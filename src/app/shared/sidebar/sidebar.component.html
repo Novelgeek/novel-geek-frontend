@@ -1,0 +1,43 @@
+<!-- Sidebar Header starts -->
+<div class="sidebar-header ">
+    <div class="logo clearfix">
+        <a [routerLink]="['/']" class="logo-text float-left">
+            <div class="logo-img">
+                <img [src]="logoUrl" />
+            </div>
+            <span class="text align-middle">Book</span>
+        </a>
+        <a class="nav-toggle d-none d-sm-none d-md-none d-lg-block" id="sidebarToggle" href="javascript:;">
+            <i #toggleIcon appSidebarToggle class="ft-toggle-right toggle-icon" data-toggle="expanded"></i>
+        </a>
+        <a class="nav-close d-block d-md-block d-lg-none d-xl-none" id="sidebarClose" href="javascript:;">
+            <i class="ft-x"></i>
+        </a>
+    </div>
+</div>
+<!-- Sidebar Header Ends -->
+
+<!-- Sidebar Content starts -->
+<div class="sidebar-content"  [perfectScrollbar]>
+    <div class="nav-container">
+        <ul class="navigation" appSidebarList>
+            <!-- First level menu -->
+             <li appSidebarlink level="{{depth + 1}}" (toggleEmit)="handleToggle($event)" (click)="toggleSlideInOut()"   [ngClass]="{ 'open':!nav_collapsed_open ? true : false, 'nav-collapsed-open': nav_collapsed_open}" [routerLinkActive]="'active'"
+                [routerLinkActiveOptions]="{exact: true}">
+                <a appSidebarAnchorToggle [routerLink]="null" *ngIf="true; else externalLinkBlock">
+                    <i class="ft-layout"></i>
+                    <span class="menu-title">Main</span>
+                    <!-- <span *ngIf="menuItem.badge != '' " [ngClass]="[menuItem.badgeClass]">{{menuItem.badge}}</span> -->
+                </a>
+                <ng-template #externalLinkBlock>
+                    <a [href]="" target="_blank">
+                        <i [ngClass]=""></i>
+                        <span class="menu-title">Home</span>
+                        <!-- <span *ngIf="menuItem.badge != '' " [ngClass]="[menuItem.badgeClass]">{{menuItem.badge}}</span> -->
+                    </a>
+                </ng-template>
+            </li>
+        </ul>
+    </div>
+</div>
+<!-- Sidebar Content Ends -->
