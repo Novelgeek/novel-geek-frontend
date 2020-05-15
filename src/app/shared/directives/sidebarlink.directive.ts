@@ -8,11 +8,11 @@ import {
   EventEmitter,
   OnInit,
   ElementRef
-} from "@angular/core";
-import { SidebarListDirective } from "./sidebarlist.directive";
-import { SidebarDirective } from "./sidebar.directive";
+} from '@angular/core';
+import { SidebarListDirective } from './sidebarlist.directive';
+import { SidebarDirective } from './sidebar.directive';
 
-@Directive({ selector: "[appSidebarlink]" })
+@Directive({ selector: '[appSidebarlink]' })
 export class SidebarLinkDirective implements OnInit {
   @Input()
   public level: number;
@@ -31,8 +31,15 @@ export class SidebarLinkDirective implements OnInit {
 
   @Output()
   toggleEmit = new EventEmitter();
+  protected _open: boolean;
+  protected _navCollapsedOpen: boolean;
+  protected _active: boolean;
+  protected _isShown: boolean;
+  protected _isHidden: boolean;
+  protected sidebarList: SidebarListDirective;
+  protected sidebar: SidebarDirective;
 
-  @HostBinding("class.open")
+  @HostBinding('class.open')
   @Input()
   get open(): boolean {
     return this._open;
@@ -41,7 +48,7 @@ export class SidebarLinkDirective implements OnInit {
     this._open = value;
   }
 
-  @HostBinding("class.nav-collapsed-open")
+  @HostBinding('class.nav-collapsed-open')
   @Input()
   get navCollapsedOpen(): boolean {
     return this._navCollapsedOpen;
@@ -50,7 +57,7 @@ export class SidebarLinkDirective implements OnInit {
     this._navCollapsedOpen = value;
   }
 
-  @HostBinding("class.active")
+  @HostBinding('class.active')
   @Input()
   get active(): boolean {
     return this._active;
@@ -59,7 +66,7 @@ export class SidebarLinkDirective implements OnInit {
     this._active = value;
   }
 
-  @HostBinding("class.is-shown")
+  @HostBinding('class.is-shown')
   @Input()
   get isShown(): boolean {
     return this._isShown;
@@ -68,7 +75,7 @@ export class SidebarLinkDirective implements OnInit {
     this._isShown = value;
   }
 
-  @HostBinding("class.is-hidden")
+  @HostBinding('class.is-hidden')
   @Input()
   get isHidden(): boolean {
     return this._isHidden;
@@ -76,13 +83,6 @@ export class SidebarLinkDirective implements OnInit {
   set isHidden(value: boolean) {
     this._isHidden = value;
   }
-  protected _open: boolean;
-  protected _navCollapsedOpen: boolean;
-  protected _active: boolean;
-  protected _isShown: boolean;
-  protected _isHidden: boolean;
-  protected sidebarList: SidebarListDirective;
-  protected sidebar: SidebarDirective;
 
   constructor(
     @Inject(SidebarListDirective) sidebarList: SidebarListDirective,
@@ -103,20 +103,20 @@ export class SidebarLinkDirective implements OnInit {
 
     const classList = this.el.nativeElement.classList;
 
-    if (this.level.toString().trim() === "3") {
+    if (this.level.toString().trim() === '3') {
       this.active = true;
       this.sidebarList.toggleActiveList(this);
       this.sidebar.hideSidebar();
     }
 
-    if (this.level.toString().trim() === "1" && !classList.contains("has-sub")) {
+    if (this.level.toString().trim() === '1' && !classList.contains('has-sub')) {
       this.sidebarList.collapseOtherLinks(this);
     }
 
-    if (classList.contains("has-sub") && classList.contains("open")) {
+    if (classList.contains('has-sub') && classList.contains('open')) {
       this.sidebarList.collapse(this);
     } else {
-      if (classList.contains("has-sub")) {
+      if (classList.contains('has-sub')) {
         this.sidebarList.expand(this);
       }
     }

@@ -8,6 +8,9 @@ import { HttpClientModule } from '@angular/common/http';
 import { PerfectScrollbarModule, PERFECT_SCROLLBAR_CONFIG, PerfectScrollbarConfigInterface} from 'ngx-perfect-scrollbar';
 
 import { AppComponent } from './app.component';
+import { LoginComponent } from './pages/auth/login/login.component';
+import { HomeLayoutComponent } from './layouts/home-layout.component';
+import { LoginLayoutComponent } from './layouts/login-layout.component';
 
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
@@ -16,7 +19,12 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   };
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [
+    AppComponent,
+    LoginComponent,
+    HomeLayoutComponent,
+    LoginLayoutComponent
+  ],
   imports: [
     BrowserAnimationsModule,
     AppRoutingModule,
