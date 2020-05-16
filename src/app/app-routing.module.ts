@@ -7,7 +7,7 @@ import { HomeLayoutComponent } from './layouts/home-layout.component';
 
 const appRoutes: Routes = [
   { path: 'login', component: LoginComponent},
-  { path: 'home', component: HomeLayoutComponent},
+  { path: '', component: HomeLayoutComponent},
 ];
 
 @NgModule({

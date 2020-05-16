@@ -22,32 +22,18 @@
     <div class="nav-container">
         <ul class="navigation" appSidebarList>
             <!-- First level menu -->
-             <li appSidebarlink level="{{depth + 1}}" (toggleEmit)="handleToggle($event)" (click)="toggleSlideInOut()" [ngClass]="{ 'open':!nav_collapsed_open ? true : false, 'nav-collapsed-open': nav_collapsed_open}" [routerLinkActive]="'active'"
+            <li appSidebarlink level="{{depth + 1}}" (toggleEmit)="handleToggle($event)" (click)="toggleSlideInOut()" [routePath]="menuItem.path" [classes]="menuItem.class" [title]="menuItem.title"  [parent]="" *ngFor="let menuItem of menuItems"   [ngClass]="{'has-sub': menuItem.class === 'has-sub' ? true: false, 'open': activeTitles.includes(menuItem.title) && !nav_collapsed_open ? true : false, 'nav-collapsed-open': nav_collapsed_open && activeTitles.includes(menuItem.title)}" [routerLinkActive]="menuItem.submenu.length != 0 ? '' : 'active'"
                 [routerLinkActiveOptions]="{exact: true}">
-                <a appSidebarAnchorToggle [routerLink]="null" *ngIf="true; else externalLinkBlock">
-                    <i class="ft-layout" ></i>
-                    <span class="menu-title">Main</span>
-                    <!-- <span *ngIf="menuItem.badge != '' " [ngClass]="[menuItem.badgeClass]">{{menuItem.badge}}</span> -->
+                <a appSidebarAnchorToggle [routerLink]="menuItem.class === '' ? [menuItem.path] : null" *ngIf="!menuItem.isExternalLink; else externalLinkBlock">
+                    <i [ngClass]="[menuItem.icon]"></i>
+                    <span class="menu-title">{{menuItem.title }}</span>
+                    <span *ngIf="menuItem.badge != '' " [ngClass]="[menuItem.badgeClass]">{{menuItem.badge}}</span>
                 </a>
                 <ng-template #externalLinkBlock>
-                    <a [href]="" target="_blank">
-                        <i [ngClass]=""></i>
-                        <span class="menu-title">Home</span>
-                        <!-- <span *ngIf="menuItem.badge != '' " [ngClass]="[menuItem.badgeClass]">{{menuItem.badge}}</span> -->
-                    </a>
-                </ng-template>
-            </li>
-            <li appSidebarlink level="{{depth + 2}}" (toggleEmit)="handleToggle($event)" (click)="toggleSlideInOut()" [ngClass]="{ 'open':!nav_collapsed_open ? true : false, 'nav-collapsed-open': nav_collapsed_open}" >
-                <a appSidebarAnchorToggle [routerLink]="null" *ngIf="true; else externalLinkBlock">
-                    <i class="ft-layout" ></i>
-                    <span class="menu-title">Main</span>
-                    <!-- <span *ngIf="menuItem.badge != '' " [ngClass]="[menuItem.badgeClass]">{{menuItem.badge}}</span> -->
-                </a>
-                <ng-template #externalLinkBlock>
-                    <a [href]="" target="_blank">
-                        <i [ngClass]=""></i>
-                        <span class="menu-title">Home</span>
-                        <!-- <span *ngIf="menuItem.badge != '' " [ngClass]="[menuItem.badgeClass]">{{menuItem.badge}}</span> -->
+                    <a [href]="[menuItem.path]" target="_blank">
+                        <i [ngClass]="[menuItem.icon]"></i>
+                        <span class="menu-title">{{menuItem.title }}</span>
+                        <span *ngIf="menuItem.badge != '' " [ngClass]="[menuItem.badgeClass]">{{menuItem.badge}}</span>
                     </a>
                 </ng-template>
             </li>

@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild, ElementRef, Renderer2, AfterViewInit } fr
 import { Router, ActivatedRoute } from '@angular/router';
 import { customAnimations } from '../animations/custom-animations';
 import { ConfigService } from '../services/config.service';
+import { ROUTES } from './sidebar-routes.config';
 
 @Component({
   selector: 'app-sidebar',
@@ -36,6 +37,7 @@ export class SidebarComponent implements OnInit, AfterViewInit {
 
 
   ngOnInit() {
+    this.menuItems = ROUTES;
     this.config = this.configService.templateConf;
     if (this.config.layout.sidebar.backgroundColor === 'white') {
       this.logoUrl = 'assets/img/logo-dark.png';
