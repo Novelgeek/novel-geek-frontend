@@ -8,7 +8,8 @@ export interface TemplateConfig
             size: string,
             backgroundColor: string,
             backgroundImage: boolean,
-            backgroundImageURL: string
+            backgroundImageURL: string,
+            smallNav: boolean
         }
     };
 }

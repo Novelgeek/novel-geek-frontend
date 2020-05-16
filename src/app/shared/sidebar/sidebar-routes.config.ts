@@ -8,6 +8,6 @@ export const ROUTES: RouteInfo[] = [
     {
         path: '/friends', title: 'ChangeLog', icon: 'ft-file', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: []
     },
-    { path: '/profile', title: 'Documentation', icon: 'ft-folder', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },
+    { path: '/profile', title: 'Profile', icon: 'ft-folder', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },
 
 ];

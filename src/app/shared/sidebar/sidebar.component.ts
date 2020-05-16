@@ -7,6 +7,7 @@ import { ROUTES } from './sidebar-routes.config';
 @Component({
   selector: 'app-sidebar',
   templateUrl: './sidebar.component.html',
+  styleUrls: ['./sidebar.component.scss'],
   animations: customAnimations
 })
 export class SidebarComponent implements OnInit, AfterViewInit {
@@ -51,6 +52,7 @@ export class SidebarComponent implements OnInit, AfterViewInit {
   ngAfterViewInit() {
 
     setTimeout(() => {
+      // tslint:disable-next-line: triple-equals
       if (this.config.layout.sidebar.collapsed != undefined) {
         if (this.config.layout.sidebar.collapsed === true) {
           this.expanded = false;
@@ -80,7 +82,7 @@ export class SidebarComponent implements OnInit, AfterViewInit {
   // NGX Wizard - skip url change
   ngxWizardFunction(path: string) {
     if (path.indexOf('forms/ngx') !== -1) {
-      this.router.navigate(["forms/ngx/wizard"], { skipLocationChange: false });
+      this.router.navigate(['forms/ngx/wizard'], { skipLocationChange: false });
     }
   }
 }

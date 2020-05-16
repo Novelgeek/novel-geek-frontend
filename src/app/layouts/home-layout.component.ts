@@ -18,7 +18,8 @@ export class HomeLayoutComponent implements OnInit, OnDestroy{
         bgImage: 'assets/img/sidebar-bg/01.jpg'
     };
     hideSidebar: boolean;
-    iscollapsed = false;
+    iscollapsed = true;
+    smallNav = false;
     isSidebar_sm = false;
     isSidebar_lg = false;
     bgColor = 'black';
@@ -69,6 +70,7 @@ export class HomeLayoutComponent implements OnInit, OnDestroy{
           this.isSidebar_lg = false;
         }
         this.iscollapsed = this.config.layout.sidebar.collapsed;
+        this.smallNav = this.config.layout.sidebar.smallNav;
       }, 0);
 
 
