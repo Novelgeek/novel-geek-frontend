@@ -12,9 +12,11 @@ import { PollsHomeComponent } from './pages/polls/polls-home/polls-home.componen
 import { PostsHomeComponent } from './pages/posts/posts-home/posts-home.component';
 import { ProfileHomeComponent } from './pages/profile/profile-home/profile-home.component';
 import { SalesHomeComponent } from './pages/sales/sales-home/sales-home.component';
+import { SignupComponent } from './pages/auth/signup/signup.component';
 
 const appRoutes: Routes = [
   { path: 'login', component: LoginComponent},
+  { path: 'signup', component: SignupComponent},
   { path: '', component: HomeLayoutComponent,
     children: [
       {path: 'books', component: BookHomeComponent},
@@ -25,6 +27,7 @@ const appRoutes: Routes = [
       {path: 'posts', component: PostsHomeComponent},
       {path: 'profile', component: ProfileHomeComponent},
       {path: 'sales', component: SalesHomeComponent},
+      {path: '**', component: PostsHomeComponent},
     ]
   },
 ];

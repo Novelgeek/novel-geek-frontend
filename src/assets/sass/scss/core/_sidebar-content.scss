@@ -419,6 +419,10 @@
     @include set-background-color(theme-color("danger"));
   }
 
+  &[data-background-color="custom"] {
+    @include set-background-color(#9B3cb7);
+  }
+
   // Gradient Background Colors
   &[data-background-color="pomegranate"] {
     @include set-gradient-background-color(#9B3cb7, #FF396f);

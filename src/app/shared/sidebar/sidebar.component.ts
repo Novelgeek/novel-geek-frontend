@@ -39,7 +39,7 @@ export class SidebarComponent implements OnInit, AfterViewInit {
 
   ngOnInit() {
     this.menuItems = ROUTES;
-    this.config = this.configService.templateConf;
+    this.config = this.configService.interfaceConf;
     if (this.config.layout.sidebar.backgroundColor === 'white') {
       this.logoUrl = 'assets/img/logo-dark.png';
     } else {

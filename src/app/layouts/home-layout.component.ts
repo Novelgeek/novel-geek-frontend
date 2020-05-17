@@ -39,7 +39,7 @@ export class HomeLayoutComponent implements OnInit{
     // }
 
     ngOnInit() {
-      this.config = this.configService.templateConf;
+      this.config = this.configService.interfaceConf;
       this.bgColor = this.config.layout.sidebar.backgroundColor;
 
       if (!this.config.layout.sidebar.backgroundImage) {

@@ -1,4 +1,4 @@
-export interface TemplateConfig
+export interface InterfaceConfig
 {
     layout: {
         variant: string

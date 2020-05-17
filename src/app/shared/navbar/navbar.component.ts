@@ -19,7 +19,7 @@ export class NavbarComponent implements OnInit, AfterViewInit {
   constructor(private layoutService: LayoutService, private configService: ConfigService) { }
 
   ngOnInit() {
-    this.config = this.configService.templateConf;
+    this.config = this.configService.interfaceConf;
   }
 
   ngAfterViewInit() {
