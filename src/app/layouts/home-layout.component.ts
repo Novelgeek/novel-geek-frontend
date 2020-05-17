@@ -7,7 +7,7 @@ import { DOCUMENT } from '@angular/common';
   templateUrl: './home.component.html',
   styles: []
 })
-export class HomeLayoutComponent implements OnInit, OnDestroy{
+export class HomeLayoutComponent implements OnInit{
     @ViewChild('sidebarBgImage', {static: false}) sidebarBgImage: ElementRef;
     @ViewChild('appSidebar', {static: false}) appSidebar: ElementRef;
     @ViewChild('wrapper', {static: false}) wrapper: ElementRef;
@@ -34,9 +34,9 @@ export class HomeLayoutComponent implements OnInit, OnDestroy{
 
 
     }
-    ngOnDestroy(): void {
-        throw new Error('Method not implemented.');
-    }
+    // ngOnDestroy(): void {
+    //     throw new Error('Method not implemented.');
+    // }
 
     ngOnInit() {
       this.config = this.configService.templateConf;
