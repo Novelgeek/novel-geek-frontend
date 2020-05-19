@@ -49,7 +49,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     AppRoutingModule,
     SharedModule,
     HttpClientModule,
-    NgbModule.forRoot(),
+    NgbModule,
     PerfectScrollbarModule
   ],
   providers: [
