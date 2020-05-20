@@ -13,11 +13,12 @@ import { PostsHomeComponent } from './pages/posts/posts-home/posts-home.componen
 import { ProfileHomeComponent } from './pages/profile/profile-home/profile-home.component';
 import { SalesHomeComponent } from './pages/sales/sales-home/sales-home.component';
 import { SignupComponent } from './pages/auth/signup/signup.component';
+import { AuthGuard } from './core/_guards/auth.guard';
 
 const appRoutes: Routes = [
   { path: 'login', component: LoginComponent},
   { path: 'signup', component: SignupComponent},
-  { path: '', component: HomeLayoutComponent,
+  { path: '', component: HomeLayoutComponent, canActivate: [AuthGuard],
     children: [
       {path: 'books', component: BookHomeComponent},
       {path: 'friends', component: FriendsHomeComponent},

@@ -1,1 +1,0 @@
-for making classes like user class, post class etc

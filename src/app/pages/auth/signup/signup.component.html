@@ -21,59 +21,65 @@
                   <p class="card-text mb-3">
                     Fill the below form to create a new account.
                   </p>
-                  <input
-                    type="text"
-                    class="form-control mb-3"
-                    placeholder="Name"
-                  />
-                  <input
-                    type="email"
-                    class="form-control mb-3"
-                    placeholder="Email"
-                  />
-                  <input
-                    type="password"
-                    class="form-control mb-3"
-                    placeholder="Password"
-                  />
-                  <input
-                    type="password"
-                    class="form-control mb-3"
-                    placeholder="Confirm Password"
-                  />
-                  <div
-                    class="custom-control custom-checkbox custom-control-inline mb-3"
-                  >
+                  <form (ngSubmit)="onSubmit(registerForm)" #registerForm="ngForm">
                     <input
-                      type="checkbox"
-                      id="customCheckboxInline1"
-                      name="customCheckboxInline1"
-                      class="custom-control-input"
-                      checked
+                      type="text"
+                      class="form-control mb-3"
+                      placeholder="Name"
+                      name="username"
+                      ngModel
                     />
-                    <label
-                      class="custom-control-label"
-                      for="customCheckboxInline1"
+                    <input
+                      type="email"
+                      class="form-control mb-3"
+                      placeholder="Email"
+                      name="email"
+                      ngModel
+                    />
+                    <input
+                      type="password"
+                      class="form-control mb-3"
+                      placeholder="Password"
+                      name="password"
+                      ngModel
+                    />
+                    <input
+                      type="password"
+                      class="form-control mb-3"
+                      placeholder="Confirm Password"
+                    />
+                    <div
+                      class="custom-control custom-checkbox custom-control-inline mb-3"
                     >
-                      I accept the terms & conditions.
-                    </label>
-                  </div>
-                  <div class="fg-actions d-flex justify-content-between">
-                    <div class="login-btn">
-                      <button class="btn btn-outline-primary"
-                          [routerLink]="['/login']"
+                      <input
+                        type="checkbox"
+                        id="customCheckboxInline1"
+                        name="customCheckboxInline1"
+                        class="custom-control-input"
+                        checked
+                      />
+                      <label
+                        class="custom-control-label"
+                        for="customCheckboxInline1"
                       >
-                          Back To Login
-                      </button>
+                        I accept the terms & conditions.
+                      </label>
                     </div>
-                    <div class="recover-pass">
-                      <button class="btn btn-primary">
-                        <a class="text-decoration-none text-white">
-                          Register
-                        </a>
-                      </button>
+                    <div class="fg-actions d-flex justify-content-between">
+                      <div class="login-btn">
+                        <button class="btn btn-outline-primary"
+                            [routerLink]="['/login']"
+                        >
+                            Back To Login
+                        </button>
+                      </div>
+                      <div class="recover-pass">
+                        <button class="btn btn-primary text-decoration-none text-white" type="submit">
+                            Register
+                        </button>
+                      </div>
                     </div>
-                  </div>
+                </form>
                 </div>
               </div>
             </div>
