@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { BehaviorSubject } from 'rxjs';
 import { User } from '../_models/user.model';
 import { tap } from 'rxjs/operators';
@@ -24,15 +24,23 @@ export class AuthService {
   constructor(private http: HttpClient, private router: Router) { }
 
   signup(email: string, password: string) {
-    return this.http.post<AuthResponseData>('https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyCla-JAP3zoxs3DXKPYCELoiUKqmu38IZM', 
+    // return this.http.post<AuthResponseData>('https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyCla-JAP3zoxs3DXKPYCELoiUKqmu38IZM', 
+    //   {
+    //     email: email,
+    //     password: password,
+    //     returnSecureToken: true
+    //   }
+    // ).pipe( tap(response => {
+    //   this.handleAuthentication(response.email, response.localId, response.idToken, +response.expiresIn);
+    // }));
+
+    return this.http.post('http://localhost:8080/auth/signup',
       {
+        name: "name",
         email: email,
         password: password,
-        returnSecureToken: true
       }
-    ).pipe( tap(response => {
-      this.handleAuthentication(response.email, response.localId, response.idToken, +response.expiresIn);
-    }));
+    );
   }
 
   private handleAuthentication(email: string, userId: string, token: string, expiresIn: number) {
@@ -44,15 +52,31 @@ export class AuthService {
   }
 
   login(email: string, password: string) {
-    return this.http.post<AuthResponseData>('https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyCla-JAP3zoxs3DXKPYCELoiUKqmu38IZM', 
+    const headerDict = {
+      'Content-Type': 'application/json',
+      'Access-Control-Allow-Origin':'*'
+    }
+    
+    const requestOptions = {                                                                                                                                                                                 
+      headers: new HttpHeaders(headerDict)
+    };
+    
+    // return this.http.post<AuthResponseData>('https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyCla-JAP3zoxs3DXKPYCELoiUKqmu38IZM', 
+    //   {
+    //     email: email,
+    //     password: password,
+    //     returnSecureToken: true
+    //   }
+    // ).pipe( tap(response => {
+    //   this.handleAuthentication(response.email, response.localId, response.idToken, +response.expiresIn);
+    // }));
+    return this.http.post('http://localhost:8080/auth/login',
       {
         email: email,
         password: password,
-        returnSecureToken: true
       }
-    ).pipe( tap(response => {
-      this.handleAuthentication(response.email, response.localId, response.idToken, +response.expiresIn);
-    }));
+    );
+    //return this.http.get('http://localhost:8080/auth');
   }
 
   logout() {
@@ -84,6 +108,10 @@ export class AuthService {
     this.tokenExpirationTimer = setTimeout(() => {
       this.logout();
     }, expirationDuration);
+  }
+
+  googleLogIn() {
+    return this.http.get('http://localhost:8080/auth');
   }
 
 }

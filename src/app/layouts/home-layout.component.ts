@@ -1,6 +1,7 @@
 import { Component, ViewChild, ElementRef, Inject, Renderer2, OnInit, OnDestroy } from '@angular/core';
 import { ConfigService } from 'app/shared/services/config.service';
 import { DOCUMENT } from '@angular/common';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-home-layout',
@@ -30,7 +31,7 @@ export class HomeLayoutComponent implements OnInit{
 
     constructor(private elementRef: ElementRef, private configService: ConfigService,
         @Inject(DOCUMENT) private document: Document,
-        private renderer: Renderer2) {
+        private renderer: Renderer2, private route: ActivatedRoute) {
 
 
     }
@@ -39,6 +40,9 @@ export class HomeLayoutComponent implements OnInit{
     // }
 
     ngOnInit() {
+      this.route.queryParams.subscribe(params => {
+        console.log(params);
+      })
       this.config = this.configService.interfaceConf;
       this.bgColor = this.config.layout.sidebar.backgroundColor;
 

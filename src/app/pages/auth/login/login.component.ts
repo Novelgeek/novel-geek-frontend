@@ -27,12 +27,20 @@ export class LoginComponent implements OnInit {
     this.submitted = true;
 
     this.authService.login(this.email, this.password).subscribe( response => {
-      console.log(response)
+      console.log(response);
       this.router.navigate(['/posts'])
     }, errorMsg => {
       console.log(errorMsg);
     });
 
+  }
+
+  onGoogle() {
+    this.authService.googleLogIn().subscribe(response => {
+      console.log(response);
+    },error=> {
+      console.log(error);
+    })
   }
 
 }
