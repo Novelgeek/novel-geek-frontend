@@ -31,7 +31,7 @@ export class HomeLayoutComponent implements OnInit{
 
     constructor(private elementRef: ElementRef, private configService: ConfigService,
         @Inject(DOCUMENT) private document: Document,
-        private renderer: Renderer2, private route: ActivatedRoute) {
+        private renderer: Renderer2) {
 
 
     }
@@ -40,9 +40,7 @@ export class HomeLayoutComponent implements OnInit{
     // }
 
     ngOnInit() {
-      this.route.queryParams.subscribe(params => {
-        console.log(params);
-      })
+
       this.config = this.configService.interfaceConf;
       this.bgColor = this.config.layout.sidebar.backgroundColor;
 

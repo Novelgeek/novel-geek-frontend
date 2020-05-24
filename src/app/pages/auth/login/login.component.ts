@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { AuthService } from 'app/core/_services/auth.service';
 import { error } from 'protractor';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -13,12 +13,18 @@ export class LoginComponent implements OnInit {
   email: string;
   password: string;
   submitted = false;
-  constructor(private authService: AuthService, private router: Router) { }
+  constructor(private authService: AuthService, private router: Router, private route: ActivatedRoute) { }
 
   ngOnInit() {
+    this.route.queryParams.subscribe(params => {
+      if(params.auth_token != null) {
+        this.authService.oAuthToken(params.auth_token);
+      }
+    })
   }
 
   onSubmit(form: NgForm) {
+    
     this.email = form.value.email;
     this.password = form.value.password;
 
@@ -33,14 +39,6 @@ export class LoginComponent implements OnInit {
       console.log(errorMsg);
     });
 
-  }
-
-  onGoogle() {
-    this.authService.googleLogIn().subscribe(response => {
-      console.log(response);
-    },error=> {
-      console.log(error);
-    })
   }
 
 }

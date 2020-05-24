@@ -4,15 +4,8 @@ import { BehaviorSubject } from 'rxjs';
 import { User } from '../_models/user.model';
 import { tap } from 'rxjs/operators';
 import { Router } from '@angular/router';
+import { JwtHelperService } from '@auth0/angular-jwt';
 
-interface AuthResponseData {
-  idToken: string,
-  email: string,
-  refreshToken: string,
-  expiresIn: string,
-  localId: string,
-  registered?: boolean
-}
 
 @Injectable({
   providedIn: 'root'
@@ -21,69 +14,50 @@ export class AuthService {
   user = new BehaviorSubject<User>(null);
   private tokenExpirationTimer: any;
 
-  constructor(private http: HttpClient, private router: Router) { }
+  constructor(private http: HttpClient, private router: Router, private jwtService: JwtHelperService) { }
 
-  signup(email: string, password: string) {
-    // return this.http.post<AuthResponseData>('https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyCla-JAP3zoxs3DXKPYCELoiUKqmu38IZM', 
-    //   {
-    //     email: email,
-    //     password: password,
-    //     returnSecureToken: true
-    //   }
-    // ).pipe( tap(response => {
-    //   this.handleAuthentication(response.email, response.localId, response.idToken, +response.expiresIn);
-    // }));
+  signup(username: string, email: string, password: string) {
 
     return this.http.post('http://localhost:8080/auth/signup',
       {
-        name: "name",
+        username: username,
         email: email,
         password: password,
       }
     );
   }
 
-  private handleAuthentication(email: string, userId: string, token: string, expiresIn: number) {
-    const expirationDate = new Date(new Date().getTime() + expiresIn * 1000)
-    const user = new User(email, userId, token, expirationDate);
+  private handleAuthentication(token: string, username: string) {
+    const expirationDate = this.jwtService.getTokenExpirationDate(token);
+    // expiresIn is in miliseconds to start the timer
+    const expiresIn = expirationDate.getTime() - new Date().getTime();
+    const user = new User(username, '1', token, expirationDate);
     this.user.next(user);
-    this.autoLogout(expiresIn * 1000);
+    this.autoLogout(expiresIn);
     localStorage.setItem('user', JSON.stringify(user));
+    localStorage.setItem('token', token);
+
   }
 
   login(email: string, password: string) {
-    const headerDict = {
-      'Content-Type': 'application/json',
-      'Access-Control-Allow-Origin':'*'
-    }
-    
-    const requestOptions = {                                                                                                                                                                                 
-      headers: new HttpHeaders(headerDict)
-    };
-    
-    // return this.http.post<AuthResponseData>('https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyCla-JAP3zoxs3DXKPYCELoiUKqmu38IZM', 
-    //   {
-    //     email: email,
-    //     password: password,
-    //     returnSecureToken: true
-    //   }
-    // ).pipe( tap(response => {
-    //   this.handleAuthentication(response.email, response.localId, response.idToken, +response.expiresIn);
-    // }));
-    return this.http.post('http://localhost:8080/auth/login',
+
+    return this.http.post<{token: string, username: string}>('http://localhost:8080/auth/login',
       {
         email: email,
         password: password,
       }
-    );
-    //return this.http.get('http://localhost:8080/auth');
+    ).pipe( tap(response => {
+        this.handleAuthentication(response.token, response.username);
+    }));
+
   }
 
   logout() {
     this.user.next(null);
     localStorage.removeItem('user');
+    localStorage.removeItem('token');
     this.router.navigate(['/login']);
-    if(this.tokenExpirationTimer) {
+    if (this.tokenExpirationTimer) {
       clearTimeout(this.tokenExpirationTimer);
     }
     this.tokenExpirationTimer = null;
@@ -104,14 +78,14 @@ export class AuthService {
   }
 
   autoLogout(expirationDuration: number) {
-    //console.log(expirationDuration);
+    console.log(expirationDuration);
     this.tokenExpirationTimer = setTimeout(() => {
       this.logout();
     }, expirationDuration);
   }
 
-  googleLogIn() {
-    return this.http.get('http://localhost:8080/auth');
+  oAuthToken(token: string) {
+    this.handleAuthentication(token, this.jwtService.decodeToken(token).sub)
   }
 
 }
