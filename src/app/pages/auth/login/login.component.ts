@@ -43,6 +43,8 @@ export class LoginComponent implements OnInit {
       this.router.navigate(['/posts'])
       this.spinner.hide();
     }, errorMsg => {
+      this.spinner.hide();
+      this.toastr.error(errorMsg.error.error);
       console.log(errorMsg);
     });
 

@@ -85,7 +85,8 @@ export class AuthService {
   }
 
   oAuthToken(token: string) {
-    this.handleAuthentication(token, this.jwtService.decodeToken(token).sub)
+    this.handleAuthentication(token, this.jwtService.decodeToken(token).sub);
+    this.autoLogin();
   }
 
 }
