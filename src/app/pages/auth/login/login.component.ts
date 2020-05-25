@@ -27,6 +27,9 @@ export class LoginComponent implements OnInit {
       if(params.auth_token != null) {
         this.authService.oAuthToken(params.auth_token);
       }
+      if(params.error != null) {
+        this.toastr.error(params.error);
+      }
     })
   }
 
@@ -44,7 +47,7 @@ export class LoginComponent implements OnInit {
       this.spinner.hide();
     }, errorMsg => {
       this.spinner.hide();
-      this.toastr.error(errorMsg.error.error);
+      this.toastr.error(errorMsg.error);
       console.log(errorMsg);
     });
 

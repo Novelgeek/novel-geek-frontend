@@ -45,7 +45,7 @@ export class SignupComponent implements OnInit {
       this.router.navigate(['login'], {queryParams: { registered: 'true' } });
     }, error => {
       this.spinner.hide();
-      this.toastr.error(error.error.error);
+      this.toastr.error(error.error);
       console.log(error)
     })
     this.registerForm.reset();
