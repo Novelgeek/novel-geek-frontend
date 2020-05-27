@@ -15,6 +15,7 @@ export class NavbarComponent implements OnInit, AfterViewInit, OnDestroy {
   public isCollapsed = true;
   @Output() toggleHideSidebar = new EventEmitter<Object>();
   private userSub: Subscription;
+  public user: any;
   isAuthenticated = false;
 
   public config: any = {};
@@ -29,6 +30,7 @@ export class NavbarComponent implements OnInit, AfterViewInit, OnDestroy {
     this.config = this.configService.interfaceConf;
     this.userSub = this.authService.user.subscribe( user => {
       this.isAuthenticated = !!user; // !user ? false : true
+      this.user = user;
     });
   }
 

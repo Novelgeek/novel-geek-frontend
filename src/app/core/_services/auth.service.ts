@@ -31,7 +31,9 @@ export class AuthService {
     const expirationDate = this.jwtService.getTokenExpirationDate(token);
     // expiresIn is in miliseconds to start the timer
     const expiresIn = expirationDate.getTime() - new Date().getTime();
-    const user = new User(username, '1', token, expirationDate);
+    const decodedToken = this.jwtService.decodeToken(token);
+    const user = new User(username, decodedToken.id , token, expirationDate, decodedToken.username, decodedToken.image);
+    console.log(user)
     this.user.next(user);
     this.autoLogout(expiresIn);
     localStorage.setItem('user', JSON.stringify(user));
@@ -67,7 +69,7 @@ export class AuthService {
     const user = JSON.parse(localStorage.getItem('user'));
     if (!user) { return; }
 
-    const loadedUser = new User(user.email, user.id, user._token, new Date(user.tokenExpirationDate));
+    const loadedUser = new User(user.email, user.id, user._token, new Date(user.tokenExpirationDate), user.username, user.photo);
 
     if (loadedUser.token) {
       this.user.next(loadedUser);
