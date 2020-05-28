@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
   selector: 'app-group-card',
@@ -6,10 +6,11 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./group-card.component.scss']
 })
 export class GroupCardComponent implements OnInit {
-
+  @Input() group: any;
   constructor() { }
 
   ngOnInit() {
+    console.log(this.group);
   }
 
 }

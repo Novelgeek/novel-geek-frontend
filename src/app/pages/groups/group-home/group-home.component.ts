@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'app/core/_services/auth.service';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgForm } from '@angular/forms';
+import { GroupService } from 'app/core/_services/group.service';
 
 @Component({
   selector: 'app-group-home',
@@ -10,10 +12,15 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 })
 export class GroupHomeComponent implements OnInit {
   user: any;
+  groups: any = [];
   constructor(private authSerice: AuthService, private http: HttpClient,
-              private modalService: NgbModal) { }
+              private modalService: NgbModal, private groupService: GroupService) { }
 
   ngOnInit() {
+    this.groupService.getUserGroups().subscribe( data => {
+      this.groups = data;
+      console.log(this.groups);
+    })
   }
 
   test() {
@@ -40,10 +47,17 @@ export class GroupHomeComponent implements OnInit {
   }
 
   open(content) {
-    this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
-      
+    this.modalService.open(content, {ariaLabelledBy: 'create-group'}).result.then((result) => {
     }, (reason) => {
-      
+    });
+  }
+
+  onSubmit(form: NgForm) {
+    console.log(form.value);
+    this.groupService.createGroup(form.value.groupName, form.value.description, form.value.avatar).subscribe( data => {
+      console.log(data)
+    }, error => {
+      console.log(error);
     });
   }
 
