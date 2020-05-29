@@ -1,8 +1,8 @@
 
-  <div class="card">
+  <!-- <div class="card card-outline-info">
     <div class="card-header">
       <i class="ft-more-vertical float-right mb-1"></i>
-      <h4 class="card-title">{{group.groupName}}</h4>
+      <a [routerLink]="['/groups',group.groupId]"><h4 class="card-title">{{group.groupName}}</h4></a>
     </div>
     <div class="card-content">
       <div class="card-img ">
@@ -13,4 +13,34 @@
         <p class="card-text text-center">{{group.description}}</p>
       </div>
     </div>
-  </div>
+  </div> -->
+
+  <div class="card card-outline-info">
+    <div class="card-header text-center">
+        <i class="ft-more-vertical float-right mb-1"></i>
+        <img src="../assets/img/pages/login-bg.jpg" alt="Brek" width="150" class="rounded-circle gradient-mint">
+        <a class="btn btn-floating float-left bg-warning"><i class="ft-plus"></i></a>
+    </div>
+    <div class="card-content">
+        <div class="card-body text-center">
+          
+          <a [routerLink]="['/groups',group.groupId]"><h4 class="card-title">{{group.groupName}}</h4></a>
+            
+            <p class="category text-gray font-small-4">{{group.description}}</p>
+            
+            <hr class="grey">
+            <div class="row grey">
+                <div class="col-4">
+                    <a><i class="ft-star mr-1"></i> <span>4.9</span></a>
+                </div>
+                <div class="col-4">
+                    <a><i class="ft-globe mr-1"></i> <span>USA</span></a>
+                </div>
+                <div class="col-4">
+                    <a><i class="ft-book mr-1"></i> <span>21</span></a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

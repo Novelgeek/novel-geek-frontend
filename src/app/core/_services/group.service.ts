@@ -22,4 +22,16 @@ export class GroupService {
     return this.http.get('http://localhost:8080/group/getGroups');
   }
 
+  getAllGroups() {
+    return this.http.get('http://localhost:8080/group/all');
+  }
+
+  getGroupInvites() {
+    return this.http.get('http://localhost:8080/group/invites');
+  }
+
+  getSingleGroup(groupId) {
+    return this.http.get('http://localhost:8080/group/' + groupId);
+  }
+
 }

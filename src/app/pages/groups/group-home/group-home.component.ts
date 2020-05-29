@@ -13,13 +13,21 @@ import { GroupService } from 'app/core/_services/group.service';
 export class GroupHomeComponent implements OnInit {
   user: any;
   groups: any = [];
+  allGroups: any =[];
+  groupInvites: any = [];
   constructor(private authSerice: AuthService, private http: HttpClient,
               private modalService: NgbModal, private groupService: GroupService) { }
 
   ngOnInit() {
     this.groupService.getUserGroups().subscribe( data => {
       this.groups = data;
-      console.log(this.groups);
+    })
+    this.groupService.getAllGroups().subscribe( data => {
+      this.allGroups = data;
+    })
+    this.groupService.getGroupInvites().subscribe( data => {
+      this.groupInvites = data;
+      console.log(this.groupInvites);
     })
   }
 

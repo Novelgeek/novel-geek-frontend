@@ -75,7 +75,7 @@ export class AuthService {
       this.user.next(loadedUser);
       const expirationDuration = new Date( loadedUser.tokenExpirationDate.getTime() - new Date().getTime())
       this.autoLogout(+expirationDuration);
-      //this.router.navigate(['/posts'])
+      // this.router.navigate(['/posts'])
     }
   }
 
@@ -89,6 +89,7 @@ export class AuthService {
   oAuthToken(token: string) {
     this.handleAuthentication(token, this.jwtService.decodeToken(token).sub);
     this.autoLogin();
+    this.router.navigate(['/posts'])
   }
 
 }

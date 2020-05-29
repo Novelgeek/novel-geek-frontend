@@ -10,7 +10,6 @@ export class GroupCardComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    console.log(this.group);
   }
 
 }

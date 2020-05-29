@@ -14,6 +14,7 @@ import { ProfileHomeComponent } from './pages/profile/profile-home/profile-home.
 import { SalesHomeComponent } from './pages/sales/sales-home/sales-home.component';
 import { SignupComponent } from './pages/auth/signup/signup.component';
 import { AuthGuard } from './core/_guards/auth.guard';
+import { GroupDetailComponent } from './pages/groups/group-detail/group-detail.component';
 
 const appRoutes: Routes = [
   { path: 'login', component: LoginComponent},
@@ -23,6 +24,7 @@ const appRoutes: Routes = [
       {path: 'books', component: BookHomeComponent},
       {path: 'friends', component: FriendsHomeComponent},
       {path: 'groups', component: GroupHomeComponent},
+      {path: 'groups/:id', component: GroupDetailComponent},
       {path: 'messages', component: MessageHomeComponent},
       {path: 'polls', component: PollsHomeComponent},
       {path: 'posts', component: PostsHomeComponent},
