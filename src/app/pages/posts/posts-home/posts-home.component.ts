@@ -10,6 +10,11 @@ export class PostsHomeComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+    console.log("working")
+  }
+
+  onsubmit(value: any){
+    console.log(value);
   }
 
 }

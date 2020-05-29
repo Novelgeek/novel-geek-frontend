@@ -1,3 +1,77 @@
-<p>
-  posts-home works!
-</p>
+<!--NEW POST SECTION-->
+ <div class="row">
+    <div class="col-3"></div>
+    <div class="col-4">
+        <form #createpost="ngForm" (ngSubmit)="onsubmit(createpost.value)">
+            <div class="card">
+                <div class="card-header">
+                  <h4 class="card-title">Create Post</h4>
+                </div>
+          
+                <div class="card-body">
+                  <input type="text" name="title" ngModel required class="form-control card-title" placeholder="Post Title">
+                  <div class="card-content">
+                    <textarea cols="100" rows="10" name="description" ngModel class="form-control" placeholder="your thoughts..."></textarea>
+                  </div>
+                </div>
+          
+                <div class="card-footer d-flex justify-content-between">
+                    <div>
+                        <label class="primary icon-picture" style="cursor:pointer;">
+                          Attach Photo
+                          <input type="file" style="display:none;">
+                        </label>
+                    </div>
+                    
+                    <div>
+                        <a class="primary icon-share" style="padding-right: 50px;"> Share On</a>
+                    </div>
+
+                    <div>
+                        <input type="submit" value="post" class="btn btn-raised gradient-purple-bliss white">
+                    </div> 
+
+                </div>
+          
+            </div>
+    </form>
+    </div>
+    <div class="col-5"></div>
+ </div>
+  
+  <!--POSTS APPEARS HEARE/POST SECTION-->
+  <div class="row">
+    <div class="col-3"></div>
+    <div class="col-4">
+      <div class="card">
+        <div class="card-header d-flex justify-content-between">
+          <div>
+            <h4 class="card-title">User Pic</h4>
+            <span class="card-subtitle text-muted"> time here</span>
+          </div>
+          <div>
+            <a class="ft-more-horizontal"></a>
+          </div>
+        </div>
+        <div class="card-body">
+          <h5 class="card-title">Post Title</h5>
+          <div class="card-content">
+            <img src="assets/img/postImages/Image.jpg" alt="img"  class="img-fluid">
+          </div>
+          <div class="card-content">
+              <p class="card-text">
+                Nullam facilisis fermentum aliquam. 
+                Suspendisse ornare dolor vitae libero hendrerit auctor lacinia a ligula. 
+                Curabitur elit tellus, porta ut orci sed, fermentum bibendum nisi.
+              </p>
+          </div>
+        </div>
+        <div class="card-footer text-muted">
+          <a class="primary icon-heart" style="padding-right: 50px;"> Like</a>
+          <a class="primary icon-speech" style="padding-right: 50px;"> Comment</a>
+        </div>
+      </div>
+    </div>
+    <div class="col-5"></div>
+  </div>
+  
