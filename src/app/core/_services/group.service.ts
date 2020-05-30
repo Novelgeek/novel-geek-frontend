@@ -34,4 +34,12 @@ export class GroupService {
     return this.http.get('http://localhost:8080/group/' + groupId);
   }
 
+  inviteUser(groupId, userId) {
+    return this.http.post('http://localhost:8080/group/' + groupId + '/inviteUser/' + userId, {})
+  }
+
+  acceptInvite(groupId) {
+    return this.http.post('http://localhost:8080/group/' + groupId + '/acceptInvite' , {});
+  }
+
 }

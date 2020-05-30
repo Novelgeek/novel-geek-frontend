@@ -2,7 +2,7 @@
   <div class="card card-outline-info">
     <div class="card-header">
       <i class="ft-more-vertical float-right mb-1"></i>
-      <h4 class="card-title">{{group.groupName}}</h4>
+      <a [routerLink]="['/groups',group.groupId]"><h4 class="card-title">{{group.groupName}}</h4></a>
     </div>
     <div class="card-content">
       <div class="card-body">

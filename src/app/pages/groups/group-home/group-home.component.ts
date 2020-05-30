@@ -31,28 +31,7 @@ export class GroupHomeComponent implements OnInit {
     })
   }
 
-  test() {
-    // subscribe to the user
-    this.authSerice.user.subscribe( user => {
-      this.user = user;
-    })
 
-    // then you can get the token like this
-    console.log(this.user.token);
-
-    // create header
-    const headerDict = {
-      'Authorization' : 'Bearer ' + this.user.token
-    }
-
-    // convert to httpheader
-    const requestOptions = {
-      headers: new HttpHeaders(headerDict)
-    };
-
-    // sending a test request attatch the header
-    this.http.get('http://localhost:8080/user/me', requestOptions);
-  }
 
   open(content) {
     this.modalService.open(content, {ariaLabelledBy: 'create-group'}).result.then((result) => {
@@ -67,6 +46,15 @@ export class GroupHomeComponent implements OnInit {
     }, error => {
       console.log(error);
     });
+  }
+
+  acceptInvite(groupId) {
+    console.log(groupId);
+    this.groupService.acceptInvite(groupId).subscribe(data => {
+      console.log(data);
+    }, error => {
+      console.log(error);
+    })
   }
 
 }
