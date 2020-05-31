@@ -73,4 +73,8 @@ export class GroupService {
     return this.http.get('http://localhost:8080/group/' + groupId + '/removeUser/' + userId)
   }
 
+  getRole(groupId) {
+    return this.http.get('http://localhost:8080/group/' + groupId + '/getRole');
+  }
+
 }

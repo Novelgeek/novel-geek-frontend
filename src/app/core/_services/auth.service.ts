@@ -12,6 +12,7 @@ import { JwtHelperService } from '@auth0/angular-jwt';
 })
 export class AuthService {
   user = new BehaviorSubject<User>(null);
+  currentUser: User;
   private tokenExpirationTimer: any;
 
   constructor(private http: HttpClient, private router: Router, private jwtService: JwtHelperService) { }
@@ -35,6 +36,7 @@ export class AuthService {
     const user = new User(username, decodedToken.id , token, expirationDate, decodedToken.username, decodedToken.image);
     console.log(user)
     this.user.next(user);
+    this.currentUser = user;
     this.autoLogout(expiresIn);
     localStorage.setItem('user', JSON.stringify(user));
     localStorage.setItem('token', token);
@@ -56,6 +58,7 @@ export class AuthService {
 
   logout() {
     this.user.next(null);
+    this.currentUser = null;
     localStorage.removeItem('user');
     localStorage.removeItem('token');
     this.router.navigate(['/login']);
@@ -73,6 +76,7 @@ export class AuthService {
 
     if (loadedUser.token) {
       this.user.next(loadedUser);
+      this.currentUser = loadedUser;
       const expirationDuration = new Date( loadedUser.tokenExpirationDate.getTime() - new Date().getTime())
       this.autoLogout(+expirationDuration);
       // this.router.navigate(['/posts'])

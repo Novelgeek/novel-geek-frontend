@@ -43,6 +43,8 @@ export class GroupHomeComponent implements OnInit {
   onSubmit(form: NgForm) {
     console.log(form.value);
     this.groupService.createGroup(form.value.groupName, form.value.description, form.value.avatar).subscribe( data => {
+      this.groups.push({group: data});
+      this.allGroups.push(data);
       console.log(data)
     }, error => {
       console.log(error);
@@ -52,7 +54,11 @@ export class GroupHomeComponent implements OnInit {
   acceptInvite(groupId) {
     console.log(groupId);
     this.groupService.acceptInvite(groupId).subscribe(data => {
-      console.log(data);
+      console.log(data[0].group);
+      this.groups.push(data[0]);
+      this.groupInvites = this.groupInvites.filter(group => {
+        return group.group.groupId !== groupId
+      })
     }, error => {
       console.log(error);
     })
