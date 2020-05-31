@@ -9,22 +9,37 @@
                 </div>
           
                 <div class="card-body">
-                  <input type="text" name="title" ngModel required class="form-control card-title" placeholder="Post Title">
+                  <input type="text" name="title" [(ngModel)]="new_post.postTitle" class="form-control card-title" placeholder="Post Title">
                   <div class="card-content">
-                    <textarea cols="100" rows="10" name="description" ngModel class="form-control" placeholder="your thoughts..."></textarea>
+                    <textarea cols="100" rows="10" name="description" [(ngModel)]="new_post.postDescription" class="form-control" placeholder="your thoughts..."></textarea>
+                  </div>
+                  <div class="card-content" *ngIf="new_post.imageURL!=''">
+                    <img [src]="new_post.imageURL" class="img-fluid">
                   </div>
                 </div>
           
                 <div class="card-footer d-flex justify-content-between">
                     <div>
-                        <label class="primary icon-picture" style="cursor:pointer;">
-                          Attach Photo
-                          <input type="file" style="display:none;">
-                        </label>
+                      <i class="primary icon-picture mr-2"></i>
+                      <label style="cursor:pointer;">
+                        <span class="primary">Attach Photo</span>
+                        <input (change)="uploadImage($event)" name="image" type="file" style="display:none;">
+                      </label>
+                    </div>
+
+                    <div>
+                      <i class="primary icon-share mr-2"></i>
+                      <label>   
+                        <span class="primary">Share On</span>
+                      </label>
                     </div>
                     
-                    <div>
-                        <a class="primary icon-share" style="padding-right: 50px;"> Share On</a>
+                    <div style="padding-left:0px;">
+                        <select class="form-control" id="sharetype">
+                          <option value="Public">Public</option>
+                          <option value="Friends Only">Friends Only</option>
+                        </select>
+
                     </div>
 
                     <div>
@@ -43,35 +58,83 @@
   <div class="row">
     <div class="col-3"></div>
     <div class="col-4">
-      <div class="card">
-        <div class="card-header d-flex justify-content-between">
-          <div>
-            <h4 class="card-title">User Pic</h4>
-            <span class="card-subtitle text-muted"> time here</span>
+      <ng-container *ngFor="let item of postList">
+
+        <div class="card">
+          <div class="card-header d-flex justify-content-between">
+            <div>
+              <h4 class="card-title">User Pic</h4>
+              <span class="card-subtitle text-muted"> {{item.postedDate|date:'medium'}}</span>
+            </div>
+
+            <div>
+
+              <a (click)="toggleList(item)"><i  class="ft-more-horizontal"></i></a>
+              <div style="position:relative">
+
+                <div *ngIf = "item.isShow" style="position:absolute; z-index: 1000;" class="text-left dropdown-menu show">
+                  <a class=" dropdown-item py-1">
+                    <i class="ft-alert-triangle mr-2"></i>
+                    <span> Report Post</span>
+                  </a> 
+                  <a class="dropdown-item py-1">
+                    <i class="ft-trash-2 mr-2"></i>
+                    <span> Delete Post</span>
+                  </a>  
+                </div>
+
+              </div>
+            </div>
           </div>
-          <div>
-            <a class="ft-more-horizontal"></a>
+
+          <div class="card-body">
+
+            <h5 class="card-title">{{item.postTitle}}</h5>
+
+            <div class="card-content" *ngIf="item.imageURL!=''">
+              <img [src]="item.imageURL" alt="img"  class="img-fluid">
+            </div>
+
+            <div class="card-content">
+                <p class="card-text">
+                  {{item.postDescription}}
+                </p>
+            </div>
+
+            <br>
+
+            <div class="card-content d-flex justify-content-between text-muted">
+              <a style="font-size: small; padding-bottom: 0px;">{{item.likeCount}} Likes</a>
+              <a style="font-size: small; padding-bottom: 0px;">{{item.commentCount}} comments</a>
+            </div>
+
           </div>
+
+          <div class="card-footer text-muted">
+
+            <a (click)="likeCount(item)" style="padding-right: 50px;">
+              <i class="fa fa-heart mr-2" [style.color]="flag" ></i> 
+              <span class="primary">  Like</span>
+            </a>
+
+            <a style="padding-right: 50px;">
+              <i class="primary icon-speech mr-2"></i>
+              <span class="primary">Comment</span>
+            </a>
+
+          </div>
+
         </div>
-        <div class="card-body">
-          <h5 class="card-title">Post Title</h5>
-          <div class="card-content">
-            <img src="assets/img/postImages/Image.jpg" alt="img"  class="img-fluid">
-          </div>
-          <div class="card-content">
-              <p class="card-text">
-                Nullam facilisis fermentum aliquam. 
-                Suspendisse ornare dolor vitae libero hendrerit auctor lacinia a ligula. 
-                Curabitur elit tellus, porta ut orci sed, fermentum bibendum nisi.
-              </p>
-          </div>
-        </div>
-        <div class="card-footer text-muted">
-          <a class="primary icon-heart" style="padding-right: 50px;"> Like</a>
-          <a class="primary icon-speech" style="padding-right: 50px;"> Comment</a>
-        </div>
+
+      </ng-container>
+
+      <div *ngIf="postList.length === 0">
+        <span class="card-body text-muted" >Currently, No Post Available</span>
       </div>
+
     </div>
+
     <div class="col-5"></div>
+
   </div>
   
