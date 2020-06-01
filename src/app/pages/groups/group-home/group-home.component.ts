@@ -21,13 +21,14 @@ export class GroupHomeComponent implements OnInit {
   ngOnInit() {
     this.groupService.getUserGroups().subscribe( data => {
       this.groups = data;
-      console.log(this.groups);
+      
     })
     this.groupService.getAllGroups().subscribe( data => {
       this.allGroups = data;
     })
     this.groupService.getGroupInvites().subscribe( data => {
       this.groupInvites = data;
+      console.log(this.groupInvites);
 
     })
   }
@@ -54,8 +55,8 @@ export class GroupHomeComponent implements OnInit {
   acceptInvite(groupId) {
     console.log(groupId);
     this.groupService.acceptInvite(groupId).subscribe(data => {
-      console.log(data[0].group);
-      this.groups.push(data[0]);
+      console.log(data);
+      this.groups.push(data.group);
       this.groupInvites = this.groupInvites.filter(group => {
         return group.group.groupId !== groupId
       })

@@ -49,7 +49,7 @@ export class GroupService {
   }
 
   acceptInvite(groupId) {
-    return this.http.post('http://localhost:8080/group/' + groupId + '/acceptInvite' , {});
+    return this.http.post<any>('http://localhost:8080/group/' + groupId + '/acceptInvite' , {});
   }
 
   requestMembership(groupId) {

@@ -55,7 +55,7 @@ export class GroupDetailComponent implements OnInit, OnDestroy {
      })
 
      this.groupService.getRole(this.id).subscribe(data => {
-       const me = data;
+       const me: any = data;
       if (me.memberStatus === 'MEMBER' || me.memberStatus === 'ADMIN' || me.memberStatus === 'CREATOR'){
         this.isMember = true;
         if(me.memberStatus === 'ADMIN' || me.memberStatus === 'CREATOR') {
@@ -149,7 +149,11 @@ export class GroupDetailComponent implements OnInit, OnDestroy {
   }
 
   joinGroup() {
-
+    this.groupService.requestMembership(this.id).subscribe( data=> {
+      console.log(data);
+    }, error => {
+      console.log(error);
+    })
   }
 
 }
