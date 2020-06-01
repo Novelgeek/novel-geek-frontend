@@ -9,11 +9,7 @@ import { SwiperComponent } from 'ngx-useful-swiper';
 export class ProfileHomeComponent implements OnInit {
 
   @ViewChild('usefulSwiper', { static: false }) usefulSwiper: SwiperComponent;
-
-  constructor() { }
-
-  ngOnInit() {
-  }
+  config: SwiperOptions;
 
   slideData = [
     {
@@ -49,8 +45,11 @@ export class ProfileHomeComponent implements OnInit {
     }
   ]
 
+  constructor() { }
 
-  config: SwiperOptions = {
+  ngOnInit() {
+    this.config = {
+
     pagination: { el: '.swiper-pagination', clickable: true },
     autoHeight: true,
     allowTouchMove: true,
@@ -80,15 +79,16 @@ export class ProfileHomeComponent implements OnInit {
     loop: true,
     on: {
       slideChange: () => {
-        console.log('slideChange Event: Active Slide Index = ', this.usefulSwiper.swiper.activeIndex);
+        // console.log('slideChange Event: Active Slide Index = ', this.usefulSwiper.swiper.activeIndex);
 
       },
       slideChangeTransitionEnd: () => {
-        console.log('slideChange Event');
+        // console.log('slideChange Event');
       }
     }
 
   };
+}
 
   
 
