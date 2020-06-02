@@ -28,6 +28,7 @@ import { GroupCardComponent } from './pages/groups/group-card/group-card.compone
 import { TokenInterceptor } from './core/_services/token.interceptor';
 import { GroupHorizontalCardComponent } from './pages/groups/group-horizontal-card/group-horizontal-card.component';
 import { GroupDetailComponent } from './pages/groups/group-detail/group-detail.component';
+import { NotFoundComponent } from './pages/not-found/not-found.component';
 
 export function tokenGetter() {
   return localStorage.getItem("token");
@@ -56,7 +57,8 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     SalesHomeComponent,
     GroupCardComponent,
     GroupHorizontalCardComponent,
-    GroupDetailComponent
+    GroupDetailComponent,
+    NotFoundComponent
   ],
   imports: [
     BrowserAnimationsModule,

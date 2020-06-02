@@ -15,6 +15,7 @@ import { SalesHomeComponent } from './pages/sales/sales-home/sales-home.componen
 import { SignupComponent } from './pages/auth/signup/signup.component';
 import { AuthGuard } from './core/_guards/auth.guard';
 import { GroupDetailComponent } from './pages/groups/group-detail/group-detail.component';
+import { NotFoundComponent } from './pages/not-found/not-found.component';
 
 const appRoutes: Routes = [
   { path: 'login', component: LoginComponent},
@@ -30,7 +31,9 @@ const appRoutes: Routes = [
       {path: 'posts', component: PostsHomeComponent},
       {path: 'profile', component: ProfileHomeComponent},
       {path: 'sales', component: SalesHomeComponent},
-      {path: '**', component: PostsHomeComponent},
+      {path: '', component: PostsHomeComponent},
+      {path: '404', component: NotFoundComponent},
+      {path: '**', component: NotFoundComponent},
     ]
   },
 ];
