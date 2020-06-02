@@ -19,7 +19,7 @@ export class GroupService {
   }
 
   updateGroup(name: String, description: String, photo: String, groupId) {
-    return this.http.post('http://localhost:8080/group/' + groupId + '/update',
+    return this.http.post<any>('http://localhost:8080/group/' + groupId + '/update',
       {
         groupName: name,
         description: description,
@@ -48,21 +48,20 @@ export class GroupService {
     return this.http.post('http://localhost:8080/group/' + groupId + '/inviteUser/' + userId, {})
   }
 
-  acceptInvite(groupId) {
-    return this.http.post<any>('http://localhost:8080/group/' + groupId + '/acceptInvite' , {});
+  acceptInvite(inviteId) {
+    return this.http.post<any>('http://localhost:8080/group/acceptInvite/' + inviteId , {});
   }
 
   requestMembership(groupId) {
     return this.http.post('http://localhost:8080/group/' + groupId + '/requestMembership', {})
   }
 
-  // no need
   getRequests(groupId) {
     return this.http.get('http://localhost:8080/group/' + groupId + '/getRequests');
   }
 
-  acceptRequest(groupId, userId) {
-    return this.http.get('http://localhost:8080/group/' + groupId + '/acceptRequest/' + userId);
+  acceptRequest(requestId) {
+    return this.http.get('http://localhost:8080/group/acceptRequest/' + requestId);
   }
 
   leaveGroup(groupId) {

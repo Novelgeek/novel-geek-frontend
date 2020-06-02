@@ -7,7 +7,7 @@
     <div class="card-content">
       <div class="card-body">
         <p class="card-text text-center">{{group.description}}</p>
-        <a class="btn btn-raised btn-success" (click)="requestMembership()">Be a member</a>
+        <a *ngIf="!group.member" class="btn btn-raised btn-success" (click)="requestMembership()">Be a member</a>
       </div>
     </div>
   </div>

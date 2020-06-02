@@ -6,7 +6,7 @@
                     <div class="col-5">
                         <div class="align-self-start halfway-fab pl-3 pt-2">
                             <div class="text-left">
-                                <h3 class="card-title primary">{{group?.groupName}}</h3>
+                                <h3 class="card-title primary">{{groupName}}</h3>
                             </div>
                         </div>
                     </div>
@@ -110,7 +110,7 @@
               </div>
             </div>
 
-            <div class="form-actions">
+            <div class="form-actions right">
               <button type="button" class="btn btn-raised btn-warning mr-1">
                 <i class="ft-x"></i> Cancel
               </button>
@@ -159,9 +159,9 @@
                       <div class="card-content d-flex justify-content-between">
                         <div class="card-stacked align-self-center">
                           <div class="px-3">
-                            <h4 class="card-title mt-2">{{request.users.username}}</h4>
-                            <p class="card-text">{{request.users.email}}</p>
-                            <a class="btn btn-raised btn-success" (click)="acceptRequest(request.users.id)">Accept Invitation</a>
+                            <h4 class="card-title mt-2">{{request.firedUser.username}}</h4>
+                            <p class="card-text">{{request.firedUser.email}}</p>
+                            <a class="btn btn-raised btn-success" (click)="acceptRequest(request.notificationId)">Accept Invitation</a>
                           </div>
                         </div>
                       </div>

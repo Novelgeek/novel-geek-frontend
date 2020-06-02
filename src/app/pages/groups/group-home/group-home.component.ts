@@ -4,6 +4,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { NgForm } from '@angular/forms';
 import { GroupService } from 'app/core/_services/group.service';
+import { group } from '@angular/animations';
 
 @Component({
   selector: 'app-group-home',
@@ -12,24 +13,22 @@ import { GroupService } from 'app/core/_services/group.service';
 })
 export class GroupHomeComponent implements OnInit {
   user: any;
-  groups: any = [];
-  allGroups: any =[];
+  myGroups: any = [];
+  allGroups: any = [];
   groupInvites: any = [];
   constructor(private authSerice: AuthService, private http: HttpClient,
               private modalService: NgbModal, private groupService: GroupService) { }
 
   ngOnInit() {
-    this.groupService.getUserGroups().subscribe( data => {
-      this.groups = data;
-      
-    })
     this.groupService.getAllGroups().subscribe( data => {
       this.allGroups = data;
+      this.myGroups = data;
+      this.myGroups = this.myGroups.filter( group => {
+        return group.member;
+      })
     })
     this.groupService.getGroupInvites().subscribe( data => {
       this.groupInvites = data;
-      console.log(this.groupInvites);
-
     })
   }
 
@@ -42,23 +41,20 @@ export class GroupHomeComponent implements OnInit {
   }
 
   onSubmit(form: NgForm) {
-    console.log(form.value);
     this.groupService.createGroup(form.value.groupName, form.value.description, form.value.avatar).subscribe( data => {
-      this.groups.push({group: data});
+      this.myGroups.push(data);
       this.allGroups.push(data);
-      console.log(data)
+      this.modalService.dismissAll();
     }, error => {
       console.log(error);
     });
   }
 
-  acceptInvite(groupId) {
-    console.log(groupId);
-    this.groupService.acceptInvite(groupId).subscribe(data => {
-      console.log(data);
-      this.groups.push(data.group);
-      this.groupInvites = this.groupInvites.filter(group => {
-        return group.group.groupId !== groupId
+  acceptInvite(inviteId) {
+    this.groupService.acceptInvite(inviteId).subscribe(data => {
+      this.myGroups.push(data);
+      this.groupInvites = this.groupInvites.filter(invite => {
+        return invite.notificationId !== inviteId
       })
     }, error => {
       console.log(error);

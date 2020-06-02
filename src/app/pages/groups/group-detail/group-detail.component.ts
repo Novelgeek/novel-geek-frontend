@@ -43,42 +43,24 @@ export class GroupDetailComponent implements OnInit, OnDestroy {
    });
 
    this.groupService.getSingleGroup(this.id).subscribe(data => {
-     this.group = data;
-     this.members = this.group.members;
-     this.requests = this.members.filter( member => {
-      return member.memberStatus === 'REQUESTED'
-     });
-     this.members = this.members.filter( function(member) {
-       if (member.memberStatus !== 'REQUESTED' && member.memberStatus !== 'INVITED') {
-         return true;
-       }
-     })
+    this.group = data;
+    this.members = this.group.members;
 
-     this.groupService.getRole(this.id).subscribe(data => {
-       const me: any = data;
-      if (me.memberStatus === 'MEMBER' || me.memberStatus === 'ADMIN' || me.memberStatus === 'CREATOR'){
-        this.isMember = true;
-        if(me.memberStatus === 'ADMIN' || me.memberStatus === 'CREATOR') {
-          this.isAdmin = false;
-        } else {
-          this.isAdmin = false;
-        }
-      }
-      else {
-        this.isMember = false;
-        this.isAdmin =false;
-      }
-      console.log(this.isMember)
-      console.log(this.isAdmin)
-     }, error => {
-
-     })
-     this.groupName = this.group.groupName;
-     this.description = this.group.description;
-     this.avatar = this.group.groupAvatar;
+    this.isMember = this.group.member;
+    this.isAdmin = this.group.isAdmin;
+    this.groupName = this.group.groupName;
+    this.description = this.group.description;
+    this.avatar = this.group.groupAvatar;
    }, error => {
      console.log('cant find group')
    })
+
+   this.groupService.getRequests(this.id).subscribe( data => {
+     this.requests = data
+   }, error => {
+     console.log(error);
+   })
+
 
   }
 
@@ -103,7 +85,10 @@ export class GroupDetailComponent implements OnInit, OnDestroy {
     console.log(form.value);
 
     this.groupService.updateGroup(this.groupName, this.description, this.avatar, this.id).subscribe( data => {
-      console.log(data);
+      this.groupName = data.groupName;
+      this.description = data.description;
+      this.avatar = data.groupAvatar;
+      console.log(data.groupName);
     }, error => {
       console.log(error);
     })
@@ -119,9 +104,12 @@ export class GroupDetailComponent implements OnInit, OnDestroy {
     })
   }
 
-  acceptRequest(userId) {
-    this.groupService.acceptRequest(this.id, userId).subscribe( data => {
+  acceptRequest(requestId) {
+    this.groupService.acceptRequest(requestId).subscribe( data => {
       console.log(data);
+      this.requests = this.requests.filter(request => {
+        return request.notificationId !== requestId
+      })
     }, error => {
       console.log(error);
     })
@@ -129,8 +117,8 @@ export class GroupDetailComponent implements OnInit, OnDestroy {
 
   leaveGroup() {
     this.groupService.leaveGroup(this.id).subscribe( data => {
-      console.log('left group');
-
+      this.isMember = false;
+      this.isAdmin = false;
     }, error => {
       console.log(error);
 

@@ -30,7 +30,7 @@
             <ngb-tab title="My Groups">
               <ng-template ngbTabContent>
                 <div class="row">
-                  <div class="col col-xl-3 col-lg-3 col-md-3 col-sm-6 col-12" *ngFor="let group of groups">
+                  <div class="col col-xl-3 col-lg-3 col-md-3 col-sm-6 col-12" *ngFor="let group of myGroups">
                     <app-group-card [group]="group"></app-group-card>
                   </div>
                 </div>
@@ -56,7 +56,7 @@
                         <div class="px-3">
                           <div class="card-text">{{invite.firedUser.username}} invited you to join</div>
                           <h4 class="card-title">{{invite.group.groupName}}</h4>
-                          <a class="btn btn-raised btn-success" (click)="acceptInvite(invite.group.groupId)">Accept Invitation</a>
+                          <a class="btn btn-raised btn-success" (click)="acceptInvite(invite.notificationId)">Accept Invitation</a>
                         </div>
                       </div>
                     </div>
