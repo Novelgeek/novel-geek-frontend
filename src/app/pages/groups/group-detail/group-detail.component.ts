@@ -29,6 +29,9 @@ export class GroupDetailComponent implements OnInit, OnDestroy {
   isAdmin: boolean;
   userId: number;
 
+  currentOrientation = 'horizontal';
+
+
   constructor(private route: ActivatedRoute, private groupService: GroupService,
               private modalService: NgbModal, private userService: UserService,
               private authService: AuthService, private router: Router,

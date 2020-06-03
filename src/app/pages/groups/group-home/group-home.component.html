@@ -72,16 +72,17 @@
                         <div class="card-content justify-content-between">
                           <div class="align-self-center">
                             <div class="row mt-2 mb-2">
-                              <div class="col-4">
+                              <div class="col-3">
                                 <div class="card-text primary">{{invite.firedUser.username}}</div>
-                                <div class="card-text "> invited you to join group</div>
+                                <div class="card-text "> invited you to join</div>
 
                               </div>
-                              <div class="col-4 align-self-center">
+                              <div class="col-3 align-self-center">
                                 <h4 class="card-title">{{invite.group.groupName}}</h4>
                               </div>
-                              <div class="col-4 my-auto mt-1">
-                                <a class="btn btn-raised btn-success" (click)="acceptInvite(invite.notificationId)">Accept Invitation</a>
+                              <div class="col-6 my-auto mt-1">
+                                <a class="btn btn-raised btn-success mr-1" (click)="acceptInvite(invite.notificationId)">Accept Invitation</a>
+                                <a class="btn btn-raised btn-warning">Decline</a>
                               </div>
                             </div>
                               
