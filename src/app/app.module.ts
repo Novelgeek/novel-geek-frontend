@@ -4,6 +4,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { SharedModule } from './shared/shared.module';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { HttpClientModule } from '@angular/common/http';
+import {NgxUsefulSwiperModule} from 'ngx-useful-swiper';
 
 import { PerfectScrollbarModule, PERFECT_SCROLLBAR_CONFIG, PerfectScrollbarConfigInterface} from 'ngx-perfect-scrollbar';
 
@@ -20,6 +21,7 @@ import { PollsHomeComponent } from './pages/polls/polls-home/polls-home.componen
 import { PostsHomeComponent } from './pages/posts/posts-home/posts-home.component';
 import { ProfileHomeComponent } from './pages/profile/profile-home/profile-home.component';
 import { SalesHomeComponent } from './pages/sales/sales-home/sales-home.component';
+import { from } from 'rxjs';
 
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
@@ -50,7 +52,8 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     SharedModule,
     HttpClientModule,
     NgbModule,
-    PerfectScrollbarModule
+    PerfectScrollbarModule,
+    NgxUsefulSwiperModule
   ],
   providers: [
     {
