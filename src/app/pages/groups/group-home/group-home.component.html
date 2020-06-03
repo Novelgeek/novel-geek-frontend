@@ -1,81 +1,111 @@
-<div class="container row justify-content-center">
-  <div class="col-sm-2"></div>
-  <div class="col-6">
-      <input type="text" class="form-control form-control " id="iconLeft" placeholder="Search">
-  </div>
-  <div class="col-4">
-    <button class="btn btn-primary btn-raised" (click)="open(createGroup)">Create Group</button>
-  </div>
-</div>
-<!-- 
 <div class="row">
-
-    <div class="col col-xl-3 col-lg-3 col-md-3 col-sm-6 col-12" *ngFor="let group of groups">
-      <app-group-card [group]="group.group"></app-group-card>
-    </div>
-
-
-</div> -->
-
-<div class="row text-left">
-  <!--Tabset Starts-->
   <div class="col-md-12 col-lg-12">
     <div class="card">
-      <div class="card-header">
-        <h4 class="card-title">Groups</h4>
-      </div>
       <div class="card-content">
         <div class="card-body">
-          <ngb-tabset>
-            <ngb-tab title="My Groups">
-              <ng-template ngbTabContent>
-                <div class="row">
-                  <div class="col col-xl-3 col-lg-3 col-md-3 col-sm-6 col-12" *ngFor="let group of myGroups">
-                    <app-group-card [group]="group"></app-group-card>
-                  </div>
-                </div>
-              </ng-template>
-            </ngb-tab>
-            <ngb-tab>
-              <ng-template ngbTabTitle><b>All</b> Groups</ng-template>
-              <ng-template ngbTabContent>
-                <div class="row">
-                  <div class="col-12" *ngFor="let group of allGroups">
-                    <app-group-horizontal-card [group]="group"></app-group-horizontal-card>
-                  </div>
-                </div>
-              </ng-template>
-            </ngb-tab>
-            <ngb-tab>
-              <ng-template ngbTabTitle>Group Invites</ng-template>
-              <ng-template ngbTabContent>
-                <div class="col-12" *ngFor="let invite of groupInvites">
-                  <div class="card horizontal">
-                    <div class="card-content d-flex justify-content-between">
-                      <div class="card-stacked align-self-center">
-                        <div class="px-3">
-                          <div class="card-text">{{invite.firedUser.username}} invited you to join</div>
-                          <h4 class="card-title">{{invite.group.groupName}}</h4>
-                          <a class="btn btn-raised btn-success" (click)="acceptInvite(invite.notificationId)">Accept Invitation</a>
+
+          <div class="row">
+            <div class="col-6">
+              <h4 class="card-title">Groups</h4>
+            </div>
+            <div class="col-6">
+              <form class="form">
+                <div class="form-group">
+                  <!-- <div class="position-relative has-icon-right">
+                    <input type="text" class="form-control" name="form-control-with-icon">
+                    <div class="form-control-position">
+                      <i class="ft-search primary"></i>
+                      <!-- <i class="ft-loader spinner"></i> 
+                    </div>
+                  </div> -->
+                  <div class="row">
+                    <div class="col-6">
+                      <button class="btn btn-outline-info mr-1 pull-right primary" (click)="open(createGroup)">
+                        <i class="ft-plus primary mr-1"></i>
+                        Create Group
+                      </button>
+                    </div>
+                    <div class="col-6">
+                      
+                      <div class="input-group ">
+                        <input type="text" class="form-control " placeholder="Search" aria-describedby="button-addon4">
+                        <div class="input-group-append">
+                          <button class="btn btn-raised btn-primary" type="button"><i class="ft-search"></i></button>
                         </div>
                       </div>
                     </div>
                   </div>
                 </div>
-              </ng-template>
-            </ngb-tab>
-            <ngb-tab title="Disabled" [disabled]="true">
-              <ng-template ngbTabContent><p>Jelly beans halvah brownie macaroon powder. Wafer gingerbread caramels candy tootsie roll powder chupa chups. Marshmallow candy caramels chocolate cake oat cake caramels. Ice cream jelly liquorice danish toffee caramels. Danish icing topping. Carrot cake cupcake marshmallow donut sugar plum gingerbread sweet jelly. Pastry chocolate carrot cake sweet macaroon sweet roll jelly beans topping. Biscuit lollipop jelly-o tart halvah muffin. Caramels topping gummies pastry sweet. Lollipop candy canes bonbon sesame snaps.
-              Tart tootsie roll donut biscuit cake. Biscuit jelly beans soufflé powder. Wafer macaroon candy canes. Cake caramels tart lemon drops cupcake chocolate dessert. Fruitcake jujubes pie candy apple pie cheesecake. Oat cake donut oat cake gummies cookie powder. Apple pie tart chupa chups jelly marshmallow liquorice wafer gummi bears.
-              Jelly sugar plum bear claw macaroon danish chocolate cake apple pie sweet roll cake. Tiramisu wafer caramels icing candy soufflé fruitcake tart candy canes. Jelly carrot cake sweet. Cake chocolate pastry fruitcake sugar plum soufflé. Pie bear claw cake donut jelly-o cake cupcake dessert. Cake candy canes liquorice oat cake chocolate.</p></ng-template>
-            </ngb-tab>
-          </ngb-tabset>
+              </form>
+            </div>
+          </div>
+
+
+          <div class="row">
+            <div class="col-auto">
+              <ul ngbNav #nav="ngbNav" class="nav-pills">
+                <li ngbNavItem >
+                  <a ngbNavLink>My Groups</a>
+                  <ng-template ngbNavContent>
+                    <div class="row" matchHeight="card">
+                      <div class="col col-xl-3 col-lg-3 col-md-3 col-sm-6 col-12" *ngFor="let group of myGroups">
+                        <app-group-card [group]="group"></app-group-card>
+                      </div>
+                    </div>
+                  </ng-template>
+                </li>
+                <li ngbNavItem>
+                  <a ngbNavLink>All Groups</a>
+                  <ng-template ngbNavContent>
+                    <div class="row">
+                      <div class="col-sm-12 col-md-6" *ngFor="let group of allGroups">
+                        <app-group-horizontal-card [group]="group"></app-group-horizontal-card>
+                      </div>
+                    </div>
+                  </ng-template>
+                </li>
+                <li ngbNavItem>
+                  <a ngbNavLink>Group Invites</a>
+                  <ng-template ngbNavContent>
+                    <div class="col-md-6" *ngFor="let invite of groupInvites">
+                      <div class="card text-center">
+                        <div class="card-content justify-content-between">
+                          <div class="align-self-center">
+                            <div class="row mt-2 mb-2">
+                              <div class="col-4">
+                                <div class="card-text primary">{{invite.firedUser.username}}</div>
+                                <div class="card-text "> invited you to join group</div>
+
+                              </div>
+                              <div class="col-4 align-self-center">
+                                <h4 class="card-title">{{invite.group.groupName}}</h4>
+                              </div>
+                              <div class="col-4 my-auto mt-1">
+                                <a class="btn btn-raised btn-success" (click)="acceptInvite(invite.notificationId)">Accept Invitation</a>
+                              </div>
+                            </div>
+                              
+                              
+
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </ng-template>
+                </li>
+              </ul>
+            </div>
+          </div>
+
+
         </div>
       </div>
     </div>
   </div>
-  <!--Tabset Ends-->    
 </div>
+
+
+<div [ngbNavOutlet]="nav"></div>
 
 
 <!-- create group modal -->
