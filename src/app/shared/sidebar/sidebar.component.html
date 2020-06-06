@@ -26,7 +26,8 @@
             <li appSidebarlink level="{{depth + 1}}" (toggleEmit)="handleToggle($event)" (click)="toggleSlideInOut()" [routePath]="menuItem.path" [classes]="menuItem.class" [title]="menuItem.title"  [parent]="" *ngFor="let menuItem of menuItems"   [ngClass]="{'has-sub': menuItem.class === 'has-sub' ? true: false, 'open': activeTitles.includes(menuItem.title) && !nav_collapsed_open ? true : false, 'nav-collapsed-open': nav_collapsed_open && activeTitles.includes(menuItem.title)}" [routerLinkActive]="menuItem.submenu.length != 0 ? '' : 'active'"
                 [routerLinkActiveOptions]="{exact: true}">
                 <a appSidebarAnchorToggle [routerLink]="menuItem.class === '' ? [menuItem.path] : null" *ngIf="!menuItem.isExternalLink; else externalLinkBlock">
-                    <i [ngClass]="[menuItem.icon]" ngbTooltip={{menuItem.title}} placement="top" ng-ngStyle="{position:relative;z-index:1000}"></i>
+                    <i [ngClass]="[menuItem.icon]" [ngbTooltip]="tipContent" placement="bottom" tooltipClass="my-custom-class"
+                    ng-ngStyle="{position:relative;z-index:1000}"></i>
                     <span class="menu-title">{{menuItem.title }}</span>
                     <span *ngIf="menuItem.badge != '' " [ngClass]="[menuItem.badgeClass]">{{menuItem.badge}}</span>
                 </a>
@@ -37,6 +38,7 @@
                         <span *ngIf="menuItem.badge != '' " [ngClass]="[menuItem.badgeClass]">{{menuItem.badge}}</span>
                     </a>
                 </ng-template>
+                <ng-template #tipContent><span class="ttip">{{menuItem.title}}</span></ng-template>
             </li>
             <li>
                 <a appSidebarToggle>
@@ -48,3 +50,5 @@
     </div>
 </div>
 <!-- Sidebar Content Ends -->
+
+
