@@ -29,6 +29,9 @@ import { TokenInterceptor } from './core/_services/token.interceptor';
 import { GroupHorizontalCardComponent } from './pages/groups/group-horizontal-card/group-horizontal-card.component';
 import { GroupDetailComponent } from './pages/groups/group-detail/group-detail.component';
 import { NotFoundComponent } from './pages/not-found/not-found.component';
+import { AdminLayoutComponent } from './layouts/admin-layout.component';
+import { AdminHomeComponent } from './pages/admin/admin-home/admin-home.component';
+import { AdminAuthComponent } from './pages/admin/admin-auth/admin-auth.component';
 
 export function tokenGetter() {
   return localStorage.getItem("token");
@@ -46,6 +49,9 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     SignupComponent,
     HomeLayoutComponent,
     LoginLayoutComponent,
+    AdminLayoutComponent,
+    AdminHomeComponent,
+    AdminAuthComponent,
     SignupComponent,
     BookHomeComponent,
     FriendsHomeComponent,
