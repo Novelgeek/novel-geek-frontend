@@ -7,4 +7,29 @@
     
     .md-card-image{min-height: 0;width:auto;}
   
-      
+    .swiper{
+      height: 250px;
+      width: 80%;
+      margin: auto;
+  }
+  
+  .swiper-slide{
+      img{
+          width: 100%;
+      }
+  }
+  .swiper-wrapper {
+      box-sizing: border-box;
+    }
+  .swiper-button-next{
+    height: 5;
+    color: white ;
+  }
+  
+  .swiper-button-prev{
+    height:5;
+    width: 5;
+    color: white;
+  }
+  
+  
