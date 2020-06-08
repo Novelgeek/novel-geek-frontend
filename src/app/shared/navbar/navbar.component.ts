@@ -32,6 +32,9 @@ export class NavbarComponent implements OnInit, AfterViewInit, OnDestroy {
       this.isAuthenticated = !!user; // !user ? false : true
       this.user = user;
     });
+    if (!this.isAuthenticated) {
+      this.user = {username: 'not logged in'}
+    }
   }
 
   ngAfterViewInit() {

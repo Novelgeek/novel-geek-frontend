@@ -3,6 +3,8 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { customAnimations } from '../animations/custom-animations';
 import { ConfigService } from '../services/config.service';
 import { ROUTES } from './sidebar-routes.config';
+import { ADMIN_ROUTES } from './sidebar-admin-routes.config';
+
 
 @Component({
   selector: 'app-sidebar',
@@ -20,6 +22,7 @@ export class SidebarComponent implements OnInit, AfterViewInit {
   expanded: boolean;
   nav_collapsed_open = false;
   logoUrl = 'assets/img/logo.png';
+  isAdmin = false;
   public config: any = {};
 
 
@@ -39,12 +42,21 @@ export class SidebarComponent implements OnInit, AfterViewInit {
 
   ngOnInit() {
     this.menuItems = ROUTES;
+
     this.config = this.configService.interfaceConf;
     if (this.config.layout.sidebar.backgroundColor === 'white') {
       this.logoUrl = 'assets/img/logo-dark.png';
     } else {
       this.logoUrl = 'assets/img/logo.png';
     }
+
+    if (this.route.snapshot.routeConfig.path === 'admin') {
+      this.isAdmin = true;
+      this.menuItems = ADMIN_ROUTES;
+      this.expanded = true;
+    }
+
+
 
 
   }
