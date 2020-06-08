@@ -41,11 +41,7 @@
     "resize-observer-polyfill": "1.5.1",
     "rxjs": "~6.5.4",
     "screenfull": "5.0.2",
-<<<<<<< HEAD
     "swiper": "^5.4.1",
-=======
-    "swiper": "^5.4.2",
->>>>>>> 7d0f45153c48c1b857646cdb4f0b43188e93ad38
     "tslib": "2.0.0",
     "web-animations-js": "2.3.2",
     "zone.js": "~0.10.2"
