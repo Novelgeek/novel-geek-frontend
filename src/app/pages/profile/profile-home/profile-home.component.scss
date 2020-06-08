@@ -22,7 +22,7 @@ h1 a{color:#131313; font-weight:bold;}
     position: relative;
     float: left;
     overflow: hidden;
-    width: 80%;
+    width: 100%;
     color:black;
     text-align: center;
     height:360px;
@@ -93,6 +93,7 @@ h1 a{color:#131313; font-weight:bold;}
     text-decoration:none;
   }
 
+  // image slider
   .swiper{
     height: 250px;
     width: 80%;
@@ -107,3 +108,14 @@ h1 a{color:#131313; font-weight:bold;}
 .swiper-wrapper {
     box-sizing: border-box;
   }
+.swiper-button-next{
+  height: 5;
+  color: white ;
+}
+
+.swiper-button-prev{
+  height:5;
+  width: 5;
+  color: white;
+}
+
