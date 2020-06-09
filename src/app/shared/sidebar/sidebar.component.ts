@@ -15,6 +15,7 @@ import { ADMIN_ROUTES } from './sidebar-admin-routes.config';
 export class SidebarComponent implements OnInit, AfterViewInit {
 
   @ViewChild('toggleIcon', {static: false} ) toggleIcon: ElementRef;
+
   public menuItems: any[];
   depth: number;
   activeTitle: string;
@@ -37,6 +38,8 @@ export class SidebarComponent implements OnInit, AfterViewInit {
       this.depth = 0;
       this.expanded = true;
     }
+
+
   }
 
 
@@ -50,37 +53,32 @@ export class SidebarComponent implements OnInit, AfterViewInit {
       this.logoUrl = 'assets/img/logo.png';
     }
 
-    if (this.route.snapshot.routeConfig.path === 'admin') {
-      this.isAdmin = true;
-      this.menuItems = ADMIN_ROUTES;
-      this.expanded = true;
-    }
-
-
-
-
+    this.route.params.subscribe( params => {
+      if (this.route.snapshot.routeConfig.path === 'admin') {
+        this.isAdmin = true;
+        this.menuItems = ADMIN_ROUTES;
+        this.expanded = true;
+      }
+    })
   }
 
   ngAfterViewInit() {
-
-    setTimeout(() => {
-      // tslint:disable-next-line: triple-equals
-      if (this.config.layout.sidebar.collapsed != undefined) {
-        if (this.config.layout.sidebar.collapsed === true) {
-          this.expanded = false;
-          this.renderer.addClass(this.toggleIcon.nativeElement, 'ft-toggle-left');
-          this.renderer.removeClass(this.toggleIcon.nativeElement, 'ft-toggle-right');
-          this.nav_collapsed_open = true;
-        } else if (this.config.layout.sidebar.collapsed === false) {
-          this.expanded = true;
-          this.renderer.removeClass(this.toggleIcon.nativeElement, 'ft-toggle-left');
-          this.renderer.addClass(this.toggleIcon.nativeElement, 'ft-toggle-right');
-          this.nav_collapsed_open = false;
+      setTimeout(() => {
+        // tslint:disable-next-line: triple-equals
+        if (this.config.layout.sidebar.collapsed != undefined) {
+          if (this.config.layout.sidebar.collapsed === true) {
+            this.expanded = false;
+            this.renderer.addClass(this.toggleIcon.nativeElement, 'ft-toggle-left');
+            this.renderer.removeClass(this.toggleIcon.nativeElement, 'ft-toggle-right');
+            this.nav_collapsed_open = true;
+          } else if (this.config.layout.sidebar.collapsed === false) {
+            this.expanded = true;
+            this.renderer.removeClass(this.toggleIcon.nativeElement, 'ft-toggle-left');
+            this.renderer.addClass(this.toggleIcon.nativeElement, 'ft-toggle-right');
+            this.nav_collapsed_open = false;
+          }
         }
-      }
-    }, 0);
-
-
+      }, 0);
   }
 
   toggleSlideInOut() {

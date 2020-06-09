@@ -9,4 +9,5 @@ export const ROUTES: RouteInfo[] = [
     { path: '/friends', title: 'Friends', icon: 'icon-user-follow', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },
     { path: '/messages', title: 'Messages', icon: 'icon-speech', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },
     { path: '/profile', title: 'Profile', icon: 'icon-user', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },
+    { path: '/admin', title: 'Admin', icon: 'icon-home', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },
 ];
