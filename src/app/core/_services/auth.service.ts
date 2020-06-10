@@ -33,8 +33,7 @@ export class AuthService {
     // expiresIn is in miliseconds to start the timer
     const expiresIn = expirationDate.getTime() - new Date().getTime();
     const decodedToken = this.jwtService.decodeToken(token);
-    const user = new User(username, decodedToken.id , token, expirationDate, decodedToken.username, decodedToken.image);
-    console.log(user)
+    const user = new User(username, decodedToken.id , token, expirationDate, decodedToken.username, decodedToken.image || null, decodedToken.role);
     this.user.next(user);
     this.currentUser = user;
     this.autoLogout(expiresIn);
@@ -72,7 +71,8 @@ export class AuthService {
     const user = JSON.parse(localStorage.getItem('user'));
     if (!user) { return; }
 
-    const loadedUser = new User(user.email, user.id, user._token, new Date(user.tokenExpirationDate), user.username, user.photo);
+    // tslint:disable-next-line: max-line-length
+    const loadedUser = new User(user.email, user.id, user._token, new Date(user.tokenExpirationDate), user.username, user.photoUrl, user.role);
 
     if (loadedUser.token) {
       this.user.next(loadedUser);
@@ -96,4 +96,12 @@ export class AuthService {
     this.router.navigate(['/posts'])
   }
 
+  adminFakeLogin() {
+    const token = 'faketoken';
+    const user = new User('admin', '1' , 'token', new Date(), 'admin', null, 'admin');
+    this.user.next(user);
+    this.currentUser = user;
+    localStorage.setItem('user', JSON.stringify(user));
+    localStorage.setItem('token', token);
+  }
 }

@@ -53,13 +53,13 @@ export class SidebarComponent implements OnInit, AfterViewInit {
       this.logoUrl = 'assets/img/logo.png';
     }
 
-    this.route.params.subscribe( params => {
-      if (this.route.snapshot.routeConfig.path === 'admin') {
-        this.isAdmin = true;
-        this.menuItems = ADMIN_ROUTES;
-        this.expanded = true;
-      }
-    })
+
+
+    if(this.router.routerState.snapshot.url.search('admin') === 1) {
+      this.isAdmin = true;
+      this.menuItems = ADMIN_ROUTES;
+
+    }
   }
 
   ngAfterViewInit() {
@@ -89,10 +89,5 @@ export class SidebarComponent implements OnInit, AfterViewInit {
     this.activeTitles = titles;
   }
 
-  // NGX Wizard - skip url change
-  ngxWizardFunction(path: string) {
-    if (path.indexOf('forms/ngx') !== -1) {
-      this.router.navigate(['forms/ngx/wizard'], { skipLocationChange: false });
-    }
-  }
+
 }

@@ -61,7 +61,7 @@
                     </div>
                     <div class="fg-actions d-flex justify-content-between">
                       <div class="login-btn">
-                        <button class="btn btn-outline-primary primary" [routerLink]="['/signup']">
+                        <button class="btn btn-outline-primary primary" [routerLink]="['/signup']" type="button">
                          Register
                         </button>
                       </div>
@@ -74,8 +74,14 @@
                   </form>
                   
                   <hr class="m-0" />
-                  <div class="d-flex justify-content-center mt-3">
+                  <div class="d-flex justify-content-center mt-2 card-content">
+                    <div class="card-text">Are you an Admin? Login 
+                      <a [routerLink]="['/admin/login']" href="">here</a> 
 
+                    </div> 
+                  </div>
+                  <div class="d-flex justify-content-center mt-2">
+                    
                     <div class="social-login-options">
                       <a  class="btn google-button" href="http://localhost:8080/oauth2/authorize/google?redirect_uri=http://localhost:4200/login">
                         <span class="google-button__icon">
@@ -84,7 +90,9 @@
                         <span class="google-button__text">Sign in with Google</span>
                       </a>
                     </div>
+
                   </div>
+
                 </div>
               </div>
             </div>
