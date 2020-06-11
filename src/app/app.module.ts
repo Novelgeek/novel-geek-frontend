@@ -32,6 +32,8 @@ import { NotFoundComponent } from './pages/not-found/not-found.component';
 import { AdminLayoutComponent } from './layouts/admin-layout.component';
 import { AdminHomeComponent } from './pages/admin/admin-home/admin-home.component';
 import { AdminAuthComponent } from './pages/admin/admin-auth/admin-auth.component';
+import { ForgotPasswordComponent } from './pages/auth/forgot-password/forgot-password.component';
+import { ResetPasswordComponent } from './pages/auth/reset-password/reset-password.component';
 
 export function tokenGetter() {
   return localStorage.getItem("token");
@@ -47,6 +49,8 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     AppComponent,
     LoginComponent,
     SignupComponent,
+    ForgotPasswordComponent,
+    ResetPasswordComponent,
     HomeLayoutComponent,
     LoginLayoutComponent,
     AdminLayoutComponent,

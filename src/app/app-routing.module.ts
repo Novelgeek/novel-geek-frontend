@@ -19,10 +19,14 @@ import { NotFoundComponent } from './pages/not-found/not-found.component';
 import { AdminAuthComponent } from './pages/admin/admin-auth/admin-auth.component';
 import { AdminLayoutComponent } from './layouts/admin-layout.component';
 import { AdminHomeComponent } from './pages/admin/admin-home/admin-home.component';
+import { ForgotPasswordComponent } from './pages/auth/forgot-password/forgot-password.component';
+import { ResetPasswordComponent } from './pages/auth/reset-password/reset-password.component';
 
 const appRoutes: Routes = [
   { path: 'login', component: LoginComponent},
   { path: 'signup', component: SignupComponent},
+  { path: 'forgot-password', component: ForgotPasswordComponent},
+  { path: 'reset-password', component: ResetPasswordComponent},
   { path: 'admin/login', component: AdminAuthComponent},
   { path: 'admin', component: AdminLayoutComponent,
     children: [

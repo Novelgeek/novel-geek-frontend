@@ -104,4 +104,12 @@ export class AuthService {
     localStorage.setItem('user', JSON.stringify(user));
     localStorage.setItem('token', token);
   }
+
+  sendPasswordResetLink(email) {
+    return this.http.post('http://localhost:8080/auth/forgot-password', { email: email });
+  }
+
+  resetPassword(password, token) {
+    return this.http.post('http://localhost:8080/auth/reset-password', { password: password, token: token });
+  }
 }
