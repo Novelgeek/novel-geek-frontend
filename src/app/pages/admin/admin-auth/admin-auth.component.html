@@ -1,0 +1,75 @@
+<!--Login Page Starts-->
+<section id="login">
+  <div class="container-fluid">
+    <div class="row full-height-vh m-0">
+      <div class="col-12 d-flex align-items-center justify-content-center">
+        <div class="card">
+          <div class="card-content">
+            <div class="card-body login-img">
+              <div class="row m-0">
+                <div
+                  class="col-lg-6 d-lg-block d-none py-2 px-3 text-center align-middle"
+                >
+                  <img
+                    src="../../assets/img/pages/admin-login.jpg"
+                    alt=""
+                    class="img-fluid mt-1"
+                    width="400"
+                    height="400"
+                  />
+                </div>
+                <div class="col-lg-6 col-md-12 bg-white px-4 pt-3 align-self-center">
+                  <h4 class="card-title mb-2">Login - Admin</h4>
+                  <p class="card-text">
+                    Welcome back Admin, please login to your account.
+                  </p>
+                  <form #loginForm="ngForm">
+                    <div class="form-group">
+                      
+                      <input 
+                        type="text" class="form-control" placeholder="Email" 
+                        name="email" ngModel
+                        required email
+                        #email="ngModel"/>
+                        <small class="help-block danger" *ngIf="!email.valid && email.touched">
+                          Please enter a valid email!</small>
+                      </div>
+                  <div class="form-group">
+                    <input 
+                      type="password" class="form-control" placeholder="Password" 
+                      name="password" minlength="4" ngModel
+                      required #password="ngModel"/>
+                      <div *ngIf="password.invalid && (password.dirty || password.touched)">
+                        <small *ngIf="password.errors.required" class="help-block danger">Please enter a password!</small> 
+                        <small *ngIf="password.errors.minlength" class="help-block danger">Password must be atleast 4 Charachters long!</small> 
+                      </div>
+                  </div>
+                        
+                    
+                    
+                    <div class="fg-actions d-flex justify-content-between">
+                      <div class="login-btn">
+                        <button class="btn btn-outline-primary primary" [routerLink]="['/login']">
+                         Back to user
+                        </button>
+                      </div>
+                      <div class="recover-pass">
+                        <button class="btn btn-primary primary-lighten-4" 
+                          type="submit" (click)="fakelogin()"><div class="white">Login</div> </button>
+                      </div>
+                    </div>
+                  </form>
+                  
+                  
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<ngx-spinner></ngx-spinner>
+
