@@ -8,7 +8,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { JwtModule } from '@auth0/angular-jwt';
 import { ToastrModule } from 'ngx-toastr';
 import { NgxSpinnerModule } from 'ngx-spinner';
-
+import {NgxUsefulSwiperModule} from 'ngx-useful-swiper';
 import { PerfectScrollbarModule, PERFECT_SCROLLBAR_CONFIG, PerfectScrollbarConfigInterface} from 'ngx-perfect-scrollbar';
 
 import { AppComponent } from './app.component';
@@ -34,6 +34,8 @@ import { AdminHomeComponent } from './pages/admin/admin-home/admin-home.componen
 import { AdminAuthComponent } from './pages/admin/admin-auth/admin-auth.component';
 import { ForgotPasswordComponent } from './pages/auth/forgot-password/forgot-password.component';
 import { ResetPasswordComponent } from './pages/auth/reset-password/reset-password.component';
+import { from } from 'rxjs';
+
 
 export function tokenGetter() {
   return localStorage.getItem("token");
@@ -88,6 +90,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
         blacklistedRoutes: ["http://example.com/examplebadroute/"],
       },
     }),
+    NgxUsefulSwiperModule
   ],
   providers: [
     {
