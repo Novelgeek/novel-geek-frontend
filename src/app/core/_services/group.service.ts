@@ -8,14 +8,8 @@ export class GroupService {
 
   constructor(private http: HttpClient) { }
 
-  createGroup(name: String, description: String, photo: String) {
-    return this.http.post('http://localhost:8080/group/new',
-      {
-        groupName: name,
-        description: description,
-        groupAvatar: photo
-      }
-    );
+  createGroup(newGroup: FormData) {
+    return this.http.post('http://localhost:8080/group/new', newGroup);
   }
 
   updateGroup(name: String, description: String, photo: String, groupId) {

@@ -130,6 +130,7 @@
         <div class="form-group">
           <label for="description">Group Avatar</label>
           <input id="description" class="form-control" placeholder="Avatar" name="avatar" ngModel>
+          <input type="file" (change)="onFileChanged($event)">
         </div>
     </div>
     <div class="modal-footer">
