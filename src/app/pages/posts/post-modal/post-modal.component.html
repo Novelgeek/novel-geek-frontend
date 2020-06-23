@@ -1,0 +1,55 @@
+<div class="card">
+  <div class="card-header d-flex justify-content-between">
+    <div>
+      <h4 class="card-title">User Pic</h4>
+      <span class="card-subtitle text-muted"> {{item.publishedDate|date:'medium'}}</span>
+    </div>
+    <div>
+      <a (click)="toggleList(item)"><i  class="ft-more-horizontal"></i></a>
+      <div style="position:relative">
+        <div *ngIf = "isShow" style="position:absolute; z-index: 1000;" class="text-left dropdown-menu show">
+          <div *ngIf="!item.owned">
+            <a class=" dropdown-item py-1">
+              <i class="ft-alert-triangle mr-2"></i>
+              <span> Report Post</span>
+            </a>
+          </div> 
+          <div *ngIf="item.owned">
+            <a (click)="deletePost(item.postid)" class="dropdown-item py-1">
+              <i class="ft-trash-2 mr-2"></i>
+              <span> Delete Post</span>
+            </a> 
+          </div> 
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card-body">
+    <h5 class="card-title">{{item.title}}</h5>
+    <div class="card-content" *ngIf="item.imagePath!=''">
+      <img [src]="item.imagePath" alt="img"  class="img-fluid">
+    </div>
+    <div class="card-content">
+        <p class="card-text">
+          {{item.description}}
+        </p>
+    </div>
+    <br>
+    <div class="card-content d-flex justify-content-between text-muted">
+      <a style="font-size: small; padding-bottom: 0px;">{{item.likecount}} Likes</a>
+      <a style="font-size: small; padding-bottom: 0px;">{{item.likecount}} comments</a>
+    </div>
+  </div>
+
+  <div class="card-footer text-muted">
+    <a (click)="likeCount(item.postid)" style="padding-right: 50px;">
+      <i class="fa fa-heart mr-2" [style.color]="flag" ></i> 
+      <span class="primary">  Like</span>
+    </a>
+    <a style="padding-right: 50px;">
+      <i class="primary icon-speech mr-2"></i>
+      <span class="primary">Comment</span>
+    </a>
+  </div>
+</div>

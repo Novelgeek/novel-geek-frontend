@@ -1,29 +1,24 @@
 export default class Post_modal {
 
-    public postType: String;
-    public postDescription: String;
-    public postTitle: String;
-    public imageURL:String;
-    public postedDate: Date;
-    public isShow:boolean;
-
-
-    public likeCount: number;
-    public commentCount: number;
-
-    public commentList: any [];
+    public postid:number;
+    public title:string;
+    public publishedDate: Date;
+    public imagePath:string;
+    public description:string;
+    public sharedtype: string;
+    public likecount:number;
+    public owned: boolean;
+    public liked: boolean;
 
     public constructor(){
-        this.postType="TEXT";
-        this.postDescription="";
-        this.postTitle="";
-        this.imageURL="";
-        this.postedDate=new Date();
-        this.isShow=false;
-
-        this.likeCount=0;
-        this.commentCount=0;
-
-        this.commentList=[];
+        this.postid=0;
+        this.title="";
+        this.publishedDate=new Date();
+        this.imagePath="";
+        this.description="";
+        this.sharedtype="";
+        this.likecount=0;
+        this.owned=true;
+        this.liked=false;
     }
 }
