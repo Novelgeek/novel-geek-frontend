@@ -62,9 +62,7 @@ export class ProfileHomeComponent implements OnInit {
     // },
     
     breakpoints: {
-      1024: {
-        slidesPerView: 4
-      },
+  
       500: {
         slidesPerView: 3
       },

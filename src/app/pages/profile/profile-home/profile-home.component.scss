@@ -22,8 +22,11 @@ h1 a{color:#131313; font-weight:bold;}
     position: relative;
     float: left;
     overflow: hidden;
-    width: 100%;
+    width: 90%;
     color:black;
+    // background-color: rgba(51, 51, 51, 1.00);
+    background-color: transparent;
+    // opacity:0;
     text-align: center;
     height:360px;
     border:none;
@@ -31,11 +34,12 @@ h1 a{color:#131313; font-weight:bold;}
   .profile-card-1 .background {
     width:100%;
     vertical-align: top;
-    opacity: 0.9;
+    opacity: 1.0;
     -webkit-filter: blur(5px);
     filter: blur(5px);
      -webkit-transform: scale(1.8);
     transform: scale(2.8);
+    color: #75787d
   }
   .profile-card-1 .card-content {
     width: 100%;
@@ -108,14 +112,39 @@ h1 a{color:#131313; font-weight:bold;}
 .swiper-wrapper {
     box-sizing: border-box;
   }
+  
 .swiper-button-next{
   height: 5;
-  color: white ;
+  color: black ;
 }
 
 .swiper-button-prev{
   height:5;
   width: 5;
-  color: white;
+  color: black;
 }
 
+.vertical { 
+  border: 1px solid rgb(58, 129, 177); 
+  height: 100%; 
+  position:absolute; 
+  left: 60%; 
+  top: 0;
+}   
+
+.msg{
+
+  border-radius: 50%;
+    position: absolute;
+    left: 100%;
+    max-width: 50px;
+    opacity: 1;
+    // box-shadow: 3px 3px 20px rgba(0, 0, 0, 0.5);
+    border: 2px solid rgba(255, 255, 255, 1);
+    -webkit-transform: translate(-50%, 0%);
+    transform: translate(-50%, 0%);
+}
+
+.stackem div {
+  width: 100%;
+}

@@ -3,6 +3,7 @@ import { LayoutService } from '../services/layout.service';
 import { ConfigService } from '../services/config.service';
 import { AuthService } from 'app/core/_services/auth.service';
 import { Subscription } from 'rxjs';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-navbar',
@@ -20,7 +21,12 @@ export class NavbarComponent implements OnInit, AfterViewInit, OnDestroy {
 
   public config: any = {};
 
-  constructor(private layoutService: LayoutService, private configService: ConfigService, private authService: AuthService) { }
+  constructor(
+    private layoutService: LayoutService, 
+    private configService: ConfigService, 
+    private authService: AuthService,
+    private route: ActivatedRoute
+    ) { }
 
   ngOnDestroy(): void {
     this.userSub.unsubscribe();

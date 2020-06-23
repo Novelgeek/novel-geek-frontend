@@ -68,15 +68,15 @@
                         </div>
                     </li>
                     <li></li>
-                    <li class="nav-item" ngbDropdown [placement]="placement">
+                    <li class="nav-item" ngbDropdown [placement]="placement" >
                         <a class="nav-link position-relative" id="dropdownBasic3" ngbDropdownToggle>
                             
                             <img src="https://s3.eu-central-1.amazonaws.com/bootstrapbaymisc/blog/24_days_bootstrap/fox.jpg" width="30" height="30" class="d-inline-flex rounded-circle">
                             <!-- <i class="ft-user font-medium-3 blue-grey darken-4"></i> -->
                             <p class="d-inline">Chethani</p>
                         </a>
-                        <div ngbDropdownMenu aria-labelledby="dropdownBasic3" class="text-left dropdown-menu-right">                           
-                            <a class="dropdown-item py-1" href="javascript:;">
+                        <div ngbDropdownMenu aria-labelledby="dropdownBasic3" class="text-left dropdown-menu-right" [routerLinkActiveOptions]="{exact: true}">                            
+                            <a class="dropdown-item py-1" [routerLink]="['/profile']" >
                                 <i class="ft-edit mr-2"></i>
                                 <span>My Profile</span>
                             </a>
@@ -84,7 +84,7 @@
                                 <i class="ft-mail mr-2"></i>
                                 <span>My Inbox</span>
                             </a>
-                            <a class="dropdown-item py-1" href="javascript:;">
+                            <a class="dropdown-item py-1" [routerLink]="['/settings']">
                                 <i class="ft-settings mr-2"></i>
                                 <span>Settings</span>
                             </a>
