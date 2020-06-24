@@ -1,4 +1,6 @@
-import { Component, OnInit,ViewChild } from '@angular/core';
+import { Component, OnInit,ViewChild ,EventEmitter,OnDestroy } from '@angular/core';
+import { AuthService } from 'app/core/_services/auth.service';
+import { Subscription } from 'rxjs';
 // imports for image slider
 import { SwiperOptions } from 'swiper';
 import { SwiperComponent } from 'ngx-useful-swiper';
@@ -10,9 +12,23 @@ import { SwiperComponent } from 'ngx-useful-swiper';
 })
 export class ProfileHomeComponent implements OnInit {
 
+  private userSub: Subscription;
+  public user: any;
+  isAuthenticated = false;
+  
+
+  constructor(
+    
+    private authService: AuthService
+    ) { }
+
+    ngOnDestroy(): void {
+      this.userSub.unsubscribe();
+    }
+
   // image slider configuration
   @ViewChild('usefulSwiper', { static: false }) usefulSwiper: SwiperComponent;
-  config: SwiperOptions;
+  swconfig: SwiperOptions;
 
   slideData = [
     {
@@ -48,10 +64,19 @@ export class ProfileHomeComponent implements OnInit {
     }
   ]
 
-  constructor() { }
+  
 
   ngOnInit() {
-    this.config = {
+
+    
+    this.userSub = this.authService.user.subscribe( user => {
+      this.isAuthenticated = !!user; // !user ? false : true
+      this.user = user;
+    });
+
+
+
+    this.swconfig = {
 
     pagination: { el: '.swiper-pagination', clickable: true },
     autoHeight: true,
