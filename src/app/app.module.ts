@@ -20,6 +20,13 @@ import { PollsHomeComponent } from './pages/polls/polls-home/polls-home.componen
 import { PostsHomeComponent } from './pages/posts/posts-home/posts-home.component';
 import { ProfileHomeComponent } from './pages/profile/profile-home/profile-home.component';
 import { SalesHomeComponent } from './pages/sales/sales-home/sales-home.component';
+import { BookletComponent } from './pages/books/booklet/booklet.component';
+import { StoreComponent } from './pages/books/store/store.component';
+
+
+import { FormsModule } from '@angular/forms';
+import { SearchResultsComponent } from './pages/books/search-results/search-results.component';
+import { BookReviewComponent } from './pages/books/book-review/book-review.component';
 
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
@@ -42,7 +49,11 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     PollsHomeComponent,
     PostsHomeComponent,
     ProfileHomeComponent,
-    SalesHomeComponent
+    SalesHomeComponent,
+    BookletComponent,
+    StoreComponent,
+    SearchResultsComponent,
+    BookReviewComponent
   ],
   imports: [
     BrowserAnimationsModule,
@@ -50,6 +61,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     SharedModule,
     HttpClientModule,
     NgbModule,
+    FormsModule,
     PerfectScrollbarModule
   ],
   providers: [
