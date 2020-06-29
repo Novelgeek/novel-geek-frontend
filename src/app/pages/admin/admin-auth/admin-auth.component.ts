@@ -26,7 +26,7 @@ export class AdminAuthComponent implements OnInit {
     this.spinner.show();
     this.authService.adminLogin(this.email, this.password).subscribe(data => {
       console.log(data);
-      this.router.navigate(['admin'])
+      this.router.navigate(['admin/home'])
       this.spinner.hide();
     }, errorMsg => {
       this.spinner.hide();
