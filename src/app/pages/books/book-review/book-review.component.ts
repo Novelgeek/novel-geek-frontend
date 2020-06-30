@@ -15,6 +15,7 @@ export class BookReviewComponent implements OnInit {
   book:any=[];
   section=false;
   comments:any = [1, 2, 3, 4]
+  showShortDesciption = true;
   constructor(private bookService: BooksService,private route:ActivatedRoute) { }
 
   ngOnInit(): void {
@@ -27,6 +28,9 @@ export class BookReviewComponent implements OnInit {
         this.book=this.data.volumeInfo;
       });
   }
+  alterDescriptionText() {
+    this.showShortDesciption = !this.showShortDesciption
+ }
   onAddReview(){
 
   }

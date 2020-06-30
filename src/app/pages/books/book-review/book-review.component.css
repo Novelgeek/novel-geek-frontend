@@ -3,8 +3,8 @@
     width:200px; 
     margin-left: 5px;   
 }
-.comment{
-    width:1000px;
+.review{
+    width:1400px;
     margin:5px;
 }
 .detail-section{
@@ -19,4 +19,15 @@
 .review-section{
     margin-left:120px;
     margin-top:100px;
+}
+.like{
+    margin-left:10px
+}
+.like-count{
+    /* padding:20px; */
+}
+.show-less {
+    height: 4rem;
+    overflow: hidden;
+    padding: 1rem;
 }
