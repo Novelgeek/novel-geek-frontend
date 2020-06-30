@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Observable } from 'rxjs/Observable';
+import { UserService } from 'app/core/_services/user.service';
+import { Userdetails } from 'app/core/_models/userdetails.model';
+import { User } from 'app/core/_models/user.model';
 
 @Component({
   selector: 'app-profile-settings',
@@ -10,20 +13,36 @@ import { Observable } from 'rxjs/Observable';
 
 export class ProfileSettingsComponent implements OnInit {
   userSettingForm: FormGroup;
-
-  constructor() {}
+  userDetails: Userdetails;
+  constructor(private userService: UserService) {}
 
   ngOnInit() {
+
     this.userSettingForm = new FormGroup({
-      'userData': new FormGroup({
-        'username': new FormControl(null, [Validators.required]),
-        'email': new FormControl(null, [Validators.required, Validators.email]),
-        'contact': new FormControl(null),
-        'city': new FormControl(null),
-        'country': new FormControl(null),
-        'description': new FormControl(null)
-      })
+      'username': new FormControl(null, [Validators.required]),
+      'contact': new FormControl(null),
+      'city': new FormControl(null),
+      'country': new FormControl(null),
+      'description': new FormControl(null)
+  });
+
+    this.userService.getUserDetais().subscribe(data => {
+      this.userDetails = data;
+      console.log(data.username);
+      this.userSettingForm.setValue({
+        'username':data.username,
+        'contact': data.contact,
+        'city': data.city,
+        'country':data.country,
+        'description': data.description
+      
     });
+      
+    }, error => {
+      console.log(error);
+      
+    })
+
     // this.userSettingForm.valueChanges.subscribe(
     //   (value) => console.log(value)
     // );
@@ -31,23 +50,18 @@ export class ProfileSettingsComponent implements OnInit {
       (status) => console.log(status)
     );
 
-    this.userSettingForm.setValue({
-      'userData': {
-        'username': 'Max',
-        'email': 'max@test.com'
-      }
-    });
-
-    this.userSettingForm.patchValue({
-      'userData': {
-        'username': 'Anna',
-      }
-    });
   }
 
   onSubmit() {
     console.log(this.userSettingForm);
-    this.userSettingForm.reset();
+    const user = new Userdetails(this.userSettingForm.value.username,
+      this.userSettingForm.value.contact,
+      this.userSettingForm.value.city,
+      this.userSettingForm.value.country,
+      this.userSettingForm.value.description);
+    this.userService.saveUserDetails(user).subscribe(data => {
+    })
+    // this.userSettingForm.reset();
   }
   
   }

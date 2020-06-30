@@ -36,8 +36,15 @@
     <div class="col-lg-4">
       <div class="card profile-card-1">
         <!-- <img src="https://images.pexels.com/photos/946351/pexels-photo-946351.jpeg?w=500&h=650&auto=compress&cs=tinysrgb" alt="profile-sample1" class="background"/> -->
-        <img src="https://upload.wikimedia.org/wikipedia/commons/5/56/Kobe_Bryant_2014.jpg" alt="profile-image"
+       <label class= "hoverable" for="fileInput">
+        <img [src]="url ? url: 'https://www.w3schools.com/howto/img_avatar.png'" alt="profile-image"
           class="profile" />
+          <div class="hover-text">Upload Image</div>
+          <div class="background"></div>
+        </label>
+        <br/>
+        <input id="fileInput" type="file" (change)="onSelectFile($event)">
+        <button *ngif="url" (click)="delete()">remove image</button>
         <div class="card-content">
           <h2>{{user.username}}<small>{{user.email}}</small></h2>
           <div class="icon-block">

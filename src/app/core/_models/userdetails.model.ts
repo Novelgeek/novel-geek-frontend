@@ -1,14 +1,13 @@
-export class User {
+export class Userdetails {
     constructor(
-        public id: string,
-        private name: string,
-        public contact: string,
-        public city: string,
-        public country: string,
-        public description: string,
-        public photoUrl?: string
+        public username: string,
+        public contact?: string,
+        public city?: string,
+        public country?: string,
+        public description?: string,
+
     ) {}
 
-    
+
     
 }
