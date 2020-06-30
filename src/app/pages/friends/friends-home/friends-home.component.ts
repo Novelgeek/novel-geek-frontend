@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FriendService } from 'app/core/_services/friend.service';
 
 @Component({
   selector: 'app-friends-home',
@@ -6,10 +7,27 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./friends-home.component.scss']
 })
 export class FriendsHomeComponent implements OnInit {
+  allUsers: any = [];
+  friends: any = [];
+  notFriends: any = [];
+  requests: any = [];
 
-  constructor() { }
+  constructor(private friendService: FriendService) { }
 
   ngOnInit() {
+    this.friendService.getUsers().subscribe(data => {
+      this.allUsers = data;
+      this.friends = this.allUsers.filter( user => {
+        return user.friend;
+      })
+      this.notFriends = this.allUsers.filter( user => {
+        return !user.friend;
+      })
+    })
+
+    this.friendService.getFriendRequests().subscribe(data => {
+      this.requests = data;
+    })
   }
 
 }

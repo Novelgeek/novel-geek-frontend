@@ -44,8 +44,8 @@
                   <a ngbNavLink>My Friends</a>
                   <ng-template ngbNavContent>
                     <div class="row" matchHeight="card">
-                      <div class="col-xl-3 col-lg-3 col-md-4 col-sm-6 col-12">
-                        <app-friend-card></app-friend-card>
+                      <div class="col-xl-3 col-lg-3 col-md-4 col-sm-6 col-12" *ngFor="let friend of friends">
+                        <app-friend-card [user]="friend"></app-friend-card>
                       </div>
                     </div>
                   </ng-template>
@@ -54,8 +54,8 @@
                   <a ngbNavLink>Find Friends</a>
                   <ng-template ngbNavContent>
                     <div class="row">
-                      <div class="col-xl-3 col-lg-3 col-md-4 col-sm-6 col-12">
-                        <app-friend-card></app-friend-card>
+                      <div class="col-xl-3 col-lg-3 col-md-4 col-sm-6 col-12" *ngFor="let user of notFriends">
+                        <app-friend-card [user]="user"></app-friend-card>
                       </div>
                     </div>
                   </ng-template>
@@ -63,17 +63,17 @@
                 <li ngbNavItem>
                   <a ngbNavLink>Friend Requests</a>
                   <ng-template ngbNavContent>
-                    <div class="col-md-6">
+                    <div class="col-md-6" *ngFor="let request of requests">
 
                       <div class="card">
                         <div class="card-content">
                           <div class="card-body">
                             <div class="row">
                               <div class="col-md-4 col-sm-12 text-center">
-                                <img src="../assets/img/group/default.jpg" width="30" height="30"
+                                <img *ngIf="request.imageUrl === null" src="assets/img/portrait/default.svg" width="30" height="30"
                                   class="d-inline-flex rounded-circle">
-                                <!-- <img *ngIf="group.groupAvatar !== null" [src]="group.groupAvatar" width="30" height="30"
-                                  class="d-inline-flex rounded-circle"> -->
+                                <img *ngIf="request.imageUrl !== null" [src]="request.imageUrl" width="30" height="30"
+                                  class="d-inline-flex rounded-circle">
                                 <a [routerLink]="['#']">
                                   <h4 class="ml-1 mt-2 d-inline-flex">Kiruthiharan</h4>
                                 </a>
