@@ -9,6 +9,7 @@ export class BooksService {
 
   public apiKey = 'AIzaSyBXGwa67D5ZrrFuPP6YUNc9glwM8edWFck';
   public name = '';
+  public bookId = '';
 
   constructor(private http: HttpClient) { }
 
@@ -16,5 +17,9 @@ export class BooksService {
     this.name = searchTerm;
     return this.http.get('https://www.googleapis.com/books/v1/volumes?q='+encodeURIComponent(this.name)+'+intitle&maxResults=10&printType=books&key='+this.apiKey);
     // return this.http.get('https://www.googleapis.com/books/v1/volumes/oPIMmQEACAAJ?key=AIzaSyBXGwa67D5ZrrFuPP6YUNc9glwM8edWFck');
+  }
+  getBooksById(bookId){
+    this.bookId = bookId;
+    return this.http.get('https://www.googleapis.com/books/v1/volumes/'+this.bookId+'?key=AIzaSyBXGwa67D5ZrrFuPP6YUNc9glwM8edWFck');
   }
 }

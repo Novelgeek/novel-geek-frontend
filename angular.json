@@ -80,6 +80,7 @@
               "src/assets/css/demo.css",
               "src/assets/sass/app.scss",
               "src/styles.css"
+              
             ],
             "assets": [
               "src/assets",

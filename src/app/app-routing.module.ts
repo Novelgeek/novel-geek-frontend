@@ -14,6 +14,7 @@ import { ProfileHomeComponent } from './pages/profile/profile-home/profile-home.
 import { SalesHomeComponent } from './pages/sales/sales-home/sales-home.component';
 import { SignupComponent } from './pages/auth/signup/signup.component';
 import {BookletComponent} from './pages/books/booklet/booklet.component'
+import {BookReviewComponent} from './pages/books/book-review/book-review.component'
 import {SearchResultsComponent} from './pages/books/search-results/search-results.component'
 import {StoreComponent} from './pages/books/store/store.component'
 
@@ -26,6 +27,7 @@ const appRoutes: Routes = [
     children: [
       {path: 'books', component: BookHomeComponent},
       {path: 'search', component: SearchResultsComponent},
+      {path: 'reviewbook', component: BookReviewComponent},
       {path: 'friends', component: FriendsHomeComponent},
       {path: 'groups', component: GroupHomeComponent},
       {path: 'messages', component: MessageHomeComponent},

@@ -17,3 +17,8 @@ STUFF==
 #routerLink allows you to link components,maybe navigate
 
 #angular observable
+
+
+<section *ngIf="section">
+                        <h1>this section</h1>
+                    </section>

@@ -18,14 +18,15 @@ export class BookletComponent implements OnInit {
   @Input() pagecount: any;
   @Input() imageLink: any;
 
-  constructor(private bookService: BooksService,private route:ActivatedRoute) {// dependency injection
+  constructor(private bookService: BooksService,private route:ActivatedRoute,private router:Router) {// dependency injection
 
   }
   ngOnInit(): void {
   
   }
-  ngDoCheck(): void {
-
+  reviewBook(){
+    this.router.navigate(['/reviewbook'],{queryParams : {bookId : this.bookId}});
   }
+  
 
 }
