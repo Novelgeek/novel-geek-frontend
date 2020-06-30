@@ -42,7 +42,7 @@ export class NavbarComponent implements OnInit, AfterViewInit, OnDestroy {
       this.isAdmin = true;
     }
     console.log(this.user);
-    
+
   }
 
   ngAfterViewInit() {

@@ -23,7 +23,7 @@
                   <p class="card-text">
                     Welcome back Admin, please login to your account.
                   </p>
-                  <form #loginForm="ngForm">
+                  <form #loginForm="ngForm" (ngSubmit)="onSubmit(loginForm)">
                     <div class="form-group">
                       
                       <input 
@@ -49,13 +49,13 @@
                     
                     <div class="fg-actions d-flex justify-content-between">
                       <div class="login-btn">
-                        <button class="btn btn-outline-primary primary" [routerLink]="['/login']">
+                        <button class="btn btn-outline-primary primary" [routerLink]="['/login']" type="button">
                          Back to user
                         </button>
                       </div>
                       <div class="recover-pass">
-                        <button class="btn btn-primary primary-lighten-4" 
-                          type="submit" (click)="fakelogin()"><div class="white">Login</div> </button>
+                        <button class="btn btn-primary primary-lighten-4"  [disabled]="loginForm.invalid"
+                          type="submit"><div class="white">Login</div> </button>
                       </div>
                     </div>
                   </form>

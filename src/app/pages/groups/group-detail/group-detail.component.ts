@@ -173,11 +173,11 @@ export class GroupDetailComponent implements OnInit, OnDestroy {
 
   deleteGroup() {
     this.toastr.warning()
-    // this.groupService.deleteGroup(this.id).subscribe(data => {
-    //   console.log('Group deleted');
-    // }, error => {
-    //   console.log(error)
-    // })
+    this.groupService.deleteGroup(this.id).subscribe(data => {
+      console.log('Group deleted');
+    }, error => {
+      console.log(error)
+    })
   }
 
 }

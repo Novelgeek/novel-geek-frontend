@@ -30,7 +30,7 @@ const appRoutes: Routes = [
   { path: 'admin/login', component: AdminAuthComponent},
   { path: 'admin', component: AdminLayoutComponent,
     children: [
-      {path: '', component: AdminHomeComponent},
+      {path: 'home', component: AdminHomeComponent},
     ]
   },
   { path: '', component: HomeLayoutComponent,

@@ -18,6 +18,8 @@ export class GroupHomeComponent implements OnInit {
   myGroups: any = [];
   allGroups: any = [];
   groupInvites: any = [];
+  selectedFile: File;
+
   constructor(private authSerice: AuthService, private http: HttpClient,
               private modalService: NgbModal, private groupService: GroupService,
               private toastr: ToastrService, private spinner: NgxSpinnerService) { }
@@ -45,7 +47,9 @@ export class GroupHomeComponent implements OnInit {
     })
   }
 
-
+  onFileChanged(event) {
+    this.selectedFile = event.target.files[0]
+  }
 
   open(content) {
     this.modalService.open(content, {ariaLabelledBy: 'create-group'}).result.then((result) => {
@@ -55,7 +59,11 @@ export class GroupHomeComponent implements OnInit {
 
   onSubmit(form: NgForm) {
     this.spinner.show();
-    this.groupService.createGroup(form.value.groupName, form.value.description, form.value.avatar).subscribe( data => {
+    const formData = new FormData();
+    formData.append('file', this.selectedFile);
+    formData.append('groupName', form.value.groupName);
+    formData.append('description', form.value.description);
+    this.groupService.createGroup(formData).subscribe( data => {
       this.myGroups.push(data);
       this.allGroups.push(data);
       this.modalService.dismissAll();
