@@ -36,6 +36,7 @@ import { AdminAuthComponent } from './pages/admin/admin-auth/admin-auth.componen
 import { ForgotPasswordComponent } from './pages/auth/forgot-password/forgot-password.component';
 import { ResetPasswordComponent } from './pages/auth/reset-password/reset-password.component';
 import { from } from 'rxjs';
+import { FriendCardComponent } from './pages/friends/friend-card/friend-card.component';
 
 
 
@@ -63,6 +64,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     SignupComponent,
     BookHomeComponent,
     FriendsHomeComponent,
+    FriendCardComponent,
     GroupHomeComponent,
     MessageHomeComponent,
     PollsHomeComponent,
