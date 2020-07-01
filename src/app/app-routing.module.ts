@@ -15,6 +15,13 @@ import { SalesHomeComponent } from './pages/sales/sales-home/sales-home.componen
 import { SignupComponent } from './pages/auth/signup/signup.component';
 
 import { AuthGuard } from './core/_guards/auth.guard';
+import { GroupDetailComponent } from './pages/groups/group-detail/group-detail.component';
+import { NotFoundComponent } from './pages/not-found/not-found.component';
+import { AdminAuthComponent } from './pages/admin/admin-auth/admin-auth.component';
+import { AdminLayoutComponent } from './layouts/admin-layout.component';
+import { AdminHomeComponent } from './pages/admin/admin-home/admin-home.component';
+import { ForgotPasswordComponent } from './pages/auth/forgot-password/forgot-password.component';
+import { ResetPasswordComponent } from './pages/auth/reset-password/reset-password.component';
 
 import {BookletComponent} from './pages/books/booklet/booklet.component'
 import {BookReviewComponent} from './pages/books/book-review/book-review.component'
@@ -26,21 +33,36 @@ import {HttpClientModule} from '@angular/common/http';
 const appRoutes: Routes = [
   { path: 'login', component: LoginComponent},
   { path: 'signup', component: SignupComponent},
-  { path: '', component: HomeLayoutComponent, 
+  { path: 'forgot-password', component: ForgotPasswordComponent},
+  { path: 'reset-password', component: ResetPasswordComponent},
+  { path: 'admin/login', component: AdminAuthComponent},
+  { path: 'admin', component: AdminLayoutComponent,
+    children: [
+      {path: 'home', component: AdminHomeComponent},
+    ]
+  },
+  { path: '', component: HomeLayoutComponent,
     children: [
       {path: 'books', component: BookHomeComponent},
       {path: 'search', component: SearchResultsComponent},
       {path: 'reviewbook', component: BookReviewComponent},
       {path: 'friends', component: FriendsHomeComponent},
       {path: 'groups', component: GroupHomeComponent},
+      {path: 'groups/:id', component: GroupDetailComponent},
       {path: 'messages', component: MessageHomeComponent},
       {path: 'polls', component: PollsHomeComponent},
       {path: 'posts', component: PostsHomeComponent},
       {path: 'profile', component: ProfileHomeComponent},
       {path: 'sales', component: SalesHomeComponent},
+
       {path: 'booklet', component: BookletComponent},
       {path: 'store', component: StoreComponent},
-      {path: '**', component: PostsHomeComponent},
+
+
+      {path: '', component: PostsHomeComponent},
+      {path: '404', component: NotFoundComponent},
+      {path: '**', component: NotFoundComponent},
+
     ]
   },
 ];

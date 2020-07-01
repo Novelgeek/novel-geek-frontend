@@ -3,7 +3,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
 import { SharedModule } from './shared/shared.module';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { JwtModule } from '@auth0/angular-jwt';
 import { ToastrModule } from 'ngx-toastr';
@@ -27,7 +27,8 @@ import { PostsHomeComponent } from './pages/posts/posts-home/posts-home.componen
 import { ProfileHomeComponent } from './pages/profile/profile-home/profile-home.component';
 import { SalesHomeComponent } from './pages/sales/sales-home/sales-home.component';
 
-import { from } from 'rxjs';
+
+
 
 import { BookletComponent } from './pages/books/booklet/booklet.component';
 import { StoreComponent } from './pages/books/store/store.component';
@@ -38,6 +39,20 @@ import { SearchResultsComponent } from './pages/books/search-results/search-resu
 import { BookReviewComponent } from './pages/books/book-review/book-review.component';
 import { ReviewComponent } from './pages/books/book-review/review/review.component';
 import { CommentComponent } from './pages/books/book-review/comment/comment.component';
+
+import { GroupCardComponent } from './pages/groups/group-card/group-card.component';
+import { TokenInterceptor } from './core/_services/token.interceptor';
+import { GroupHorizontalCardComponent } from './pages/groups/group-horizontal-card/group-horizontal-card.component';
+import { GroupDetailComponent } from './pages/groups/group-detail/group-detail.component';
+import { NotFoundComponent } from './pages/not-found/not-found.component';
+import { AdminLayoutComponent } from './layouts/admin-layout.component';
+import { AdminHomeComponent } from './pages/admin/admin-home/admin-home.component';
+import { AdminAuthComponent } from './pages/admin/admin-auth/admin-auth.component';
+import { ForgotPasswordComponent } from './pages/auth/forgot-password/forgot-password.component';
+import { ResetPasswordComponent } from './pages/auth/reset-password/reset-password.component';
+import { from } from 'rxjs';
+
+
 
 
 export function tokenGetter() {
@@ -54,8 +69,13 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     AppComponent,
     LoginComponent,
     SignupComponent,
+    ForgotPasswordComponent,
+    ResetPasswordComponent,
     HomeLayoutComponent,
     LoginLayoutComponent,
+    AdminLayoutComponent,
+    AdminHomeComponent,
+    AdminAuthComponent,
     SignupComponent,
     BookHomeComponent,
     FriendsHomeComponent,
@@ -65,12 +85,19 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     PostsHomeComponent,
     ProfileHomeComponent,
     SalesHomeComponent,
+
     BookletComponent,
     StoreComponent,
     SearchResultsComponent,
     BookReviewComponent,
     ReviewComponent,
     CommentComponent
+
+    GroupCardComponent,
+    GroupHorizontalCardComponent,
+    GroupDetailComponent,
+    NotFoundComponent
+
   ],
   imports: [
     BrowserAnimationsModule,
@@ -99,7 +126,12 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
       provide: PERFECT_SCROLLBAR_CONFIG,
       useValue: DEFAULT_PERFECT_SCROLLBAR_CONFIG
     },
-    { provide: PERFECT_SCROLLBAR_CONFIG, useValue: DEFAULT_PERFECT_SCROLLBAR_CONFIG }
+    { provide: PERFECT_SCROLLBAR_CONFIG, useValue: DEFAULT_PERFECT_SCROLLBAR_CONFIG },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: TokenInterceptor,
+      multi: true
+    }
   ],
   bootstrap: [AppComponent]
 })

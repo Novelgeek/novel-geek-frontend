@@ -1,0 +1,249 @@
+<div class="row">
+  <div class="col-12">
+      <div class="card profile-with-cover">
+          <div *ngIf="group.groupAvatar === null" class="card-img-top img-fluid bg-cover height-200" style="background: url('../assets/img/group/default.jpg') 50%;"></div>
+          <div *ngIf="group.groupAvatar !== null" class="card-img-top img-fluid bg-cover height-200" [ngStyle]="{'background': 'url(' + group.groupAvatar + ')'}" ></div>
+          <div class="media profil-cover-details row mt-2 mb-1">
+              <div class="col-5">
+                  <div class="align-self-start halfway-fab pl-3 pt-2">
+                      <div class="text-left">
+                          <h3 class="card-title primary">{{groupName}}</h3>
+                      </div>
+                  </div>
+              </div>
+
+              <div class="col-7 text-right">
+                <div class="align-self-endprofile-cover-buttons pull-right">
+                  <div class="media-body halfway-fab align-self-end">
+                      <div class="text-right d-none d-sm-none d-md-none d-lg-block">
+                          <button type="button" class="btn btn-primary btn-raised mr-2" (click)="open(addMembers)" *ngIf="isMember"><i class="fa fa-plus"></i> Add Member</button>
+                          <button type="button" class="btn btn-primary btn-raised mr-2" (click)="joinGroup()" *ngIf="!isMember"><i class="fa fa-plus"></i> Join Group</button>
+                          <button type="button" class="btn btn-success btn-raised mr-3" (click)="leaveGroup()" *ngIf="isMember"><i class="fa fa-dashcube"></i> Leave Group</button>
+                      </div>
+                      <div class="text-right d-block d-sm-block d-md-block d-lg-none">
+                          <button type="button" class="btn btn-primary btn-raised mr-2"><i class="fa fa-plus"></i></button>
+                          <button type="button" class="btn btn-success btn-raised mr-3"><i class="fa fa-dashcube"></i></button>
+                      </div>
+                  </div>
+              </div>                
+              </div>                    
+          </div>
+          
+          
+      </div>
+  </div>
+</div>
+
+
+
+<div class="row text-left">
+  <div class="col-md-4 col-sm-12">
+    <div class="card">
+      <!-- <div class="card-header">
+        <h4 class="card-title">Nav orientation</h4>
+      </div> -->
+      <div class="card-content">
+        <div class="card-body">
+
+            <ul ngbNav #nav="ngbNav" class="nav-pills" orientation="vertical">
+              <li ngbNavItem="posts">
+                <a ngbNavLink>Posts</a>
+                <ng-template ngbNavContent>
+                  <section id="posts">
+                    <div class="row">
+                      <div class="col-12">
+                          <div class="content-header">Posts</div>
+                      </div>
+                    </div>
+                  </section>
+                </ng-template>
+              </li>
+              <li ngbNavItem="about">
+                <a ngbNavLink>About</a>
+                <ng-template ngbNavContent>
+                  <section id="About">
+                    <div class="row">
+                      <div class="col-12">
+                          <div class="content-header">About</div>
+                          <div class="card">
+                            <div class="card-content">
+                              <div class="card-body">
+                                {{group.groupName}}
+                                <br>
+                                {{group.description}}
+                              </div>
+                            </div>
+                          </div>
+                      </div>
+                    </div>
+                  </section>
+                </ng-template>
+              </li>
+              <li ngbNavItem="settings">
+                <a ngbNavLink>Settings</a>
+                <ng-template ngbNavContent>
+
+
+                      <div class="card">
+                        <div class="card-header">
+                          <h4 class="card-title">Group Details</h4>
+                        </div>
+                        <div class="card-content">
+                          <div class="card-body">
+                  
+                            <form class="form" (ngSubmit)="onSubmit(updateGroupForm)" #updateGroupForm="ngForm">
+                              <div class="form-body">
+                  
+                                <div class="form-group">
+                                  <label for="groupName">Group Name</label>
+                                  <input id="groupName" class="form-control" placeholder="Name" name="groupName" [(ngModel)]="groupName" >
+                                </div>
+                                <div class="form-group">
+                                  <label for="description">Group Description</label>
+                                  <input id="description" class="form-control" placeholder="Description" name="description" [(ngModel)]="description">
+                                </div>
+                                <div class="form-group">
+                                  <label for="description">Group Avatar</label>
+                                  <input id="description" class="form-control" placeholder="Avatar" name="avatar" [(ngModel)]="avatar">
+                                </div>
+                              </div>
+                  
+                              <div class="form-actions right">
+                                <button type="button" class="btn btn-raised btn-warning mr-1">
+                                  <i class="ft-x"></i> Cancel
+                                </button>
+                                <button type="submit" class="btn btn-raised btn-primary">
+                                  <i class="ft-check"></i> Save
+                                </button>
+                                <button type="button" (click)="deleteGroup()" class="float-left btn btn-raised btn-danger mr-1">
+                                  <i class="ft-x"></i> Delete Group
+                                </button>
+                              </div>
+                            </form>
+                          </div>
+                        </div>
+                      </div>
+
+
+                </ng-template>
+              </li>
+              <li ngbNavItem="member">
+                <a ngbNavLink>Members</a>
+                <ng-template ngbNavContent>
+                  <section id="Members">
+                    <div class="col-md-12 col-lg-12">
+                      <div class="card">
+                        <div class="card-header">
+                          <h4 class="card-title">Members</h4>
+                        </div>
+                        <div class="card-content">
+                          <div class="card-body">
+                            <ngb-tabset>
+                              <ngb-tab title="Members">
+                                <ng-template ngbTabContent>
+                                  <div class="col-6" *ngFor="let members of members">
+                                    <div class="card horizontal">
+                                        <div class="card-content d-flex justify-content-between">
+                                          <div class="card-stacked align-self-center">
+                                            <div class="px-3">
+                                              <h4 class="card-title mt-2">{{members.users.username}}</h4>
+                                              <p class="card-text mb-2">{{members.users.email}}</p>
+                                              <a class="btn btn-raised btn-success" (click)="removeUser(members.users.id)">Remove User</a>
+                                            </div>
+                                          </div>
+                                        </div>
+                                    </div>
+                               </div>
+                                </ng-template>
+                              </ngb-tab>
+                              <ngb-tab>
+                                <ng-template ngbTabTitle>Member Requests</ng-template>
+                                <ng-template ngbTabContent>
+                                  
+                                <ul class="list-group">
+                                  <li class="list-group-item" *ngFor="let request of requests">
+                                    <div class="row">
+                                      <div class="col-sm-6">
+                                        <img  src="assets/img/portrait/small/avatar-s-20.png" alt="Avatar" class="mr-3 avatar rounded" width="35">
+                                        <span class="card-title mt-2">{{request.firedUser.username}}</span>
+                                      </div>
+                                      <div class="col-sm-6 text-right">
+                                        <div class="text-right d-none d-sm-none d-md-none d-lg-block">
+                                          <a class="btn btn-raised btn-success mr-2" (click)="acceptRequest(request.notificationId)">Accept</a>
+                                          <a class="btn btn-raised btn-warning">Decline</a>
+                                          
+                                        </div>
+                                        <div class="text-right d-block d-sm-block d-md-block d-lg-none">
+                                            <button type="button" class="btn btn-success btn-raised mr-2"><i class="fa fa-plus"></i></button>
+                                            <button type="button" class="btn btn-warning btn-raised"><i class="fa fa-dashcube"></i></button>
+                                        </div>
+                                      </div>
+                                    </div>
+
+                                  </li>
+                                </ul>
+                                </ng-template>
+                              </ngb-tab>
+                              
+                            </ngb-tabset>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </section>
+                </ng-template>
+              </li>
+            </ul>
+           
+        </div>
+    </div>
+  </div>
+
+
+  </div>
+  <div class="col-md-8 col-sm-12">
+    <div [ngbNavOutlet]="nav"></div>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+<ng-template #addMembers let-modal>
+    <div class="modal-header">
+      <h4 class="card-title mb-0" id="add-members">Invite Members</h4>
+      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+      <div class="modal-body">
+        <div class="row" matchHeight="card">
+            <div class="col-xl-12 col-lg-12">
+              <div class="card">
+                <div class="card-content">
+                  <div class="card-body">
+                    <div class="media pt-0 pb-3" *ngFor="let user of users">
+                      <img alt="96x96" class="media-object d-flex mr-3 align-self-center bg-info height-50 rounded-circle" src="assets/img/portrait/small/avatar-s-18.png">
+                      <div class="media-body">
+                        <h4 class="font-medium-1 mt-2 mb-0">{{user.username}}</h4>
+                        <div>{{members[0].users.username}}</div>
+                      </div>
+                      <button class="d-flex ml-3 py-2 btn btn-primary justify-content-center pull-right" (click)= "inviteUser(user.id)"><i class="ft-user-plus white"></i></button>
+                    </div>
+                    
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+      </div>
+  </ng-template>
+
+  <ngx-spinner></ngx-spinner>
+  
