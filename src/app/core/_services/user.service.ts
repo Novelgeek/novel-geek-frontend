@@ -12,7 +12,7 @@ import { Userdetails } from '../_models/userdetails.model';
   providedIn: 'root'
 })
 export class UserService {
-  
+
 
   constructor(private http: HttpClient, private router: Router, private jwtService: JwtHelperService) { }
 
@@ -21,7 +21,7 @@ export class UserService {
   }
 
   saveUserDetails(userDetails: Userdetails) {
-    return this.http.post('http://localhost:8080/user/save',userDetails);
+    return this.http.post('http://localhost:8080/user/save', userDetails);
   }
 
   getAllUsers() {
@@ -30,4 +30,3 @@ export class UserService {
 
 }
 
-`

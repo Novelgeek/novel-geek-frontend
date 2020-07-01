@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './pages/auth/login/login.component';
-import { LoginLayoutComponent } from './layouts/login-layout.component';
 import { HomeLayoutComponent } from './layouts/home-layout.component';
 import { FriendsHomeComponent } from './pages/friends/friends-home/friends-home.component';
 import { BookHomeComponent } from './pages/books/book-home/book-home.component';
@@ -56,7 +55,7 @@ const appRoutes: Routes = [
       {path: 'posts', component: PostsHomeComponent},
       {path: 'profile', component: ProfileHomeComponent},
       {path: 'sales', component: SalesHomeComponent},
-      {path: 'settings', component: ProfileSettingsComponent},
+      {path: 'profile/settings', component: ProfileSettingsComponent},
       {path: 'booklet', component: BookletComponent},
       {path: 'store', component: StoreComponent},
       {path: '', component: PostsHomeComponent},

@@ -17,9 +17,9 @@ export class PostsHomeComponent implements OnInit {
   public url: any;
   selectedImage: File;
   public flag = '#009da0';
-  default="Public";
+  default = 'Public';
   isShow = false;
-  create=false;
+  create = false;
   postdelete: number;
 
   /*public sanitizer:DomSanitizer*/
@@ -30,8 +30,8 @@ export class PostsHomeComponent implements OnInit {
 
   ngOnInit() {
     console.log('working');
-    this.postsService.getAllPosts().subscribe(response =>{
-      this.postList=response;
+    this.postsService.getAllPosts().subscribe(response => {
+      this.postList = response;
     })
   }
 
@@ -40,12 +40,12 @@ export class PostsHomeComponent implements OnInit {
     newpost.append('title', Values.title);
     newpost.append('description', Values.description)
     newpost.append('sharedtype', Values.sharedtype)
-    newpost.append('file',this.selectedImage);
+    newpost.append('file', this.selectedImage);
     this.postsService.createPost(newpost)
-    .subscribe(response =>{
+    .subscribe(response => {
       this.new_post = response;
       this.postList.splice(0, 0, this.new_post);
-      this.create=false;
+      this.create = false;
     })
   }
 
@@ -56,24 +56,25 @@ export class PostsHomeComponent implements OnInit {
     // this.url=this.sanitizer.bypassSecurityTrustResourceUrl(url_el);
     // this.new_post.imageURL=this.url;
     if (event.target.files) {
-      let reader = new FileReader();
+      const reader = new FileReader();
       reader.readAsDataURL(event.target.files[0]);
+      // tslint:disable-next-line: no-shadowed-variable
       reader.onload = (event: any) => {
         this.new_post.imagePath = event.target.result;
       }
-      this.selectedImage=event.target.files[0];
+      this.selectedImage = event.target.files[0];
     }
   }
 
-  onOpen(){
-    this.create=true;
+  onOpen() {
+    this.create = true;
   }
 
-  onClose(){
-    this.create=false;
+  onClose() {
+    this.create = false;
   }
 
-  onDeletePost(data:{id:number}){
-    this.postList.splice(data.id,1);
+  onDeletePost(data: {id: number}) {
+    this.postList.splice(data.id, 1);
   }
 }

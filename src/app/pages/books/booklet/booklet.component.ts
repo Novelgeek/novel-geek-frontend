@@ -10,7 +10,7 @@ import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 
 
 export class BookletComponent implements OnInit {
-  @Input() bookId:any;
+  @Input() bookId: any;
   @Input() title: any;
   @Input() authors: any;
   @Input() description: any;
@@ -18,15 +18,15 @@ export class BookletComponent implements OnInit {
   @Input() pagecount: any;
   @Input() imageLink: any;
 
-  constructor(private bookService: BooksService,private route:ActivatedRoute,private router:Router) {// dependency injection
+  constructor(private bookService: BooksService, private route: ActivatedRoute, private router: Router) {// dependency injection
 
   }
   ngOnInit(): void {
-  
+
   }
-  reviewBook(){
-    this.router.navigate(['/reviewbook'],{queryParams : {bookId : this.bookId}});
+  reviewBook() {
+    this.router.navigate(['/reviewbook'], {queryParams : {bookId : this.bookId}});
   }
-  
+
 
 }

@@ -16,7 +16,6 @@ import { PerfectScrollbarModule, PERFECT_SCROLLBAR_CONFIG, PerfectScrollbarConfi
 import { AppComponent } from './app.component';
 import { LoginComponent } from './pages/auth/login/login.component';
 import { HomeLayoutComponent } from './layouts/home-layout.component';
-import { LoginLayoutComponent } from './layouts/login-layout.component';
 import { SignupComponent } from './pages/auth/signup/signup.component';
 import { BookHomeComponent } from './pages/books/book-home/book-home.component';
 import { FriendsHomeComponent } from './pages/friends/friends-home/friends-home.component';
@@ -43,7 +42,6 @@ import { ReviewComponent } from './pages/books/book-review/review/review.compone
 import { CommentComponent } from './pages/books/book-review/comment/comment.component';
 
 import { GroupCardComponent } from './pages/groups/group-card/group-card.component';
-import { TokenInterceptor } from './core/_services/token.interceptor';
 import { GroupHorizontalCardComponent } from './pages/groups/group-horizontal-card/group-horizontal-card.component';
 import { GroupDetailComponent } from './pages/groups/group-detail/group-detail.component';
 import { NotFoundComponent } from './pages/not-found/not-found.component';
@@ -75,7 +73,6 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     ForgotPasswordComponent,
     ResetPasswordComponent,
     HomeLayoutComponent,
-    LoginLayoutComponent,
     AdminLayoutComponent,
     AdminHomeComponent,
     AdminAuthComponent,
@@ -90,7 +87,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     PostModalComponent,
     ProfileHomeComponent,
     SalesHomeComponent,
-    ProfileSettingsComponent
+    ProfileSettingsComponent,
 
 
     BookletComponent,
