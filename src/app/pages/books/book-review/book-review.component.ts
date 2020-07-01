@@ -3,6 +3,7 @@ import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import {BooksService} from '../books.service';
 import { DomSanitizer } from '@angular/platform-browser';
 import { SanitizeHtmlPipe } from './sanitize-html';
+import {ReviewComponent} from './review/review.component'
 @Component({
   selector: 'app-book-review',
   templateUrl: './book-review.component.html',
@@ -14,8 +15,8 @@ export class BookReviewComponent implements OnInit {
   data:any=[];
   book:any=[];
   section=false;
-  comments:any = [1, 2, 3, 4]
-  showShortDesciption = true;
+  reviews:any = [1, 2, 3, 4]
+  
   constructor(private bookService: BooksService,private route:ActivatedRoute) { }
 
   ngOnInit(): void {
@@ -28,12 +29,7 @@ export class BookReviewComponent implements OnInit {
         this.book=this.data.volumeInfo;
       });
   }
-  alterDescriptionText() {
-    this.showShortDesciption = !this.showShortDesciption
- }
-  onAddReview(){
-
-  }
+  
 
 
 }

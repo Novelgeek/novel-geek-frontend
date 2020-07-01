@@ -1,0 +1,58 @@
+<div class="row">
+<a class="list-group-item no-border review" >
+    <span class="media">
+      <span class="avatar avatar-md avatar-busy">
+        <img class="media-object d-flex mr-3 bg-info height-50 rounded-circle" src="assets/img/portrait/small/avatar-s-7.png"
+          alt="Generic placeholder image">
+        <i></i>
+      </span>
+        
+                <div class="media-body  text-left">
+                            <h6 class="list-group-item-heading" style="font-weight: bold;">Kristopher Candy
+                            <span class="font-small-3 float-right info">9:04 PM</span>
+                            </h6>
+                            <div class="list-group-item-text " [ngClass]="{'show-less': showShortDesciption}" >
+                            <i class="ft-circle info font-small-2"></i> {{com}}
+                            <span class="float-right info">
+                            </span>
+                        </div>
+                        <div style="margin-top: 20px;">
+                            <div class="float-left">
+                                <i type="button" (click)="alterDescriptionText()" class="ft-maximize-2 dark"  style="font-size:16px;margin: 12x;"> {{ showShortDesciption ? 'Read More...': 'Read Less' }}</i>
+                            </div>
+                            <div class="float-right">
+                                <div class="row">
+                                    <div class="col">
+                                        <i type="button" class="ft-thumbs-up info like" style="font-size:24px;font-weight:bold;"></i>
+                                    </div>
+                                    <div class="col">
+                                        <span class="badge badge-pill like-count badge-info">12</span>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                        </div>
+                        <div class="comment-btn">
+                            <button type="button"  class="btn btn-outline-secondary" (click)="isCollapsed = !isCollapsed"
+                            [attr.aria-expanded]="!isCollapsed" aria-controls="collapseExample">
+                            <p style="color: black;margin:2px">Comments</p>
+                            </button>
+                            
+                        </div>
+                    </div>
+                    
+    </span>
+</a>
+</div>
+<div class="row">
+    <div class="collapse" id="collapseExample" [ngbCollapse]="isCollapsed">
+        <div class="card">
+            <div class="card-body">
+                <div class="row" *ngFor="let comment of comments">
+                    <app-comment class="comment-component" style="width: 700px;"></app-comment>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

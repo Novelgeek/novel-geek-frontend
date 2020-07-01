@@ -3,10 +3,7 @@
     width:200px; 
     margin-left: 5px;   
 }
-.review{
-    width:1400px;
-    margin:5px;
-}
+
 .detail-section{
     margin:20px
 }
@@ -25,9 +22,4 @@
 }
 .like-count{
     /* padding:20px; */
-}
-.show-less {
-    height: 4rem;
-    overflow: hidden;
-    padding: 1rem;
 }

@@ -60,59 +60,11 @@
             </fieldset>
         </form>
     </div>
-    <div *ngFor="let comment of comments">
+    <div *ngFor="let review of reviews">
         <div class="row">
-            <!-- <a class="list-group-item bg-blue-grey bg-lighten-5 border-right-info border-right-2 comment" (click)="SetActive($event, 'chat1')">
-                <span class="media">
-                <span class="avatar avatar-md avatar-online">
-                    <img class="media-object d-flex mr-3 bg-successs height-50 rounded-circle" src="assets/img/portrait/small/avatar-s-3.png"
-                    alt="Generic placeholder image">
-                    <i></i>
-                </span>
-                <div class="media-body  text-left">
-                    <h6 class="list-group-item-heading">Elizabeth Elliott
-                    <span class="font-small-3 float-right successs">4:14 AM</span>
-                    </h6>
-                    <p class="list-group-item-text text-muted">
-                    <i class="ft-check successs font-small-2"></i> Okay
-                    <span class="float-right successs">
-                        <i class="font-medium-1 icon-pin blue-grey lighten-3"></i>
-                    </span>
-                    </p>
-                </div>
-                </span>
-            </a> -->
-
-            <a class="list-group-item no-border review" (click)="SetActive($event,'chat2')">
-                <span class="media">
-                  <span class="avatar avatar-md avatar-busy">
-                    <img class="media-object d-flex mr-3 bg-info height-50 rounded-circle" src="assets/img/portrait/small/avatar-s-7.png"
-                      alt="Generic placeholder image">
-                    <i></i>
-                  </span>
-                  <div class="media-body  text-left">
-                    <h6 class="list-group-item-heading">Kristopher Candy
-                      <span class="font-small-3 float-right info">9:04 PM</span>
-                    </h6>
-                    <p class="list-group-item-text text-muted" [ngClass]="{'show-less': showShortDesciption}" >
-                      <i class="ft-circle info font-small-2"></i>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum
-                      <span class="float-right info">
-                          
-                    </span>
-                    </p>
-                    <div class="float-right">
-                        <div class="row">
-                            <div class="col">
-                                <i type="button" class="ft-thumbs-up info like" style="font-size:24px;font-weight:bold;"></i>
-                            </div>
-                            <div class="col">
-                                <span class="badge badge-pill like-count badge-info">12</span>
-                            </div>
-                        </div>
-                    </div>
-                  </div>
-                </span>
-              </a>
+            
+            <app-review></app-review>
+           
         </div>
     </div>
 </div>
