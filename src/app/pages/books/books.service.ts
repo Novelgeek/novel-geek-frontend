@@ -13,13 +13,13 @@ export class BooksService {
 
   constructor(private http: HttpClient) { }
 
-  getBooks(searchTerm){
+  getBooks(searchTerm) {
     this.name = searchTerm;
-    return this.http.get('https://www.googleapis.com/books/v1/volumes?q='+encodeURIComponent(this.name)+'+intitle&maxResults=10&printType=books&key='+this.apiKey);
+    return this.http.get('https://www.googleapis.com/books/v1/volumes?q=' + encodeURIComponent(this.name) + '+intitle&maxResults=10&printType=books&key=' + this.apiKey);
     // return this.http.get('https://www.googleapis.com/books/v1/volumes/oPIMmQEACAAJ?key=AIzaSyBXGwa67D5ZrrFuPP6YUNc9glwM8edWFck');
   }
-  getBooksById(bookId){
+  getBooksById(bookId) {
     this.bookId = bookId;
-    return this.http.get('https://www.googleapis.com/books/v1/volumes/'+this.bookId+'?key=AIzaSyBXGwa67D5ZrrFuPP6YUNc9glwM8edWFck');
+    return this.http.get('https://www.googleapis.com/books/v1/volumes/' + this.bookId + '?key=AIzaSyBXGwa67D5ZrrFuPP6YUNc9glwM8edWFck');
   }
 }

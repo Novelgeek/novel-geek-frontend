@@ -16,7 +16,6 @@ import { PerfectScrollbarModule, PERFECT_SCROLLBAR_CONFIG, PerfectScrollbarConfi
 import { AppComponent } from './app.component';
 import { LoginComponent } from './pages/auth/login/login.component';
 import { HomeLayoutComponent } from './layouts/home-layout.component';
-import { LoginLayoutComponent } from './layouts/login-layout.component';
 import { SignupComponent } from './pages/auth/signup/signup.component';
 import { BookHomeComponent } from './pages/books/book-home/book-home.component';
 import { FriendsHomeComponent } from './pages/friends/friends-home/friends-home.component';
@@ -24,8 +23,11 @@ import { GroupHomeComponent } from './pages/groups/group-home/group-home.compone
 import { MessageHomeComponent } from './pages/messages/message-home/message-home.component';
 import { PollsHomeComponent } from './pages/polls/polls-home/polls-home.component';
 import { PostsHomeComponent } from './pages/posts/posts-home/posts-home.component';
+import { PostModalComponent } from './pages/posts/post-modal/post-modal.component';
 import { ProfileHomeComponent } from './pages/profile/profile-home/profile-home.component';
 import { SalesHomeComponent } from './pages/sales/sales-home/sales-home.component';
+import { ProfileSettingsComponent } from './pages/profile/profile-settings/profile-settings.component';
+import { TokenInterceptor } from './core/_services/token.interceptor';
 
 
 
@@ -34,14 +36,12 @@ import { BookletComponent } from './pages/books/booklet/booklet.component';
 import { StoreComponent } from './pages/books/store/store.component';
 
 
-import { FormsModule } from '@angular/forms';
 import { SearchResultsComponent } from './pages/books/search-results/search-results.component';
 import { BookReviewComponent } from './pages/books/book-review/book-review.component';
 import { ReviewComponent } from './pages/books/book-review/review/review.component';
 import { CommentComponent } from './pages/books/book-review/comment/comment.component';
 
 import { GroupCardComponent } from './pages/groups/group-card/group-card.component';
-import { TokenInterceptor } from './core/_services/token.interceptor';
 import { GroupHorizontalCardComponent } from './pages/groups/group-horizontal-card/group-horizontal-card.component';
 import { GroupDetailComponent } from './pages/groups/group-detail/group-detail.component';
 import { NotFoundComponent } from './pages/not-found/not-found.component';
@@ -51,6 +51,7 @@ import { AdminAuthComponent } from './pages/admin/admin-auth/admin-auth.componen
 import { ForgotPasswordComponent } from './pages/auth/forgot-password/forgot-password.component';
 import { ResetPasswordComponent } from './pages/auth/reset-password/reset-password.component';
 import { from } from 'rxjs';
+import { FriendCardComponent } from './pages/friends/friend-card/friend-card.component';
 
 
 
@@ -72,32 +73,34 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     ForgotPasswordComponent,
     ResetPasswordComponent,
     HomeLayoutComponent,
-    LoginLayoutComponent,
     AdminLayoutComponent,
     AdminHomeComponent,
     AdminAuthComponent,
     SignupComponent,
     BookHomeComponent,
     FriendsHomeComponent,
+    FriendCardComponent,
     GroupHomeComponent,
     MessageHomeComponent,
     PollsHomeComponent,
     PostsHomeComponent,
+    PostModalComponent,
     ProfileHomeComponent,
     SalesHomeComponent,
+    ProfileSettingsComponent,
+
 
     BookletComponent,
     StoreComponent,
     SearchResultsComponent,
     BookReviewComponent,
     ReviewComponent,
-    CommentComponent
+    CommentComponent,
 
     GroupCardComponent,
     GroupHorizontalCardComponent,
     GroupDetailComponent,
     NotFoundComponent
-
   ],
   imports: [
     BrowserAnimationsModule,
