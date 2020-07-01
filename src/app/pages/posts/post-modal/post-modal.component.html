@@ -1,0 +1,117 @@
+<div class="card">
+  <div class="card-header d-flex justify-content-between">
+    <div>
+      <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60" 
+      width="30" height="30" class="d-inline-flex rounded-circle mr-1">
+      <span class="text-muted"><b>{{item.username}}</b></span>
+      <br/>
+      <span class="card-subtitle text-muted"> {{item.publishedDate|date:'medium'}}</span>
+    </div>
+    <div>
+      <a (click)="toggleList(item)"><i  class="ft-more-horizontal"></i></a>
+      <div style="position:relative">
+        <div *ngIf = "isShow" style="position:absolute; z-index: 1000;" class="text-left dropdown-menu show">
+          <div *ngIf="!item.owned">
+            <a class=" dropdown-item py-1">
+              <i class="ft-alert-triangle mr-2"></i>
+              <span> Report Post</span>
+            </a>
+          </div> 
+          <div *ngIf="item.owned">
+            <a (click)="deletePost(item.postid)" class="dropdown-item py-1">
+              <i class="ft-trash-2 mr-2"></i>
+              <span> Delete Post</span>
+            </a> 
+          </div> 
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card-body">
+    <h5 class="card-title">{{item.title}}</h5>
+    <div class="card-content" *ngIf="item.imagePath!=''">
+      <img [src]="item.imagePath" alt="img"  class="img-fluid">
+    </div>
+    <div class="card-content">
+        <p class="card-text">
+          {{item.description}}
+        </p>
+    </div>
+    <br>
+    <div class="card-content d-flex justify-content-between text-muted">
+      <a (click)="openLikes(item.postid)" style="font-size: small; padding-bottom: 0px;">{{item.likecount}} Likes</a>
+      <a (click)="openComments(item.postid)" style="font-size: small; padding-bottom: 0px;">{{item.commentcount}} comments</a>
+    </div>
+  </div>
+
+  <div class="card-footer">
+    <a (click)="likeCount(item.postid)" style="padding-right: 50px;">
+      <i class="fa fa-heart mr-2" [style.color]="flag" ></i> 
+      <span class="primary">  Like</span>
+    </a>
+    <a style="padding-right: 50px;">
+      <i class="primary icon-speech mr-2"></i>
+      <span class="primary">Comment</span>
+    </a>
+  </div>
+  
+  <!--SHOW COMMENTS WINDOW-->
+  <div class="card-footer" *ngIf="showComments">
+    <!--NEW COMMENT-->
+    <div>
+      <form #addcomment="ngForm" (ngSubmit)="onsubmit(addcomment.value, item.postid)">
+        <div class="d-flex justify-content-between">
+          <input class="form-control" placeholder="add comment" name="comment" ngModel #comment="ngModel" required style="margin: 5px;">
+          <button type="submit" [disabled]="!addcomment.valid" class="btn btn-rased gradient-purple-bliss ft-navigation" style="margin: 5px;"></button>
+        </div>
+      </form>
+    </div>
+    <br/>
+
+    <!--COMMENTS-->
+    <div *ngIf="commentList.length === 0">
+      No comments yet :D
+    </div>
+    <div>
+      <ng-container *ngFor="let com of commentList">
+        <div class="row">
+          <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60" 
+          width="30" height="30" class="rounded-circle mr-1" >
+          <div class="col chat-bubble mb-1" style="float: right;">
+            <div class="row">
+              <b style="font-size: small; padding-bottom: 0px;">{{com.username}}</b>
+            </div>
+            <div class="row">
+              <p>{{com.comment}}</p>
+            </div>
+          </div>
+        </div>
+      </ng-container>
+    </div>
+    <div style="float: right; font-size: small; color: rgb(16, 80, 175); text-decoration: underline;">
+      <a (click)="hideFooter()">hide</a>
+    </div>
+  </div>
+
+  <!--SHOW PEOPLE WHO LIKED POST WINDOW-->
+  <div class="card-footer" *ngIf="showLikes">
+    <div *ngIf="likeList.length === 0">
+      No likes yet :D
+    </div>
+    <div>
+      <ng-container *ngFor="let like of likeList">
+        <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60" 
+        width="30" height="30" class="d-inline-flex rounded-circle mr-1"> 
+        <span>
+          <b>{{like.likedUser}}</b>
+        </span>
+        <br>
+        <br>
+      </ng-container>
+    </div>
+    <div style="float: right; font-size: small; color: rgb(16, 80, 175); text-decoration: underline;">
+      <a (click)="hideFooter()">hide</a>
+    </div>
+  </div>
+</div>

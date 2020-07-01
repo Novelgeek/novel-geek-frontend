@@ -1,3 +1,4 @@
+
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { BehaviorSubject } from 'rxjs';
@@ -23,6 +24,10 @@ export class UserService {
     return this.http.post('http://localhost:8080/user/save',userDetails);
   }
 
-  
+  getAllUsers() {
+    return this.http.get('http://localhost:8080/user');
+  }
 
 }
+
+`

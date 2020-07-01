@@ -24,10 +24,39 @@ import { GroupHomeComponent } from './pages/groups/group-home/group-home.compone
 import { MessageHomeComponent } from './pages/messages/message-home/message-home.component';
 import { PollsHomeComponent } from './pages/polls/polls-home/polls-home.component';
 import { PostsHomeComponent } from './pages/posts/posts-home/posts-home.component';
+import { PostModalComponent } from './pages/posts/post-modal/post-modal.component';
 import { ProfileHomeComponent } from './pages/profile/profile-home/profile-home.component';
 import { SalesHomeComponent } from './pages/sales/sales-home/sales-home.component';
 import { ProfileSettingsComponent } from './pages/profile/profile-settings/profile-settings.component';
 import { TokenInterceptor } from './core/_services/token.interceptor';
+
+
+
+
+import { BookletComponent } from './pages/books/booklet/booklet.component';
+import { StoreComponent } from './pages/books/store/store.component';
+
+
+import { SearchResultsComponent } from './pages/books/search-results/search-results.component';
+import { BookReviewComponent } from './pages/books/book-review/book-review.component';
+import { ReviewComponent } from './pages/books/book-review/review/review.component';
+import { CommentComponent } from './pages/books/book-review/comment/comment.component';
+
+import { GroupCardComponent } from './pages/groups/group-card/group-card.component';
+import { TokenInterceptor } from './core/_services/token.interceptor';
+import { GroupHorizontalCardComponent } from './pages/groups/group-horizontal-card/group-horizontal-card.component';
+import { GroupDetailComponent } from './pages/groups/group-detail/group-detail.component';
+import { NotFoundComponent } from './pages/not-found/not-found.component';
+import { AdminLayoutComponent } from './layouts/admin-layout.component';
+import { AdminHomeComponent } from './pages/admin/admin-home/admin-home.component';
+import { AdminAuthComponent } from './pages/admin/admin-auth/admin-auth.component';
+import { ForgotPasswordComponent } from './pages/auth/forgot-password/forgot-password.component';
+import { ResetPasswordComponent } from './pages/auth/reset-password/reset-password.component';
+import { from } from 'rxjs';
+import { FriendCardComponent } from './pages/friends/friend-card/friend-card.component';
+
+
+
 
 export function tokenGetter() {
   return localStorage.getItem("token");
@@ -43,18 +72,38 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     AppComponent,
     LoginComponent,
     SignupComponent,
+    ForgotPasswordComponent,
+    ResetPasswordComponent,
     HomeLayoutComponent,
     LoginLayoutComponent,
+    AdminLayoutComponent,
+    AdminHomeComponent,
+    AdminAuthComponent,
     SignupComponent,
     BookHomeComponent,
     FriendsHomeComponent,
+    FriendCardComponent,
     GroupHomeComponent,
     MessageHomeComponent,
     PollsHomeComponent,
     PostsHomeComponent,
+    PostModalComponent,
     ProfileHomeComponent,
     SalesHomeComponent,
     ProfileSettingsComponent
+
+
+    BookletComponent,
+    StoreComponent,
+    SearchResultsComponent,
+    BookReviewComponent,
+    ReviewComponent,
+    CommentComponent,
+
+    GroupCardComponent,
+    GroupHorizontalCardComponent,
+    GroupDetailComponent,
+    NotFoundComponent
   ],
   imports: [
     BrowserAnimationsModule,
@@ -62,6 +111,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     SharedModule,
     HttpClientModule,
     NgbModule,
+
     PerfectScrollbarModule,
     FormsModule,
     ToastrModule.forRoot(),
@@ -75,6 +125,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
         blacklistedRoutes: ["http://example.com/examplebadroute/"],
       },
     }),
+    NgxUsefulSwiperModule
   ],
   providers: [
     {

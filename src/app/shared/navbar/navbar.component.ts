@@ -4,6 +4,8 @@ import { ConfigService } from '../services/config.service';
 import { AuthService } from 'app/core/_services/auth.service';
 import { Subscription } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
+import { Router } from '@angular/router';
+
 
 @Component({
   selector: 'app-navbar',
@@ -18,6 +20,7 @@ export class NavbarComponent implements OnInit, AfterViewInit, OnDestroy {
   private userSub: Subscription;
   public user: any;
   isAuthenticated = false;
+  isAdmin = false;
 
   public config: any = {};
 
@@ -25,8 +28,10 @@ export class NavbarComponent implements OnInit, AfterViewInit, OnDestroy {
     private layoutService: LayoutService, 
     private configService: ConfigService, 
     private authService: AuthService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private router: Router
     ) { }
+
 
   ngOnDestroy(): void {
     this.userSub.unsubscribe();
@@ -38,6 +43,14 @@ export class NavbarComponent implements OnInit, AfterViewInit, OnDestroy {
       this.isAuthenticated = !!user; // !user ? false : true
       this.user = user;
     });
+    if (!this.isAuthenticated) {
+      this.user = {username: 'not logged in'}
+    }
+    if (this.router.routerState.snapshot.url.search('admin') === 1) {
+      this.isAdmin = true;
+    }
+    console.log(this.user);
+
   }
 
   ngAfterViewInit() {

@@ -5,7 +5,7 @@ import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-home-layout',
-  templateUrl: './home.component.html',
+  templateUrl: './home-layout.component.html',
   styles: []
 })
 export class HomeLayoutComponent implements OnInit{
