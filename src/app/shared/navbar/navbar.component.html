@@ -13,6 +13,7 @@
                     <i class="ft-more-vertical"></i>
                 </a>
             </span>
+
             <!-- <form class="navbar-form navbar-right mt-1" role="search">
                 <div class="position-relative has-icon-right">
                     <input type="text" class="form-control round" placeholder="Search">
@@ -21,6 +22,7 @@
                     </div>
                 </div>
             </form> -->
+
            
         </div>
         <div class="navbar-container">
@@ -75,13 +77,13 @@
                     <li class="nav-item" ngbDropdown [placement]="placement">
                         <a class="nav-link position-relative" id="dropdownBasic3" ngbDropdownToggle>
                             
-                            <img *ngIf="user.photoUrl === null" src="https://s3.eu-central-1.amazonaws.com/bootstrapbaymisc/blog/24_days_bootstrap/fox.jpg" width="30" height="30" class="d-inline-flex rounded-circle mr-1">
+                            <img *ngIf="user.photoUrl === null" src="../../../assets/img/portrait/default.svg" width="30" height="30" class="d-inline-flex rounded-circle mr-1">
                             <img *ngIf="user.photoUrl !== null" [src]="user.photoUrl" width="30" height="30" class="d-inline-flex rounded-circle mr-1">
                             <!-- <i class="ft-user font-medium-3 blue-grey darken-4"></i> -->
                             <p class="d-inline ">{{user.username}} </p>
                         </a>
                         <div ngbDropdownMenu aria-labelledby="dropdownBasic3" class="text-left dropdown-menu-right">                           
-                            <a class="dropdown-item py-1" href="javascript:;">
+                            <a class="dropdown-item py-1" href="javascript:;"  [routerLink]="['profile']">
                                 <i class="ft-edit mr-2"></i>
                                 <span>My Profile</span>
                             </a>
@@ -113,3 +115,4 @@
     </div> 
 </nav>
 <!-- Navbar (Header) Ends -->
+

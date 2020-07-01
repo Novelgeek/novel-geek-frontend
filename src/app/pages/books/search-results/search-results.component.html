@@ -1,0 +1,25 @@
+<div class="row">
+    <form (submit)="search()" class="navbar-form navbar-right mt-1" role="search">
+        <div class="position-relative has-icon-left">
+            <input  type="text" [(ngModel)] = "searchTerm" value='searchTerm' name="searchbox" class="form-control round" placeholder="Searching">
+            <div class="form-control-position">
+                <i class="ft-search"></i>
+            </div>
+        </div>
+    </form>
+</div>
+<div *ngFor="let book of books">
+    <div class="row-12" >
+        <app-booklet 
+        [title]="book.volumeInfo.title"
+        [authors]="book.volumeInfo.authors"
+        [description]="book.volumeInfo.description"
+        [averageRating]="book.volumeInfo.averageRating"
+        [pagecount]="book.volumeInfo.pagecount"
+        [imageLink]="book.volumeInfo.imageLinks.thumbnail"
+        [bookId]="book.id"
+
+        ></app-booklet>
+    </div>
+    <ng-template #none></ng-template>
+</div>

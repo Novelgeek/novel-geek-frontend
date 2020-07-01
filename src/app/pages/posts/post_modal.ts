@@ -1,5 +1,4 @@
 export default class Post_modal {
-
     public postid:number;
     public username:string;
     public title:string;
@@ -24,5 +23,6 @@ export default class Post_modal {
         this.commentcount=0;
         this.owned=true;
         this.liked=false;
+
     }
 }

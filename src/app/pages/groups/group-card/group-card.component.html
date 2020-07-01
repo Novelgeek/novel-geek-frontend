@@ -6,7 +6,8 @@
       <a class="btn btn-floating float-left bg-warning"><i class="ft-plus"></i></a>
   </div> -->
   <div class="card-content">
-      <img class="card-img-top img-fluid" src="../assets/img/group/default.jpg" alt="Group">
+      <img *ngIf="group.groupAvatar === null" class="card-img-top img-fluid" src="../assets/img/group/default.jpg" alt="Group">
+      <img *ngIf="group.groupAvatar !== null" class="card-img-top img-fluid" [src]="group.groupAvatar" alt="Group" height="100">
       <div class="card-body text-center">
         <a [routerLink]="['/groups',group.groupId]"><h4 class="card-title">{{group.groupName}}</h4></a>
         <p class="category text-gray font-small-4">{{group.description}}</p>
@@ -34,4 +35,6 @@
     </a>
   </div>
 </div>
+
+
 

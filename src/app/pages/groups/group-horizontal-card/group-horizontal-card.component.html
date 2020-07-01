@@ -4,7 +4,8 @@
       <div class="card-body">
         <div class="row">
           <div class="col-md-5 col-sm-12 my-auto">
-            <img src="../assets/img/group/default.jpg" width="30" height="30" class="d-inline-flex rounded-circle">
+            <img *ngIf="group.groupAvatar === null" src="../assets/img/group/default.jpg" width="30" height="30" class="d-inline-flex rounded-circle">
+            <img *ngIf="group.groupAvatar !== null" [src]="group.groupAvatar" width="30" height="30" class="d-inline-flex rounded-circle">
             <a [routerLink]="['/groups',group.groupId]"><h4 class="ml-2 d-inline-flex card-title">{{group.groupName}}</h4></a>
           </div>
           <div class="col-3 text-center">

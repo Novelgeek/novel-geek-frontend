@@ -1,12 +1,4 @@
 
-  
-  
-    .card_space {
-      max-width: 250px;
-    }
-    
-    .md-card-image{min-height: 0;width:auto;}
-  
     .swiper{
       height: 250px;
       width: 80%;
@@ -31,5 +23,58 @@
     width: 5;
     color: white;
   }
+
+  .button {
+    background-color: #4b4d9b;
+    border: none;
+    color: white;
+    padding: 10px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+  }
+
+  .buttonHistory {
+    background-image: url('assets/hhcard/history.jpg');
+    border: none;
+    padding: 25px;
+    text-decoration: none;
+    margin: 5px 30px;
+  } 
+  .buttonFood {
+    background-image: url('assets/hhcard/food.jpg');
+    border: none;
+    padding: 25px;
+    text-decoration: none;
+    margin: 5px 30px;
+  } 
+  .buttonLove {
+    background-image: url('assets/hhcard/love.jpg');
+    border: none;
+    padding: 25px;
+    text-decoration: none;
+    margin: 5px 30px;
+  } 
+  .buttonMedical {
+    background-image: url('assets/hhcard/medical.jpg');
+    border: none;
+    padding: 25px;
+    text-decoration: none;
+    margin: 5px 30px;
+  } 
+
+  .button4 {border-radius: 12px;}
+  .button5 {border-radius: 50%;}
+
+  .para{
+    padding: 5px;
+    margin: 2px ;
+    text-align: center;
+    color: red($color: #10abb6);
+  }
+
+ 
   
   
