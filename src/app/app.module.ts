@@ -34,7 +34,6 @@ import { BookletComponent } from './pages/books/booklet/booklet.component';
 import { StoreComponent } from './pages/books/store/store.component';
 
 
-import { FormsModule } from '@angular/forms';
 import { SearchResultsComponent } from './pages/books/search-results/search-results.component';
 import { BookReviewComponent } from './pages/books/book-review/book-review.component';
 import { ReviewComponent } from './pages/books/book-review/review/review.component';
@@ -91,7 +90,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     SearchResultsComponent,
     BookReviewComponent,
     ReviewComponent,
-    CommentComponent
+    CommentComponent,
 
     GroupCardComponent,
     GroupHorizontalCardComponent,
