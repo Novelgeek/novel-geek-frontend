@@ -8,7 +8,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { JwtModule } from '@auth0/angular-jwt';
 import { ToastrModule } from 'ngx-toastr';
 import { NgxSpinnerModule } from 'ngx-spinner';
-import {NgxUsefulSwiperModule} from 'ngx-useful-swiper';
+import { NgxUsefulSwiperModule } from 'ngx-useful-swiper';
+
+
 import { PerfectScrollbarModule, PERFECT_SCROLLBAR_CONFIG, PerfectScrollbarConfigInterface} from 'ngx-perfect-scrollbar';
 
 import { AppComponent } from './app.component';
@@ -25,6 +27,18 @@ import { PostsHomeComponent } from './pages/posts/posts-home/posts-home.componen
 import { ProfileHomeComponent } from './pages/profile/profile-home/profile-home.component';
 import { SalesHomeComponent } from './pages/sales/sales-home/sales-home.component';
 
+
+
+
+import { BookletComponent } from './pages/books/booklet/booklet.component';
+import { StoreComponent } from './pages/books/store/store.component';
+
+
+import { SearchResultsComponent } from './pages/books/search-results/search-results.component';
+import { BookReviewComponent } from './pages/books/book-review/book-review.component';
+import { ReviewComponent } from './pages/books/book-review/review/review.component';
+import { CommentComponent } from './pages/books/book-review/comment/comment.component';
+
 import { GroupCardComponent } from './pages/groups/group-card/group-card.component';
 import { TokenInterceptor } from './core/_services/token.interceptor';
 import { GroupHorizontalCardComponent } from './pages/groups/group-horizontal-card/group-horizontal-card.component';
@@ -36,6 +50,7 @@ import { AdminAuthComponent } from './pages/admin/admin-auth/admin-auth.componen
 import { ForgotPasswordComponent } from './pages/auth/forgot-password/forgot-password.component';
 import { ResetPasswordComponent } from './pages/auth/reset-password/reset-password.component';
 import { from } from 'rxjs';
+
 
 
 
@@ -69,10 +84,19 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     PostsHomeComponent,
     ProfileHomeComponent,
     SalesHomeComponent,
+
+    BookletComponent,
+    StoreComponent,
+    SearchResultsComponent,
+    BookReviewComponent,
+    ReviewComponent,
+    CommentComponent,
+
     GroupCardComponent,
     GroupHorizontalCardComponent,
     GroupDetailComponent,
     NotFoundComponent
+
   ],
   imports: [
     BrowserAnimationsModule,
@@ -80,10 +104,12 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     SharedModule,
     HttpClientModule,
     NgbModule,
+
     PerfectScrollbarModule,
     FormsModule,
     ToastrModule.forRoot(),
     NgxSpinnerModule,
+    NgxUsefulSwiperModule,
     ReactiveFormsModule,
     JwtModule.forRoot({
       config: {

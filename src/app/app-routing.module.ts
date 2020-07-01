@@ -13,6 +13,7 @@ import { PostsHomeComponent } from './pages/posts/posts-home/posts-home.componen
 import { ProfileHomeComponent } from './pages/profile/profile-home/profile-home.component';
 import { SalesHomeComponent } from './pages/sales/sales-home/sales-home.component';
 import { SignupComponent } from './pages/auth/signup/signup.component';
+
 import { AuthGuard } from './core/_guards/auth.guard';
 import { GroupDetailComponent } from './pages/groups/group-detail/group-detail.component';
 import { NotFoundComponent } from './pages/not-found/not-found.component';
@@ -21,6 +22,13 @@ import { AdminLayoutComponent } from './layouts/admin-layout.component';
 import { AdminHomeComponent } from './pages/admin/admin-home/admin-home.component';
 import { ForgotPasswordComponent } from './pages/auth/forgot-password/forgot-password.component';
 import { ResetPasswordComponent } from './pages/auth/reset-password/reset-password.component';
+
+import {BookletComponent} from './pages/books/booklet/booklet.component'
+import {BookReviewComponent} from './pages/books/book-review/book-review.component'
+import {SearchResultsComponent} from './pages/books/search-results/search-results.component'
+import {StoreComponent} from './pages/books/store/store.component'
+
+import {HttpClientModule} from '@angular/common/http';
 
 const appRoutes: Routes = [
   { path: 'login', component: LoginComponent},
@@ -37,6 +45,8 @@ const appRoutes: Routes = [
   { path: '', component: HomeLayoutComponent,
     children: [
       {path: 'books', component: BookHomeComponent},
+      {path: 'search', component: SearchResultsComponent},
+      {path: 'reviewbook', component: BookReviewComponent},
       {path: 'friends', component: FriendsHomeComponent},
       {path: 'groups', component: GroupHomeComponent},
       {path: 'groups/:id', component: GroupDetailComponent},
@@ -45,15 +55,24 @@ const appRoutes: Routes = [
       {path: 'posts', component: PostsHomeComponent},
       {path: 'profile', component: ProfileHomeComponent},
       {path: 'sales', component: SalesHomeComponent},
+
+      {path: 'booklet', component: BookletComponent},
+      {path: 'store', component: StoreComponent},
+
+
       {path: '', component: PostsHomeComponent},
       {path: '404', component: NotFoundComponent},
       {path: '**', component: NotFoundComponent},
+
     ]
   },
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(appRoutes)],
+  imports: [
+    RouterModule.forRoot(appRoutes),
+    HttpClientModule
+  ],
   exports: [RouterModule]
 })
 

@@ -1,0 +1,219 @@
+<div class="container">
+
+  <div class="row">
+    <div class="col-9">
+
+      <div class="row">
+
+        <div class="col-1.5">
+          <button class="buttonHistory button5 "></button>
+          <p class="para">History</p>
+        </div>
+ 
+        <div class="col-1.5">
+          <button class="buttonMedical button5 "></button>
+          <p class="para">Medical</p>
+        </div>
+ 
+        <div class="col-1.5">
+          <button class="buttonFood button5 "></button>
+          <p class="para">Foods</p>
+        </div>
+ 
+        <div class="col-1.5">
+          <button class="buttonLove button5 "></button>
+          <p class="para">Love</p>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="col-3">
+      <button class="button button4">Add Fan Fiction</button>
+      <button class="button button4">Add Books</button>
+    </div>
+
+  </div>
+
+<br>
+
+
+  <div class="row">
+
+    <div class="col-sm">
+      <p class="font-weight-bold  text-muted">Our top picks</p>        
+      
+      <swiper [config]="config">
+        <div class="swiper-wrapper">
+      
+          <div class="swiper-slide" *ngFor="let slide of slideData">
+            <img src="https://i.picsum.photos/id/{{slide.id}}/400/300.jpg" />
+            {{slide.name}}
+          </div>
+      
+        </div>
+      
+        <!-- Add Pagination -->
+        <div class="swiper-pagination"></div>
+      
+        <!-- Add Arrows -->
+        <div class="swiper-button-next"></div>
+        <div class="swiper-button-prev"></div>
+      
+      </swiper>
+    </div>
+
+    <div class="col-sm">
+      <p class="font-weight-bold text-muted">Book List</p>
+
+      <swiper [config]="config">
+        <div class="swiper-wrapper">
+      
+          <div class="swiper-slide" *ngFor="let slide of slideData">
+            <img src="https://i.picsum.photos/id/{{slide.id}}/400/300.jpg" />
+            {{slide.name}}
+          </div>
+      
+        </div>
+      
+        <!-- Add Pagination -->
+        <div class="swiper-pagination"></div>
+      
+        <!-- Add Arrows -->
+        <div class="swiper-button-next"></div>
+        <div class="swiper-button-prev"></div>
+      
+      </swiper>
+    </div>
+
+  </div>
+
+<br>
+
+  <div class="row">
+    <div class="col-sm">
+      <p class="font-weight-bold text-muted">Trending Books</p>
+      <swiper [config]="config">
+
+        <div class="swiper-wrapper">
+      
+          <div class="swiper-slide" *ngFor="let slide of slideData">
+            <img src="https://i.picsum.photos/id/{{slide.id}}/400/300.jpg" />
+            {{slide.name}}
+          </div>
+      
+        </div>
+      
+        <!-- Add Pagination -->
+        <div class="swiper-pagination"></div>
+      
+        <!-- Add Arrows -->
+        <div class="swiper-button-next"></div>
+        <div class="swiper-button-prev"></div>
+      
+      </swiper>
+    </div>
+
+    <div class="col-sm">
+      <p class="font-weight-bold text-muted">Local Books</p>
+      <swiper [config]="config">
+
+        <div class="swiper-wrapper">
+      
+          <div class="swiper-slide" *ngFor="let slide of slideData">
+            <img src="https://i.picsum.photos/id/{{slide.id}}/400/300.jpg" />
+            {{slide.name}}
+          </div>
+      
+        </div>
+      
+        <!-- Add Pagination -->
+        <div class="swiper-pagination"></div>
+      
+        <!-- Add Arrows -->
+        <div class="swiper-button-next"></div>
+        <div class="swiper-button-prev"></div>
+      
+      </swiper>
+    </div>
+  </div>
+
+
+<br>
+
+  <div class="row">
+    <div class="col-sm">
+      <p class="font-weight-bold text-muted">Recently Viewed</p>
+      <swiper [config]="config">
+
+        <div class="swiper-wrapper">
+      
+          <div class="swiper-slide" *ngFor="let slide of slideData">
+            <img src="https://i.picsum.photos/id/{{slide.id}}/400/300.jpg" />
+            {{slide.name}}
+          </div>
+      
+        </div>
+      
+        <!-- Add Pagination -->
+        <div class="swiper-pagination"></div>
+      
+        <!-- Add Arrows -->
+        <div class="swiper-button-next"></div>
+        <div class="swiper-button-prev"></div>
+      
+      </swiper>
+    </div>
+
+    <div class="col-sm">
+      <p class="font-weight-bold text-muted">Fan Fictiion</p>
+      <swiper [config]="config">
+
+        <div class="swiper-wrapper">
+      
+          <div class="swiper-slide" *ngFor="let slide of slideData">
+            <img src="https://i.picsum.photos/id/{{slide.id}}/400/300.jpg" />
+            {{slide.name}}
+          </div>
+      
+        </div>
+      
+        <!-- Add Pagination -->
+        <div class="swiper-pagination"></div>
+      
+        <!-- Add Arrows -->
+        <div class="swiper-button-next"></div>
+        <div class="swiper-button-prev"></div>
+      
+      </swiper>
+    </div>
+  </div>
+
+
+</div>
+
+  
+  
+  
+
+
+
+    
+
+
+<div class="row">
+
+    <form (submit)="search()" class="navbar-form navbar-right mt-1" role="search">
+        <div class="position-relative has-icon-left">
+            <input  type="text" [(ngModel)] = "searchTerm" name="searchbox" class="form-control round" placeholder="Searching">
+            <div class="form-control-position">
+                <i class="ft-search"></i>
+            </div>
+        </div>
+    </form>
+</div>
+<div class="row">
+    <a type="button" href="/store">store</a>
+</div>
+
+

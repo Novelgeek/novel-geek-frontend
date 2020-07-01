@@ -9,6 +9,9 @@ export class FriendsHomeComponent implements OnInit {
 
   constructor() { }
 
+  search(){
+    console.log("searching");
+  }
   ngOnInit() {
   }
 

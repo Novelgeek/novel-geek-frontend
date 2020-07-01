@@ -1,0 +1,25 @@
+.btn-review{
+    height:50px;
+    width:200px; 
+    margin-left: 5px;   
+}
+
+.detail-section{
+    margin:20px
+}
+.image-section{
+    margin:20px
+}
+.book-section{
+    margin-left:80px
+}
+.review-section{
+    margin-left:120px;
+    margin-top:100px;
+}
+.like{
+    margin-left:10px
+}
+.like-count{
+    /* padding:20px; */
+}
