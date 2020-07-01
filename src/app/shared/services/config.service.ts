@@ -20,7 +20,8 @@ export class ConfigService {
                 sidebar: {
                     collapsed: true, //options: true, false
                     size: 'sidebar-md', // Options: 'sidebar-lg', 'sidebar-md', 'sidebar-sm'
-                    backgroundColor: "purple-bliss", // Options: 'black', 'pomegranate', 'king-yna', 'ibiza-sunset', 'flickr', 'purple-bliss', 'man-of-steel', 'purple-love'
+                    backgroundColor: 'purple-bliss', 
+                    // Options: 'black', 'pomegranate', 'king-yna', 'ibiza-sunset', 'flickr', 'purple-bliss', 'man-of-steel', 'purple-love'
                     backgroundImage: false, // Options: true, false | Set true to show background image
                     backgroundImageURL: 'assets/img/sidebar-bg/01.jpg',
                     smallNav: true

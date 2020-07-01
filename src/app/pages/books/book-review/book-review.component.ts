@@ -12,27 +12,30 @@ import {ReviewComponent} from './review/review.component'
 
 export class BookReviewComponent implements OnInit {
   bookId: any;
-  data:any=[];
-  book:any=[];
-  section=false;
-  reviews:any = [1, 2, 3, 4]
-  
-  constructor(private bookService: BooksService,private route:ActivatedRoute) { }
+  data: any = [];
+  book: any = [];
+  section = false;
+  reviews: any = [1, 2, 3, 4]
+
+  constructor(private bookService: BooksService, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
       this.route.queryParams.subscribe(params => {
         this.bookId = params.bookId;
       });
-      this.bookService.getBooksById(this.bookId).subscribe(data=>{
+      this.bookService.getBooksById(this.bookId).subscribe(data => {
         console.log(data);
-        this.data=data;
-        this.book=this.data.volumeInfo;
+        this.data = data;
+        this.book = this.data.volumeInfo;
       });
       this.bookService.getReviews(this.bookId).subscribe(data=>{
         console.log(data);
       });
   }
-  
+
+  onAddReview() {
+
+  }
 
 
 }

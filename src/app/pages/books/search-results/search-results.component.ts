@@ -11,17 +11,17 @@ export class SearchResultsComponent implements OnInit {
   searchTerm = '';
   info: any;
   books: any = [];
-  constructor(private bookService: BooksService,private route:ActivatedRoute) { }
+  constructor(private bookService: BooksService, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
-    this.route.queryParams.subscribe(params=>{
+    this.route.queryParams.subscribe(params => {
       console.log(params.searchTerm);
       this.searchTerm = params.searchTerm;
     });
     this.search();
   }
-  search(){
-    if (this.searchTerm != '') {
+  search() {
+    if (this.searchTerm !== '') {
 
       this.bookService.getBooks(this.searchTerm).subscribe(
         (data) => {

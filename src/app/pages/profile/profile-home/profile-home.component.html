@@ -4,51 +4,58 @@
       <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
     </div>
   </div> -->
-  <section>
-    <div class="container">
-    	<div class="row">
-            <div class="col-8">
-                <swiper [config]="config"  #usefulSwiper>
 
-                    <div class="swiper-wrapper">
-                  
-                      <div class="swiper-slide" *ngFor="let slide of slideData">
-                        <img src="https://i.picsum.photos/id/{{slide.id}}/400/300.jpg" />
-                        {{slide.name}}
-                      </div>
-                  
-                    </div>
-                  
-                    <!-- Add Pagination -->
-                    <div class="swiper-pagination"></div>
-                  
-                    <!-- Add Arrows -->
-                    <div class="swiper-button-next"></div>
-                    <div class="swiper-button-prev"></div>
-                 
-                  </swiper>
-                    
-                
-            </div>
-    		<!--Profile Card 3-->
-    		<div class="col-md-4">
-    		    <div class="card profile-card-1">
-    		        <!-- <img src="https://images.pexels.com/photos/946351/pexels-photo-946351.jpeg?w=500&h=650&auto=compress&cs=tinysrgb" alt="profile-sample1" class="background"/> -->
-    		        <img src="https://upload.wikimedia.org/wikipedia/commons/5/56/Kobe_Bryant_2014.jpg" alt="profile-image" class="profile"/>
-                    <div class="card-content">
-                        <h2>Kobe Bryant<small>kobe@123</small></h2>
-                    <div class="icon-block">
-                        <a href="#"><i class="icon-user-follow" data-toggle="tooltip" data-placement="bottom" title="follow"></i></a>
-                        <!-- if already friends  -->
-                        <!-- <a href="#"><i class="icon-user-following" ></i></a> -->
-                        <a href="#"> <i class="icon-users" data-toggle="tooltip" data-placement="bottom" title="followers"></i></a>
-                        
-                        <a href="#"> <i class="icon-book-open" data-toggle="tooltip" data-placement="bottom" title="Books"></i></a></div>
-                    </div>
-                </div>
-               
-    		</div>
-    		
-    	</div>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-lg-8">
+      <div>
+        <h1>Book lists</h1>
+      </div>
+      <!-- image slider starts -->
+      <!-- <swiper [config]="config" #usefulSwiper>
+        <div class="swiper-wrapper">
+          <div class="swiper-slide" *ngFor="let slide of slideData">
+            <img src="https://i.picsum.photos/id/{{slide.id}}/400/300.jpg" />
+            {{slide.name}}
+          </div>
+        </div> -->
+
+        <!-- if you wand uncomment pagination -->
+        <!-- Add Pagination -->
+        <!-- <div class="swiper-pagination"></div> -->
+
+        <!-- Add Arrows -->
+        <!-- <div class="swiper-button-next"></div>
+        <div class="swiper-button-prev"></div>
+      </swiper> -->
+      <!-- image slider ends -->
     </div>
-</section>
+
+    <!--Profile Card 3-->
+    <div class="col-lg-4">
+      <div class="card profile-card-1" >
+        <!-- <img src="https://images.pexels.com/photos/946351/pexels-photo-946351.jpeg?w=500&h=650&auto=compress&cs=tinysrgb" alt="profile-sample1" class="background"/> -->
+       <label class= "hoverable" for="fileInput">
+        <img  [src]="url ? url: 'https://www.w3schools.com/howto/img_avatar.png'" alt="profile-image" />
+          <div class="hover-text">Upload Image</div>
+          <div class="background"></div>
+        </label>
+        <br/>
+        <input id="fileInput" type="file" (change)="onSelectFile($event)">
+        <button *ngif="url" (click)="delete()">remove image</button>
+        <div class="card-content">
+          <h2>{{user.username}}<small>{{user.email}}</small></h2>
+          <div class="icon-block">
+            <a href="#"><i class="icon-user-follow" data-toggle="tooltip" data-placement="bottom"
+                title="follow"></i></a>
+            <!-- if already friends  -->
+            <!-- <a href="#"><i class="icon-user-following" ></i></a> -->
+            <a href="#"> <i class="icon-users" data-toggle="tooltip" data-placement="bottom" title="followers"></i></a>
+
+            <a href="#"> <i class="icon-book-open" data-toggle="tooltip" data-placement="bottom" title="Books"></i></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

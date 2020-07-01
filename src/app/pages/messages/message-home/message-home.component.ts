@@ -6,10 +6,14 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./message-home.component.scss']
 })
 export class MessageHomeComponent implements OnInit {
-
+  name = 'aa';
   constructor() { }
 
   ngOnInit() {
+  }
+
+  test(){
+
   }
 
 }
