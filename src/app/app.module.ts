@@ -24,6 +24,7 @@ import { GroupHomeComponent } from './pages/groups/group-home/group-home.compone
 import { MessageHomeComponent } from './pages/messages/message-home/message-home.component';
 import { PollsHomeComponent } from './pages/polls/polls-home/polls-home.component';
 import { PostsHomeComponent } from './pages/posts/posts-home/posts-home.component';
+import { PostModalComponent } from './pages/posts/post-modal/post-modal.component';
 import { ProfileHomeComponent } from './pages/profile/profile-home/profile-home.component';
 import { SalesHomeComponent } from './pages/sales/sales-home/sales-home.component';
 
@@ -84,6 +85,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     MessageHomeComponent,
     PollsHomeComponent,
     PostsHomeComponent,
+    PostModalComponent,
     ProfileHomeComponent,
     SalesHomeComponent,
 

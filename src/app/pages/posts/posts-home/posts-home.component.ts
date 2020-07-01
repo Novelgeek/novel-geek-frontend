@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 // import Post_modal from 'src/app/posts/post_modal';
 import Post_modal from '../post_modal';
+import { HttpClient } from '@angular/common/http';
+import { PostsService } from 'app/core/_services/posts.service';
 // import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
@@ -13,32 +15,38 @@ export class PostsHomeComponent implements OnInit {
   public postList: Post_modal[];
   public new_post: Post_modal;
   public url: any;
+  selectedImage: File;
   public flag = '#009da0';
+  default="Public";
   isShow = false;
+  create=false;
+  postdelete: number;
 
-  constructor(/*public sanitizer:DomSanitizer*/) {
+  /*public sanitizer:DomSanitizer*/
+  constructor(private http: HttpClient, private postsService: PostsService) {
     this.new_post = new Post_modal();
     this.postList = [];
   }
 
   ngOnInit() {
-    console.log('working')
+    console.log('working');
+    this.postsService.getAllPosts().subscribe(response =>{
+      this.postList=response;
+    })
   }
 
-  onsubmit(value: any) {
-    // this.postList.push(this.new_post);
-
-    // add to given position
-    this.new_post.postedDate = new Date();
-    this.postList.splice(0, 0, this.new_post);
-    this.new_post = new Post_modal();
-    // console.log(value);
-  }
-
-  public likeCount(item: Post_modal) {
-    // this.flag="red";
-    item.likeCount += 1;
-    // this.flag="#009da0";
+  onsubmit(Values: any) {
+    const newpost = new FormData();
+    newpost.append('title', Values.title);
+    newpost.append('description', Values.description)
+    newpost.append('sharedtype', Values.sharedtype)
+    newpost.append('file',this.selectedImage);
+    this.postsService.createPost(newpost)
+    .subscribe(response =>{
+      this.new_post = response;
+      this.postList.splice(0, 0, this.new_post);
+      this.create=false;
+    })
   }
 
   public uploadImage(event) {
@@ -47,20 +55,25 @@ export class PostsHomeComponent implements OnInit {
     // const url_el=URL.createObjectURL(photo);
     // this.url=this.sanitizer.bypassSecurityTrustResourceUrl(url_el);
     // this.new_post.imageURL=this.url;
-
     if (event.target.files) {
       let reader = new FileReader();
       reader.readAsDataURL(event.target.files[0]);
       reader.onload = (event: any) => {
-        this.new_post.imageURL = event.target.result;
+        this.new_post.imagePath = event.target.result;
       }
+      this.selectedImage=event.target.files[0];
     }
   }
 
-  // public postStory(){
-  // }
+  onOpen(){
+    this.create=true;
+  }
 
-  public toggleList(item) {
-    item.isShow = !item.isShow;
+  onClose(){
+    this.create=false;
+  }
+
+  onDeletePost(data:{id:number}){
+    this.postList.splice(data.id,1);
   }
 }
