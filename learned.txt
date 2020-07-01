@@ -1,0 +1,24 @@
+COMMANDS==
+ng new myapp
+*ng serve -o
+
+*ng generate component home
+ ng g c home --style= scss
+
+#services are special components that are reusable
+throughout your app.They are used to communicate with
+an API
+ng g s http
+
+
+
+STUFF==
+
+#routerLink allows you to link components,maybe navigate
+
+#angular observable
+
+
+<section *ngIf="section">
+                        <h1>this section</h1>
+                    </section>

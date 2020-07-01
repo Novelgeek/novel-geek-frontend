@@ -1,8 +1,6 @@
 import { Component, OnInit,ViewChild } from '@angular/core';
-// imports for image slider
 import { SwiperOptions } from 'swiper';
 import { SwiperComponent } from 'ngx-useful-swiper';
-// 
 @Component({
   selector: 'app-profile-home',
   templateUrl: './profile-home.component.html',
@@ -10,7 +8,6 @@ import { SwiperComponent } from 'ngx-useful-swiper';
 })
 export class ProfileHomeComponent implements OnInit {
 
-  // image slider configuration
   @ViewChild('usefulSwiper', { static: false }) usefulSwiper: SwiperComponent;
   config: SwiperOptions;
 
@@ -56,11 +53,10 @@ export class ProfileHomeComponent implements OnInit {
     pagination: { el: '.swiper-pagination', clickable: true },
     autoHeight: true,
     allowTouchMove: true,
-    // autoplay: {
-    //   delay: 500,
-    //   disableOnInteraction: true
-    // },
-    
+    autoplay: {
+      delay: 6000,
+      disableOnInteraction: true
+    },
     breakpoints: {
       1024: {
         slidesPerView: 4
@@ -76,16 +72,11 @@ export class ProfileHomeComponent implements OnInit {
       }
     },
     navigation: {
-      nextEl: '.swiper-button-next  ',
-      prevEl: '.swiper-button-prev',
-      hideOnClick:true,
+      nextEl: '.swiper-button-next',
+      prevEl: '.swiper-button-prev'
     },
-    simulateTouch:true,
-    watchOverflow:true,
     spaceBetween: 30,
     loop: true,
-    speed: 400,
-
     on: {
       slideChange: () => {
         // console.log('slideChange Event: Active Slide Index = ', this.usefulSwiper.swiper.activeIndex);
@@ -99,6 +90,8 @@ export class ProfileHomeComponent implements OnInit {
   };
 }
 
+  
+
    nextSlide() {
     this.usefulSwiper.swiper.slideNext();
   }
@@ -111,7 +104,6 @@ export class ProfileHomeComponent implements OnInit {
     this.usefulSwiper.swiper.slideTo(index);
   }
 
-  // image slider configuration ends
 
 }
 
