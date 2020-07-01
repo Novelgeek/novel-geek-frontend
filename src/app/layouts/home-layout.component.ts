@@ -1,6 +1,7 @@
 import { Component, ViewChild, ElementRef, Inject, Renderer2, OnInit, OnDestroy } from '@angular/core';
 import { ConfigService } from 'app/shared/services/config.service';
 import { DOCUMENT } from '@angular/common';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-home-layout',
@@ -39,6 +40,7 @@ export class HomeLayoutComponent implements OnInit{
     // }
 
     ngOnInit() {
+
       this.config = this.configService.interfaceConf;
       this.bgColor = this.config.layout.sidebar.backgroundColor;
 

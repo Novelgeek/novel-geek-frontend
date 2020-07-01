@@ -4,6 +4,12 @@ import { AppRoutingModule } from './app-routing.module';
 import { SharedModule } from './shared/shared.module';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { HttpClientModule } from '@angular/common/http';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { JwtModule } from '@auth0/angular-jwt';
+import { ToastrModule } from 'ngx-toastr';
+import { NgxSpinnerModule } from 'ngx-spinner';
+import { NgxUsefulSwiperModule } from 'ngx-useful-swiper';
+
 
 import { PerfectScrollbarModule, PERFECT_SCROLLBAR_CONFIG, PerfectScrollbarConfigInterface} from 'ngx-perfect-scrollbar';
 
@@ -20,6 +26,9 @@ import { PollsHomeComponent } from './pages/polls/polls-home/polls-home.componen
 import { PostsHomeComponent } from './pages/posts/posts-home/posts-home.component';
 import { ProfileHomeComponent } from './pages/profile/profile-home/profile-home.component';
 import { SalesHomeComponent } from './pages/sales/sales-home/sales-home.component';
+
+import { from } from 'rxjs';
+
 import { BookletComponent } from './pages/books/booklet/booklet.component';
 import { StoreComponent } from './pages/books/store/store.component';
 
@@ -30,6 +39,10 @@ import { BookReviewComponent } from './pages/books/book-review/book-review.compo
 import { ReviewComponent } from './pages/books/book-review/review/review.component';
 import { CommentComponent } from './pages/books/book-review/comment/comment.component';
 
+
+export function tokenGetter() {
+  return localStorage.getItem("token");
+}
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     suppressScrollX: true,
@@ -65,8 +78,21 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     SharedModule,
     HttpClientModule,
     NgbModule,
+
+    PerfectScrollbarModule,
     FormsModule,
-    PerfectScrollbarModule
+    ToastrModule.forRoot(),
+    NgxSpinnerModule,
+    NgxUsefulSwiperModule,
+    ReactiveFormsModule,
+    JwtModule.forRoot({
+      config: {
+        tokenGetter: tokenGetter,
+        whitelistedDomains: ["example.com"],
+        blacklistedRoutes: ["http://example.com/examplebadroute/"],
+      },
+    }),
+    NgxUsefulSwiperModule
   ],
   providers: [
     {
