@@ -13,22 +13,22 @@
       <span class="font-medium-1 grey d-block text-center">{{user.email}}</span>
       <div class="row mt-4 mb-3 text-center">
         <div *ngIf="user.status === 'REQUESTED'" class="col align-self-center text-center">
-          <a (click)="cancelSentRequest()">
+          <a (click)="cancelSentRequest()" [ngbTooltip]="'Cancel Sent Request'" placement="bottom">
             <i class="ft-user-x"></i>
           </a>
         </div>
         <div *ngIf="user.status !== 'REQUESTED' && user.friend === false" class="col align-self-center text-center">
-          <a (click)="sendFriendRequest()">
+          <a (click)="sendFriendRequest()" [ngbTooltip]="'Send Friend Request'" placement="bottom">
             <i class="ft-user-plus"></i>
           </a>
         </div>
         <div *ngIf="user.friend === true" class="col align-self-center text-center">
-          <a (click)="unFriend()">
+          <a (click)="unFriend()" [ngbTooltip]="'Unfriend User'" placement="bottom">
             <i class="ft-user-minus"></i>
           </a>
         </div>
         <div class="col align-self-center text-center">
-          <a>
+          <a [ngbTooltip]="'Message User'" placement="bottom">
             <i class="ft-mail"></i>
           </a>
 
