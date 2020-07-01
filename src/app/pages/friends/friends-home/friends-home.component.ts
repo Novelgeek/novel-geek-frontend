@@ -23,10 +23,23 @@ export class FriendsHomeComponent implements OnInit {
       this.notFriends = this.allUsers.filter( user => {
         return !user.friend;
       })
+      console.log(this.allUsers);
     })
 
     this.friendService.getFriendRequests().subscribe(data => {
       this.requests = data;
+    })
+  }
+
+  acceptFriendRequest(id) {
+    this.friendService.acceptFriendRequest(id).subscribe(data => {
+      console.log('friend req acceoted')
+    })
+  }
+
+  declineFriendRequest(id) {
+    this.friendService.declineFriendRequest(id).subscribe(data => {
+      console.log('friend req declined')
     })
   }
 
