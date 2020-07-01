@@ -28,6 +28,9 @@ export class BookReviewComponent implements OnInit {
         this.data=data;
         this.book=this.data.volumeInfo;
       });
+      this.bookService.getReviews(this.bookId).subscribe(data=>{
+        console.log(data);
+      });
   }
   
 

@@ -22,4 +22,7 @@ export class BooksService {
     this.bookId = bookId;
     return this.http.get('https://www.googleapis.com/books/v1/volumes/'+this.bookId+'?key=AIzaSyBXGwa67D5ZrrFuPP6YUNc9glwM8edWFck');
   }
+  getReviews(bookId){
+    return this.http.get('http://localhost:8080/book/test');
+  }
 }
