@@ -12,4 +12,6 @@ export class GroupCardComponent implements OnInit {
   ngOnInit() {
   }
 
+
+  
 }
