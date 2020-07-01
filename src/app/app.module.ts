@@ -27,6 +27,8 @@ import { PostsHomeComponent } from './pages/posts/posts-home/posts-home.componen
 import { PostModalComponent } from './pages/posts/post-modal/post-modal.component';
 import { ProfileHomeComponent } from './pages/profile/profile-home/profile-home.component';
 import { SalesHomeComponent } from './pages/sales/sales-home/sales-home.component';
+import { ProfileSettingsComponent } from './pages/profile/profile-settings/profile-settings.component';
+import { TokenInterceptor } from './core/_services/token.interceptor';
 
 
 
@@ -88,6 +90,8 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     PostModalComponent,
     ProfileHomeComponent,
     SalesHomeComponent,
+    ProfileSettingsComponent
+
 
     BookletComponent,
     StoreComponent,
@@ -100,7 +104,6 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     GroupHorizontalCardComponent,
     GroupDetailComponent,
     NotFoundComponent
-
   ],
   imports: [
     BrowserAnimationsModule,
