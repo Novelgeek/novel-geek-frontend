@@ -26,7 +26,19 @@ import { PollsHomeComponent } from './pages/polls/polls-home/polls-home.componen
 import { PostsHomeComponent } from './pages/posts/posts-home/posts-home.component';
 import { ProfileHomeComponent } from './pages/profile/profile-home/profile-home.component';
 import { SalesHomeComponent } from './pages/sales/sales-home/sales-home.component';
+
 import { from } from 'rxjs';
+
+import { BookletComponent } from './pages/books/booklet/booklet.component';
+import { StoreComponent } from './pages/books/store/store.component';
+
+
+import { FormsModule } from '@angular/forms';
+import { SearchResultsComponent } from './pages/books/search-results/search-results.component';
+import { BookReviewComponent } from './pages/books/book-review/book-review.component';
+import { ReviewComponent } from './pages/books/book-review/review/review.component';
+import { CommentComponent } from './pages/books/book-review/comment/comment.component';
+
 
 export function tokenGetter() {
   return localStorage.getItem("token");
@@ -52,7 +64,13 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     PollsHomeComponent,
     PostsHomeComponent,
     ProfileHomeComponent,
-    SalesHomeComponent
+    SalesHomeComponent,
+    BookletComponent,
+    StoreComponent,
+    SearchResultsComponent,
+    BookReviewComponent,
+    ReviewComponent,
+    CommentComponent
   ],
   imports: [
     BrowserAnimationsModule,
@@ -60,6 +78,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     SharedModule,
     HttpClientModule,
     NgbModule,
+
     PerfectScrollbarModule,
     FormsModule,
     ToastrModule.forRoot(),

@@ -1,6 +1,10 @@
+
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { SwiperComponent } from 'ngx-useful-swiper';
 import { SwiperOptions } from 'swiper';
+
+
+import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 
 @Component({
   selector: 'app-book-home',
@@ -47,7 +51,10 @@ export class BookHomeComponent implements OnInit {
     }
   ]
 
-  constructor() { }
+
+  public searchTerm='';
+  constructor(private router:Router) { }
+
 
   ngOnInit() {
     this.config = {
@@ -105,12 +112,19 @@ export class BookHomeComponent implements OnInit {
   previousSlide() {
     this.usefulSwiper.swiper.slidePrev();
   }
+
   
   slideToThis(index) {
     this.usefulSwiper.swiper.slideTo(index);
   }
 
   // image slider configuration ends
+
+  search(){
+    console.log("searching");
+    this.router.navigate(['search'],{queryParams:{searchTerm:this.searchTerm} });
+  }
+
 
 }
 

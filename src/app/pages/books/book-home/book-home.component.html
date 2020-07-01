@@ -1,4 +1,5 @@
 
+
 <div class="container">
 
   <div class="row">
@@ -200,4 +201,20 @@
 
 
     
+
+
+<div class="row">
+
+    <form (submit)="search()" class="navbar-form navbar-right mt-1" role="search">
+        <div class="position-relative has-icon-left">
+            <input  type="text" [(ngModel)] = "searchTerm" name="searchbox" class="form-control round" placeholder="Searching">
+            <div class="form-control-position">
+                <i class="ft-search"></i>
+            </div>
+        </div>
+    </form>
+</div>
+<div class="row">
+    <a type="button" href="/store">store</a>
+</div>
 
