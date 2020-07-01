@@ -8,7 +8,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { JwtModule } from '@auth0/angular-jwt';
 import { ToastrModule } from 'ngx-toastr';
 import { NgxSpinnerModule } from 'ngx-spinner';
-
+import {NgxUsefulSwiperModule} from 'ngx-useful-swiper';
 import { PerfectScrollbarModule, PERFECT_SCROLLBAR_CONFIG, PerfectScrollbarConfigInterface} from 'ngx-perfect-scrollbar';
 
 import { AppComponent } from './app.component';
@@ -22,8 +22,10 @@ import { GroupHomeComponent } from './pages/groups/group-home/group-home.compone
 import { MessageHomeComponent } from './pages/messages/message-home/message-home.component';
 import { PollsHomeComponent } from './pages/polls/polls-home/polls-home.component';
 import { PostsHomeComponent } from './pages/posts/posts-home/posts-home.component';
+import { PostModalComponent } from './pages/posts/post-modal/post-modal.component';
 import { ProfileHomeComponent } from './pages/profile/profile-home/profile-home.component';
 import { SalesHomeComponent } from './pages/sales/sales-home/sales-home.component';
+
 import { GroupCardComponent } from './pages/groups/group-card/group-card.component';
 import { TokenInterceptor } from './core/_services/token.interceptor';
 import { GroupHorizontalCardComponent } from './pages/groups/group-horizontal-card/group-horizontal-card.component';
@@ -34,6 +36,9 @@ import { AdminHomeComponent } from './pages/admin/admin-home/admin-home.componen
 import { AdminAuthComponent } from './pages/admin/admin-auth/admin-auth.component';
 import { ForgotPasswordComponent } from './pages/auth/forgot-password/forgot-password.component';
 import { ResetPasswordComponent } from './pages/auth/reset-password/reset-password.component';
+import { from } from 'rxjs';
+
+
 
 export function tokenGetter() {
   return localStorage.getItem("token");
@@ -63,6 +68,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     MessageHomeComponent,
     PollsHomeComponent,
     PostsHomeComponent,
+    PostModalComponent,
     ProfileHomeComponent,
     SalesHomeComponent,
     GroupCardComponent,
@@ -88,6 +94,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
         blacklistedRoutes: ["http://example.com/examplebadroute/"],
       },
     }),
+    NgxUsefulSwiperModule
   ],
   providers: [
     {
