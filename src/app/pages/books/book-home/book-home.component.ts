@@ -1,4 +1,5 @@
 
+
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { SwiperComponent } from 'ngx-useful-swiper';
 import { SwiperOptions } from 'swiper';
@@ -127,4 +128,6 @@ export class BookHomeComponent implements OnInit {
 
 
 }
+
+
 

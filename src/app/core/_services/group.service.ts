@@ -70,4 +70,8 @@ export class GroupService {
     return this.http.delete('http://localhost:8080/group/' + groupId);
   }
 
+  getMembersAndNonMenbers(groupId) {
+    return this.http.get('http://localhost:8080/group/getAllUsers/' + groupId)
+  }
+
 }

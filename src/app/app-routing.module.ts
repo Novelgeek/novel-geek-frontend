@@ -39,6 +39,7 @@ const appRoutes: Routes = [
   { path: 'admin', component: AdminLayoutComponent,
     children: [
       {path: 'home', component: AdminHomeComponent},
+      {path: '**', component: NotFoundComponent},
     ]
   },
   { path: '', component: HomeLayoutComponent,

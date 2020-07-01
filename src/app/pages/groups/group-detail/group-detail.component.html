@@ -228,11 +228,12 @@
               <div class="card">
                 <div class="card-content">
                   <div class="card-body">
-                    <div class="media pt-0 pb-3" *ngFor="let user of users">
-                      <img alt="96x96" class="media-object d-flex mr-3 align-self-center bg-info height-50 rounded-circle" src="assets/img/portrait/small/avatar-s-18.png">
+                    <div class="media pt-0 pb-3" *ngFor="let user of nonMembers">
+                      <img *ngIf="user.imageUrl === null" alt="96x96" class="media-object d-flex mr-3 align-self-center height-50 rounded-circle" src="assets/img/portrait/default.svg">
+                      <img *ngIf="user.imageUrl !== null"alt="96x96" class="media-object d-flex mr-3 align-self-center bg-info height-50 rounded-circle" [src]="user.imageUrl">
                       <div class="media-body">
                         <h4 class="font-medium-1 mt-2 mb-0">{{user.username}}</h4>
-                        <div>{{members[0].users.username}}</div>
+                        <div>{{user.email}}</div>
                       </div>
                       <button class="d-flex ml-3 py-2 btn btn-primary justify-content-center pull-right" (click)= "inviteUser(user.id)"><i class="ft-user-plus white"></i></button>
                     </div>
