@@ -25,6 +25,9 @@ export class GroupDetailComponent implements OnInit, OnDestroy {
   description: string;
   avatar: string;
 
+  nonMembers: any = [];
+  allMembers: any = [];
+
   isMember: boolean;
   isAdmin: boolean;
   userId: number;
@@ -72,6 +75,13 @@ export class GroupDetailComponent implements OnInit, OnDestroy {
     this.toastr.error('Unable to get member Requests')
    })
 
+   this.groupService.getMembersAndNonMenbers(this.id).subscribe(data => {
+     this.allMembers = data;
+     this.nonMembers = this.allMembers.filter(user => {
+      return !user.member
+    })
+
+   })
 
   }
 
