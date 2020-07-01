@@ -28,9 +28,11 @@ h1 a{color:#131313; font-weight:bold;}
     background-color: transparent;
     // opacity:0;
     text-align: center;
+    align-items: center;
     height:360px;
     border:none;
   }
+
   .profile-card-1 .background {
     width:100%;
     vertical-align: top;
@@ -49,18 +51,24 @@ h1 a{color:#131313; font-weight:bold;}
     left: 0;
     top: 50%;
   }
-  .profile-card-1 .profile {
-    border-radius: 50%;
-    position: absolute;
-    bottom: 50%;
-    left: 50%;
-    max-width: 150px;
-    opacity: 1;
-    box-shadow: 3px 3px 20px rgba(0, 0, 0, 0.5);
-    border: 2px solid rgba(255, 255, 255, 1);
-    -webkit-transform: translate(-50%, 0%);
-    transform: translate(-50%, 0%);
-  }
+
+// .hoverable {
+//     border-radius: 50%;
+//     position: relative;
+//     display: block;
+//     cursor: pointer;
+//     height: 200px;
+//     width: 200px;
+//     bottom: 50%;
+//     left: 50%;
+//     // max-width: 150px;
+//     // opacity: 1;
+//     // box-shadow: 3px 3px 20px rgba(0, 0, 0, 0.5);
+//     border: 2px solid rgba(255, 255, 255, 1);
+//     // -webkit-transform: translate(-50%, 0%);
+//     // transform: translate(-50%, 0%);
+    
+//   }
   .profile-card-1 h2 {
     margin: 0 0 5px;
     font-weight: 600;
@@ -151,47 +159,54 @@ h1 a{color:#131313; font-weight:bold;}
 
 //image upload
 
-// img {
-//   height: 100%;
-//   width: 100%;
-//   border-radius: 50%;
-// }
-// .hoverable{
-//   position: relative;
-//   display: block;
-//   cursor: pointer;
-//   height: 200px;
-//   width: 200px;
-//   border: 5px solid #000;
-//   border-radius: 50%;
-// }
-// .hoverable .hover-text{
-//   position: absolute;
-//   display: none;
-//   top: 50%;
-//   left:  50%;
-//   transform: translate(-50%,-50%);   
-//   z-index: 2;
-// }
-// .hoverable .background{
-//   position: absolute;
-//   display: none;
-//   top: 0;
-//   left:  0;
-//   bottom: 0;
-//   right: 0;
-//   background-color:rgba(255, 255, 255, 0.5);
-//   pointer-events: none;
-//   border-radius: 50%;
-//   z-index: 1;
-// }
-// .hoverable:hover .hover-text{
-//   display: block;
-// }
-// .hoverable:hover .background{
-//   display: block;
-// }
+img {
+  height: 100%;
+  width: 100%;
+  border-radius: 50%;
+  text-align: center;
+  align-content: center;
+  
+}
+.hoverable{
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+  height: 146px;
+  width: 146px;
+  top:20px;
+  text-align: center;
+  align-items: center;
+  border: 2px solid white;
+  border-radius: 50%;
+}
 
-// #fileInput{
-//   display: none;
-// }
+.hoverable .hover-text{
+  position: absolute;
+  display: none;
+  top: 50%;
+  left:  50%;
+  transform: translate(-50%,-50%);   
+  z-index: 2;
+}
+.hoverable .background{
+  position: absolute;
+  display: none;
+  top: 0;
+  left:  0;
+  bottom: 0;
+  right: 0;
+  background-color:rgba(255, 255, 255, 0.5);
+  pointer-events: none;
+  border-radius: 50%;
+  z-index: 1;
+}
+.hoverable:hover .hover-text{
+  display: inline-block;
+}
+.hoverable:hover .background{
+  display: inline-block;
+}
+
+#fileInput{
+  display: none;
+}

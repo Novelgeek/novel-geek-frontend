@@ -64,14 +64,12 @@ export class ProfileHomeComponent implements OnInit {
     }
   ]
 
-  
 
   ngOnInit() {
     this.userSub = this.authService.user.subscribe( user => {
       this.isAuthenticated = !!user; // !user ? false : true
       this.user = user;
     });
-
 
 
     this.swconfig = {
