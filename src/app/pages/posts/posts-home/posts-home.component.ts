@@ -15,6 +15,7 @@ export class PostsHomeComponent implements OnInit {
   public postList: Post_modal[];
   public new_post: Post_modal;
   public url: any;
+  selectedImage: File;
   public flag = '#009da0';
   default="Public";
   isShow = false;
@@ -35,10 +36,14 @@ export class PostsHomeComponent implements OnInit {
   }
 
   onsubmit(Values: any) {
-    this.postsService.createPost(Values.title, Values.description, Values.sharedtype)
+    const newpost = new FormData();
+    newpost.append('title', Values.title);
+    newpost.append('description', Values.description)
+    newpost.append('sharedtype', Values.sharedtype)
+    newpost.append('file',this.selectedImage);
+    this.postsService.createPost(newpost)
     .subscribe(response =>{
       this.new_post = response;
-      this.new_post.imagePath='';
       this.postList.splice(0, 0, this.new_post);
       this.create=false;
     })
@@ -56,6 +61,7 @@ export class PostsHomeComponent implements OnInit {
       reader.onload = (event: any) => {
         this.new_post.imagePath = event.target.result;
       }
+      this.selectedImage=event.target.files[0];
     }
   }
 

@@ -1,18 +1,15 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import Post_modal from 'app/pages/posts/post_modal';
+import { Comment_modal } from 'app/pages/posts/comment_modal';
 
 @Injectable({providedIn: 'root'})
 export class PostsService {
 
     constructor(private http:HttpClient){}
 
-    createPost(title:string, description:string, sharedtype:string){
-        return this.http.post<Post_modal>("http://localhost:8080/post/newpost",{
-            title: title,
-            description: description,
-            sharedtype: sharedtype
-        })
+    createPost(newpost:FormData){
+        return this.http.post<Post_modal>("http://localhost:8080/post/newpost", newpost)
     }
 
     getAllPosts(){
@@ -30,6 +27,20 @@ export class PostsService {
     unLikePost(postid:number){
         return this.http.delete("http://localhost:8080/post/unlikepost/"+ postid)
 
+    }
+
+    getLikes(postid:number){
+        return this.http.get<any>("http://localhost:8080/post/likes/" + postid)
+    }
+
+    addComment(comment:string, postid:number){
+        return this.http.post<Comment_modal>("http://localhost:8080/post/addcomment/" + postid,{
+            comment:comment
+        })
+    }
+
+    getComments(postid:number){
+        return this.http.get<any>("http://localhost:8080/post/getcomments/" + postid)
     }
 
     deletePost(postid:number){
