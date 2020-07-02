@@ -4,33 +4,25 @@
       <div class="card-content">
         <div class="card-body">
 
-          <div class="row">
-            <div class="col-6">
+          <div class="row justify-content-between">
+            <div class="col-md-6 col-sm-4 col-xs-12">
               <h4 class="card-title">Friends</h4>
             </div>
-            <div class="col-6">
+            <div class="col-md-4 col-sm-8 col-xs-12">
               <form class="form">
                 <div class="form-group">
-                  <!-- <div class="position-relative has-icon-right">
-                    <input type="text" class="form-control" name="form-control-with-icon">
-                    <div class="form-control-position">
-                      <i class="ft-search primary"></i>
-                      <!-- <i class="ft-loader spinner"></i> 
-                    </div>
-                  </div> -->
-                  <div class="row">
-                    <div class="col-6">
-                    </div>
-                    <div class="col-6">
+                  
 
                       <div class="input-group ">
                         <input type="text" class="form-control " placeholder="Search" aria-describedby="button-addon4">
                         <div class="input-group-append">
-                          <button class="btn btn-raised btn-primary" type="button"><i class="ft-search"></i></button>
+                          <button class="btn btn-raised btn-primary" type="button">
+                            <i class="ft-search"></i>
+                            <!-- <i class="ft-loader spinner"></i>   -->
+                          </button>
                         </div>
                       </div>
-                    </div>
-                  </div>
+
                 </div>
               </form>
             </div>
@@ -43,10 +35,13 @@
                 <li ngbNavItem>
                   <a ngbNavLink>My Friends</a>
                   <ng-template ngbNavContent>
-                    <div class="row" matchHeight="card">
+                    <div class="row" matchHeight="card" *ngIf="friends.length !== 0">
                       <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12" *ngFor="let friend of friends">
-                        <app-friend-card [user]="friend"></app-friend-card>
+                        <app-friend-card [user]="friend" (unFriend)="unFriended($event)"></app-friend-card>
                       </div>
+                    </div>
+                    <div class="row justify-content-center  mt-2 font-medium-4" matchHeight="card" *ngIf="friends.length === 0">
+                        You have no friends yet, click on find friends to get started
                     </div>
                   </ng-template>
                 </li>
@@ -58,13 +53,15 @@
                         <app-friend-card [user]="user"></app-friend-card>
                       </div>
                     </div>
+                    <div class="row justify-content-center  mt-2 font-medium-4" matchHeight="card" *ngIf="notFriends.length === 0">
+                      No users found, recommend your friends to use the system.
+                    </div>
                   </ng-template>
                 </li>
                 <li ngbNavItem>
                   <a ngbNavLink>Friend Requests</a>
                   <ng-template ngbNavContent>
                     <div class="col-md-6" *ngFor="let request of requests">
-
                       <div class="card">
                         <div class="card-content">
                           <div class="card-body">
@@ -72,7 +69,7 @@
                               <div class="col-md-4 col-sm-12 text-center">
                                 <img *ngIf="request.imageUrl === null" src="assets/img/portrait/default.svg" width="30" height="30"
                                   class="d-inline-flex rounded-circle">
-                                <img *ngIf="request.imageUrl !== null" [src]="request.imageUrl" width="30" height="30"
+                                <img *ngIf="request.imageUrl !== null" [src]="request.imageUrl" width="30" height="30" onerror="this.src='assets/img/portrait/default.svg';"
                                   class="d-inline-flex rounded-circle">
                                 <a [routerLink]="['#']">
                                   <h4 class="ml-1 mt-2 d-inline-flex">{{request.username}}</h4>
@@ -98,6 +95,9 @@
                         </div>
                       </div>
                     </div>
+                    <div class="row justify-content-center  mt-2 font-medium-4" matchHeight="card" *ngIf="requests.length === 0">
+                      You have no pending friend requests
+                  </div>
                   </ng-template>
                 </li>
               </ul>
