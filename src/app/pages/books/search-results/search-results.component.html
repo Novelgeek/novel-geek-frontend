@@ -1,12 +1,17 @@
-<div class="row">
-    <form (submit)="search()" class="navbar-form navbar-right mt-1" role="search">
-        <div class="position-relative has-icon-left">
-            <input  type="text" [(ngModel)] = "searchTerm" value='searchTerm' name="searchbox" class="form-control round" placeholder="Searching">
-            <div class="form-control-position">
-                <i class="ft-search"></i>
+<div class="row align-items-center justify-content-center">
+    <div class="col-6">
+        <form (submit)="search()" class="" role="search">
+            <div class="input-group">
+                <input  
+                type="text" [(ngModel)] = "searchTerm" 
+                value='searchTerm' name="searchbox" 
+                class="form-control rounded-right form-control-lg shadow pl-2" placeholder="Searching">
+                <div class="input-group-append">
+                    <button class="btn btn-raised btn-primary" type="button" (click)="search()"><i class="ft-search"></i></button>
+                  </div>
             </div>
-        </div>
-    </form>
+        </form>
+    </div>
 </div>
 <div *ngFor="let book of books">
     <div class="row-12" >

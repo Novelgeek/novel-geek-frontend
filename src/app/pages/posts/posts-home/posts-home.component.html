@@ -1,26 +1,26 @@
 <!--NEW POST SECTION-->
-<div class="row justify-content-center">
-  <div class="col-md-4 col-sm-12 col-xs-12 ">
-    <div class="card sticky ">
+<div class="row justify-content-center ">
+  <div class="col-md-4 col-sm-12 col-xs-12">
+    <div class="card  ">
       <div class="card-body d-flex justify-content-between">
         <img src="../../../assets/img/portrait/default.svg" 
           width="30" height="30" class="rounded-circle mr-1">
-        <input class="form-control" (click)="onOpen()" placeholder="share your thoughts ...">
+        <input class="form-control" (click)="onOpen()" placeholder="Share your thoughts ...">
       </div>
     </div>
   </div>
 </div>
 
 
-<div class="row">
-  <div class="col-md-4 col-12 col-sm-12 col-xs-12" *ngFor="let item of postList; let itemindex = index;">
-    <ng-container >
+<div class="card-columns">
+
+    <ng-container *ngFor="let item of postList; let itemindex = index;">
       <app-post-modal [item]="item" [itemindex]="itemindex" (ondelete)="onDeletePost($event)"></app-post-modal>
     </ng-container>
     <div *ngIf="postList.length === 0">
       <span class="card-body text-muted" >Currently, No Post Available</span>
     </div>
-  </div>
+
 </div>
 <!--POSTS APPEARS HEARE/POST SECTION-->
 
@@ -81,3 +81,4 @@
 
  </div>
 
+ <ngx-spinner></ngx-spinner>
