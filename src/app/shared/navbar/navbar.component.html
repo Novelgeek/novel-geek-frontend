@@ -79,7 +79,9 @@
                         <a class="nav-link position-relative" id="dropdownBasic3" ngbDropdownToggle>
                             
                             <img *ngIf="user.photoUrl === null" src="../../../assets/img/portrait/default.svg" width="30" height="30" class="d-inline-flex rounded-circle mr-1">
-                            <img *ngIf="user.photoUrl !== null" [src]="user.photoUrl" width="30" height="30" class="d-inline-flex rounded-circle mr-1">
+                            <img *ngIf="user.photoUrl !== null" [src]="user.photoUrl" width="30" height="30" 
+                            class="d-inline-flex rounded-circle mr-1"
+                            onerror="this.src='../../../assets/img/portrait/default.svg';">
                             <!-- <i class="ft-user font-medium-3 blue-grey darken-4"></i> -->
                             <p class="d-inline ">{{user.username}} </p>
                         </a>

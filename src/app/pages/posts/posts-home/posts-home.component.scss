@@ -12,3 +12,20 @@
     position: fixed;
     left: 30vw;
 }
+
+div.sticky {
+    position: -webkit-sticky; /* Safari */
+    position: sticky;
+    top: 5rem;
+}
+
+div.sticky-bottom {
+    position: -webkit-sticky; /* Safari */
+    position: sticky;
+    top: 35rem;
+}
+
+.book{ 
+    width: 100px;
+    height: 150px;
+}

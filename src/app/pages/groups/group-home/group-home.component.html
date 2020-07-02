@@ -52,6 +52,9 @@
                         <app-group-card [group]="group"></app-group-card>
                       </div>
                     </div>
+                    <div class="row justify-content-center  mt-2 font-medium-4" matchHeight="card" *ngIf="myGroups.length === 0">
+                      You aren't a member of any group. Click on All Groups to get started.
+                    </div>
                   </ng-template>
                 </li>
                 <li ngbNavItem>
@@ -62,36 +65,52 @@
                         <app-group-horizontal-card [group]="group"></app-group-horizontal-card>
                       </div>
                     </div>
+                    <div class="row justify-content-center  mt-2 font-medium-4" matchHeight="card" *ngIf="allGroups.length === 0">
+                      There are no groups yet. Click on Create Group to get started.
+                    </div>
                   </ng-template>
                 </li>
                 <li ngbNavItem>
                   <a ngbNavLink>Group Invites</a>
                   <ng-template ngbNavContent>
-                    <div class="col-md-6" *ngFor="let invite of groupInvites">
+                    <div class="col-lg-6 col-md-8 col-sm-12" *ngFor="let invite of groupInvites">
                       <div class="card text-center">
-                        <div class="card-content justify-content-between">
+                        <div class="card-content ">
                           <div class="align-self-center">
-                            <div class="row mt-2 mb-2">
+                            <div class="row mt-2 mb-2 justify-content-between align-items-center">
+                              <div class="col-2 justify-content-center">
+                                <img *ngIf="invite.firedUser.imageUrl === null" src="assets/img/portrait/default.svg" width="30" height="30"
+                                  class="d-inline-flex rounded-circle">
+                                <img *ngIf="invite.firedUser.imageUrl !== null" [src]="invite.firedUser.imageUrl" width="30" height="30" onerror="this.src='assets/img/portrait/default.svg';"
+                                  class="d-inline-flex rounded-circle">
+                              </div>
                               <div class="col-3">
-                                <div class="card-text primary">{{invite.firedUser.username}}</div>
-                                <div class="card-text "> invited you to join</div>
-
+                                <a [routerLink]="['#']">
+                                  <div class="d-inline-flex">{{invite.firedUser.username}}</div>
+                                </a>
+                                <div class="d-inline-flex"> invited you to join</div>
                               </div>
                               <div class="col-3 align-self-center">
                                 <h4 class="card-title">{{invite.group.groupName}}</h4>
                               </div>
-                              <div class="col-6 my-auto mt-1">
-                                <a class="btn btn-raised btn-success mr-1" (click)="acceptInvite(invite.notificationId)">Accept Invitation</a>
-                                <a class="btn btn-raised btn-warning">Decline</a>
+                              <div class="col-md-4 col-sm-12 my-auto text-center">
+                                <a class="btn btn-raised btn-primary ml-2 mb-1 mt-0" (click)="acceptInvite(invite.notificationId)">
+                                  Accept
+                                </a>
+                                <a class="btn btn-raised btn-danger ml-2 mb-1 mt-0">
+                                  Decline
+                                </a>
                               </div>
                             </div>
-                              
-                              
-
                           </div>
                         </div>
                       </div>
                     </div>
+
+                    <div class="row justify-content-center  mt-2 font-medium-4" matchHeight="card" *ngIf="groupInvites.length === 0">
+                      You have no group Invites.
+                    </div>
+                    
                   </ng-template>
                 </li>
               </ul>
