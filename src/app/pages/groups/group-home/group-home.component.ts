@@ -90,6 +90,19 @@ export class GroupHomeComponent implements OnInit {
     })
   }
 
+  declineInvite(inviteId) {
+    this.spinner.show();
+    this.groupService.declineInvite(inviteId).subscribe(data => {
+      this.groupInvites = this.groupInvites.filter(invite => {
+        return invite.notificationId !== inviteId
+      })
+      this.spinner.hide();
+    }, error => {
+      this.toastr.error('Unable to decline request currently');
+      this.spinner.show();
+    })
+  }
+
 
 
 }
