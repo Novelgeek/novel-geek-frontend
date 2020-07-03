@@ -29,6 +29,7 @@ import { SalesHomeComponent } from './pages/sales/sales-home/sales-home.componen
 import { ProfileSettingsComponent } from './pages/profile/profile-settings/profile-settings.component';
 import { TokenInterceptor } from './core/_services/token.interceptor';
 
+import { MatSliderModule } from '@angular/material/slider';
 
 
 
@@ -52,10 +53,12 @@ import { ForgotPasswordComponent } from './pages/auth/forgot-password/forgot-pas
 import { ResetPasswordComponent } from './pages/auth/reset-password/reset-password.component';
 import { from } from 'rxjs';
 import { FriendCardComponent } from './pages/friends/friend-card/friend-card.component';
+import { AuctionHomeComponent } from './pages/auction/auction-home/auction-home.component';
+import { AuctionCardComponent } from './pages/auction/auction-card/auction-card.component';
 
+import {MatInputModule} from '@angular/material/input';
 
-
-
+import {MatButtonModule} from '@angular/material/button';
 export function tokenGetter() {
   return localStorage.getItem("token");
 }
@@ -100,7 +103,9 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     GroupCardComponent,
     GroupHorizontalCardComponent,
     GroupDetailComponent,
-    NotFoundComponent
+    NotFoundComponent,
+    AuctionHomeComponent,
+    AuctionCardComponent
   ],
   imports: [
     BrowserAnimationsModule,
@@ -108,12 +113,15 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     SharedModule,
     HttpClientModule,
     NgbModule,
-
+    
+    MatSliderModule,
+    MatInputModule,
+    MatButtonModule,
     PerfectScrollbarModule,
     FormsModule,
     ToastrModule.forRoot(),
     NgxSpinnerModule,
-    NgxUsefulSwiperModule,
+    NgxUsefulSwiperModule,  
     ReactiveFormsModule,
     JwtModule.forRoot({
       config: {

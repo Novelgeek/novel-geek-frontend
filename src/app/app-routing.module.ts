@@ -29,6 +29,7 @@ import {SearchResultsComponent} from './pages/books/search-results/search-result
 import {StoreComponent} from './pages/books/store/store.component'
 
 import {HttpClientModule} from '@angular/common/http';
+import { AuctionHomeComponent } from './pages/auction/auction-home/auction-home.component';
 
 const appRoutes: Routes = [
   { path: 'login', component: LoginComponent},
@@ -45,6 +46,7 @@ const appRoutes: Routes = [
   { path: '', component: HomeLayoutComponent,
     children: [
       {path: 'books', component: BookHomeComponent},
+      {path: 'auction', component: AuctionHomeComponent},
       {path: 'search', component: SearchResultsComponent},
       {path: 'reviewbook', component: BookReviewComponent},
       {path: 'friends', component: FriendsHomeComponent},
