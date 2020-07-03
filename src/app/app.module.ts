@@ -52,6 +52,7 @@ import { ForgotPasswordComponent } from './pages/auth/forgot-password/forgot-pas
 import { ResetPasswordComponent } from './pages/auth/reset-password/reset-password.component';
 import { from } from 'rxjs';
 import { FriendCardComponent } from './pages/friends/friend-card/friend-card.component';
+import { AuctionsHomeComponent } from './pages/auctions/auctions-home/auctions-home.component';
 
 
 
@@ -88,7 +89,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     ProfileHomeComponent,
     SalesHomeComponent,
     ProfileSettingsComponent,
-
+    AuctionsHomeComponent,
 
     BookletComponent,
     StoreComponent,
