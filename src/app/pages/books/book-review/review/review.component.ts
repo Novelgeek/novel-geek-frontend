@@ -1,5 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import {CommentComponent} from '../comment/comment.component'
+import { AuthService } from 'app/core/_services/auth.service';
+import { BooksService } from '../../books.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-review',
@@ -7,19 +10,51 @@ import {CommentComponent} from '../comment/comment.component'
   styleUrls: ['./review.component.css']
 })
 export class ReviewComponent implements OnInit {
-  com = 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum';
-  public isCollapsed = true;
+  @Input() userName: any;
+  @Input() timestamp: any;
+  @Input() noOfLikes: any;
+  @Input() description: any;
+  @Input() imageUrl: any;
+  @Input() reviewId: any;
+  @Input() comments: any = [];
+  @Input() bookId: any;
+  data:any=[];
+  commentDescription:any = '';
+  commentData: any = [];
+  isCollapsed = true;
   showShortDesciption = true;
-  comments: any = [1, 2, 3];
 
-  constructor() { }
+  constructor(private authService: AuthService, private bookService: BooksService,private router:Router) { }
 
   ngOnInit(): void {
+    if (this.imageUrl == null) {
+      this.imageUrl = '../../../../../assets/books/default.png';
+    }
   }
   alterDescriptionText() {
     this.showShortDesciption = !this.showShortDesciption
   }
-  onAddReview() {
+  onAddComment() {
+    const commentData = {
+      commentedUserId: this.authService.currentUser.id,
+      reviewId:this.reviewId,
+      commentDescription:this.commentDescription
+    }
+    this.bookService.addComment(commentData).subscribe({
+      next: data => {
+        console.log(data);
+        this.data = data;
+        this.comments = this.data.comments;
+        this.commentDescription='';
+
+        // window.location.reload();
+        // this.rou(['/books']);ter.navigateByUrl('/', { skipLocationChange: true }).then(() => {
+        //   this.router.navigate
+        //   // this.router.navigate(['/reviewbook'], {queryParams : {bookId : this.bookId}});
+        //  });  
+      },
+      error: error => console.error('There was an error!', error)
+    })
 
   }
 

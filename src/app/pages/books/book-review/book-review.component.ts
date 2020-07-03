@@ -15,7 +15,7 @@ export class BookReviewComponent implements OnInit {
   data: any = [];
   book: any = [];
   section = false;
-  reviews: any = [1, 2, 3, 4]
+  reviews: any = [];
 
   constructor(private bookService: BooksService, private route: ActivatedRoute) { }
 
@@ -27,6 +27,10 @@ export class BookReviewComponent implements OnInit {
         console.log(data);
         this.data = data;
         this.book = this.data.volumeInfo;
+      });
+      this.bookService.getReviews(this.bookId).subscribe(data=>{
+        console.log(data);
+        this.reviews = data;
       });
   }
 
