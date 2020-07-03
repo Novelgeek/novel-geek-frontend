@@ -13,9 +13,9 @@
         </form>
     </div>
 </div>
-<div *ngFor="let book of books">
-    <div class="row-12" >
-        <app-booklet 
+<div class="row">
+    <div class="col-3"  *ngFor="let book of books">
+        <app-booklet
         [title]="book.volumeInfo.title"
         [authors]="book.volumeInfo.authors"
         [description]="book.volumeInfo.description"
@@ -23,8 +23,6 @@
         [pagecount]="book.volumeInfo.pagecount"
         [imageLink]="book.volumeInfo.imageLinks.thumbnail"
         [bookId]="book.id"
-
         ></app-booklet>
     </div>
-    <ng-template #none></ng-template>
 </div>
