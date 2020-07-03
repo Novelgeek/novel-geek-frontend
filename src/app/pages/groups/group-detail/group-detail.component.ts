@@ -115,7 +115,7 @@ export class GroupDetailComponent implements OnInit, OnDestroy {
     })
   }
 
-  inviteUser(userId: number) {
+  inviteUser(userId) {
     this.spinner.show();
     this.groupService.inviteUser(this.group.groupId, userId).subscribe( data => {
       this.spinner.hide();
@@ -141,6 +141,7 @@ export class GroupDetailComponent implements OnInit, OnDestroy {
       this.toastr.error(error);
     })
   }
+
 
   leaveGroup() {
     this.spinner.show();

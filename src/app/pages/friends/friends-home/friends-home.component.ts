@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FriendService } from 'app/core/_services/friend.service';
+import { ToastrService } from 'ngx-toastr';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-friends-home',
@@ -12,7 +14,7 @@ export class FriendsHomeComponent implements OnInit {
   notFriends: any = [];
   requests: any = [];
 
-  constructor(private friendService: FriendService) { }
+  constructor(private friendService: FriendService, private toastr: ToastrService, private spinner: NgxSpinnerService) { }
 
   search(){
     console.log("searching");
@@ -26,24 +28,65 @@ export class FriendsHomeComponent implements OnInit {
       this.notFriends = this.allUsers.filter( user => {
         return !user.friend;
       })
-      console.log(this.allUsers);
     })
 
     this.friendService.getFriendRequests().subscribe(data => {
       this.requests = data;
     })
+
+    console.log(this.friends.length === 0);
+
   }
 
   acceptFriendRequest(id) {
+    this.spinner.show()
     this.friendService.acceptFriendRequest(id).subscribe(data => {
-      console.log('friend req acceoted')
+      this.toastr.info('Friend request Accepted');
+      this.allUsers.push(data);
+      this.requests = this.requests.filter( request => {
+        return request.id !== id
+      })
+      this.friends = this.allUsers.filter( user => {
+        return user.friend;
+      })
+      this.notFriends = this.allUsers.filter( user => {
+        return !user.friend;
+      })
+      this.spinner.hide()
+    }, errorMsg => {
+      this.toastr.error('Unable to Accept request currently, please try again later!')
+      this.spinner.hide()
     })
   }
 
   declineFriendRequest(id) {
+    this.spinner.show()
     this.friendService.declineFriendRequest(id).subscribe(data => {
-      console.log('friend req declined')
+      this.toastr.info('Friend request declined');
+      this.requests = this.requests.filter( request => {
+        return request.id !== id
+      })
+      this.spinner.hide()
+    }, errorMsg => {
+      this.toastr.error('Unable to decline request currently, please try again later!')
+      this.spinner.hide()
     })
   }
 
+  unFriended($event) {
+    if ($event.status === true) {
+      console.log($event.id);
+      this.allUsers.forEach(user => {
+        if (user.id === $event.id) {
+          user.friend = false;
+        }
+      });
+      this.friends = this.allUsers.filter( user => {
+        return user.friend;
+      })
+      this.notFriends = this.allUsers.filter( user => {
+        return !user.friend;
+      })
+    }
+  }
 }

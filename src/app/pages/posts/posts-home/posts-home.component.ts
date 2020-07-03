@@ -3,6 +3,8 @@ import { Component, OnInit } from '@angular/core';
 import Post_modal from '../post_modal';
 import { HttpClient } from '@angular/common/http';
 import { PostsService } from 'app/core/_services/posts.service';
+import { ToastrService } from 'ngx-toastr';
+import { NgxSpinnerService } from 'ngx-spinner';
 // import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
@@ -23,7 +25,8 @@ export class PostsHomeComponent implements OnInit {
   postdelete: number;
 
   /*public sanitizer:DomSanitizer*/
-  constructor(private http: HttpClient, private postsService: PostsService) {
+  constructor(private http: HttpClient, private postsService: PostsService,
+    private toastr: ToastrService, private spinner: NgxSpinnerService) {
     this.new_post = new Post_modal();
     this.postList = [];
   }
@@ -41,11 +44,17 @@ export class PostsHomeComponent implements OnInit {
     newpost.append('description', Values.description)
     newpost.append('sharedtype', Values.sharedtype)
     newpost.append('file', this.selectedImage);
+    this.spinner.show();
     this.postsService.createPost(newpost)
     .subscribe(response => {
       this.new_post = response;
       this.postList.splice(0, 0, this.new_post);
       this.create = false;
+      this.spinner.hide();
+      this.toastr.success('Post created succesfully');
+    }, errorMsg => {
+      this.spinner.hide();
+      this.toastr.error('Unable to create post at the moment.');
     })
   }
 
