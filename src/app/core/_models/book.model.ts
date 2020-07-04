@@ -3,6 +3,7 @@ export class Book {
         public bookId: number,
         public title: string,
         public author: string,
-        public myRating: number
+        public myRating: number,
+        public img: string
     ) {}
 }

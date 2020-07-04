@@ -6,6 +6,8 @@ import { SwiperOptions } from 'swiper';
 
 
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
+import { BooksService } from '../books.service';
+import { Autoplay } from 'swiper/js/swiper.esm';
 
 @Component({
   selector: 'app-book-home',
@@ -54,20 +56,32 @@ export class BookHomeComponent implements OnInit {
 
 
   public searchTerm = '';
-  constructor(private router: Router) { }
+  public recommendations: any;
+  public recentlyViewed: any;
+  constructor(private router: Router, private bookService: BooksService) { }
 
 
   ngOnInit() {
+    this.bookService.getRecommendations().subscribe(data => {
+      this.recommendations = data;
+    });
+    this.bookService.getRecentlyViewed().subscribe(data => {
+      this.recentlyViewed = data;
+    });
+
+
+
     this.config = {
 
     pagination: { el: '.swiper-pagination', clickable: true },
-    autoHeight: true,
+    height: 240,
+    autoHeight: false,
     allowTouchMove: true,
     // autoplay: {
     //   delay: 500,
     //   disableOnInteraction: true
     // },
-
+    slidesPerView: 'auto',
     breakpoints: {
       1024: {
         slidesPerView: 4

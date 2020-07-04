@@ -29,11 +29,18 @@ export class BookReviewComponent implements OnInit {
       this.bookService.getBooksById(this.bookId).subscribe(data => {
         this.data = data;
         this.book = this.data.volumeInfo;
+        const bookDetail = new Book(this.bookId, this.book.title, this.book.authors[0], this.rating, this.book.imageLinks.thumbnail);
+        this.bookService.updateRecentlyViewed(bookDetail).subscribe(data => {
+          console.log(data);
+        }, errorMsg => {
+          console.log(errorMsg);
+        });
       });
       // this.bookService.getReviews(this.bookId).subscribe(data=>{
       //   console.log(data);
       //   this.reviews = data;
       // });
+
   }
 
   onAddReview() {
@@ -41,12 +48,12 @@ export class BookReviewComponent implements OnInit {
   }
 
   onRate() {
-    const bookDetail = new Book(this.bookId, this.book.title, this.book.authors[0], this.rating);
+    const bookDetail = new Book(this.bookId, this.book.title, this.book.authors[0], this.rating, this.book.imageLinks.thumbnail);
     console.log(bookDetail);
-    this.bookService.rateBook(bookDetail).subscribe(data => {
-      console.log('success');
-    }, errorMsg => {
-      console.log(errorMsg);
-    })
+    // this.bookService.rateBook(bookDetail).subscribe(data => {
+    //   console.log(data);
+    // }, errorMsg => {
+    //   console.log(errorMsg);
+    // })
   }
 }

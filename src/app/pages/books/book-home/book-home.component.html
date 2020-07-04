@@ -1,19 +1,82 @@
-
 <div class="row align-items-center justify-content-center">
   <div class="col-6">
-      <form (submit)="search()" class="" role="search">
-          <div class="input-group">
-              <input  
-              type="text" [(ngModel)] = "searchTerm" 
-              value='searchTerm' name="searchbox" 
-              class="form-control rounded-right form-control-lg shadow pl-2" placeholder="Search a Book">
-              <div class="input-group-append">
-                  <button class="btn btn-raised btn-primary" type="button" (click)="search()"><i class="ft-search"></i></button>
-                </div>
-          </div>
-      </form>
+    <form (submit)="search()" class="" role="search">
+      <div class="input-group">
+        <input type="text" [(ngModel)]="searchTerm" value='searchTerm' name="searchbox"
+          class="form-control rounded-right form-control-lg shadow pl-2" placeholder="Search a Book">
+        <div class="input-group-append">
+          <button class="btn btn-raised btn-primary" type="button" (click)="search()"><i class="ft-search"></i></button>
+        </div>
+      </div>
+    </form>
   </div>
 </div>
+
+
+
+<div class="row">
+  <div class="col-6">
+    <div class="card pl-3 pr-3">
+      <div class="card-header text-center">
+        <h4 class="card-title">Recommeded For you</h4>
+        <p></p>
+      </div>
+      <div class="card-content">
+        <swiper [config]="config">
+          <div class="swiper-wrapper ">
+        
+            <div class="swiper-slide"  *ngFor="let recommendation of recommendations">
+              <img [src]="recommendation.img"/>
+              {{recommendation.title}}
+            </div>
+        
+          </div>
+        
+          <br/>
+          <br/>
+          <div class="swiper-pagination"></div>
+          
+          <div class="swiper-button-next"></div>
+          <div class="swiper-button-prev"></div>
+        
+        </swiper>
+      </div>
+      
+    </div>
+  </div>
+
+  <div class="col-6">
+    <div class="card pl-3 pr-3">
+      <div class="card-header text-center">
+        <h4 class="card-title">Recently Viewed</h4>
+        <p></p>
+      </div>
+      <div class="card-content">
+        <swiper [config]="config">
+          <div class="swiper-wrapper ">
+        
+            <div class="swiper-slide"  *ngFor="let recommendation of recentlyViewed">
+              <img [src]="recommendation.img"/>
+              {{recommendation.title}}
+            </div>
+        
+          </div>
+        
+          <br/>
+          <br/>
+          <div class="swiper-pagination"></div>
+          
+          <div class="swiper-button-next"></div>
+          <div class="swiper-button-prev"></div>
+        
+        </swiper>
+      </div>
+      
+    </div>
+  </div>
+
+</div>
+
 
 
 <!-- <div class="row">
@@ -218,11 +281,3 @@
 
 
 </div> -->
-
-  
-  
-  
-
-
-
-    

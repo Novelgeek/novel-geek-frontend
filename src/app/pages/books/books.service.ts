@@ -38,4 +38,16 @@ export class BooksService {
   rateBook(bookDetail: Book) {
     return this.http.post('http://localhost:8080/book/addRating', bookDetail);
   }
+
+  getRecommendations() {
+    return this.http.get('http://localhost:8080/book/getRecommendations');
+  }
+
+  getRecentlyViewed() {
+    return this.http.get('http://localhost:8080/book/recentlyViewed');
+  }
+
+  updateRecentlyViewed(bookDetail: Book) {
+    return this.http.post('http://localhost:8080/book/updateView', bookDetail);
+  }
 }
