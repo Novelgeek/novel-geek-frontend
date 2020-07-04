@@ -18,7 +18,7 @@ export class ReviewComponent implements OnInit {
   @Input() reviewId: any;
   @Input() comments: any = [];
   @Input() bookId: any;
-  data:any=[];
+  data: any = [];
   commentDescription:any = '';
   commentData: any = [];
   isCollapsed = true;

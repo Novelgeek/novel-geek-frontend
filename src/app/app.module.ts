@@ -9,7 +9,7 @@ import { JwtModule } from '@auth0/angular-jwt';
 import { ToastrModule } from 'ngx-toastr';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { NgxUsefulSwiperModule } from 'ngx-useful-swiper';
-
+import { BarRatingModule } from 'ngx-bar-rating';
 
 import { PerfectScrollbarModule, PERFECT_SCROLLBAR_CONFIG, PerfectScrollbarConfigInterface} from 'ngx-perfect-scrollbar';
 
@@ -33,7 +33,7 @@ import { TokenInterceptor } from './core/_services/token.interceptor';
 
 
 import { BookletComponent } from './pages/books/booklet/booklet.component';
-import { StoreComponent } from './pages/books/store/store.component';
+
 
 
 import { SearchResultsComponent } from './pages/books/search-results/search-results.component';
@@ -92,7 +92,6 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     AuctionsHomeComponent,
 
     BookletComponent,
-    StoreComponent,
     SearchResultsComponent,
     BookReviewComponent,
     ReviewComponent,
@@ -109,7 +108,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     SharedModule,
     HttpClientModule,
     NgbModule,
-
+    BarRatingModule,
     PerfectScrollbarModule,
     FormsModule,
     ToastrModule.forRoot(),

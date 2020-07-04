@@ -26,7 +26,7 @@ import { ResetPasswordComponent } from './pages/auth/reset-password/reset-passwo
 import {BookletComponent} from './pages/books/booklet/booklet.component'
 import {BookReviewComponent} from './pages/books/book-review/book-review.component'
 import {SearchResultsComponent} from './pages/books/search-results/search-results.component'
-import {StoreComponent} from './pages/books/store/store.component'
+
 
 import {HttpClientModule} from '@angular/common/http';
 import { AuctionsHomeComponent } from './pages/auctions/auctions-home/auctions-home.component';
@@ -47,8 +47,8 @@ const appRoutes: Routes = [
     children: [
       {path: 'books', component: BookHomeComponent},
       {path: 'auctions', component: AuctionsHomeComponent},
-      {path: 'search', component: SearchResultsComponent},
-      {path: 'reviewbook', component: BookReviewComponent},
+      {path: 'books/search', component: SearchResultsComponent},
+      {path: 'books/reviewbook', component: BookReviewComponent},
       {path: 'friends', component: FriendsHomeComponent},
       {path: 'groups', component: GroupHomeComponent},
       {path: 'groups/:id', component: GroupDetailComponent},
@@ -59,7 +59,6 @@ const appRoutes: Routes = [
       {path: 'sales', component: SalesHomeComponent},
       {path: 'profile/settings', component: ProfileSettingsComponent},
       {path: 'booklet', component: BookletComponent},
-      {path: 'store', component: StoreComponent},
       {path: '', component: PostsHomeComponent},
       {path: '404', component: NotFoundComponent},
       {path: '**', component: NotFoundComponent},

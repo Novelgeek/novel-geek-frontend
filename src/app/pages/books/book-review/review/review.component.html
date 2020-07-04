@@ -1,72 +1,75 @@
 <div class="row">
-<a class="list-group-item no-border review" >
-    <span class="media">
-      <span class="avatar avatar-md avatar-busy">
-        <img class="media-object d-flex mr-3 bg-info height-50 rounded-circle" src="{{imageUrl}}" onerror="this.src='../../../../../assets/img/portrait/default.svg';"
-          alt="Generic placeholder image">
-        <i></i>
-      </span>
-        
-                <div class="media-body  text-left">
-                            <h6 class="list-group-item-heading" style="font-weight: bold;">{{userName}}
-                            <span class="font-small-3 float-right info">{{timestamp}}</span>
-                            </h6>
-                            <div class="list-group-item-text " [ngClass]="{'show-less': showShortDesciption}" >
-                            <i class="ft-circle info font-small-2"></i> {{description}}
-                            <span class="float-right info">
-                            </span>
-                        </div>
-                        <div style="margin-top: 20px;">
-                            <div class="float-left">
-                                <i type="button" (click)="alterDescriptionText()" class="ft-maximize-2 dark"  style="font-size:16px;margin: 12x;"> {{ showShortDesciption ? 'Read More...': 'Read Less' }}</i>
+    <a class="list-group-item no-border review">
+        <span class="media">
+            <span class="avatar avatar-md avatar-busy">
+                <img class="media-object d-flex mr-3 bg-info height-50 rounded-circle" src="{{imageUrl}}"
+                    onerror="this.src='../../../../../assets/img/portrait/default.svg';"
+                    alt="Generic placeholder image">
+                <i></i>
+            </span>
+
+            <div class="media-body  text-left">
+                <h6 class="list-group-item-heading" style="font-weight: bold;">{{userName}}
+                    <span class="font-small-3 float-right info">{{timestamp}}</span>
+                </h6>
+                <div class="list-group-item-text " [ngClass]="{'show-less': showShortDesciption}">
+                    <i class="ft-circle info font-small-2"></i> {{description}}
+                    <span class="float-right info">
+                    </span>
+                </div>
+                <div style="margin-top: 20px;">
+                    <div class="float-left">
+                        <i type="button" (click)="alterDescriptionText()" class="ft-maximize-2 dark"
+                            style="font-size:16px;margin: 12x;">
+                            {{ showShortDesciption ? 'Read More...': 'Read Less' }}</i>
+                    </div>
+                    <div class="float-right">
+                        <div class="row">
+                            <div class="col">
+                                <i type="button" class="ft-thumbs-up info like"
+                                    style="font-size:24px;font-weight:bold;"></i>
                             </div>
-                            <div class="float-right">
-                                <div class="row">
-                                    <div class="col">
-                                        <i type="button" class="ft-thumbs-up info like" style="font-size:24px;font-weight:bold;"></i>
-                                    </div>
-                                    <div class="col">
-                                        <span class="badge badge-pill like-count badge-info">{{noOfLikes}}</span>
-                                    </div>
-                                </div>
+                            <div class="col">
+                                <span class="badge badge-pill like-count badge-info">{{noOfLikes}}</span>
                             </div>
-                            
-                        </div>
-                        <div class="comment-btn">
-                            <i class="ft-comment-square info like" style="font-size:24px;"></i>
-                            <a type="button" (click)="isCollapsed = !isCollapsed"
-                            [attr.aria-expanded]="!isCollapsed" aria-controls="collapseExample">
-                            <p style="color: black;margin:2px"> <i type="button" class="fa fa-comments-o info " style="font-size:24px;"></i> Comments</p>
-                        </a>
-                            
                         </div>
                     </div>
-                    
-    </span>
-</a>
+
+                </div>
+                <div class="comment-btn">
+                    <i class="ft-comment-square info like" style="font-size:24px;"></i>
+                    <a type="button" (click)="isCollapsed = !isCollapsed" [attr.aria-expanded]="!isCollapsed"
+                        aria-controls="collapseExample">
+                        <p style="color: black;margin:2px"> <i type="button" class="fa fa-comments-o info "
+                                style="font-size:24px;"></i> Comments</p>
+                    </a>
+
+                </div>
+            </div>
+
+        </span>
+    </a>
 </div>
-<div class="row" >
+<!-- <div class="row">
     <div class="collapse" id="collapseExample" [ngbCollapse]="isCollapsed">
         <div class="card" style="width: 700px;background-color:whitesmoke;">
             <div class="card-body">
                 <div class="container">
-                    
+
                     <div class="row">
-                        <input type="text" [(ngModel)]="commentDescription" style="width: 800px;margin: 10px;" class="form-control" id="iconLeft4" placeholder="Add your comment"  (keydown.enter)="onAddComment();$event.preventDefault()"
-                            #messageInput>
+                        <input type="text" [(ngModel)]="commentDescription" style="width: 800px;margin: 10px;"
+                            class="form-control" id="iconLeft4" placeholder="Add your comment"
+                            (keydown.enter)="onAddComment();$event.preventDefault()" #messageInput>
                     </div>
                     <div class="row" *ngFor="let comment of comments">
-                        <app-comment 
-                        [userName]="comment.commentedUserId.username"
-                        [comment]="comment.commentDescription"
-                        [timestamp]="comment.commentAge"
-                        [imageUrl]="comment.commentedUserId.imageUrl"
-                        class="comment-component" style="width: 700px;" ></app-comment>
+                        <app-comment [userName]="comment.commentedUserId.username"
+                            [comment]="comment.commentDescription" [timestamp]="comment.commentAge"
+                            [imageUrl]="comment.commentedUserId.imageUrl" class="comment-component"
+                            style="width: 700px;"></app-comment>
                     </div>
-            </div>
+                </div>
 
             </div>
         </div>
     </div>
-</div>
-
+</div> -->

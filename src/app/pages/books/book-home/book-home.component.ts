@@ -122,8 +122,7 @@ export class BookHomeComponent implements OnInit {
   // image slider configuration ends
 
   search() {
-    console.log("searching");
-    this.router.navigate(['search'],{queryParams:{searchTerm:this.searchTerm} });
+    this.router.navigate(['/books/search'], {queryParams: {searchTerm: this.searchTerm} });
   }
 
 
