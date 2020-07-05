@@ -20,40 +20,6 @@ export class BookHomeComponent implements OnInit {
   @ViewChild('usefulSwiper', { static: false }) usefulSwiper: SwiperComponent;
   config: SwiperOptions;
 
-  slideData = [
-    {
-      id: 382,
-      name: 'Metal bluetooth cyan',
-    }, {
-      id: 822,
-      name: 'Avon',
-    }, {
-      id: 159,
-      name: 'Infrastructures',
-    }, {
-      id: 424,
-      name: 'Users Cotton',
-    }, {
-      id: 572,
-      name: 'Haptic Oklahoma Jewelery',
-    }, {
-      id: 127,
-      name: 'Circles Integration Street',
-    }, {
-      id: 1009,
-      name: 'uniform Communications Tuna',
-    }, {
-      id: 619,
-      name: 'North Carolina',
-    }, {
-      id: 716,
-      name: 'Eyeballs Rubber',
-    }, {
-      id: 382,
-      name: 'Nevada green unleash',
-    }
-  ]
-
 
   public searchTerm = '';
   public recommendations: any;
@@ -81,7 +47,6 @@ export class BookHomeComponent implements OnInit {
     //   delay: 500,
     //   disableOnInteraction: true
     // },
-    slidesPerView: 'auto',
     breakpoints: {
       1024: {
         slidesPerView: 4

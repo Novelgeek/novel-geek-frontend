@@ -46,6 +46,7 @@ const appRoutes: Routes = [
   { path: '', component: HomeLayoutComponent,
     children: [
       {path: 'books', component: BookHomeComponent},
+      {path: 'books/search/:id', component: BookReviewComponent},
       {path: 'auctions', component: AuctionsHomeComponent},
       {path: 'books/search', component: SearchResultsComponent},
       {path: 'books/reviewbook', component: BookReviewComponent},

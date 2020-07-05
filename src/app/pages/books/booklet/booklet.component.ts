@@ -25,7 +25,7 @@ export class BookletComponent implements OnInit {
 
   }
   reviewBook() {
-    this.router.navigate(['books/reviewbook'], {queryParams : {bookId : this.bookId}});
+    this.router.navigate(['books/search', this.bookId]);
   }
 
 
