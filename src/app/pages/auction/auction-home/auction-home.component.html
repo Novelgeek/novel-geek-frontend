@@ -1,3 +1,75 @@
-<div class="container">
-    <app-auction-card></app-auction-card>
+<a href="javascript:void(0)" (click)="onClick()" class="btn btn-raised gradient-purple-bliss white">Start Auction</a>
+<div class="container">   
+    <div class="row">
+        <div class="col-6" *ngFor="let auction of auctions">
+            <app-auction-card
+              [auctionId]="auction.auctionId",
+              [bookDescription]="auction.bookDescription",
+              [bookTitle]="auction.bookTitle",
+              [finishDate]="auction.finishDate",
+              [imageUrl]="auction.imageUrl",
+              [startingBid]="auction.startingBid",
+              [numberOfBids]="auction.numberOfBids",
+              [currentBid]="auction.currentBid"
+              [user]="auction.user"
+              
+            ></app-auction-card>
+        </div>
+
+    </div>     
 </div>
+<div class="row">
+    <div class="backdrop" *ngIf="create">
+      <div class="col-3"></div>
+      <div class="col-4 modal-box" >
+         <form #createpost="ngForm" (ngSubmit)="onSubmit()">
+           <div class="card">
+               <div class="card-header d-flex justify-content-between">
+                 <h4 class="card-title">Create Post</h4>
+                 <i class="ft-x" style="cursor:pointer;" (click)="onClick()"></i>
+               </div>    
+               <div class="card-body form-group">
+                 
+                 <mat-form-field class="example-full-width">
+                  <mat-label>Book Title</mat-label>
+                  <input matInput  [(ngModel)]="bookTitle" name="title">
+                </mat-form-field>
+                
+                <mat-form-field class="example-full-width">
+                  <mat-label>Book Description</mat-label>
+                  <textarea rows="5" matInput [(ngModel)]="bookDescription" name="description"></textarea>
+                </mat-form-field>
+                <mat-form-field class="example-full-width">
+                 <mat-label>Starting Bid</mat-label>
+                 <input matInput [(ngModel)]="startingBid" name="startingBid">
+               </mat-form-field>
+
+               <mat-form-field appearance="fill">
+                <mat-label>Auction Ending Date</mat-label>
+                <input matInput [matDatepicker]="picker" [(ngModel)]="finishDate" name="date" >
+                <mat-datepicker-toggle matSuffix [for]="picker" ></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+              </mat-form-field>
+
+                
+               </div>    
+               <div class="card-footer d-flex justify-content-between">
+                   <div class="form-group">
+                     <i class="primary icon-picture mr-2"></i>
+                     <label style="cursor:pointer;">
+                       <span class="primary">Attach Photo</span>
+                       <input (change)="uploadImage($event)" ngModel name="image" type="file" style="display:none;">
+                     </label>
+                   </div>
+                   
+                   <div>
+                     <input type="submit" [disabled]="!createpost.valid" value="post" class="btn btn-raised gradient-purple-bliss white">
+                   </div> 
+               </div> 
+           </div>
+         </form>
+      </div>
+      <div class="col-5"></div>
+    </div>
+
+    <ngx-spinner></ngx-spinner>

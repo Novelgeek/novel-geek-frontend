@@ -55,6 +55,8 @@ import { from } from 'rxjs';
 import { FriendCardComponent } from './pages/friends/friend-card/friend-card.component';
 import { AuctionHomeComponent } from './pages/auction/auction-home/auction-home.component';
 import { AuctionCardComponent } from './pages/auction/auction-card/auction-card.component';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import {MatNativeDateModule} from '@angular/material';
 
 import {MatInputModule} from '@angular/material/input';
 
@@ -113,10 +115,13 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     SharedModule,
     HttpClientModule,
     NgbModule,
-    
+
+    MatDatepickerModule,
     MatSliderModule,
     MatInputModule,
     MatButtonModule,
+    MatNativeDateModule,
+
     PerfectScrollbarModule,
     FormsModule,
     ToastrModule.forRoot(),
