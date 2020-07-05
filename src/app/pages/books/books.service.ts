@@ -8,7 +8,6 @@ import { Book } from 'app/core/_models/book.model';
 })
 export class BooksService {
 
-
   public apiKey = 'AIzaSyBXGwa67D5ZrrFuPP6YUNc9glwM8edWFck';
   public name = '';
   public bookId = '';
@@ -49,5 +48,13 @@ export class BooksService {
 
   updateRecentlyViewed(bookDetail: Book) {
     return this.http.post('http://localhost:8080/book/updateView', bookDetail);
+  }
+
+  getUserRating(bookId) {
+    return this.http.get('http://localhost:8080/book/userRating/' + bookId);
+  }
+
+  getMyBookRatings(){
+    return this.http.get('http://localhost:8080/book/bookRatings');
   }
 }

@@ -35,6 +35,14 @@ export class BookReviewComponent implements OnInit, OnDestroy {
         this.data = data;
         this.book = this.data.volumeInfo;
         const bookDetail = new Book(this.bookId, this.book.title, this.book.authors[0], this.rating, this.book.imageLinks.thumbnail);
+
+        // tslint:disable-next-line: no-shadowed-variable
+        this.bookService.getUserRating(this.bookId).subscribe( data => {
+          if( data !== null) {
+            this.rating = +data;
+          }
+        })
+
         this.bookService.updateRecentlyViewed(bookDetail).subscribe(data => {
           // console.log(data);
         }, errorMsg => {
