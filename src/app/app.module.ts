@@ -54,8 +54,6 @@ import { ForgotPasswordComponent } from './pages/auth/forgot-password/forgot-pas
 import { ResetPasswordComponent } from './pages/auth/reset-password/reset-password.component';
 import { from } from 'rxjs';
 import { FriendCardComponent } from './pages/friends/friend-card/friend-card.component';
-import { ManageAdminsComponent } from './pages/admin/manage-admins/manage-admins.component';
-import { ManagePostsComponent } from './pages/admin/manage-posts/manage-posts.component';
 import { AuctionHomeComponent } from './pages/auction/auction-home/auction-home.component';
 import { AuctionCardComponent } from './pages/auction/auction-card/auction-card.component';
 import {MatDatepickerModule} from '@angular/material/datepicker';
@@ -64,6 +62,8 @@ import {MatNativeDateModule} from '@angular/material';
 import {MatInputModule} from '@angular/material/input';
 
 import {MatButtonModule} from '@angular/material/button';
+import { ManageAdminsComponent } from './pages/admin/manage-admins/manage-admins.component';
+import { ManagePostsComponent } from './pages/admin/manage-posts/manage-posts.component';
 export function tokenGetter() {
   return localStorage.getItem('token');
 }
@@ -96,6 +96,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     ProfileHomeComponent,
     SalesHomeComponent,
     ProfileSettingsComponent,
+    AuctionHomeComponent,
 
     BookletComponent,
     SearchResultsComponent,
@@ -130,7 +131,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     FormsModule,
     ToastrModule.forRoot(),
     NgxSpinnerModule,
-    NgxUsefulSwiperModule,  
+    NgxUsefulSwiperModule,
     ReactiveFormsModule,
     ChartsModule,
     JwtModule.forRoot({
