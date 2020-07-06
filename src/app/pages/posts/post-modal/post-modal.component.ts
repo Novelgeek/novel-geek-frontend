@@ -18,9 +18,12 @@ export class PostModalComponent implements OnInit {
   @Input() itemindex: number;
   @ViewChild('addcomment') addcomment: NgForm;
   isLiked: boolean;
-  showComments = false;
-  showLikes = false;
-  isShow = false;
+
+  showComments:boolean=false;
+  showLikes:boolean=false;
+  isShow:boolean = false;
+  report :boolean = false;
+
 
   commentList: Comment_modal [];
   public new_comment: Comment_modal;
@@ -34,6 +37,7 @@ export class PostModalComponent implements OnInit {
     this.commentList = [];
     this.showLikes = false;
     this.showLikes = false;
+    this.report = false;
    }
 
   ngOnInit() {
@@ -54,12 +58,41 @@ export class PostModalComponent implements OnInit {
     })
   }
 
-  public likeCount(postid: number) {
-    if (this.isLiked) {
-      this.postService.unLikePost(postid).subscribe(response => {
-        this.flag = '#009da0';
-        this.item.likecount -= 1;
-        this.isLiked = false;
+
+  public reportPost(){
+    this.report=true;
+    this.isShow=!this.isShow;
+  }
+
+  public onsubmitReport(Values: any, postid:number){
+    console.log(Values);
+    console.log(postid);
+    this.report=false;
+    this.postService.reportPost(postid, Values.reason).
+    subscribe(response =>{
+      this.item.reported=true
+    })  
+  }
+
+  onClose(){
+    this.report=false;
+    this.isShow=false;   
+  }
+
+  public unReportPost(postid:number){
+    this.postService.unReportPost(postid).
+    subscribe(response =>{
+      this.item.reported=false
+      this.isShow=!this.isShow;
+    })
+  }
+
+  public likeCount(postid:number) {
+    if(this.isLiked){
+      this.postService.unLikePost(postid).subscribe(response=>{
+        this.flag="#009da0";
+        this.item.likecount-=1;
+        this.isLiked=false;
       })
     } else {
       this.postService.likePost(postid).subscribe(response => {
@@ -142,4 +175,5 @@ export class PostModalComponent implements OnInit {
     this.showLikes = false;
     this.showComments = false;
   }
+
 }

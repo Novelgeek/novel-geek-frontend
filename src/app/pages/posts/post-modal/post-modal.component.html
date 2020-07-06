@@ -8,13 +8,19 @@
       <span class="card-subtitle text-muted"> {{item.publishedDate|date:'medium'}}</span>
     </div>
     <div>
-      <a (click)="toggleList(item)"><i  class="ft-more-horizontal"></i></a>
+      <a (click)="toggleList()"><i  class="ft-more-horizontal"></i></a>
       <div style="position:relative">
         <div *ngIf = "isShow" style="position:absolute; z-index: 1000;" class="text-left dropdown-menu show">
-          <div *ngIf="!item.owned">
-            <a class=" dropdown-item py-1">
-              <i class="ft-alert-triangle mr-2"></i>
+          <div *ngIf="!item.owned && !item.reported">
+            <a class=" dropdown-item py-1" (click)="reportPost()">
+              <i class="ft-shield mr-2"></i>
               <span> Report Post</span>
+            </a>
+          </div>
+          <div *ngIf="!item.owned && item.reported">
+            <a class=" dropdown-item py-1" (click)="unReportPost(item.postid)">
+              <i class="ft-shield-off mr-2"></i>
+              <span> Cancel Report</span>
             </a>
           </div> 
           <div *ngIf="item.owned">
@@ -30,7 +36,7 @@
 
   <div class="card-body">
     <h5 class="card-title">{{item.title}}</h5>
-    <div class="card-content" *ngIf="item.imagePath!=''">
+    <div class="card-content" *ngIf="item.imagePath!= null ">
       <img [src]="item.imagePath" alt="img"  class="img-fluid">
     </div>
     <div class="card-content">
@@ -113,5 +119,26 @@
     <div style="float: right; font-size: small; color: rgb(16, 80, 175); text-decoration: underline;">
       <a (click)="hideFooter()">hide</a>
     </div>
+  </div>
+</div>
+
+<!--REPORT POST CUSTOM MODAL SECTION-->
+<div class="row backdrop" *ngIf="report">
+  <div class="modal-box">
+    <form #reportpost="ngForm" (ngSubmit)="onsubmitReport(reportpost.value, item.postid)">
+      <div class="card">
+          <div class="card-header d-flex justify-content-between">
+            <h4 class="card-title">Report Post</h4>
+            <i class="ft-x" style="cursor:pointer;" (click)="onClose()"></i>
+          </div>    
+          <div class="card-body form-group">
+           <div class="d-flex justify-content-between">
+             <input class="form-control" placeholder="add reason" name="reason" ngModel #reason="ngModel" required style="margin: 5px;">
+             <button type="submit" [disabled]="!reportpost.valid" class="btn btn-rased gradient-purple-bliss ft-navigation" style="margin: 5px;"></button>
+           </div>
+          </div>    
+          <div class="card-footer d-flex justify-content-between"></div> 
+      </div>
+    </form>
   </div>
 </div>
