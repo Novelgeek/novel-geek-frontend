@@ -6,7 +6,6 @@ import { tap } from 'rxjs/operators';
 import { Router } from '@angular/router';
 import { JwtHelperService } from '@auth0/angular-jwt';
 
-
 @Injectable({
   providedIn: 'root'
 })
@@ -33,7 +32,8 @@ export class AuthService {
     // expiresIn is in miliseconds to start the timer
     const expiresIn = expirationDate.getTime() - new Date().getTime();
     const decodedToken = this.jwtService.decodeToken(token);
-    const user = new User(username, decodedToken.id , token, expirationDate, decodedToken.username, decodedToken.image || null, decodedToken.role);
+    const user = new User(username, decodedToken.id , token, expirationDate,
+      decodedToken.username, decodedToken.image || null, decodedToken.role);
     this.user.next(user);
     this.currentUser = user;
     this.autoLogout(expiresIn);
@@ -79,12 +79,13 @@ export class AuthService {
       this.currentUser = loadedUser;
       const expirationDuration = new Date( loadedUser.tokenExpirationDate.getTime() - new Date().getTime())
       this.autoLogout(+expirationDuration);
+      console.log(loadedUser.role);
       // this.router.navigate(['/posts'])
     }
   }
 
   autoLogout(expirationDuration: number) {
-    console.log(expirationDuration);
+
     this.tokenExpirationTimer = setTimeout(() => {
       this.logout();
     }, expirationDuration);
@@ -96,13 +97,15 @@ export class AuthService {
     this.router.navigate(['/posts'])
   }
 
-  adminFakeLogin() {
-    const token = 'faketoken';
-    const user = new User('admin', '1' , 'token', new Date(), 'admin', null, 'admin');
-    this.user.next(user);
-    this.currentUser = user;
-    localStorage.setItem('user', JSON.stringify(user));
-    localStorage.setItem('token', token);
+  adminLogin(email, password) {
+    return this.http.post<{token: string, username: string}>('http://localhost:8080/admin/auth/login',
+      {
+        email: email,
+        password: password,
+      }
+    ).pipe( tap(response => {
+        this.handleAuthentication(response.token, response.username);
+    }));
   }
 
   sendPasswordResetLink(email) {

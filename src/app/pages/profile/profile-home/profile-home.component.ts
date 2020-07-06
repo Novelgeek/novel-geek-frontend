@@ -1,8 +1,10 @@
-import { Component, OnInit,ViewChild } from '@angular/core';
+import { Component, OnInit,ViewChild ,EventEmitter,OnDestroy } from '@angular/core';
+import { AuthService } from 'app/core/_services/auth.service';
+import { Subscription } from 'rxjs';
 // imports for image slider
 import { SwiperOptions } from 'swiper';
 import { SwiperComponent } from 'ngx-useful-swiper';
-// 
+//  
 @Component({
   selector: 'app-profile-home',
   templateUrl: './profile-home.component.html',
@@ -10,9 +12,23 @@ import { SwiperComponent } from 'ngx-useful-swiper';
 })
 export class ProfileHomeComponent implements OnInit {
 
+  private userSub: Subscription;
+  public user: any;
+  isAuthenticated = false;
+  url: any;
+  
+
+  constructor(
+    private authService: AuthService
+    ) { }
+
+    ngOnDestroy(): void {
+      this.userSub.unsubscribe();
+    }
+
   // image slider configuration
   @ViewChild('usefulSwiper', { static: false }) usefulSwiper: SwiperComponent;
-  config: SwiperOptions;
+  swconfig: SwiperOptions;
 
   slideData = [
     {
@@ -48,10 +64,15 @@ export class ProfileHomeComponent implements OnInit {
     }
   ]
 
-  constructor() { }
 
   ngOnInit() {
-    this.config = {
+    this.userSub = this.authService.user.subscribe( user => {
+      this.isAuthenticated = !!user; // !user ? false : true
+      this.user = user;
+    });
+
+
+    this.swconfig = {
 
     pagination: { el: '.swiper-pagination', clickable: true },
     autoHeight: true,
@@ -62,9 +83,7 @@ export class ProfileHomeComponent implements OnInit {
     // },
     
     breakpoints: {
-      1024: {
-        slidesPerView: 4
-      },
+  
       500: {
         slidesPerView: 3
       },
@@ -112,6 +131,23 @@ export class ProfileHomeComponent implements OnInit {
   }
 
   // image slider configuration ends
+
+  //image upload
+
+  onSelectFile(event) {
+    if (event.target.files && event.target.files[0]) {
+      var reader = new FileReader();
+
+      reader.readAsDataURL(event.target.files[0]); // read file as data url
+
+      reader.onload = (event) => { // called once readAsDataURL is completed
+        this.url = event.target.result;
+      }
+    }
+  }
+  public delete(){
+    this.url = null;
+  }
 
 }
 

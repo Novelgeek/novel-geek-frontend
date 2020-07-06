@@ -1,6 +1,8 @@
  <div class="row">
+
    <!--NEW POST SECTION-->
-    <div class="col-3">
+
+    <div class="col-md-4 col-sm-6 col-xs-12">
       <div class="card">
         <div class="card-body d-flex justify-content-between">
           <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60" 
@@ -10,7 +12,7 @@
       </div>
     </div>
     <!--POSTS APPEARS HEARE/POST SECTION-->
-    <div class="col-4">
+    <div class="col-md-4 col-6 col-sm-6 col-xs-12">
       <ng-container *ngFor="let item of postList; let itemindex = index;">
         <app-post-modal [item]="item" [itemindex]="itemindex" (ondelete)="onDeletePost($event)"></app-post-modal>
       </ng-container>

@@ -1,17 +1,17 @@
 export default class Post_modal {
-
-    public postid:number;
-    public username:string;
-    public title:string;
+    public postid: number;
+    public username: string;
+    public title: string;
     public publishedDate: Date;
-    public imagePath:string;
-    public description:string;
+    public imagePath: string;
+    public description: string;
     public sharedtype: string;
-    public likecount:number;
-    public commentcount:number;
+    public likecount: number;
+    public commentcount: number;
     public owned: boolean;
     public liked: boolean;
     public reported: boolean;
+
 
     public constructor(){
         this.postid=0;
@@ -26,5 +26,6 @@ export default class Post_modal {
         this.owned=true;
         this.liked=false;
         this.reported=false;
+
     }
 }

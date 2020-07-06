@@ -8,14 +8,8 @@ export class GroupService {
 
   constructor(private http: HttpClient) { }
 
-  createGroup(name: String, description: String, photo: String) {
-    return this.http.post('http://localhost:8080/group/new',
-      {
-        groupName: name,
-        description: description,
-        groupAvatar: photo
-      }
-    );
+  createGroup(newGroup: FormData) {
+    return this.http.post('http://localhost:8080/group/new', newGroup);
   }
 
   updateGroup(name: String, description: String, photo: String, groupId) {
@@ -74,6 +68,10 @@ export class GroupService {
 
   deleteGroup(groupId) {
     return this.http.delete('http://localhost:8080/group/' + groupId);
+  }
+
+  getMembersAndNonMenbers(groupId) {
+    return this.http.get('http://localhost:8080/group/getAllUsers/' + groupId)
   }
 
 }

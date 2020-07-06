@@ -1,0 +1,20 @@
+.show-less {
+    height: 64px;
+    overflow: hidden;
+}
+.review{
+    width:1400px;
+    margin:5px;
+}
+.comment-btn{
+    margin-left:500px;
+}
+.comment-component{
+    margin:5px;
+    width: 1000px;
+
+}
+.collapse{
+    margin-top: -10px;
+    margin-left: 5px;
+}
