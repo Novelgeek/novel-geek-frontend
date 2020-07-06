@@ -18,7 +18,7 @@ export class ReviewComponent implements OnInit {
   @Input() reviewId: any;
   @Input() comments: any = [];
   @Input() bookId: any;
-  data:any=[];
+  data: any = [];
   commentDescription:any = '';
   commentData: any = [];
   isCollapsed = true;
@@ -45,7 +45,7 @@ export class ReviewComponent implements OnInit {
         console.log(data);
         this.data = data;
         this.comments = this.data.comments;
-        this.commentDescription='';
+        this.commentDescription = '';
 
         // window.location.reload();
         // this.rou(['/books']);ter.navigateByUrl('/', { skipLocationChange: true }).then(() => {

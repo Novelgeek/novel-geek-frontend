@@ -49,8 +49,6 @@ export class NavbarComponent implements OnInit, AfterViewInit, OnDestroy {
     if (this.router.routerState.snapshot.url.search('admin') === 1) {
       this.isAdmin = true;
     }
-    console.log(this.user);
-
   }
 
   ngAfterViewInit() {

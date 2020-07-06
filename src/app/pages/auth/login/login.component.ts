@@ -49,7 +49,7 @@ export class LoginComponent implements OnInit {
       this.spinner.hide();
     }, errorMsg => {
       this.spinner.hide();
-      this.toastr.error(errorMsg.error);
+      this.toastr.error(errorMsg.error,  '', {tapToDismiss: true});
       console.log(errorMsg);
     });
 
