@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { NgxSpinner } from 'ngx-spinner/lib/ngx-spinner.enum';
+import { ToastrService } from 'ngx-toastr';
 import { AuthService } from 'app/core/_services/auth.service';
 import { AuctionService } from '../auction.service';
-import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-auction-home',
@@ -11,7 +11,7 @@ import { ToastrService } from 'ngx-toastr';
   styleUrls: ['./auction-home.component.css']
 })
 export class AuctionHomeComponent implements OnInit {
-  auctions:any = [1, 2, 3, 4, 5, 6];
+  auctions:any = [];
   create = false;
   
   bookTitle:any='';
@@ -25,6 +25,17 @@ export class AuctionHomeComponent implements OnInit {
   constructor(private spinner:NgxSpinnerService,private authService:AuthService,
     private auctionService:AuctionService,private toastr:ToastrService) { }
   ngOnInit(): void {
+    this.spinner.show();
+    this.auctionService.getAuctions().subscribe(data => {
+      console.log(data);
+      this.spinner.hide();
+      this.auctions = data;
+    },
+    error=>{
+      this.spinner.hide();
+      this.toastr.error("Error Occured")
+    }
+    );
   }
 
   onClick(){
@@ -49,7 +60,13 @@ export class AuctionHomeComponent implements OnInit {
 
     this.auctionService.addAuction(formData).subscribe(data => {
       console.log(data);
+      this.auctions.push(data);
       this.spinner.hide();
+      this.bookTitle='';
+      this.bookDescription='';
+      this.startingBid='';
+      this.selectedFile=null;
+      this.finishDate='';
       this.toastr.success("New Auction Started Successfully!");
       this.create=false;
     }, error => {

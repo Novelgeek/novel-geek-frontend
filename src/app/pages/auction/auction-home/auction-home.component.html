@@ -1,15 +1,22 @@
-<a href="javascript:void(0)" (click)="onClick()" class="btn btn-raised gradient-purple-bliss white">Start Auction</a>
+<div class="row">
+  <div class="col">
+    <a href="javascript:void(0)" (click)="onClick()" class="btn btn-raised gradient-mint white shadow-z-4"><i class="fa fa-podcast" aria-hidden="true"></i> Start Item</a>
+  </div>
+  <div class="col">
+    <h3 style="align-self: center;margin-left: -100px;">Auction Block</h3>
+  </div>
+</div>
 <div class="container">   
     <div class="row">
-        <div class="col-6" *ngFor="let auction of auctions">
+        <div class="col-md-12 col-lg-6" *ngFor="let auction of auctions">
             <app-auction-card
-              [auctionId]="auction.auctionId",
-              [bookDescription]="auction.bookDescription",
-              [bookTitle]="auction.bookTitle",
-              [finishDate]="auction.finishDate",
-              [imageUrl]="auction.imageUrl",
-              [startingBid]="auction.startingBid",
-              [numberOfBids]="auction.numberOfBids",
+              [auctionId]="auction.auctionId"
+              [bookDescription]="auction.bookDescription"
+              [bookTitle]="auction.bookTitle"
+              [finishDate]="auction.finishDate"
+              [imageUrl]="auction.imageUrl"
+              [startingBid]="auction.startingBid"
+              [numberOfBids]="auction.numberOfBids"
               [currentBid]="auction.currentBid"
               [user]="auction.user"
               
@@ -25,7 +32,7 @@
          <form #createpost="ngForm" (ngSubmit)="onSubmit()">
            <div class="card">
                <div class="card-header d-flex justify-content-between">
-                 <h4 class="card-title">Create Post</h4>
+                 <h4 style="margin-left: 200px;font-weight: 500;">Start Auction</h4>
                  <i class="ft-x" style="cursor:pointer;" (click)="onClick()"></i>
                </div>    
                <div class="card-body form-group">
@@ -45,7 +52,7 @@
                </mat-form-field>
 
                <mat-form-field appearance="fill">
-                <mat-label>Auction Ending Date</mat-label>
+                <mat-label>Ending Date</mat-label>
                 <input matInput [matDatepicker]="picker" [(ngModel)]="finishDate" name="date" >
                 <mat-datepicker-toggle matSuffix [for]="picker" ></mat-datepicker-toggle>
                 <mat-datepicker #picker></mat-datepicker>
@@ -63,7 +70,9 @@
                    </div>
                    
                    <div>
-                     <input type="submit" [disabled]="!createpost.valid" value="post" class="btn btn-raised gradient-purple-bliss white">
+                     <!-- <input type="submit" [disabled]="!createpost.valid" value="post" class="btn btn-raised gradient-purple-bliss white"> -->
+                      <a href="javascript:void(0)" (click)="onSubmit()" type="submit" value="post" class="btn btn-raised gradient-mint white shadow-z-4"><i class="fa fa-check" aria-hidden="true"></i> Start</a>
+                     
                    </div> 
                </div> 
            </div>
