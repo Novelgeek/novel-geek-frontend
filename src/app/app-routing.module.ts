@@ -29,9 +29,9 @@ import {SearchResultsComponent} from './pages/books/search-results/search-result
 
 
 import {HttpClientModule} from '@angular/common/http';
-import { AuctionsHomeComponent } from './pages/auctions/auctions-home/auctions-home.component';
 import { ManagePostsComponent } from './pages/admin/manage-posts/manage-posts.component';
 import { ManageAdminsComponent } from './pages/admin/manage-admins/manage-admins.component';
+import { AuctionHomeComponent } from './pages/auction/auction-home/auction-home.component';
 
 const appRoutes: Routes = [
   { path: 'login', component: LoginComponent},
@@ -51,9 +51,10 @@ const appRoutes: Routes = [
     children: [
       {path: 'books', component: BookHomeComponent},
       {path: 'books/search/:id', component: BookReviewComponent},
-      {path: 'auctions', component: AuctionsHomeComponent},
       {path: 'books/search', component: SearchResultsComponent},
       {path: 'books/reviewbook', component: BookReviewComponent},
+      {path: 'auction', component: AuctionHomeComponent},
+
       {path: 'friends', component: FriendsHomeComponent},
       {path: 'groups', component: GroupHomeComponent},
       {path: 'groups/:id', component: GroupDetailComponent},
