@@ -53,7 +53,7 @@ const appRoutes: Routes = [
       {path: 'books/search/:id', component: BookReviewComponent},
       {path: 'books/search', component: SearchResultsComponent},
       {path: 'books/reviewbook', component: BookReviewComponent},
-      {path: 'auction', component: AuctionHomeComponent},
+      {path: 'auctions', component: AuctionHomeComponent},
 
       {path: 'friends', component: FriendsHomeComponent},
       {path: 'groups', component: GroupHomeComponent},
