@@ -47,4 +47,12 @@ export class PostsService {
         return this.http.delete("http://localhost:8080/post/delete/"+ postid)
         
     }
+
+    reportPost(postid:number, reason: string){
+        return this.http.post<any>("http://localhost:8080/post/report/"+ postid, reason)
+    }
+
+    unReportPost(postid:number){
+        return this.http.delete<any>("http://localhost:8080/post/unreport/"+ postid)
+    }
 }

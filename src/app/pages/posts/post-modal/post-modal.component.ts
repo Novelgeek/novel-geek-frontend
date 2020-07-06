@@ -21,6 +21,7 @@ export class PostModalComponent implements OnInit {
   showComments:boolean=false;
   showLikes:boolean=false;
   isShow:boolean = false;
+  report :boolean = false;
 
   commentList: Comment_modal [];
   public new_comment: Comment_modal;
@@ -34,6 +35,7 @@ export class PostModalComponent implements OnInit {
     this.commentList = [];
     this.showLikes = false;
     this.showLikes = false;
+    this.report = false;
    }
 
   ngOnInit() {
@@ -51,6 +53,34 @@ export class PostModalComponent implements OnInit {
     subscribe(response=>{
       this.isShow = false;
       this.ondelete.emit({id:this.itemindex});  
+    })
+  }
+
+  public reportPost(){
+    this.report=true;
+    this.isShow=!this.isShow;
+  }
+
+  public onsubmitReport(Values: any, postid:number){
+    console.log(Values);
+    console.log(postid);
+    this.report=false;
+    this.postService.reportPost(postid, Values.reason).
+    subscribe(response =>{
+      this.item.reported=true
+    })  
+  }
+
+  onClose(){
+    this.report=false;
+    this.isShow=false;   
+  }
+
+  public unReportPost(postid:number){
+    this.postService.unReportPost(postid).
+    subscribe(response =>{
+      this.item.reported=false
+      this.isShow=!this.isShow;
     })
   }
 
@@ -142,4 +172,5 @@ export class PostModalComponent implements OnInit {
     this.showLikes=false;
     this.showComments=false;
   }
+
 }

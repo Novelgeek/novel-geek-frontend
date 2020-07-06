@@ -11,6 +11,7 @@ export default class Post_modal {
     public commentcount:number;
     public owned: boolean;
     public liked: boolean;
+    public reported: boolean;
 
     public constructor(){
         this.postid=0;
@@ -24,5 +25,6 @@ export default class Post_modal {
         this.commentcount=0;
         this.owned=true;
         this.liked=false;
+        this.reported=false;
     }
 }
