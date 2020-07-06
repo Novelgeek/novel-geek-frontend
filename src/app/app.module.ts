@@ -28,6 +28,7 @@ import { ProfileHomeComponent } from './pages/profile/profile-home/profile-home.
 import { SalesHomeComponent } from './pages/sales/sales-home/sales-home.component';
 import { ProfileSettingsComponent } from './pages/profile/profile-settings/profile-settings.component';
 import { TokenInterceptor } from './core/_services/token.interceptor';
+import { ChartsModule } from 'ng2-charts';
 
 
 
@@ -53,12 +54,14 @@ import { ResetPasswordComponent } from './pages/auth/reset-password/reset-passwo
 import { from } from 'rxjs';
 import { FriendCardComponent } from './pages/friends/friend-card/friend-card.component';
 import { AuctionsHomeComponent } from './pages/auctions/auctions-home/auctions-home.component';
+import { ManageAdminsComponent } from './pages/admin/manage-admins/manage-admins.component';
+import { ManagePostsComponent } from './pages/admin/manage-posts/manage-posts.component';
 
 
 
 
 export function tokenGetter() {
-  return localStorage.getItem("token");
+  return localStorage.getItem('token');
 }
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
@@ -96,6 +99,8 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     BookReviewComponent,
     ReviewComponent,
     CommentComponent,
+    ManageAdminsComponent,
+    ManagePostsComponent,
 
     GroupCardComponent,
     GroupHorizontalCardComponent,
@@ -115,11 +120,12 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     NgxSpinnerModule,
     NgxUsefulSwiperModule,
     ReactiveFormsModule,
+    ChartsModule,
     JwtModule.forRoot({
       config: {
         tokenGetter: tokenGetter,
-        whitelistedDomains: ["example.com"],
-        blacklistedRoutes: ["http://example.com/examplebadroute/"],
+        whitelistedDomains: ['example.com'],
+        blacklistedRoutes: ['http://example.com/examplebadroute/'],
       },
     }),
     NgxUsefulSwiperModule

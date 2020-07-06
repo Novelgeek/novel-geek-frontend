@@ -71,13 +71,13 @@
                   <div class="form-body">
                   <div class="form-group ">
                     <label for="contact">Old Password</label>
-                    <input type="text" id="contact" formControlName="oldPassword" class="form-control">
+                    <input type="password" id="contact" formControlName="oldPassword" class="form-control">
                     <small class="help-block danger" *ngIf="passwordResetForm.get('oldPassword').hasError('required') && passwordResetForm.get('oldPassword').touched">
                       Password cannot be Empty!</small>
                   </div>
                   <div class="form-group ">
                     <label for="city">New Password</label>
-                    <input type="text" id="city" formControlName="password" class="form-control">
+                    <input type="password" id="city" formControlName="password" class="form-control">
                     <small class="help-block danger" *ngIf="passwordResetForm.get('password').hasError('required') && passwordResetForm.get('password').touched">
                       Password cannot be Empty!</small>
                     <small class="help-block danger" *ngIf="passwordResetForm.get('password').hasError('minlength') && passwordResetForm.get('password').touched">
@@ -88,7 +88,7 @@
                   </div>
                   <div class="form-group ">
                     <label for="country">Retype New Password</label>
-                    <input type="text" id="country" formControlName="confirmPassword" class="form-control">
+                    <input type="password" id="country" formControlName="confirmPassword" class="form-control">
                     <small class="help-block danger" *ngIf="passwordResetForm.get('confirmPassword').hasError('required') && passwordResetForm.get('confirmPassword').touched">
                       Password cannot be Empty!</small>
                       <small class="help-block danger" *ngIf="passwordResetForm.hasError('mismatch') && passwordResetForm.get('confirmPassword').touched">

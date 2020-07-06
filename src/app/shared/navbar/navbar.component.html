@@ -86,7 +86,7 @@
                             <p class="d-inline ">{{user.username}} </p>
                         </a>
                         <div ngbDropdownMenu aria-labelledby="dropdownBasic3" class="text-left dropdown-menu-right">                           
-                            <a class="dropdown-item py-1" [routerLink]="['/profile']">
+                            <a *ngIf="!isAdmin" class="dropdown-item py-1" [routerLink]="['/profile']">
                                 <i class="ft-edit mr-2"></i>
                                 <span>My Profile</span>
                             </a>
@@ -94,7 +94,7 @@
                                 <i class="ft-mail mr-2"></i>
                                 <span>My Inbox</span>
                             </a>
-                            <a class="dropdown-item py-1" [routerLink]="['/profile/settings']">
+                            <a *ngIf="!isAdmin" class="dropdown-item py-1" [routerLink]="['/profile/settings']">
                                 <i class="ft-settings mr-2"></i>
                                 <span>Settings</span>
                             </a>

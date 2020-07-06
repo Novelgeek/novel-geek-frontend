@@ -47,7 +47,7 @@
       <div class="card profile-card-1" >
         <!-- <img src="https://images.pexels.com/photos/946351/pexels-photo-946351.jpeg?w=500&h=650&auto=compress&cs=tinysrgb" alt="profile-sample1" class="background"/> -->
        <label class= "hoverable" for="fileInput">
-        <img  [src]="url ? url: 'https://www.w3schools.com/howto/img_avatar.png'" alt="profile-image" />
+        <img  [src]="url ? url: '../../../assets/img/portrait/default.svg'" alt="profile-image" />
           <div class="hover-text">Upload Image</div>
           <div class="background"></div>
         </label>
@@ -57,13 +57,12 @@
         <div class="card-content">
           <h2>{{user.username}}<small>{{user.email}}</small></h2>
           <div class="icon-block">
-            <a href="#"><i class="icon-user-follow" data-toggle="tooltip" data-placement="bottom"
-                title="follow"></i></a>
+            <a [routerLink]="'/friends'"><i class="icon-user-follow"  data-placement="bottom" ngbTooltip="Friends"></i></a>
             <!-- if already friends  -->
             <!-- <a href="#"><i class="icon-user-following" ></i></a> -->
-            <a href="#"> <i class="icon-users" data-toggle="tooltip" data-placement="bottom" title="followers"></i></a>
+            <a [routerLink]="'/groups'"> <i class="icon-users" data-placement="bottom" ngbTooltip="Groups"></i></a>
 
-            <a href="#"> <i class="icon-book-open" data-toggle="tooltip" data-placement="bottom" title="Books"></i></a>
+            <a [routerLink]="'/books'"> <i class="icon-book-open"  data-placement="bottom" ngbTooltip="Books"></i></a>
           </div>
         </div>
       </div>

@@ -30,6 +30,8 @@ import {SearchResultsComponent} from './pages/books/search-results/search-result
 
 import {HttpClientModule} from '@angular/common/http';
 import { AuctionsHomeComponent } from './pages/auctions/auctions-home/auctions-home.component';
+import { ManagePostsComponent } from './pages/admin/manage-posts/manage-posts.component';
+import { ManageAdminsComponent } from './pages/admin/manage-admins/manage-admins.component';
 
 const appRoutes: Routes = [
   { path: 'login', component: LoginComponent},
@@ -40,10 +42,12 @@ const appRoutes: Routes = [
   { path: 'admin', component: AdminLayoutComponent,
     children: [
       {path: 'home', component: AdminHomeComponent},
+      {path: 'posts', component: ManagePostsComponent},
+      {path: 'admins', component: ManageAdminsComponent},
       {path: '**', component: NotFoundComponent},
     ]
   },
-  { path: '', component: HomeLayoutComponent,
+  { path: '', component: HomeLayoutComponent, canActivate: [AuthGuard],
     children: [
       {path: 'books', component: BookHomeComponent},
       {path: 'books/search/:id', component: BookReviewComponent},
