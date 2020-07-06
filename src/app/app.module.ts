@@ -9,7 +9,7 @@ import { JwtModule } from '@auth0/angular-jwt';
 import { ToastrModule } from 'ngx-toastr';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { NgxUsefulSwiperModule } from 'ngx-useful-swiper';
-
+import { BarRatingModule } from 'ngx-bar-rating';
 
 import { PerfectScrollbarModule, PERFECT_SCROLLBAR_CONFIG, PerfectScrollbarConfigInterface} from 'ngx-perfect-scrollbar';
 
@@ -28,12 +28,13 @@ import { ProfileHomeComponent } from './pages/profile/profile-home/profile-home.
 import { SalesHomeComponent } from './pages/sales/sales-home/sales-home.component';
 import { ProfileSettingsComponent } from './pages/profile/profile-settings/profile-settings.component';
 import { TokenInterceptor } from './core/_services/token.interceptor';
+import { ChartsModule } from 'ng2-charts';
 
 
 
 
 import { BookletComponent } from './pages/books/booklet/booklet.component';
-import { StoreComponent } from './pages/books/store/store.component';
+
 
 
 import { SearchResultsComponent } from './pages/books/search-results/search-results.component';
@@ -53,12 +54,14 @@ import { ResetPasswordComponent } from './pages/auth/reset-password/reset-passwo
 import { from } from 'rxjs';
 import { FriendCardComponent } from './pages/friends/friend-card/friend-card.component';
 import { AuctionsHomeComponent } from './pages/auctions/auctions-home/auctions-home.component';
+import { ManageAdminsComponent } from './pages/admin/manage-admins/manage-admins.component';
+import { ManagePostsComponent } from './pages/admin/manage-posts/manage-posts.component';
 
 
 
 
 export function tokenGetter() {
-  return localStorage.getItem("token");
+  return localStorage.getItem('token');
 }
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
@@ -92,11 +95,12 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     AuctionsHomeComponent,
 
     BookletComponent,
-    StoreComponent,
     SearchResultsComponent,
     BookReviewComponent,
     ReviewComponent,
     CommentComponent,
+    ManageAdminsComponent,
+    ManagePostsComponent,
 
     GroupCardComponent,
     GroupHorizontalCardComponent,
@@ -109,18 +113,19 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     SharedModule,
     HttpClientModule,
     NgbModule,
-
+    BarRatingModule,
     PerfectScrollbarModule,
     FormsModule,
     ToastrModule.forRoot(),
     NgxSpinnerModule,
     NgxUsefulSwiperModule,
     ReactiveFormsModule,
+    ChartsModule,
     JwtModule.forRoot({
       config: {
         tokenGetter: tokenGetter,
-        whitelistedDomains: ["example.com"],
-        blacklistedRoutes: ["http://example.com/examplebadroute/"],
+        whitelistedDomains: ['example.com'],
+        blacklistedRoutes: ['http://example.com/examplebadroute/'],
       },
     }),
     NgxUsefulSwiperModule

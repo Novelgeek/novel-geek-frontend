@@ -1,74 +1,118 @@
-<div class="container-fluid">
-  <div class="row">
-    <div class="col-lg-8">
-      <div class="card text-center">
-        <div class="card-header">
-          <ul class="nav nav-tabs card-header-tabs">
-            <li class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
-              <a class="nav-link active" [routerLink]="['/settings']">Edit Profile</a>
-            </li>
-            <li class="nav-item" routerLinkActive="active">
-              <a class="nav-link" [routerLink]="['/settings']">Change Password</a>
-            </li>
-          </ul>
-        </div>
-        <div class="card-body">
-          <div class="row">
-            <div class="col-lg-8 col-md-12 bg-white px-4 pt-3">
-              <form [formGroup]="userSettingForm" (ngSubmit)="onSubmit()">
-                  <div class="form-group row">
-                    <label for="username">Username</label>
-                    <input
-                      type="text"
-                      id="username"
-                      formControlName="username"
-                      class="form-control">
-                    <span
-                      *ngIf="!userSettingForm.get('username').valid && userSettingForm.get('username').touched"
-                      class="help-block">
-                      <span *ngIf="userSettingForm.get('username').errors['required']">This field is required!</span>
-                    </span>
-                  </div>
-                <div class="form-group row">
-                  <label for="contact">Contact</label>
-                  <input
-                    type="text"
-                    id="contact"
-                    formControlName="contact"
-                    class="form-control">
-                </div>
-                <div class="form-group row">
-                  <label for="city">City</label>
-                  <input 
-                  type="text"
-                  id="city"
-                  formControlName="city"
-                  class="form-control">
-                </div>
-                <div class="form-group row">
-                  <label for="country">Country</label>
-                  <input 
-                  type="text"
-                  id="country"
-                  formControlName="country"
-                  class="form-control">
-                </div>
-                <div class="form-group row">
-                  <label for="description">Description</label>
-                  <textarea 
-                  id="description"
-                  placeholder="Something about you ..."
-                  formControlName="description"
-                  class="form-control"
-                  style="height:150px"></textarea>
-                </div>
-                <button class="btn btn-raised btn-primary primary-lighten-4" type="submit">Update Profile</button>
-              </form>
+<div class="row">
+  <div class="col-md-3 mt-4">
+    <ul ngbNav #nav="ngbNav" class="nav-pills" orientation="vertical">
+      <li ngbNavItem="posts">
+        <a ngbNavLink><i class="ft-settings mr-1 align-middle"></i><span class="align-middle">General</span></a>
+        <ng-template ngbNavContent>
+          <div class="card">
+            <div class="card-header">
+              <h4 class="card-title">Edit Details</h4>
             </div>
-              
+            <div class="card-content">
+              <div class="card-body px-4">
+                <form [formGroup]="userSettingForm" (ngSubmit)="onSubmit()">
+                  <div class="form-body">
+                    <div class="form-group row">
+                      <label for="username">Username</label>
+                      <input type="text" id="username" formControlName="username" class="form-control">
+                      <span *ngIf="!userSettingForm.get('username').valid && userSettingForm.get('username').touched"
+                        class="help-block danger">
+                        <span *ngIf="userSettingForm.get('username').errors['required']">This field is
+                          required!</span>
+                      </span>
+                    </div>
+                    <div class="form-group row">
+                      <label for="contact">Contact</label>
+                      <input type="text" id="contact" formControlName="contact" class="form-control">
+                    </div>
+                    <div class="form-group row">
+                      <label for="city">City</label>
+                      <input type="text" id="city" formControlName="city" class="form-control">
+                    </div>
+                    <div class="form-group row">
+                      <label for="country">Country</label>
+                      <input type="text" id="country" formControlName="country" class="form-control">
+                    </div>
+                    <div class="form-group row">
+                      <label for="description">Description</label>
+                      <textarea id="description" placeholder="Something about you ..." formControlName="description"
+                        class="form-control" style="height:150px"></textarea>
+                    </div>
+                  </div>
+
+                  <div class="form-actions right">
+                    <button type="button" class="btn btn-raised btn-warning mr-1">
+                      <i class="ft-x"></i> Cancel
+                    </button>
+                    <button type="submit" class="btn btn-raised btn-primary" [disabled]="!userSettingForm.valid">
+                      <i class="ft-check"></i> Update Profile
+                    </button>
+                  </div>
+
+                </form>
+              </div>
+            </div>
+
           </div>
-        </div>
-      </div>
-    </div>
+        </ng-template>
+      </li>
+
+
+      <li ngbNavItem="member">
+        <a ngbNavLink><i class="ft-lock mr-1 align-middle"></i><span class="align-middle">Change Password</span></a>
+        <ng-template ngbNavContent>
+          <div class="card">
+            <div class="card-header">
+              <h4 class="card-title">Change Password</h4>
+            </div>
+            <div class="card-body px-4">
+              <div class="card-content">
+                <form [formGroup]="passwordResetForm" (ngSubmit)="onPasswordChange()">
+                  <div class="form-body">
+                  <div class="form-group ">
+                    <label for="contact">Old Password</label>
+                    <input type="password" id="contact" formControlName="oldPassword" class="form-control">
+                    <small class="help-block danger" *ngIf="passwordResetForm.get('oldPassword').hasError('required') && passwordResetForm.get('oldPassword').touched">
+                      Password cannot be Empty!</small>
+                  </div>
+                  <div class="form-group ">
+                    <label for="city">New Password</label>
+                    <input type="password" id="city" formControlName="password" class="form-control">
+                    <small class="help-block danger" *ngIf="passwordResetForm.get('password').hasError('required') && passwordResetForm.get('password').touched">
+                      Password cannot be Empty!</small>
+                    <small class="help-block danger" *ngIf="passwordResetForm.get('password').hasError('minlength') && passwordResetForm.get('password').touched">
+                      Password must be at least 4 characters</small>
+                    <small class="help-block danger" *ngIf="passwordResetForm.get('password').hasError('maxlength') && passwordResetForm.get('password').touched">
+                      Password must be less than 8 characters</small>
+
+                  </div>
+                  <div class="form-group ">
+                    <label for="country">Retype New Password</label>
+                    <input type="password" id="country" formControlName="confirmPassword" class="form-control">
+                    <small class="help-block danger" *ngIf="passwordResetForm.get('confirmPassword').hasError('required') && passwordResetForm.get('confirmPassword').touched">
+                      Password cannot be Empty!</small>
+                      <small class="help-block danger" *ngIf="passwordResetForm.hasError('mismatch') && passwordResetForm.get('confirmPassword').touched">
+                        Passwords do not Match!</small>  
+                  </div>
+                  </div>
+                  <div class="form-actions right">
+                    <button type="button" class="btn btn-raised btn-warning mr-1">
+                      <i class="ft-x"></i> Cancel
+                    </button>
+                    <button type="submit" class="btn btn-raised btn-primary" [disabled]="!passwordResetForm.valid">
+                      <i class="ft-check"></i> Change Passoword
+                    </button>
+                  </div>
+
+                </form>
+              </div>
+            </div>
+          </div>
+        </ng-template>
+      </li>
+    </ul>
+  </div>
+  <div class="col-md-9 col-sm-12">
+    <div [ngbNavOutlet]="nav"></div>
   </div>
 </div>

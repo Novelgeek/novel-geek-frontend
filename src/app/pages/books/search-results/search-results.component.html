@@ -13,16 +13,18 @@
         </form>
     </div>
 </div>
-<div class="row">
+<div class="row" matchHeight="card">
     <div class="col-lg-4 col-md-6 col-sm-12"  *ngFor="let book of books">
         <app-booklet
-        [title]="book.volumeInfo.title"
-        [authors]="book.volumeInfo.authors"
-        [description]="book.volumeInfo.description"
-        [averageRating]="book.volumeInfo.averageRating"
-        [pagecount]="book.volumeInfo.pagecount"
-        [imageLink]="book.volumeInfo.imageLinks.thumbnail"
-        [bookId]="book.id"
+        [title]="book?.volumeInfo?.title"
+        [authors]="book?.volumeInfo?.authors"
+        [description]="book?.volumeInfo?.description"
+        [averageRating]="book?.volumeInfo?.averageRating"
+        [pagecount]="book?.volumeInfo?.pagecount"
+        [imageLink]="book?.volumeInfo?.imageLinks?.thumbnail"
+        [bookId]="book?.id"
         ></app-booklet>
     </div>
 </div>
+
+<ngx-spinner></ngx-spinner>
