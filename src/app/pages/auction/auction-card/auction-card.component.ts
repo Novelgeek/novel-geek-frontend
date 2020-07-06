@@ -22,6 +22,7 @@ export class AuctionCardComponent implements OnInit {
   @Input() numberOfBids: any;
   @Input() currentBid: any;
   @Input() user: any = [];
+  ownUser=false;
 
   auction:any=[];
 
@@ -31,6 +32,9 @@ export class AuctionCardComponent implements OnInit {
   ngOnInit(): void {
     if (this.imageUrl == null){
       this.imageUrl = '../../../../assets/books/default-book.png';
+    }
+    if(this.user.id==this.authService.currentUser.id){
+      this.ownUser=true;
     }
     const time = new Date(this.finishDate).getTime() - new Date().getTime();
     this.remainingTime = this.dhm(time);

@@ -28,9 +28,9 @@
              
                 
                 <div class="row" >
-                        <input type="text" [(ngModel)]="bid" style="width: auto;margin-left: 100px;float: right;" class="form-control" id="iconLeft4" placeholder="Place your Bid"  (keydown.enter)="onAddBid();$event.preventDefault()"
+                        <input [disabled]="ownUser" type="text" [(ngModel)]="bid" style="width: auto;margin-left: 100px;float: right;" class="form-control" id="iconLeft4" placeholder="Place your Bid"  (keydown.enter)="onAddBid();$event.preventDefault()"
                         #messageInput>
-                        <button (click)="onAddBid()" style="size:20px;width: auto; margin-left:10px;float: left;" mat-raised-button color="primary"><i class="fa fa-location-arrow" style="font-size: 24px;" aria-hidden="true"></i></button>
+                        <button [disabled]="ownUser" (click)="onAddBid()" style="size:20px;width: auto; margin-left:10px;float: left;" mat-raised-button color="primary"><i class="fa fa-location-arrow" style="font-size: 24px;" aria-hidden="true"></i></button>
                 </div>
             </div>
         </div>
