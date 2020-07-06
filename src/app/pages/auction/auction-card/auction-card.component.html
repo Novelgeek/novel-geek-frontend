@@ -4,7 +4,9 @@
         <div class="card-content">
             <div class="row">
                 <span class="avatar avatar-md avatar-busy" style="margin-left: 100px;margin-top: 50px;">
-                    <img class="media-object d-flex mr-3 bg-info height-50 rounded-circle" src="{{user.imageUrl}}"
+                    <img *ngIf="user.imageUrl !== null" class="media-object d-flex mr-3 height-50 rounded-circle" src="{{user.imageUrl}}"
+                    alt="Generic placeholder image">
+                    <img *ngIf="user.imageUrl === null" class="media-object d-flex mr-3 height-50 rounded-circle" src="../../../../assets/img/portrait/default.svg"
                     alt="Generic placeholder image">
                     <i></i>
                 </span>
