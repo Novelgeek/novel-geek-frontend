@@ -1,0 +1,48 @@
+
+<div class="col-md-6 col-sm-12">
+    <div class="card   text-center" style="width:500px;height: auto;">
+        <div class="card-content">
+            <div class="row">
+                <span class="avatar avatar-md avatar-busy" style="margin-left: 100px;margin-top: 50px;">
+                    <img *ngIf="user.imageUrl !== null" class="media-object d-flex mr-3 height-50 rounded-circle" src="{{user.imageUrl}}"
+                    alt="Generic placeholder image">
+                    <img *ngIf="user.imageUrl === null" class="media-object d-flex mr-3 height-50 rounded-circle" src="../../../../assets/img/portrait/default.svg"
+                    alt="Generic placeholder image">
+                    <i></i>
+                </span>
+                <h6 class="list-group-item-heading" style="font-weight: bold;margin-left: 170px;margin-top: -40px;">{{user.username}} started the item </h6>
+            </div>
+            <div class="card-header">
+                <h4 class="card-title">{{bookTitle}}</h4>
+                <h6 class="card-subtitle text-muted">{{bookDescription}}</h6>
+            </div>  
+            <div class="card-body" >
+                <img src="{{imageUrl}}" style="height: 200px;width: 150px;" alt="element 02" width="225" class="mb-1">
+                
+                <p style="text-align: left;margin-left: 170px;margin-top: 20px;" class="card-text">
+                    Starting Bid : Rs.{{startingBid}} <br>
+                    Current Bid: Rs.{{currentBid}} <br>
+                    Bids : {{numberOfBids}}
+                </p>
+                <h6 class="card-subtitle">Closing in : </h6><p style="color: red;">{{remainingTime}}</p>
+            </div>
+            <div class="card-footer">
+             
+                
+                <div class="row" >
+                        <input [disabled]="ownUser" type="text" [(ngModel)]="bid" style="width: auto;margin-left: 100px;float: right;" class="form-control" id="iconLeft4" placeholder="Place your Bid"  (keydown.enter)="onAddBid();$event.preventDefault()"
+                        #messageInput>
+                        <button [disabled]="ownUser" (click)="onAddBid()" style="size:20px;width: auto; margin-left:10px;float: left;" mat-raised-button color="primary"><i class="fa fa-location-arrow" style="font-size: 24px;" aria-hidden="true"></i></button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<ngx-spinner></ngx-spinner>
+<!-- <mat-slider min="1" max="100" step="1" value="1"></mat-slider>
+<form class="example-form">
+    <mat-form-field class="example-full-width">
+      <mat-label>Add your bid</mat-label>
+      <textarea matInput placeholder="Got to make it count..."></textarea>
+    </mat-form-field>
+</form> -->

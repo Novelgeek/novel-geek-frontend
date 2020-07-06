@@ -5,30 +5,41 @@
     </div>
   </div> -->
 
+  
+
+
 <div class="container-fluid">
-  <div class="row">
-    <div class="col-lg-8">
-      <div>
-        <h1>Book lists</h1>
-      </div>
-      <!-- image slider starts -->
-      <!-- <swiper [config]="config" #usefulSwiper>
-        <div class="swiper-wrapper">
-          <div class="swiper-slide" *ngFor="let slide of slideData">
-            <img src="https://i.picsum.photos/id/{{slide.id}}/400/300.jpg" />
-            {{slide.name}}
-          </div>
-        </div> -->
-
-        <!-- if you wand uncomment pagination -->
-        <!-- Add Pagination -->
-        <!-- <div class="swiper-pagination"></div> -->
-
-        <!-- Add Arrows -->
-        <!-- <div class="swiper-button-next"></div>
-        <div class="swiper-button-prev"></div>
-      </swiper> -->
-      <!-- image slider ends -->
+  <div class="row justify-content-between">
+    <div class="col-lg-6">
+      <!-- <div class="card pl-3 pr-3">
+        <div class="card-header text-center">
+          <h4 class="card-title">Your high rated Books</h4>
+          <p></p>
+        </div>
+        <div class="card-content">
+          <swiper [config]="swconfig">
+            <div class="swiper-wrapper ">
+          
+              <div class="swiper-slide"  *ngFor="let rating of highRated">
+                <a [routerLink]="['/books/search',rating.book.bookId]">
+                <img [src]="rating.book.img" height="150" class="book-img"/>
+                {{rating.book.title}}
+              </a>
+              </div>
+          
+            </div>
+          
+            <br/>
+            <br/>
+            <div class="swiper-pagination"></div>
+            
+            <div class="swiper-button-next"></div>
+            <div class="swiper-button-prev"></div>
+          
+          </swiper>
+        </div>
+        
+      </div> -->
     </div>
 
     <!--Profile Card 3-->
@@ -36,26 +47,58 @@
       <div class="card profile-card-1" >
         <!-- <img src="https://images.pexels.com/photos/946351/pexels-photo-946351.jpeg?w=500&h=650&auto=compress&cs=tinysrgb" alt="profile-sample1" class="background"/> -->
        <label class= "hoverable" for="fileInput">
-        <img  [src]="url ? url: 'https://www.w3schools.com/howto/img_avatar.png'" alt="profile-image" />
+        <img  [src]="url ? url: '../../../assets/img/portrait/default.svg'" alt="profile-image" />
           <div class="hover-text">Upload Image</div>
           <div class="background"></div>
         </label>
         <br/>
         <input id="fileInput" type="file" (change)="onSelectFile($event)">
-        <button *ngif="url" (click)="delete()">remove image</button>
+        <button *ngIf="url !== null" (click)="delete()">remove image</button>
         <div class="card-content">
           <h2>{{user.username}}<small>{{user.email}}</small></h2>
           <div class="icon-block">
-            <a href="#"><i class="icon-user-follow" data-toggle="tooltip" data-placement="bottom"
-                title="follow"></i></a>
+            <a [routerLink]="'/friends'"><i class="icon-user-follow"  data-placement="bottom" ngbTooltip="Friends"></i></a>
             <!-- if already friends  -->
             <!-- <a href="#"><i class="icon-user-following" ></i></a> -->
-            <a href="#"> <i class="icon-users" data-toggle="tooltip" data-placement="bottom" title="followers"></i></a>
+            <a [routerLink]="'/groups'"> <i class="icon-users" data-placement="bottom" ngbTooltip="Groups"></i></a>
 
-            <a href="#"> <i class="icon-book-open" data-toggle="tooltip" data-placement="bottom" title="Books"></i></a>
+            <a [routerLink]="'/books'"> <i class="icon-book-open"  data-placement="bottom" ngbTooltip="Books"></i></a>
           </div>
         </div>
       </div>
     </div>
+
+    <!-- <div class="col-6">
+      <div class="card pl-3 pr-3">
+        <div class="card-header text-center">
+          <h4 class="card-title">Your low rated Books</h4>
+          <p></p>
+        </div>
+        <div class="card-content">
+          <swiper [config]="swconfig">
+            <div class="swiper-wrapper ">
+          
+              <div class="swiper-slide"  *ngFor="let rating of lowRated">
+                <a [routerLink]="['/books/search',rating.book.bookId]">
+                <img [src]="rating.book.img" height="150" class="book-img"/>
+                {{rating.book.title}}
+              </a>
+              </div>
+          
+            </div>
+          
+            <br/>
+            <br/>
+            <div class="swiper-pagination"></div>
+            
+            <div class="swiper-button-next"></div>
+            <div class="swiper-button-prev"></div>
+          
+          </swiper>
+        </div>
+        
+      </div>
+    </div> -->
+
   </div>
 </div>

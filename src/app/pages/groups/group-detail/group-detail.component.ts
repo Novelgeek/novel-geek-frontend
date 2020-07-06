@@ -107,7 +107,6 @@ export class GroupDetailComponent implements OnInit, OnDestroy {
     this.groupService.updateGroup(this.groupName, this.description, this.avatar, this.id).subscribe( data => {
       this.groupName = data.groupName;
       this.description = data.description;
-      this.avatar = data.groupAvatar;
       this.spinner.hide();
       this.toastr.success('Group updated succesfully');
     }, error => {
@@ -115,7 +114,7 @@ export class GroupDetailComponent implements OnInit, OnDestroy {
     })
   }
 
-  inviteUser(userId: number) {
+  inviteUser(userId) {
     this.spinner.show();
     this.groupService.inviteUser(this.group.groupId, userId).subscribe( data => {
       this.spinner.hide();
@@ -141,6 +140,7 @@ export class GroupDetailComponent implements OnInit, OnDestroy {
       this.toastr.error(error);
     })
   }
+
 
   leaveGroup() {
     this.spinner.show();

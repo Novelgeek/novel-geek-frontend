@@ -115,4 +115,14 @@ export class AuthService {
   resetPassword(password, token) {
     return this.http.post('http://localhost:8080/auth/reset-password', { password: password, token: token });
   }
+
+  changePassword(password, oldPassword) {
+    return this.http.post('http://localhost:8080/change-password', { password: password, oldPassword: oldPassword });
+  }
+
+  userUpdated(username) {
+    const newUser = this.currentUser;
+    newUser.username = username;
+    this.user.next(newUser)
+  }
 }
