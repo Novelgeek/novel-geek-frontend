@@ -32,9 +32,12 @@ export class PostsHomeComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log('working');
+    this.spinner.show();
     this.postsService.getAllPosts().subscribe(response => {
       this.postList = response;
+      this.spinner.hide();
+    }, errorMsg => {
+      this.spinner.hide()
     })
   }
 

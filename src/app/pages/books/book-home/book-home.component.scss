@@ -81,9 +81,11 @@ img{
   object-fit: contain;
 }
 
-// .loading{
-//   background: transparent url(path/to/loading.gif) no-repeat scroll center center;
-// }
- 
+.card-img-top {
+  width: 100%;
+  height: 15vw;
+  object-fit: cover;
+}
+
   
   

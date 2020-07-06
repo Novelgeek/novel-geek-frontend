@@ -27,7 +27,7 @@
         
             <div class="swiper-slide"  *ngFor="let recommendation of recommendations">
               <a [routerLink]="['/books/search',recommendation.bookId]">
-              <img [src]="recommendation.img" class="img-fluid" height="150"/>
+              <img [src]="recommendation.img" class="img-fluid card-img-top"/>
               {{recommendation.title}}
             </a>
             </div>
@@ -59,7 +59,7 @@
         
             <div class="swiper-slide"  *ngFor="let recommendation of recentlyViewed">
               <a [routerLink]="['/books/search',recommendation.bookId]">
-              <img [src]="recommendation.img"/>
+              <img [src]="recommendation.img" class="img-fluid card-img-top"/>
               {{recommendation.title}}
             </a>
             </div>
