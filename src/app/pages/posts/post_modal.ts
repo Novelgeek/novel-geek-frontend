@@ -10,19 +10,22 @@ export default class Post_modal {
     public commentcount: number;
     public owned: boolean;
     public liked: boolean;
+    public reported: boolean;
 
-    public constructor() {
-        this.postid = 0;
-        this.username = '';
-        this.title = '';
-        this.publishedDate = new Date();
-        this.imagePath = '';
-        this.description = '';
-        this.sharedtype = '';
-        this.likecount = 0;
-        this.commentcount = 0;
-        this.owned = true;
-        this.liked = false;
+
+    public constructor(){
+        this.postid=0;
+        this.username='';
+        this.title="";
+        this.publishedDate=new Date();
+        this.imagePath="";
+        this.description="";
+        this.sharedtype="";
+        this.likecount=0;
+        this.commentcount=0;
+        this.owned=true;
+        this.liked=false;
+        this.reported=false;
 
     }
 }
