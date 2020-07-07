@@ -64,6 +64,8 @@ import {MatInputModule} from '@angular/material/input';
 import {MatButtonModule} from '@angular/material/button';
 import { ManageAdminsComponent } from './pages/admin/manage-admins/manage-admins.component';
 import { ManagePostsComponent } from './pages/admin/manage-posts/manage-posts.component';
+import { AuctionProcessComponent } from './pages/auction/auction-process/auction-process.component';
+import { StoreComponent } from './pages/books/store/store.component';
 export function tokenGetter() {
   return localStorage.getItem('token');
 }
@@ -111,7 +113,9 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     GroupDetailComponent,
     NotFoundComponent,
     AuctionHomeComponent,
-    AuctionCardComponent
+    AuctionCardComponent,
+    AuctionProcessComponent,
+    StoreComponent
   ],
   imports: [
     BrowserAnimationsModule,

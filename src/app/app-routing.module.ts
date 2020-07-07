@@ -32,6 +32,8 @@ import {HttpClientModule} from '@angular/common/http';
 import { ManagePostsComponent } from './pages/admin/manage-posts/manage-posts.component';
 import { ManageAdminsComponent } from './pages/admin/manage-admins/manage-admins.component';
 import { AuctionHomeComponent } from './pages/auction/auction-home/auction-home.component';
+import { AuctionProcessComponent } from './pages/auction/auction-process/auction-process.component';
+import { StoreComponent } from './pages/books/store/store.component';
 
 const appRoutes: Routes = [
   { path: 'login', component: LoginComponent},
@@ -54,6 +56,8 @@ const appRoutes: Routes = [
       {path: 'books/search', component: SearchResultsComponent},
       {path: 'books/reviewbook', component: BookReviewComponent},
       {path: 'auctions', component: AuctionHomeComponent},
+      {path: 'auctions/process', component: AuctionProcessComponent},
+      {path: 'store', component: StoreComponent},
 
       {path: 'friends', component: FriendsHomeComponent},
       {path: 'groups', component: GroupHomeComponent},
