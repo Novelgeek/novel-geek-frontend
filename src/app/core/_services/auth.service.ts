@@ -122,6 +122,9 @@ export class AuthService {
 
   userUpdated(username) {
     const newUser = this.currentUser;
+    const user = JSON.parse(localStorage.getItem('user'));
+    user.username = username;
+    localStorage.setItem('user', JSON.stringify(user));
     newUser.username = username;
     this.user.next(newUser)
   }
