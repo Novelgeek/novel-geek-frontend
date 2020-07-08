@@ -6,6 +6,7 @@ import { HttpClient } from '@angular/common/http';
 })
 export class AdminService {
 
+
   constructor(private http: HttpClient) { }
 
 
@@ -21,6 +22,10 @@ export class AdminService {
 
   getAllAdmins() {
     return this.http.get('http://localhost:8080/admin/all');
+  }
+
+  deleteAdmin(adminId: any) {
+    return this.http.delete('http://localhost:8080/admin/' + adminId);
   }
 
 }
