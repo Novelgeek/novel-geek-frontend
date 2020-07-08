@@ -1,0 +1,196 @@
+<div class="row">
+  <div class="col-sm-12">
+      <div class="content-header">Add New Book</div>
+  </div>
+</div>
+<section id="ngx">
+  <div class="card">
+      <div class="card-content">
+          <div class="card-body">
+              <aw-wizard #wizard navBarLayout="large-empty-symbols">
+                  <aw-wizard-step [stepTitle]="'Steptitle 1'" [navigationSymbol]="{ symbol: '&#xf007;', fontFamily: 'FontAwesome' }">
+                      <form #personalForm="ngForm" class="editForm" novalidate>
+                          <h4 class="head text-center">Please tell us about yourself.</h4>
+                          <br/>
+                          <div class='row'>
+                              <div class='col-12'>
+                                  <div class="row justify-content-center">
+                                      <div class="col-md-6 col-sm-12 align-self-center">
+                                        <div *ngIf="imageUrl ===''" class="py-5 mb-3 text-center font-medium-5 text-uppercase grey my-drop-zone">
+                                        Base dropzone
+                                        </div>
+                                        <div class="card-content text-center" *ngIf="imageUrl!=''">
+                                            <img [src]="imageUrl" class="img-fluid book-img">
+                                        </div>
+                                        <div class="text-center mt-2">
+                                            <i class="primary icon-picture mr-2"></i>
+                                            <label style="cursor:pointer;">
+                                              <span class="primary">Attach Photo</span>
+                                              <input (change)="uploadImage($event)" ngModel name="image" type="file" style="display:none;">
+                                            </label>
+                                        </div>
+
+                                      </div>
+                                      <div class="col-md-6 col-sm-12">
+                                        <div class='col-12 col-sm-12'>
+                                            <div class="form-group">
+                                                <label class="form-control-label" for="firstname">Name</label>
+                                                <input class="form-control input-md" ngModel #firstname="ngModel" required id="firstname" name="firstname" type="text">
+                                                <small class="form-text text-muted danger" *ngIf="!firstname.valid && (firstname.dirty || firstname.touched)">This field is required!</small>
+                                            </div>
+                                        </div>
+                                        <div class='col-12 col-sm-12'>
+                                            <div class="form-group">
+                                                <label class="form-control-label" for="lastname">Description</label>
+                                                <textarea  required id="lastname" rows="5" name="lastname" class="form-control"></textarea>
+                                                
+                                                
+                                            </div>
+                                        </div>
+                                      </div>
+                                      
+                                  </div>
+                                  <!-- <div class="form-group">
+                                      <label class="form-control-label" for="email">Email</label>
+                                      <input class="form-control input-md" ngModel #email="ngModel" required email id="email" name="email" type="text">
+                                      <small class="form-text text-muted danger" *ngIf="!email.valid && (email.dirty || email.touched)">Please enter a valid email!</small>
+                                  </div> -->
+
+                                  <div class="form-group text-center">
+                                      <button type="button" uiSref="work" class="btn btn-info btn-raised" awNextStep>
+                                          Next
+                                          <span style="margin-left:10px;">
+                                              <i class="ft-chevron-right"></i>
+                                          </span>
+                                      </button>
+                                  </div>
+                              </div>
+                          </div>
+                      </form>
+                  </aw-wizard-step>
+                  <aw-wizard-step  [stepTitle]="'Steptitle 2'" [navigationSymbol]="{ symbol: '&#xf0b1;', fontFamily: 'FontAwesome' }">
+                      <form #workForm="ngForm" class="editForm" novalidate>
+                          <h4 class="head text-center">What do you do?</h4>
+                          <br/>
+                          <div class='row justify-content-center'>
+
+                                <div class='col-md-6 col-sm-12'>
+                                    <div class="form-group">
+                                        <label class="form-control-label" for="isbn">ISBN</label>
+                                        <input class="form-control input-md" ngModel #isbn="ngModel" required id="isbn" name="isbn" type="text">
+                                        <small class="form-text text-muted danger" *ngIf="!isbn.valid && (isbn.dirty || isbn.touched)">This field is required!</small>
+        
+                                    </div>
+                                </div>
+                                <div class='col-md-6 col-sm-12'>
+                                    <div class="form-group">
+                                        <label class="form-control-label" for="year">Year</label>
+                                        <input class="form-control input-md" ngModel #year="ngModel" required id="year" name="year" type="text">
+                                        <small class="form-text text-muted danger" *ngIf="!year.valid && (year.dirty || year.touched)">This field is required!</small>
+
+                                    </div>
+                                </div>
+                                <div class='col-md-6  col-sm-12'>
+                                    <div class="form-group">
+                                        <label class="form-control-label" for="genres">Genres</label>
+                                        <ng-select [items]="companies"
+                                                [addTag]="addTagFn"
+                                                [hideSelected]="true"
+                                                multiple="true"
+                                                bindLabel="name"
+                                                [(ngModel)]="selectedCompanies">
+                                        </ng-select>
+                                        
+                                        <!-- <small class="form-text text-muted danger" *ngIf="!state.valid && (state.dirty || state.touched)">This field is required!</small> -->
+
+                                    </div>
+                                </div>
+                                <div class=' col-md-6 col-sm-12'>
+                                    <div class="form-group">
+                                        <label class="form-control-label" for="author">Author</label>
+                                        <input class="form-control input-md" ngModel #author="ngModel" required id="author" name="author" type="text">
+                                        <small class="form-text text-muted danger" *ngIf="!author.valid && (author.dirty || author.touched)">This field is required!</small>
+
+                                    </div>
+                                </div>
+
+                          </div>
+                          <div class="form-group text-center space-20">
+                              <button uiSref="personal" type="button" class="btn btn-raised btn-secondary mr-1" awPreviousStep>
+                                  <span style="margin-right:10px;">
+                                      <i class="ft-chevron-left"></i>
+                                  </span> Previous</button>
+                              <button uiSref="address" type="button" class="btn btn-raised btn-info" awNextStep>
+                                  Next
+                                  <span style="margin-left:10px;">
+                                      <i class="ft-chevron-right"></i>
+                                  </span>
+                              </button>
+                              <!-- <button uiSref="address" type="button" class="btn btn-raised btn-info" [disabled]="!workForm.valid" awNextStep>
+                                  Next
+                                  <span style="margin-left:10px;">
+                                      <i class="ft-chevron-right"></i>
+                                  </span>
+                              </button> -->
+                          </div>
+                      </form>                        
+                  </aw-wizard-step>
+                  <aw-wizard-step [stepTitle]="'Steptitle 3'" [navigationSymbol]="{ symbol: '&#xf0ac;', fontFamily: 'FontAwesome' }">
+                      <form #addressForm="ngForm" class="editForm" novalidate>
+                          <h4 class="head text-center">Where do you live?</h4>
+                          <br/>
+                          <div class='row'>
+                              <div class="col-6">
+                                <div class="form-group">
+                                    <label class="form-control-label" for="search">Search terms</label>
+                                    <ng-select [items]="[]"
+                                            [addTag]="true"
+                                            [multiple]="true"
+                                            [selectOnTab]="true"
+                                            [isOpen]="false">
+                                    </ng-select>
+                                </div>
+                              </div>
+                              <div class="col-6">
+                                <div class="form-group">
+                                    <label class="form-control-label" for="search">Urls</label>
+                                    <ng-select [items]="[]"
+                                            [addTag]="true"
+                                            [multiple]="true"
+                                            [selectOnTab]="true"
+                                            [isOpen]="false">
+                                    </ng-select>
+                                </div>
+                              </div>
+                              <div class="col-6">
+                                <fieldset class="form-group">
+                                    <label for="file">PDF of Book</label>
+                                    <div class="custom-file  mx-auto d-block">
+                                    <input type="file" class="custom-file-input" id="inputGroupFile01">
+                                    <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
+                                    </div>
+                                </fieldset>
+                              </div>
+                          </div>
+                          <div class="form-group text-center">
+                            <button uiSref="work" type="button" class="btn btn-raised btn-secondary mr-1" awPreviousStep>
+                                <span style="margin-right:10px;">
+                                    <i class="ft-chevron-left"></i>
+                                </span> Previous</button>
+                            <button uiSref="result" type="button" class="btn btn-raised btn-success" [disabled]="!addressForm.valid" awResetWizard>
+                                Finish
+                                <span style="margin-left:10px;">
+                                    <i class="ft-chevron-right"></i>
+                                </span>
+                            </button>
+                        </div>
+                      </form>
+                      
+                  </aw-wizard-step>
+              </aw-wizard>
+
+
+          </div>
+      </div>
+  </div>
+</section>
