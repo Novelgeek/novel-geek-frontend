@@ -11,9 +11,9 @@
 <div class="container-fluid">
   <div class="row justify-content-between">
     <div class="col-lg-6">
-      <!-- <div class="card pl-3 pr-3">
+      <div class="card pl-3 pr-3">
         <div class="card-header text-center">
-          <h4 class="card-title">Your high rated Books</h4>
+          <h4 class="card-title">Your Books</h4>
           <p></p>
         </div>
         <div class="card-content">
@@ -22,7 +22,7 @@
           
               <div class="swiper-slide"  *ngFor="let rating of highRated">
                 <a [routerLink]="['/books/search',rating.book.bookId]">
-                <img [src]="rating.book.img" height="150" class="book-img"/>
+                <img [src]="rating.book.img" height="150" class="book-img card-img-top"/>
                 {{rating.book.title}}
               </a>
               </div>
@@ -39,7 +39,7 @@
           </swiper>
         </div>
         
-      </div> -->
+      </div>
     </div>
 
     <!--Profile Card 3-->
@@ -53,7 +53,7 @@
         </label>
         <br/>
         <input id="fileInput" type="file" (change)="onSelectFile($event)">
-        <button *ngIf="url !== null" (click)="delete()">remove image</button>
+        <!-- <button *ngIf="url !== null" (click)="delete()">remove image</button> -->
         <div class="card-content">
           <h2>{{user.username}}<small>{{user.email}}</small></h2>
           <div class="icon-block">
@@ -63,6 +63,7 @@
             <a [routerLink]="'/groups'"> <i class="icon-users" data-placement="bottom" ngbTooltip="Groups"></i></a>
 
             <a [routerLink]="'/books'"> <i class="icon-book-open"  data-placement="bottom" ngbTooltip="Books"></i></a>
+            <a [routerLink]="'/profile/settings'"> <i class="icon-settings"  data-placement="bottom" ngbTooltip="Settings"></i></a>
           </div>
         </div>
       </div>

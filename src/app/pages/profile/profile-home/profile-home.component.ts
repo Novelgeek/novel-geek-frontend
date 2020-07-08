@@ -41,6 +41,7 @@ export class ProfileHomeComponent implements OnInit, OnDestroy {
     this.userSub = this.authService.user.subscribe( user => {
       this.isAuthenticated = !!user; // !user ? false : true
       this.user = user;
+      this.url = user.photoUrl;
     });
 
     this.bookService.getMyBookRatings().subscribe(data => {

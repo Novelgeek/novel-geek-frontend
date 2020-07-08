@@ -10,7 +10,7 @@
     <div>
       <a (click)="toggleList()"><i  class="ft-more-horizontal"></i></a>
       <div style="position:relative">
-        <div *ngIf = "isShow" style="position:absolute; z-index: 1000;" class="text-left dropdown-menu show">
+        <div *ngIf = "isShow" style="position: absolute; z-index: 1000;" class="text-left dropdown-menu show">
           <div *ngIf="!item.owned && !item.reported">
             <a class=" dropdown-item py-1" (click)="reportPost()">
               <i class="ft-shield mr-2"></i>
