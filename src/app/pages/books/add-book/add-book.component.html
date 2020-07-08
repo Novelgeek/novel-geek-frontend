@@ -9,8 +9,8 @@
           <div class="card-body">
               <aw-wizard #wizard navBarLayout="large-empty-symbols">
                   <aw-wizard-step [stepTitle]="'Steptitle 1'" [navigationSymbol]="{ symbol: '&#xf007;', fontFamily: 'FontAwesome' }">
-                      <form #personalForm="ngForm" class="editForm" novalidate>
-                          <h4 class="head text-center">Please tell us about yourself.</h4>
+                      <form #basicBookForm="ngForm" class="editForm" novalidate>
+                          <h4 class="head text-center">Enter basic book details.</h4>
                           <br/>
                           <div class='row'>
                               <div class='col-12'>
@@ -34,15 +34,15 @@
                                       <div class="col-md-6 col-sm-12">
                                         <div class='col-12 col-sm-12'>
                                             <div class="form-group">
-                                                <label class="form-control-label" for="firstname">Name</label>
-                                                <input class="form-control input-md" ngModel #firstname="ngModel" required id="firstname" name="firstname" type="text">
-                                                <small class="form-text text-muted danger" *ngIf="!firstname.valid && (firstname.dirty || firstname.touched)">This field is required!</small>
+                                                <label class="form-control-label" for="title">Title</label>
+                                                <input class="form-control input-md" ngModel #title="ngModel" required id="title" name="title" type="text">
+                                                <small class="form-text text-muted danger" *ngIf="!title.valid && (title.dirty || title.touched)">This field is required!</small>
                                             </div>
                                         </div>
                                         <div class='col-12 col-sm-12'>
                                             <div class="form-group">
-                                                <label class="form-control-label" for="lastname">Description</label>
-                                                <textarea  required id="lastname" rows="5" name="lastname" class="form-control"></textarea>
+                                                <label class="form-control-label" for="description">Description</label>
+                                                <textarea  required id="description" ngModel rows="5" name="description"  class="form-control"></textarea>
                                                 
                                                 
                                             </div>
@@ -50,12 +50,6 @@
                                       </div>
                                       
                                   </div>
-                                  <!-- <div class="form-group">
-                                      <label class="form-control-label" for="email">Email</label>
-                                      <input class="form-control input-md" ngModel #email="ngModel" required email id="email" name="email" type="text">
-                                      <small class="form-text text-muted danger" *ngIf="!email.valid && (email.dirty || email.touched)">Please enter a valid email!</small>
-                                  </div> -->
-
                                   <div class="form-group text-center">
                                       <button type="button" uiSref="work" class="btn btn-info btn-raised" awNextStep>
                                           Next
@@ -69,8 +63,8 @@
                       </form>
                   </aw-wizard-step>
                   <aw-wizard-step  [stepTitle]="'Steptitle 2'" [navigationSymbol]="{ symbol: '&#xf0b1;', fontFamily: 'FontAwesome' }">
-                      <form #workForm="ngForm" class="editForm" novalidate>
-                          <h4 class="head text-center">What do you do?</h4>
+                      <form #advancedBookForm="ngForm" class="editForm" novalidate>
+                          <h4 class="head text-center">Tell us more about your book.</h4>
                           <br/>
                           <div class='row justify-content-center'>
 
@@ -93,14 +87,15 @@
                                 <div class='col-md-6  col-sm-12'>
                                     <div class="form-group">
                                         <label class="form-control-label" for="genres">Genres</label>
-                                        <ng-select [items]="companies"
+                                        <ng-select [items]="genres"
                                                 [addTag]="addTagFn"
                                                 [hideSelected]="true"
                                                 multiple="true"
                                                 bindLabel="name"
-                                                [(ngModel)]="selectedCompanies">
+                                                [(ngModel)]="selectedGenres"
+                                                [ngModelOptions]="{standalone: true}"
+                                                >
                                         </ng-select>
-                                        
                                         <!-- <small class="form-text text-muted danger" *ngIf="!state.valid && (state.dirty || state.touched)">This field is required!</small> -->
 
                                     </div>
@@ -126,7 +121,7 @@
                                       <i class="ft-chevron-right"></i>
                                   </span>
                               </button>
-                              <!-- <button uiSref="address" type="button" class="btn btn-raised btn-info" [disabled]="!workForm.valid" awNextStep>
+                              <!-- <button uiSref="address" type="button" class="btn btn-raised btn-info" [disabled]="!advancedBookForm.valid" awNextStep>
                                   Next
                                   <span style="margin-left:10px;">
                                       <i class="ft-chevron-right"></i>
@@ -136,8 +131,8 @@
                       </form>                        
                   </aw-wizard-step>
                   <aw-wizard-step [stepTitle]="'Steptitle 3'" [navigationSymbol]="{ symbol: '&#xf0ac;', fontFamily: 'FontAwesome' }">
-                      <form #addressForm="ngForm" class="editForm" novalidate>
-                          <h4 class="head text-center">Where do you live?</h4>
+                      <form #optionalBookForm="ngForm" class="editForm" novalidate>
+                          <h4 class="head text-center">Optional details about your book</h4>
                           <br/>
                           <div class='row'>
                               <div class="col-6">
@@ -147,7 +142,9 @@
                                             [addTag]="true"
                                             [multiple]="true"
                                             [selectOnTab]="true"
-                                            [isOpen]="false">
+                                            [isOpen]="false"
+                                            [(ngModel)]="searchTerms"
+                                            [ngModelOptions]="{standalone: true}">
                                     </ng-select>
                                 </div>
                               </div>
@@ -158,7 +155,9 @@
                                             [addTag]="true"
                                             [multiple]="true"
                                             [selectOnTab]="true"
-                                            [isOpen]="false">
+                                            [isOpen]="false"
+                                            [(ngModel)]="urls"
+                                            [ngModelOptions]="{standalone: true}">
                                     </ng-select>
                                 </div>
                               </div>
@@ -166,10 +165,19 @@
                                 <fieldset class="form-group">
                                     <label for="file">PDF of Book</label>
                                     <div class="custom-file  mx-auto d-block">
-                                    <input type="file" class="custom-file-input" id="inputGroupFile01">
+                                    <input type="file" (change)="uploadPdf($event)" class="custom-file-input" 
+                                        id="inputGroupFile01" accept=".pdf,.doc,.docx">
                                     <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
                                     </div>
                                 </fieldset>
+                              </div>
+                              <div class="col-6">
+                                <div class="form-group">
+                                    <label class="form-control-label" for="publisher">Publisher</label>
+                                    <input class="form-control input-md" ngModel #publisher="ngModel" required id="publisher" name="publisher" type="text">
+                                    <small class="form-text text-muted danger" *ngIf="!publisher.valid && (publisher.dirty || publisher.touched)">This field is required!</small>
+
+                                </div>
                               </div>
                           </div>
                           <div class="form-group text-center">
@@ -177,7 +185,8 @@
                                 <span style="margin-right:10px;">
                                     <i class="ft-chevron-left"></i>
                                 </span> Previous</button>
-                            <button uiSref="result" type="button" class="btn btn-raised btn-success" [disabled]="!addressForm.valid" awResetWizard>
+                            <button uiSref="result" type="button" class="btn btn-raised btn-success" 
+                            (click)="addBook(basicBookForm, advancedBookForm, optionalBookForm)" awResetWizard>
                                 Finish
                                 <span style="margin-left:10px;">
                                     <i class="ft-chevron-right"></i>
