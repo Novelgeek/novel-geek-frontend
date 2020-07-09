@@ -52,6 +52,9 @@ import { ForgotPasswordComponent } from './pages/auth/forgot-password/forgot-pas
 import { ResetPasswordComponent } from './pages/auth/reset-password/reset-password.component';
 import { from } from 'rxjs';
 import { FriendCardComponent } from './pages/friends/friend-card/friend-card.component';
+import { AddPollComponent } from './pages/polls/add-poll/add-poll.component';
+import { MyPollsComponent } from './pages/polls/my-polls/my-polls.component';
+import { PollModelComponent } from './pages/polls/poll-model/poll-model.component';
 
 
 
@@ -100,7 +103,10 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     GroupCardComponent,
     GroupHorizontalCardComponent,
     GroupDetailComponent,
-    NotFoundComponent
+    NotFoundComponent,
+    AddPollComponent,
+    MyPollsComponent,
+    PollModelComponent
   ],
   imports: [
     BrowserAnimationsModule,
