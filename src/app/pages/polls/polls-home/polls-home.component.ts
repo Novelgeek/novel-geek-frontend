@@ -1,4 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { Poll } from 'app/core/_models/poll.model';
+import { PollService } from 'app/core/_services/poll.service';
+import { ToastrService } from 'ngx-toastr';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-polls-home',
@@ -7,9 +11,34 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PollsHomeComponent implements OnInit {
 
-  constructor() { }
+  @Input() poll: Poll;
+  selected: number;
+  votingEnded = false;
+
+  constructor(
+    private pollService: PollService,
+    private toastr: ToastrService, 
+    private spinner: NgxSpinnerService) { }
 
   ngOnInit() {
+    const now = new Date();
+
+    if (new Date(this.poll.endDate).getTime() < now.getTime()) {
+      this.votingEnded = true;
+    }
   }
+
+  vote() {
+    this.spinner.show();
+    this.pollService.vote(this.poll.id, this.selected).subscribe(success => {
+      this.poll.voted = true;
+      this.toastr.success('Vote submitted!');
+    }, error => {
+      console.log(error);
+      this.toastr.error(error);
+      this.spinner.show();
+    });
+  }
+
 
 }

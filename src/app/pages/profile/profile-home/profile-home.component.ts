@@ -17,7 +17,6 @@ export class ProfileHomeComponent implements OnInit {
   isAuthenticated = false;
   url: any;
   
-
   constructor(
     private authService: AuthService
     ) { }
@@ -70,7 +69,6 @@ export class ProfileHomeComponent implements OnInit {
       this.isAuthenticated = !!user; // !user ? false : true
       this.user = user;
     });
-
 
     this.swconfig = {
 
