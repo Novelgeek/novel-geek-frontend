@@ -17,7 +17,7 @@ export class AddPollComponent implements OnInit {
   poll: Poll = {
     id: null,
     title: null,
-    endDate: new Date(),
+    endDate: null,
     options: null,
     user: null
   };
@@ -36,6 +36,7 @@ export class AddPollComponent implements OnInit {
     if (option !== undefined && option != null && option !== '') {
       this.options.push(option);
     }
+    
   }
 
   removeOption(optionDel: string) {
@@ -45,25 +46,12 @@ export class AddPollComponent implements OnInit {
 
   onSubmitPollForm(f) {
 
-    this.options.forEach(option => {
-      if (this.poll.options == null) {
-        this.poll.options = [{
-          option: option,
-          score: 0
-        }];
-      } else {
-
-        this.poll.options.push({
-          option: option,
-          score: 0
-        });
-
-      }
-
-    });
-    this.poll.endDate = new Date(f.value.endDate);
+    this.poll.options = this.options;
+    this.poll.endDate = new Date(f.value.endDate).toDateString();
+    console.log(this.poll);
+    
     this.pollService.savePoll(this.poll).subscribe(success => {
-      this.router.navigate(['']);
+      // this.router.navigate(['']);
       this.toastr.success('Successfully added!');
     }, error => {
       console.log(error);

@@ -2,15 +2,10 @@ export class Poll {
 
     id: string;
     title: string;
-    options: [{
-      option: String,
-      score: Number,
-    }];
+    options: string[];
     user: string;
-    endDate: Date;
-    voted?: Boolean;
+    endDate: string;
+
   
-    constructor() {
-      this.voted = false;
-    }
+
   }
