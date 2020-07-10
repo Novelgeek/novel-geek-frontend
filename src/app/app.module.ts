@@ -54,10 +54,16 @@ import { ForgotPasswordComponent } from './pages/auth/forgot-password/forgot-pas
 import { ResetPasswordComponent } from './pages/auth/reset-password/reset-password.component';
 import { from } from 'rxjs';
 import { FriendCardComponent } from './pages/friends/friend-card/friend-card.component';
+
 import { AuctionHomeComponent } from './pages/auction/auction-home/auction-home.component';
 import { AuctionCardComponent } from './pages/auction/auction-card/auction-card.component';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatNativeDateModule} from '@angular/material';
+
+import { AddPollComponent } from './pages/polls/add-poll/add-poll.component';
+import { MyPollsComponent } from './pages/polls/my-polls/my-polls.component';
+import { PollModelComponent } from './pages/polls/poll-model/poll-model.component';
+
 
 import {MatInputModule} from '@angular/material/input';
 
@@ -110,8 +116,14 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     GroupHorizontalCardComponent,
     GroupDetailComponent,
     NotFoundComponent,
+
     AuctionHomeComponent,
     AuctionCardComponent
+
+    AddPollComponent,
+    MyPollsComponent,
+    PollModelComponent
+
   ],
   imports: [
     BrowserAnimationsModule,

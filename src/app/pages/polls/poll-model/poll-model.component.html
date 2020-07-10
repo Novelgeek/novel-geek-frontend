@@ -1,0 +1,45 @@
+<div class="icon-block">
+    <h2 class="center light-blue-text">
+      <i class="material-icons">insert_chart</i>
+    </h2>
+    <h5 class="center">{{poll.title}}</h5>
+    <form *ngIf="!votingEnded">
+      <div *ngFor="let option of poll.options,  let i = index"
+           class="left-align">
+        <p>
+          <label>
+            <input (click)="selected=option.id"
+                   name="group1"
+                   type="radio"
+                   [disabled]="poll.voted" />
+            <span>{{option?.option}}</span>
+          </label>
+        </p>
+      </div>
+    </form>
+    <div *ngIf="votingEnded">
+      Voting has ended.
+    </div>
+    <button *ngIf="!votingEnded"
+            [disabled]="selected == undefined"
+            (click)="vote()"
+            class="btn waves-effect waves-light cyan accent-4">Vote</button>
+    <!-- TO-DO: if end date passed -->
+    <button routerLink="/poll/{{poll.id}}"
+            class="btn waves-effect waves-light cyan accent-4">See results</button>
+  </div>
+
+  <ng-template #results>
+    <div class="row">
+        <div class="input-field col s8 offset-s2">
+          <div class="poll-container">
+            <br>
+            <ngx-charts-bar-vertical [scheme]="colorScheme" [results]="options" [gradient]="gradient" [xAxis]="showXAxis" [yAxis]="showYAxis"
+              [legend]="showLegend" [showXAxisLabel]="showXAxisLabel" [showYAxisLabel]="showYAxisLabel" [xAxisLabel]="xAxisLabel"
+              [yAxisLabel]="yAxisLabel" (select)="onSelect($event)">
+            </ngx-charts-bar-vertical>
+          </div>
+        </div>
+      </div>
+  </ng-template>
+  
