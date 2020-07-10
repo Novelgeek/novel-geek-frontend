@@ -1,0 +1,98 @@
+<div class="row justify-content-between align-self-center">
+  <div class="col-8">
+    <div class="content-header">Manage Admins</div>
+  </div>
+  <div class="col-4">
+    <button class="btn btn-outline-info mr-1 pull-right primary" (click)="open(addAdmin)">
+      <i class="ft-plus primary mr-1"></i>
+      Create Admin
+    </button>
+  </div>
+</div>
+<section id="extended">
+  <div class="row text-left">
+    <div class="col-sm-12">
+      <div class="card">
+        <div class="card-header">
+          <h4 class="card-title">All admins</h4>
+        </div>
+        <div class="card-content">
+          <div class="card-body">
+            <table class="table table-responsive-md text-center">
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th></th>
+                  <th>Username</th>
+                  <th>Email</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let admin of admins">
+                  <td>{{admin.id}}</td>
+                  <td>
+                    <div class="custom-control custom-checkbox m-0">
+                      <input type="checkbox" class="custom-control-input" id="item1">
+                      <label class="custom-control-label col-form-label" for="item1"></label>
+                    </div>
+                  </td>
+                  <td>{{admin.username}}</td>
+                  <td>{{admin.email}}</td>
+                  <td>
+                    <a class="info p-0" data-original-title="" title="">
+                      <i class="ft-user font-medium-3 mr-2"></i>
+                    </a>
+                    <a class="success p-0" data-original-title="" title="">
+                      <i class="ft-edit-2 font-medium-3 mr-2"></i>
+                    </a>
+                    <a class="danger p-0" data-original-title="" title="">
+                      <i class="ft-x font-medium-3 mr-2"></i>
+                    </a>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<ng-template #addAdmin let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="create-group">Add new admin</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <form (ngSubmit)="onSubmit(addAdminForm)" #addAdminForm="ngForm">
+    <div class="modal-body">
+        <div class="form-group">
+          <label for="username">Username</label>
+          <input id="username" class="form-control" placeholder="Username" name="username" ngModel required #username="ngModel">
+          <small class="help-block danger" *ngIf="!username.valid && username.touched">Username cannot be empty</small>
+        </div>
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input id="email" class="form-control" placeholder="Email" name="email" ngModel required email #email="ngModel">
+          <small class="help-block danger" *ngIf="!email.valid && email.touched">Please enter a valid email!</small>
+        </div>
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input id="password" class="form-control" placeholder="Password" name="password" ngModel required #password="ngModel" minlength="4">
+          <div *ngIf="password.invalid && (password.dirty || password.touched)">
+            <small *ngIf="password.errors.required" class="help-block danger">Please enter a password!</small> 
+            <small *ngIf="password.errors.minlength" class="help-block danger">Password must be atleast 4 Charachters long!</small> 
+          </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-outline-primary primary"   (click)="modal.close('Save click')">Cancel</button>
+      <button type="submit" class="btn btn-primary" [disabled]="addAdminForm.invalid"><div class="white">Save</div></button>
+    </div>
+  </form>
+</ng-template>
+
+<ngx-spinner></ngx-spinner>

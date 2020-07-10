@@ -9,7 +9,7 @@ import { JwtModule } from '@auth0/angular-jwt';
 import { ToastrModule } from 'ngx-toastr';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { NgxUsefulSwiperModule } from 'ngx-useful-swiper';
-
+import { BarRatingModule } from 'ngx-bar-rating';
 
 import { PerfectScrollbarModule, PERFECT_SCROLLBAR_CONFIG, PerfectScrollbarConfigInterface} from 'ngx-perfect-scrollbar';
 
@@ -28,12 +28,14 @@ import { ProfileHomeComponent } from './pages/profile/profile-home/profile-home.
 import { SalesHomeComponent } from './pages/sales/sales-home/sales-home.component';
 import { ProfileSettingsComponent } from './pages/profile/profile-settings/profile-settings.component';
 import { TokenInterceptor } from './core/_services/token.interceptor';
+import { ChartsModule } from 'ng2-charts';
 
+import { MatSliderModule } from '@angular/material/slider';
 
 
 
 import { BookletComponent } from './pages/books/booklet/booklet.component';
-import { StoreComponent } from './pages/books/store/store.component';
+
 
 
 import { SearchResultsComponent } from './pages/books/search-results/search-results.component';
@@ -52,15 +54,24 @@ import { ForgotPasswordComponent } from './pages/auth/forgot-password/forgot-pas
 import { ResetPasswordComponent } from './pages/auth/reset-password/reset-password.component';
 import { from } from 'rxjs';
 import { FriendCardComponent } from './pages/friends/friend-card/friend-card.component';
+
+import { AuctionHomeComponent } from './pages/auction/auction-home/auction-home.component';
+import { AuctionCardComponent } from './pages/auction/auction-card/auction-card.component';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import {MatNativeDateModule} from '@angular/material';
+
 import { AddPollComponent } from './pages/polls/add-poll/add-poll.component';
 import { MyPollsComponent } from './pages/polls/my-polls/my-polls.component';
 import { PollModelComponent } from './pages/polls/poll-model/poll-model.component';
 
 
+import {MatInputModule} from '@angular/material/input';
 
-
+import {MatButtonModule} from '@angular/material/button';
+import { ManageAdminsComponent } from './pages/admin/manage-admins/manage-admins.component';
+import { ManagePostsComponent } from './pages/admin/manage-posts/manage-posts.component';
 export function tokenGetter() {
-  return localStorage.getItem("token");
+  return localStorage.getItem('token');
 }
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
@@ -91,22 +102,28 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     ProfileHomeComponent,
     SalesHomeComponent,
     ProfileSettingsComponent,
-
+    AuctionHomeComponent,
 
     BookletComponent,
-    StoreComponent,
     SearchResultsComponent,
     BookReviewComponent,
     ReviewComponent,
     CommentComponent,
+    ManageAdminsComponent,
+    ManagePostsComponent,
 
     GroupCardComponent,
     GroupHorizontalCardComponent,
     GroupDetailComponent,
     NotFoundComponent,
+
+    AuctionHomeComponent,
+    AuctionCardComponent
+
     AddPollComponent,
     MyPollsComponent,
     PollModelComponent
+
   ],
   imports: [
     BrowserAnimationsModule,
@@ -114,6 +131,13 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     SharedModule,
     HttpClientModule,
     NgbModule,
+    BarRatingModule,
+
+    MatDatepickerModule,
+    MatSliderModule,
+    MatInputModule,
+    MatButtonModule,
+    MatNativeDateModule,
 
     PerfectScrollbarModule,
     FormsModule,
@@ -121,11 +145,12 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     NgxSpinnerModule,
     NgxUsefulSwiperModule,
     ReactiveFormsModule,
+    ChartsModule,
     JwtModule.forRoot({
       config: {
         tokenGetter: tokenGetter,
-        whitelistedDomains: ["example.com"],
-        blacklistedRoutes: ["http://example.com/examplebadroute/"],
+        whitelistedDomains: ['example.com'],
+        blacklistedRoutes: ['http://example.com/examplebadroute/'],
       },
     }),
     NgxUsefulSwiperModule

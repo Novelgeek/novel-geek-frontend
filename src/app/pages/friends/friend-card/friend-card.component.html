@@ -6,7 +6,7 @@
         <div *ngIf="user.imageUrl === null" class="col align-self-center"><img alt="96x96"
             class="width-150 rounded-circle img-fluid" src="assets/img/portrait/default.svg"></div>
         <div *ngIf="user.imageUrl !== null" class="col align-self-center"><img alt="96x96"
-            class="width-150 rounded-circle img-fluid" [src]="user.imageUrl"></div>
+            class="width-150 rounded-circle img-fluid" [src]="user.imageUrl" onerror="this.src='assets/img/portrait/default.svg';"></div>
         <!-- <div class="col align-self-center text-center"><i class="icon-envelope font-large-2 blue-grey lighten-2"></i></div> -->
       </div>
       <h3 class="font-large-1 text-center">{{user.username}}</h3>
@@ -23,7 +23,7 @@
           </a>
         </div>
         <div *ngIf="user.friend === true" class="col align-self-center text-center">
-          <a (click)="unFriend()" [ngbTooltip]="'Unfriend User'" placement="bottom">
+          <a (click)="unFriendUser()" [ngbTooltip]="'Unfriend User'" placement="bottom">
             <i class="ft-user-minus"></i>
           </a>
         </div>
@@ -37,3 +37,5 @@
     </div>
   </div>
 </div>
+
+<ngx-spinner></ngx-spinner>

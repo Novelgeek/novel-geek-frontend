@@ -113,6 +113,9 @@ export class HomeLayoutComponent implements OnInit{
 
 
     toggleHideSidebar($event: boolean): void {
+      if ($event) {
+        this.config.layout.sidebar.collapsed = true
+      }
         setTimeout(() => {
             this.hideSidebar = $event;
         }, 0);

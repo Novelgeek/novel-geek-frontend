@@ -1,21 +1,19 @@
 
-<div class="row-12">
-  <div class="card card-inverse bg-primary text-center">
-    <div class="card-content">
-      <div class="card-body pt-3">
-        <div class="row d-flex">
-          <div class="col align-self-center">
-            <h4 class="card-title mt-3">{{title}}</h4>
-            <p class="card-text">{{authors}}</p>
-            <p class="card-text">{{description}}</p>
-            <button (click)="reviewBook()" class="btn btn-raised btn-primary btn-darken-3 white">View Book</button>
-          </div>
-          <div class="col align-self-center" >
-            <img src="{{imageLink}}" alt="element 06" width="190" class="float-right">
-            <!-- <img [src]="{{book.volumeInfo.imageLinks.thumbnail}}!= null ? item.pictureUrl : myImgUrl" alt="element 06" width="190" class="float-right"> -->
-          </div>
-        </div>
+
+  
+<div class="card card-inverse bg-primary horizontal text-center" style="overflow: hidden;">
+  <div class="card-content d-flex ">
+    <div class="card-stacked align-self-center pt-3">
+      <div class="px-3">
+        <h4 class="card-title">{{(title | slice:0:50) + (title.length > 50 ? '...': '')}}</h4>
+        <p class="card-text">{{authors | slice:0:10}}</p>
+        <button (click)="reviewBook()" class="btn btn-raised btn-primary btn-darken-3 white">View Book</button>
       </div>
+    </div>
+    <div class="card-img p-3">
+      <img class="card-img-top img-fluid float-right" src="{{imageLink}}" alt="Card image cap" width="80%" >
     </div>
   </div>
 </div>
+
+
