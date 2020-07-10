@@ -1,4 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import { Poll } from 'app/core/_models/poll.model';
+import { PollService } from 'app/core/_services/poll.service';
+import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
+import { NgxSpinnerService } from 'ngx-spinner';
+import { EROFS } from 'constants';
 
 @Component({
   selector: 'app-add-poll',
@@ -7,9 +13,63 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AddPollComponent implements OnInit {
 
-  constructor() { }
+  options: string[] = [];
+  poll: Poll = {
+    id: null,
+    title: null,
+    endDate: new Date(),
+    options: null,
+    user: null
+  };
 
-  ngOnInit(): void {
+  constructor(
+    private pollService: PollService,
+    private router: Router,
+    private toastr: ToastrService, 
+    private spinner: NgxSpinnerService) { }
+
+
+  ngOnInit(){
   }
+
+  addOption(option: string) {
+    if (option !== undefined && option != null && option !== '') {
+      this.options.push(option);
+    }
+  }
+
+  removeOption(optionDel: string) {
+    this.options = this.options.filter(option => option !== optionDel);
+  }
+
+
+  onSubmitPollForm(f) {
+
+    this.options.forEach(option => {
+      if (this.poll.options == null) {
+        this.poll.options = [{
+          option: option,
+          score: 0
+        }];
+      } else {
+
+        this.poll.options.push({
+          option: option,
+          score: 0
+        });
+
+      }
+
+    });
+    this.poll.endDate = new Date(f.value.endDate);
+    this.pollService.savePoll(this.poll).subscribe(success => {
+      this.router.navigate(['']);
+      this.toastr.success('Successfully added!');
+    }, error => {
+      console.log(error);
+      this.toastr.error(error);
+    });
+  }
+
 
 }

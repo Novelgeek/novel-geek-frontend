@@ -13,6 +13,7 @@ export class PollsHomeComponent implements OnInit {
 
   ngOnInit(): void {
    
+    
   }
 
   
