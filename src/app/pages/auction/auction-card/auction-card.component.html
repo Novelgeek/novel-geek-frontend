@@ -1,16 +1,30 @@
 
 <div class="col-md-6 col-sm-12">
+
     <div class="card   text-center" style="width:500px;height: auto;">
+        
         <div class="card-content">
-            <div class="row">
-                <span class="avatar avatar-md avatar-busy" style="margin-left: 100px;margin-top: 50px;">
-                    <img *ngIf="user.imageUrl !== null" class="media-object d-flex mr-3 height-50 rounded-circle" src="{{user.imageUrl}}"
-                    alt="Generic placeholder image">
-                    <img *ngIf="user.imageUrl === null" class="media-object d-flex mr-3 height-50 rounded-circle" src="../../../../assets/img/portrait/default.svg"
-                    alt="Generic placeholder image">
-                    <i></i>
-                </span>
-                <h6 class="list-group-item-heading" style="font-weight: bold;margin-left: 170px;margin-top: -40px;">{{user.username}} started the item </h6>
+            <div class="row" >
+                    <div class="row" style="float:left;margin-left: 100px;margin-top: 30px;">
+
+                        <span class="avatar avatar-md avatar-busy"  style="float: left;">
+                            <img *ngIf="user.imageUrl !== null" class="media-object d-flex mr-3 height-50 rounded-circle" src="{{user.imageUrl}}"
+                            alt="Generic placeholder image">
+                            <img *ngIf="user.imageUrl === null" class="media-object d-flex mr-3 height-50 rounded-circle" src="../../../../assets/img/portrait/default.svg"
+                            alt="Generic placeholder image">
+                            <i></i>
+                        </span>
+                        <h6 class="list-group-item-heading" style="font-weight: bold;margin-top: 20px;">{{user.username}} started the item </h6>
+                        <!-- margin-left: 170px;margin-top: -40px; -->
+                    </div>
+                    <div style="margin-left: 80px;">
+
+                        <a  mat-button [matMenuTriggerFor]="menu"  href="javascript:void(0)" class="btn"><i class="fa fa-ellipsis-h" aria-hidden="true"></i></a>
+                        <mat-menu #menu="matMenu">
+                            <button mat-menu-item> <mat-icon>dialpad</mat-icon>Prcess</button>
+                            <button mat-menu-item>Delete</button>
+                        </mat-menu>
+                    </div>
             </div>
             <div class="card-header">
                 <h4 class="card-title">{{bookTitle}}</h4>

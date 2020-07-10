@@ -30,6 +30,9 @@ export class AuctionHomeComponent implements OnInit {
       console.log(data);
       this.spinner.hide();
       this.auctions = data;
+      this.auctions = this.auctions.filter(auc=>{
+        return auc.auctionStatus=="ONGOING";
+      })
     },
     error=>{
       this.spinner.hide();

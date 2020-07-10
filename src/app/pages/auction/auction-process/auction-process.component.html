@@ -1,5 +1,5 @@
 <div class="row-12">
-<div class="row" style="background-color: white;height: 400px;margin-top: 20px;">
+<div class="row" style="background-color: white;height:500px;margin-top: 20px;">
     <div class="container">
             <div class="card card-inverse bg-danger text-center" >
                 <div class="card-content">
@@ -21,23 +21,7 @@
 
         <div class="col-12" *ngFor="let user of users">
             <div class="container" style="text-align: center;">
-
-                <div  class="card horizontal" style="width: 500px;margin-left: 300px;">
-                    <div class="card-content d-flex justify-content-between">
-                        <div class="card-stacked align-self-center">
-                            <div class="px-3" style="margin: 10px;">
-                                <h4 class="card-title">Card title</h4>
-                                <p class="card-text">Toffee sugar plum brownie pastry gummies jelly.</p>
-                                <a class="btn btn-raised btn-primary">Go somewhere</a>
-                            </div>
-                        </div>
-                        <div class="card-img" style="text-align: left;margin-top: 20px;">
-                            <img style="height: 100px;width:100px ;" class="card-img-top media-object d-flex mr-3 bg-successs rounded-circle" src="../../../../assets/books/default.png"
-                            alt="Generic placeholder image"
-                            onerror="this.src='../../../../../assets/img/portrait/default.svg';">
-                        </div>
-                        </div>
-                </div>
+                <app-bidder-card></app-bidder-card>
             </div>
 
          </div>

@@ -31,7 +31,8 @@ import { TokenInterceptor } from './core/_services/token.interceptor';
 import { ChartsModule } from 'ng2-charts';
 
 import { MatSliderModule } from '@angular/material/slider';
-
+import {MatMenuModule} from '@angular/material/menu';
+import {MatIconModule} from '@angular/material/icon';
 
 
 import { BookletComponent } from './pages/books/booklet/booklet.component';
@@ -58,7 +59,7 @@ import { AuctionHomeComponent } from './pages/auction/auction-home/auction-home.
 import { AuctionCardComponent } from './pages/auction/auction-card/auction-card.component';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatNativeDateModule} from '@angular/material';
-
+import {MatChipsModule} from '@angular/material/chips';
 import {MatInputModule} from '@angular/material/input';
 
 import {MatButtonModule} from '@angular/material/button';
@@ -66,6 +67,7 @@ import { ManageAdminsComponent } from './pages/admin/manage-admins/manage-admins
 import { ManagePostsComponent } from './pages/admin/manage-posts/manage-posts.component';
 import { AuctionProcessComponent } from './pages/auction/auction-process/auction-process.component';
 import { StoreComponent } from './pages/books/store/store.component';
+import { BidderCardComponent } from './pages/auction/auction-process/bidder-card/bidder-card.component';
 export function tokenGetter() {
   return localStorage.getItem('token');
 }
@@ -115,7 +117,8 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     AuctionHomeComponent,
     AuctionCardComponent,
     AuctionProcessComponent,
-    StoreComponent
+    StoreComponent,
+    BidderCardComponent
   ],
   imports: [
     BrowserAnimationsModule,
@@ -124,12 +127,15 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     HttpClientModule,
     NgbModule,
     BarRatingModule,
-
+    
+    MatMenuModule,
+    MatChipsModule,
     MatDatepickerModule,
     MatSliderModule,
     MatInputModule,
     MatButtonModule,
     MatNativeDateModule,
+    MatIconModule,
 
     PerfectScrollbarModule,
     FormsModule,
