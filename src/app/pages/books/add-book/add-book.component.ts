@@ -23,7 +23,7 @@ export class AddBookComponent implements OnInit {
   ngOnInit() {
     this.genresNames.forEach((c, i) => {
       this.genres.push({ id: i, name: c });
-  });
+    });
   }
 
   public uploadImage(event) {
@@ -50,6 +50,12 @@ export class AddBookComponent implements OnInit {
   }
 
   addBook(basicBookForm: NgForm, advancedBookForm: NgForm, optionalBookForm: NgForm) {
+    const bookGenres = [];
+    this.selectedGenres.forEach( genre => {
+      bookGenres.push(genre.name);
+    });
+    console.log(bookGenres);
+
     const newBook = new FormData();
     newBook.append('title', basicBookForm.value.title);
     newBook.append('description', basicBookForm.value.description);
@@ -58,17 +64,15 @@ export class AddBookComponent implements OnInit {
     newBook.append('year', advancedBookForm.value.year);
     newBook.append('author', advancedBookForm.value.author);
     newBook.append('genres', this.selectedGenres);
-    newBook.append('searchTerms', this.searchTerms);
-    newBook.append('urls', this.urls);
     newBook.append('publisher', optionalBookForm.value.publisher);
     newBook.append('pdf', this.selectedPdf);
     //   for (var pair of newBook.entries()) {
     //     console.log(pair[0]+ ', ' + pair[1]);
     // }
 
-    this.bookService.addNewBook(newBook).subscribe(data => {
+    // this.bookService.addNewBook(newBook).subscribe(data => {
 
-    })
+    // })
   }
 
 }
