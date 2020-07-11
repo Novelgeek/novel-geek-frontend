@@ -27,8 +27,7 @@ export class AddPollComponent implements OnInit {
     private router: Router,
     private toastr: ToastrService, 
     private spinner: NgxSpinnerService) { }
-
-
+    
   ngOnInit(){
   }
 
@@ -42,7 +41,6 @@ export class AddPollComponent implements OnInit {
   removeOption(optionDel: string) {
     this.options = this.options.filter(option => option !== optionDel);
   }
-
 
   onSubmitPollForm(f) {
 
