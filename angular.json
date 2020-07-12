@@ -83,6 +83,7 @@
               "src/assets/sass/app.scss",
               "src/styles.css",
               "node_modules/swiper/css/swiper.css"
+
             ],
             "assets": [
               "src/assets",
@@ -141,6 +142,8 @@
     }
   },
   "cli": {
-    "analytics": false
+
+    "analytics": "35d2b467-c301-4f1b-9ae8-3ba5226ad29e"
+
   }
 }

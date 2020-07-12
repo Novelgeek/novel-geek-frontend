@@ -4,6 +4,7 @@ export const ROUTES: RouteInfo[] = [
     { path: '/posts', title: 'Posts', icon: 'icon-home', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },
     { path: '/books', title: 'Books', icon: 'icon-book-open', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },
     { path: '/polls', title: 'Polls', icon: 'icon-bar-chart', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },
+    { path: '/auctions', title: 'Auctions', icon: 'ft-sliders', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },
     { path: '/sales', title: 'Sales', icon: 'icon-basket', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },
     { path: '/groups', title: 'Groups', icon: 'icon-users', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },
     { path: '/friends', title: 'Friends', icon: 'icon-user-follow', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },

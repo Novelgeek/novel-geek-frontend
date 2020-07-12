@@ -5,7 +5,7 @@ import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-home-layout',
-  templateUrl: './home.component.html',
+  templateUrl: './home-layout.component.html',
   styles: []
 })
 export class HomeLayoutComponent implements OnInit{
@@ -113,6 +113,9 @@ export class HomeLayoutComponent implements OnInit{
 
 
     toggleHideSidebar($event: boolean): void {
+      if ($event) {
+        this.config.layout.sidebar.collapsed = true
+      }
         setTimeout(() => {
             this.hideSidebar = $event;
         }, 0);
