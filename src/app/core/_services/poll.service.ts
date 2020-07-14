@@ -13,8 +13,8 @@ export class PollService {
     return this.http.get<any>('http://localhost:8080/poll/allpolls');
   }
 
-  getPollsForUser(id) {
-    return this.http.get<any>('http://localhost:8080/poll/mypolls');
+  getPollsForUser() {
+    return this.http.get<any>('http://localhost:8080/poll/user');
   }
 
   getPoll(id) {

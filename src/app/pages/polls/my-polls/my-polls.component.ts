@@ -21,17 +21,17 @@ export class MyPollsComponent implements OnInit {
 
     polls: Poll[] = [];
 
-  private userSub: Subscription;
+  // private userSub: Subscription;
   public user: any;
   isAuthenticated = false;
   url: any;
   userId: number;
 
   ngOnInit(): void {
-    this.userSub = this.authService.user.subscribe( user => {
-      this.isAuthenticated = !!user; // !user ? false : true
-      this.user = user;
-    });
+    // this.userSub = this.authService.user.subscribe( user => {
+    //   this.isAuthenticated = !!user; // !user ? false : true
+    //   this.user = user;
+    // });
     this.loadMyPolls();
   }
 
@@ -46,8 +46,8 @@ export class MyPollsComponent implements OnInit {
   }
 
   loadMyPolls() {
-    let userId = this.authService.currentUser.id;
-    this.pollService.getPollsForUser(userId).subscribe(polls => {
+    // let userId = this.authService.currentUser.id;
+    this.pollService.getPollsForUser().subscribe(polls => {
       this.polls = polls;
     }, error => {
       console.log(error);

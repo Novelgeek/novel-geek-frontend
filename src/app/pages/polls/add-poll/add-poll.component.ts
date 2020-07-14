@@ -19,7 +19,8 @@ export class AddPollComponent implements OnInit {
     title: null,
     endDate: null,
     options: null,
-    user: null
+    user: null,
+    voted:false
   };
 
   constructor(
@@ -43,13 +44,14 @@ export class AddPollComponent implements OnInit {
   }
 
   onSubmitPollForm(f) {
-
+    this.spinner.show();
     this.poll.options = this.options;
     this.poll.endDate = new Date(f.value.endDate).toDateString();
     console.log(this.poll);
     
     this.pollService.savePoll(this.poll).subscribe(success => {
-      // this.router.navigate(['']);
+      this.router.navigate(['/polls']);
+      this.spinner.hide();
       this.toastr.success('Successfully added!');
     }, error => {
       console.log(error);

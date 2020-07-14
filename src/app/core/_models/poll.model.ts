@@ -5,6 +5,7 @@ export class Poll {
     options: string[];
     user: string;
     endDate: string;
+    voted: boolean;
 
   
 
