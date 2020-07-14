@@ -34,7 +34,7 @@ export class AddBookComponent implements OnInit {
       reader.onload = (event: any) => {
         this.imageUrl = event.target.result;
       }
-      this.selectedPdf = event.target.files[0];
+      this.selectedImage = event.target.files[0];
     }
   }
 
@@ -50,7 +50,7 @@ export class AddBookComponent implements OnInit {
   }
 
   addBook(basicBookForm: NgForm, advancedBookForm: NgForm, optionalBookForm: NgForm) {
-    const bookGenres = [];
+    const bookGenres: String[] = [];
     this.selectedGenres.forEach( genre => {
       bookGenres.push(genre.name);
     });
@@ -66,13 +66,10 @@ export class AddBookComponent implements OnInit {
     newBook.append('genres', this.selectedGenres);
     newBook.append('publisher', optionalBookForm.value.publisher);
     newBook.append('pdf', this.selectedPdf);
-    //   for (var pair of newBook.entries()) {
-    //     console.log(pair[0]+ ', ' + pair[1]);
-    // }
 
-    // this.bookService.addNewBook(newBook).subscribe(data => {
+    this.bookService.addNewBook(newBook).subscribe(data => {
 
-    // })
+    })
   }
 
 }
