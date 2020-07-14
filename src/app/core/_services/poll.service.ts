@@ -10,7 +10,7 @@ export class PollService {
   constructor(private http: HttpClient) { }
 
   getPolls(){
-    return this.http.get<any>('http://localhost:8080/poll/allpolls');
+    return this.http.get<any>('http://localhost:8080/poll/all');
   }
 
   getPollsForUser() {
@@ -29,7 +29,7 @@ export class PollService {
     return this.http.delete('http://localhost:8080/poll/delete' + pollId);
   }
 
-  vote(pollId: string, selectedOption: number){
+  vote(pollId: number, selectedOption: number){
     return this.http.post('http://localhost:8080/poll/' + pollId + '/vote/' + selectedOption, {});
   }
 }

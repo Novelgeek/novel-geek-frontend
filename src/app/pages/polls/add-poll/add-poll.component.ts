@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { EROFS } from 'constants';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-add-poll',
@@ -27,8 +28,9 @@ export class AddPollComponent implements OnInit {
     private pollService: PollService,
     private router: Router,
     private toastr: ToastrService, 
-    private spinner: NgxSpinnerService) { }
-    
+    private spinner: NgxSpinnerService,
+    private modalService: NgbModal,) { }
+  
   ngOnInit(){
   }
 

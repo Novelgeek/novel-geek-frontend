@@ -16,8 +16,8 @@
                   <a ngbNavLink>All Polls</a>
                   <ng-template ngbNavContent>
                     <div class="row">
-                      <div class="col col-xl-3 col-md-3 col-sm-6 col-12" >
-                          <app-poll-model></app-poll-model>
+                      <div *ngFor="let poll of allpolls" class="col col-xl-3 col-md-3 col-sm-6 col-12" >
+                          <app-poll-model [poll]="poll"></app-poll-model>
                       </div>
                     </div>
                   </ng-template>
@@ -26,8 +26,8 @@
                   <a ngbNavLink>My Polls</a>
                   <ng-template ngbNavContent>
                     <div class="row">
-                      <div class="col-sm-12 col-md-6">
-                        <app-my-polls></app-my-polls>
+                      <div *ngFor="let poll of mypolls" class="col-sm-12 col-md-6">
+                        <app-my-polls [poll]="poll"></app-my-polls>
                       </div>
                     </div>
                   </ng-template>

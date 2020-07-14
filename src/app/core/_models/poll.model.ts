@@ -1,6 +1,6 @@
 export class Poll {
 
-    id: string;
+    id: number;
     title: string;
     options: string[];
     user: string;

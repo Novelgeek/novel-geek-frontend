@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { PollService } from 'app/core/_services/poll.service';
 import { ToastrService } from 'ngx-toastr';
 import { NgxSpinnerService } from 'ngx-spinner';
@@ -19,21 +19,13 @@ export class MyPollsComponent implements OnInit {
     private spinner: NgxSpinnerService
     ) { }
 
-    polls: Poll[] = [];
-
-  // private userSub: Subscription;
-  public user: any;
-  isAuthenticated = false;
-  url: any;
-  userId: number;
-
-  ngOnInit(): void {
-    // this.userSub = this.authService.user.subscribe( user => {
-    //   this.isAuthenticated = !!user; // !user ? false : true
-    //   this.user = user;
-    // });
-    this.loadMyPolls();
-  }
+    @Input() poll;
+    isShow:boolean = false;
+ 
+    ngOnInit(): void {
+        //this.loadMyPolls();
+        console.log(this.poll);
+    }
 
 
   deletePoll(id) {
@@ -48,10 +40,14 @@ export class MyPollsComponent implements OnInit {
   loadMyPolls() {
     // let userId = this.authService.currentUser.id;
     this.pollService.getPollsForUser().subscribe(polls => {
-      this.polls = polls;
+      this.poll = polls;
     }, error => {
       console.log(error);
     });
+  }
+
+  public toggleList() {
+    this.isShow = !this.isShow;
   }
 
 }
