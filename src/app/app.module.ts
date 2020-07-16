@@ -68,6 +68,7 @@ import { ManagePostsComponent } from './pages/admin/manage-posts/manage-posts.co
 import { AddBookComponent } from './pages/books/add-book/add-book.component';
 import { ArchwizardModule } from 'angular-archwizard';
 import { LocalBooksComponent } from './pages/books/local-books/local-books.component';
+import { LocalBookCardComponent } from './pages/books/local-books/local-book-card/local-book-card.component';
 
 export function tokenGetter() {
   return localStorage.getItem('token');
@@ -104,6 +105,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     AuctionHomeComponent,
     AddBookComponent,
     LocalBooksComponent,
+    LocalBookCardComponent,
 
     BookletComponent,
     SearchResultsComponent,

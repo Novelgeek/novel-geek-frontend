@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
   selector: 'app-local-book-card',
@@ -6,7 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./local-book-card.component.scss']
 })
 export class LocalBookCardComponent implements OnInit {
-
+  @Input() book: any;
   constructor() { }
 
   ngOnInit() {
