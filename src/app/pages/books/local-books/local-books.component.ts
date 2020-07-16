@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { BooksService } from '../books.service';
 
 @Component({
   selector: 'app-local-books',
@@ -7,9 +8,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LocalBooksComponent implements OnInit {
 
-  constructor() { }
+  localBooks: any;
+  constructor(private bookService: BooksService ) { }
 
   ngOnInit() {
+    this.bookService.getAllLocalBooks().subscribe(data => {
+      this.localBooks = data
+      console.log(data)
+    })
   }
 
 }

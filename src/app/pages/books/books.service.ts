@@ -8,6 +8,7 @@ import { Book } from 'app/core/_models/book.model';
 })
 export class BooksService {
 
+
   public apiKey = 'AIzaSyBXGwa67D5ZrrFuPP6YUNc9glwM8edWFck';
   public name = '';
   public bookId = '';
@@ -67,6 +68,10 @@ export class BooksService {
 
   addNewBook(newBook: FormData) {
     return this.http.post('http://localhost:8080/book/addNewBook', newBook);
+  }
+
+  getAllLocalBooks() {
+    return this.http.get('http://localhost:8080/book/allLocal')
   }
 
 }
