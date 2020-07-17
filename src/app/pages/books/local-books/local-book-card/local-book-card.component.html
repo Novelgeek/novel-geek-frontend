@@ -1,10 +1,21 @@
-<div class="card">
-  <div class="card-header">
-    {{book.title}}
-  </div>
-  <div class="card-content">
-    <div class="card-body">
-      {{book.description}}
+
+
+<div class="card horizontal text-center" style="overflow: hidden;">
+  <div class="card-content d-flex ">
+    <div class="card-stacked align-self-center pt-3">
+      <div class="px-3">
+        <h4 class="card-title">{{(book.title | slice:0:50) + (book.title.length > 50 ? '...': '')}}</h4>
+        <p class="card-text">{{book.description | slice:0:10}}</p>
+        <button  class="btn btn-raised btn-primary btn-darken-3 white">View Book</button>
+      </div>
+      <div class="px-3">
+        <button class="btn btn-outline-primary primary" type="button">Boost</button>
+      </div>
+    </div>
+    <div class="card-img p-3">
+      <img *ngIf="book.imgUrl" class="card-img-top img-fluid float-right" src="{{book.imgUrl}}" alt="Card image cap" width="80%" >
+      <img *ngIf="!book.imgUrl" class="card-img-top img-fluid float-right" src="../../../../../assets/img/book/default.png" alt="Card image cap" width="80%" >
     </div>
   </div>
 </div>
+
