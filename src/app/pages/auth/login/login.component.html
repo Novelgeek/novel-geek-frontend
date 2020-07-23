@@ -18,7 +18,7 @@
                     height="400"
                   />
                 </div>
-                <div class="col-lg-6 col-md-12 bg-white px-4 pt-3">
+                <div class="col-lg-6 col-md-12 bg-white px-4 pt-3 align-self-center">
                   <h4 class="card-title mb-2">Login</h4>
                   <p class="card-text">
                     Welcome back, please login to your account.
@@ -44,39 +44,38 @@
                         <small *ngIf="password.errors.minlength" class="help-block danger">Password must be atleast 4 Charachters long!</small> 
                       </div>
                   </div>
+
                         
                     
-                    <div class="d-flex justify-content-between mt-2">
-                      <div class="remember-me">
-                        <div class="custom-control custom-checkbox custom-control-inline mb-3">
-                          <input type="checkbox" id="customCheckboxInline1" name="customCheckboxInline1" class="custom-control-input"/>
-                          <label class="custom-control-label" for="customCheckboxInline1">
-                            Remember Me
-                          </label>
-                        </div>
-                      </div>
+                    <div class="d-flex flex-row-reverse mt-2 mb-2">
+
                       <div class="forgot-password-option">
-                        <a [routerLink]="['/pages/forgotpassword']" class="text-decoration-none text-primary">Forgot Password ?</a>
+                        <a [routerLink]="['/forgot-password']" class="text-decoration-none text-primary  ">Forgot Password ?</a>
                       </div>
                     </div>
                     <div class="fg-actions d-flex justify-content-between">
                       <div class="login-btn">
-                        <button class="btn btn-outline-primary">
-                          <a [routerLink]="['/signup']" class="text-decoration-none">Register</a>
+                        <button class="btn btn-outline-primary primary" [routerLink]="['/signup']" type="button">
+                         Register
                         </button>
                       </div>
                       <div class="recover-pass">
-                        <button class="btn btn-raised btn-primary primary-lighten-4" 
+                        <button class="btn btn-primary primary-lighten-4" 
                           type="submit" 
-                          [disabled]="loginForm.invalid"
-                          >Login </button>
+                          [disabled]="loginForm.invalid" ><div class="white">Login</div> </button>
                       </div>
                     </div>
                   </form>
                   
                   <hr class="m-0" />
-                  <div class="d-flex justify-content-center mt-3">
+                  <div class="d-flex justify-content-center mt-2 card-content">
+                    <div class="card-text">Are you an Admin? Login 
+                      <a [routerLink]="['/admin/login']" href="">here</a> 
 
+                    </div> 
+                  </div>
+                  <div class="d-flex justify-content-center mt-2">
+                    
                     <div class="social-login-options">
                       <a  class="btn google-button" href="http://localhost:8080/oauth2/authorize/google?redirect_uri=http://localhost:4200/login">
                         <span class="google-button__icon">
@@ -85,7 +84,9 @@
                         <span class="google-button__text">Sign in with Google</span>
                       </a>
                     </div>
+
                   </div>
+
                 </div>
               </div>
             </div>

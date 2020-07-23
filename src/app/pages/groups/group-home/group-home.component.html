@@ -1,28 +1,165 @@
 <div class="row">
-  <div class="col-sm-3 col-12 ">
+  <div class="col-md-12 col-lg-12">
     <div class="card">
-      <div class="card-header">
-        <i class="ft-more-vertical float-right mb-1"></i>
-        <h4 class="card-title">Card title</h4>
-        <h6 class="card-subtitle text-muted">Support card subtitle</h6>
-      </div>
       <div class="card-content">
-        <div class="card-img">
-          <img class="card-img-top img-fluid" src="../assets/img/pages/login-bg.jpg" alt="Card image cap">
-          <a class="btn btn-floating halfway-fab bg-warning"><i class="ft-plus"></i></a>
-        </div>
         <div class="card-body">
-          <p class="card-text">Icing powder caramels macaroon. Toffee sugar plum brownie pastry gummies jelly.</p>
-          <a class="btn btn-raised btn-warning">Go somewhere</a>
+
+          <div class="row">
+            <div class="col-6">
+              <h4 class="card-title">Groups</h4>
+            </div>
+            <div class="col-6">
+              <form class="form">
+                <div class="form-group">
+                  <!-- <div class="position-relative has-icon-right">
+                    <input type="text" class="form-control" name="form-control-with-icon">
+                    <div class="form-control-position">
+                      <i class="ft-search primary"></i>
+                      <!-- <i class="ft-loader spinner"></i> 
+                    </div>
+                  </div> -->
+                  <div class="row">
+                    <div class="col-6">
+                      <button class="btn btn-outline-info mr-1 pull-right primary" (click)="open(createGroup)">
+                        <i class="ft-plus primary mr-1"></i>
+                        Create Group
+                      </button>
+                    </div>
+                    <div class="col-6">
+                      
+                      <div class="input-group ">
+                        <input type="text" class="form-control " placeholder="Search" aria-describedby="button-addon4">
+                        <div class="input-group-append">
+                          <button class="btn btn-raised btn-primary" type="button"><i class="ft-search"></i></button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+
+
+          <div class="row">
+            <div class="col-auto">
+              <ul ngbNav #nav="ngbNav" class="nav-pills">
+                <li ngbNavItem >
+                  <a ngbNavLink>My Groups</a>
+                  <ng-template ngbNavContent>
+                    <div class="row" matchHeight="card">
+                      <div class="col col-xl-3 col-lg-3 col-md-3 col-sm-6 col-12" *ngFor="let group of myGroups">
+                        <app-group-card [group]="group"></app-group-card>
+                      </div>
+                    </div>
+                    <div class="row justify-content-center  mt-2 font-medium-4" matchHeight="card" *ngIf="myGroups.length === 0">
+                      You aren't a member of any group. Click on All Groups to get started.
+                    </div>
+                  </ng-template>
+                </li>
+                <li ngbNavItem>
+                  <a ngbNavLink>All Groups</a>
+                  <ng-template ngbNavContent>
+                    <div class="row">
+                      <div class="col-sm-12 col-md-6" *ngFor="let group of allGroups">
+                        <app-group-horizontal-card [group]="group"></app-group-horizontal-card>
+                      </div>
+                    </div>
+                    <div class="row justify-content-center  mt-2 font-medium-4" matchHeight="card" *ngIf="allGroups.length === 0">
+                      There are no groups yet. Click on Create Group to get started.
+                    </div>
+                  </ng-template>
+                </li>
+                <li ngbNavItem>
+                  <a ngbNavLink>Group Invites</a>
+                  <ng-template ngbNavContent>
+                    <div class="col-lg-6 col-md-8 col-sm-12" *ngFor="let invite of groupInvites">
+                      <div class="card text-center">
+                        <div class="card-content ">
+                          <div class="align-self-center">
+                            <div class="row mt-2 mb-2 justify-content-between align-items-center">
+                              <div class="col-2 justify-content-center">
+                                <img *ngIf="invite.firedUser.imageUrl === null" src="assets/img/portrait/default.svg" width="30" height="30"
+                                  class="d-inline-flex rounded-circle">
+                                <img *ngIf="invite.firedUser.imageUrl !== null" [src]="invite.firedUser.imageUrl" width="30" height="30" onerror="this.src='assets/img/portrait/default.svg';"
+                                  class="d-inline-flex rounded-circle">
+                              </div>
+                              <div class="col-3">
+                                <a [routerLink]="['#']">
+                                  <div class="d-inline-flex">{{invite.firedUser.username}}</div>
+                                </a>
+                                <div class="d-inline-flex"> invited you to join</div>
+                              </div>
+                              <div class="col-3 align-self-center">
+                                <h4 class="card-title">{{invite.group.groupName}}</h4>
+                              </div>
+                              <div class="col-md-4 col-sm-12 my-auto text-center">
+                                <a class="btn btn-raised btn-primary ml-2 mb-1 mt-0" (click)="acceptInvite(invite.notificationId)">
+                                  Accept
+                                </a>
+                                <a class="btn btn-raised btn-danger ml-2 mb-1 mt-0" (click)="declineInvite(invite.notificationId)">
+                                  Decline
+                                </a>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="row justify-content-center  mt-2 font-medium-4" matchHeight="card" *ngIf="groupInvites.length === 0">
+                      You have no group Invites.
+                    </div>
+                    
+                  </ng-template>
+                </li>
+              </ul>
+            </div>
+          </div>
+
+
         </div>
-      </div>
-      <div class="card-footer text-muted">
-        <span class="float-left">3 hours ago</span>
-        <span class="float-right">
-          <a href="#" class="card-link">Read More <i class="fa fa-angle-right"></i></a>
-        </span>
       </div>
     </div>
   </div>
 </div>
+
+
+<div [ngbNavOutlet]="nav"></div>
+
+
+<!-- create group modal -->
+<ng-template #createGroup let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="create-group">Create new Group</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <form (ngSubmit)="onSubmit(createGroupForm)" #createGroupForm="ngForm">
+    <div class="modal-body">
+        <div class="form-group">
+          <label for="groupName">Group Name</label>
+          <input id="groupName" class="form-control" placeholder="Name" name="groupName" ngModel #groupName="ngModel">
+        </div>
+        <div class="form-group">
+          <label for="description">Group Description</label>
+          <input id="description" class="form-control" placeholder="Description" name="description" ngModel>
+        </div>
+        <div class="form-group">
+          <label for="description">Group Avatar</label>
+          <input type="file"  class="form-control" (change)="onFileChanged($event)">
+        </div>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-outline-primary primary" (click)="modal.close('Save click')">Cancel</button>
+      <button type="submit" class="btn btn-primary"><div class="white">Save</div></button>
+    </div>
+  </form>
+</ng-template>
+
+
+
+
+<ngx-spinner></ngx-spinner>
 

@@ -21,14 +21,14 @@ export class LoginComponent implements OnInit {
 
   ngOnInit() {
     this.route.queryParams.subscribe(params => {
-      if (params.registered === 'true'){
+      if (params.registered === 'true') {
         this.toastr.success('Account registered Successfully, Login to Continue');
         params.registered = null;
       }
-      if(params.auth_token != null) {
+      if (params.auth_token != null) {
         this.authService.oAuthToken(params.auth_token);
       }
-      if(params.error != null) {
+      if (params.error != null) {
         this.toastr.error(params.error);
         params.registered = null;
       }
@@ -49,7 +49,7 @@ export class LoginComponent implements OnInit {
       this.spinner.hide();
     }, errorMsg => {
       this.spinner.hide();
-      this.toastr.error(errorMsg.error);
+      this.toastr.error(errorMsg.error,  '', {tapToDismiss: true});
       console.log(errorMsg);
     });
 

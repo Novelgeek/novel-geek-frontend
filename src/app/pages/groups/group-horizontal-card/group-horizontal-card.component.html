@@ -1,0 +1,40 @@
+
+  <div class="card">
+    <div class="card-content">
+      <div class="card-body">
+        <div class="row">
+          <div class="col-md-5 col-sm-12 my-auto">
+            <img *ngIf="group.groupAvatar === null" src="../assets/img/group/default.jpg" width="30" height="30" class="d-inline-flex rounded-circle">
+            <img *ngIf="group.groupAvatar !== null" [src]="group.groupAvatar" width="30" height="30" class="d-inline-flex rounded-circle">
+            <a [routerLink]="['/groups',group.groupId]"><h4 class="ml-2 d-inline-flex card-title">{{group.groupName}}</h4></a>
+          </div>
+          <div class="col-3 text-center">
+            <div class="d-flex justify-content-center align-items-center mt-2">
+              <div class="dash-followers mr-2 font-small-2">
+                <div class="">
+                  <h6 class="mb-0">{{group.memberCount}}</h6>
+                  <span class="grey">Members</span>
+                </div>
+              </div>
+              <div class="dash-followers mr-2 font-small-2">
+                <div class="">
+                  <h6 class="mb-0">0</h6>
+                  <span class="grey">Posts</span>
+                </div>
+              </div>
+            </div>
+            
+          </div>
+          <div class="col-4 my-auto">
+            <a *ngIf="!group.member" class="btn btn-raised btn-primary pull-right mb-0 mt-0" (click)="requestMembership()">
+              <i class="ft-plus mr-1"></i>
+              Join Group
+            </a>
+          </div>
+        </div>
+        
+      </div>
+    </div>
+  </div>
+
+<ngx-spinner></ngx-spinner>

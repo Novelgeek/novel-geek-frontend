@@ -1,96 +1,112 @@
-import { Component, OnInit,ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild , EventEmitter, OnDestroy } from '@angular/core';
+import { AuthService } from 'app/core/_services/auth.service';
+import { Subscription } from 'rxjs';
+// imports for image slider
 import { SwiperOptions } from 'swiper';
 import { SwiperComponent } from 'ngx-useful-swiper';
+import { BooksService } from 'app/pages/books/books.service';
+//
 @Component({
   selector: 'app-profile-home',
   templateUrl: './profile-home.component.html',
   styleUrls: ['./profile-home.component.scss']
 })
-export class ProfileHomeComponent implements OnInit {
+export class ProfileHomeComponent implements OnInit, OnDestroy {
 
+  private userSub: Subscription;
+  public user: any;
+  isAuthenticated = false;
+  public url: any = null;
+
+  public allBooks: any;
+  public highRated: any;
+  public lowRated: any;
+
+  // image slider configuration
   @ViewChild('usefulSwiper', { static: false }) usefulSwiper: SwiperComponent;
-  config: SwiperOptions;
+  swconfig: SwiperOptions;
 
-  slideData = [
-    {
-      id: 382,
-      name: "Metal bluetooth cyan",
-    }, {
-      id: 822,
-      name: "Avon",
-    }, {
-      id: 159,
-      name: "Infrastructures",
-    }, {
-      id: 424,
-      name: "Users Cotton",
-    }, {
-      id: 572,
-      name: "Haptic Oklahoma Jewelery",
-    }, {
-      id: 127,
-      name: "Circles Integration Street",
-    }, {
-      id: 1009,
-      name: "uniform Communications Tuna",
-    }, {
-      id: 619,
-      name: "North Carolina",
-    }, {
-      id: 716,
-      name: "Eyeballs Rubber",
-    }, {
-      id: 382,
-      name: "Nevada green unleash",
+  constructor(
+    private authService: AuthService,
+    private bookService: BooksService
+    ) { }
+
+    ngOnDestroy(): void {
+      this.userSub.unsubscribe();
     }
-  ]
 
-  constructor() { }
+
 
   ngOnInit() {
-    this.config = {
+    this.userSub = this.authService.user.subscribe( user => {
+      this.isAuthenticated = !!user; // !user ? false : true
+      this.user = user;
+      this.url = user.photoUrl;
+    });
 
-    pagination: { el: '.swiper-pagination', clickable: true },
-    autoHeight: true,
-    allowTouchMove: true,
-    autoplay: {
-      delay: 6000,
-      disableOnInteraction: true
-    },
-    breakpoints: {
-      1024: {
-        slidesPerView: 4
+    this.bookService.getMyBookRatings().subscribe(data => {
+      this.allBooks = data;
+      this.highRated = this.allBooks.filter(book => {
+        return book.rating > 2
+      })
+      this.lowRated = this.allBooks.filter(book => {
+        return book.rating <= 2
+      })
+      console.log(this.highRated);
+      console.log(this.lowRated);
+
+    }, errorMsg => {
+      console.log(errorMsg);
+    })
+
+
+    this.swconfig = {
+
+      pagination: { el: '.swiper-pagination', clickable: true },
+      height: 240,
+      autoHeight: false,
+      allowTouchMove: true,
+      // autoplay: {
+      //   delay: 500,
+      //   disableOnInteraction: true
+      // },
+      breakpoints: {
+        1024: {
+          slidesPerView: 4
+        },
+        500: {
+          slidesPerView: 3
+        },
+        400: {
+          slidesPerView: 2
+        },
+        300: {
+          slidesPerView: 1
+        }
       },
-      500: {
-        slidesPerView: 3
+      navigation: {
+        nextEl: '.swiper-button-next  ',
+        prevEl: '.swiper-button-prev',
+        hideOnClick: true,
       },
-      400: {
-        slidesPerView: 2
-      },
-      300: {
-        slidesPerView: 1
+      simulateTouch: true,
+      watchOverflow: true,
+      spaceBetween: 30,
+      loop: true,
+      speed: 400,
+
+      on: {
+        slideChange: () => {
+          // console.log('slideChange Event: Active Slide Index = ', this.usefulSwiper.swiper.activeIndex);
+
+        },
+        slideChangeTransitionEnd: () => {
+          // console.log('slideChange Event');
+        }
       }
-    },
-    navigation: {
-      nextEl: '.swiper-button-next',
-      prevEl: '.swiper-button-prev'
-    },
-    spaceBetween: 30,
-    loop: true,
-    on: {
-      slideChange: () => {
-        // console.log('slideChange Event: Active Slide Index = ', this.usefulSwiper.swiper.activeIndex);
 
-      },
-      slideChangeTransitionEnd: () => {
-        // console.log('slideChange Event');
-      }
-    }
-
-  };
+    };
 }
-
-  
 
    nextSlide() {
     this.usefulSwiper.swiper.slideNext();
@@ -99,11 +115,29 @@ export class ProfileHomeComponent implements OnInit {
   previousSlide() {
     this.usefulSwiper.swiper.slidePrev();
   }
-  
+
   slideToThis(index) {
     this.usefulSwiper.swiper.slideTo(index);
   }
 
+  // image slider configuration ends
+
+  // image upload
+
+  onSelectFile(event) {
+    if (event.target.files && event.target.files[0]) {
+      const reader = new FileReader();
+
+      reader.readAsDataURL(event.target.files[0]); // read file as data url
+
+      reader.onload = (event) => { // called once readAsDataURL is completed
+        this.url = event.target.result;
+      }
+    }
+  }
+  public delete() {
+    this.url = null;
+  }
 
 }
 
