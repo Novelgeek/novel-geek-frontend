@@ -127,7 +127,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     NotFoundComponent,
 
     AuctionHomeComponent,
-    AuctionCardComponent
+    AuctionCardComponent,
 
     AddPollComponent,
     MyPollsComponent,
