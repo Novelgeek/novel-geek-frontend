@@ -1,215 +1,90 @@
-<div class="chat-application">
-    <div #contentOverlay class="content-overlay" (click)="onContentOverlay()"></div>
-    <div [perfectScrollbar] #chatSidebar class="chat-sidebar float-left d-none d-sm-none d-md-block d-lg-block">
-      <div class="chat-sidebar-content">
-        <div class="chat-fixed-search p-2">
-          <form>
-            <div class="position-relative has-icon-left">
-              <input class="form-control" id="timesheetinput1" name="employeename" type="text">
-              <div class="form-control-position">
-                <i class="ft-user"></i>
+<div class="container">
+  <h3 class=" text-center">Messaging</h3>
+  <div class="messaging">
+    <div class="inbox_msg">
+      <div class="inbox_people">
+        <div class="headind_srch">
+          <div class="recent_heading">
+            <h4>Recent</h4>
+          </div>
+          <div class="srch_bar">
+            <div class="stylish-input-group">
+              <input type="text" class="search-bar" placeholder="Search">
+              <span class="input-group-addon">
+                <button type="button"> <i class="fa fa-search" aria-hidden="true"></i> </button>
+              </span> </div>
+          </div>
+        </div>
+        <div class="inbox_chat">
+          <div class="chat_list" *ngFor="let user of users" [ngClass]="{'active_chat': user === activeUser}">
+            <a (click)="setCurrentUser(user)">
+            <div class="chat_people">
+              <div class="chat_img"> <img src="https://ptetutorials.com/images/user-profile.png" alt="sunil"> </div>
+              <div class="chat_ib">
+                <h5>{{user.username}} <span class="chat_date">Dec 25</span></h5>
+                <p>{{user.email}}</p>
               </div>
             </div>
-          </form>
+          </a>
+          </div>
+          
+         
         </div>
-        <div id="users-list" class="list-group position-relative">
-          <div class="users-list-padding">
-            <a class="list-group-item bg-blue-grey bg-lighten-5 border-right-primary border-right-2" (click)="SetActive($event, 'chat1')">
-              <span class="media">
-                <span class="avatar avatar-md avatar-online">
-                  <img class="media-object d-flex mr-3 bg-primary height-50 rounded-circle" src="assets/img/portrait/small/avatar-s-3.png"
-                    alt="Generic placeholder image">
-                  <i></i>
-                </span>
-                <div class="media-body  text-left">
-                  <h6 class="list-group-item-heading">Elizabeth Elliott
-                    <span class="font-small-3 float-right primary">4:14 AM</span>
-                  </h6>
-                  <p class="list-group-item-text text-muted">
-                    <i class="ft-check primary font-small-2"></i> Okay
-                    <span class="float-right primary">
-                      <i class="font-medium-1 icon-pin blue-grey lighten-3"></i>
-                    </span>
-                  </p>
-                </div>
-              </span>
-            </a>
-            <a class="list-group-item no-border" (click)="SetActive($event,'chat2')">
-              <span class="media">
-                <span class="avatar avatar-md avatar-busy">
-                  <img class="media-object d-flex mr-3 bg-primary height-50 rounded-circle" src="assets/img/portrait/small/avatar-s-7.png"
-                    alt="Generic placeholder image">
-                  <i></i>
-                </span>
-                <div class="media-body  text-left">
-                  <h6 class="list-group-item-heading">Kristopher Candy
-                    <span class="font-small-3 float-right primary">9:04 PM</span>
-                  </h6>
-                  <p class="list-group-item-text text-muted">
-                    <i class="ft-check primary font-small-2"></i> Thank you
-                    <span class="float-right
-                          primary">
-                      <span class="badge badge-pill badge-primary">12</span>
-                    </span>
-                  </p>
-                </div>
-              </span>
-            </a>
-            <a class="list-group-item no-border" (click)="SetActive($event,'chat3')">
-              <span class="media">
-                <span class="avatar avatar-md avatar-away">
-                  <img class="media-object d-flex mr-3 bg-primary height-50 rounded-circle" src="assets/img/portrait/small/avatar-s-8.png"
-                    alt="Generic placeholder image">
-                  <i></i>
-                </span>
-                <div class="media-body  text-left">
-                  <h6 class="list-group-item-heading">Sarah Woods
-                    <span class="font-small-3 float-right primary">2:14 AM</span>
-                  </h6>
-                  <p class="list-group-item-text text-muted">
-                    <i class="ft-check font-small-2"></i> Hello krish!
-                    <span class="float-right primary">
-                      <i class="font-medium-1 icon-volume-off blue-grey lighten-3 mr-1"></i>
-                      <span class="badge badge-pill badge-primary">3</span>
-                    </span>
-                  </p>
-                </div>
-              </span>
-            </a>
-            <a class="list-group-item no-border" (click)="SetActive($event,'chat4')">
-              <span class="media">
-                <span class="avatar avatar-md avatar-away">
-                  <img class="media-object d-flex mr-3 bg-primary height-50 rounded-circle" src="assets/img/portrait/small/avatar-s-5.png"
-                    alt="Generic placeholder image">
-                  <i></i>
-                </span>
-                <div class="media-body  text-left">
-                  <h6 class="list-group-item-heading">Bruce Reid
-                    <span class="font-small-3 float-right primary">Yesterday</span>
-                  </h6>
-                  <p class="list-group-item-text text-muted">
-                    <i class="ft-check font-small-2"></i> Will connect you</p>
-                </div>
-              </span>
-            </a>
-            <a class="list-group-item no-border" (click)="SetActive($event,'chat5')">
-              <span class="media">
-                <span class="avatar avatar-md avatar-online">
-                  <img class="media-object d-flex mr-3 bg-primary height-50 rounded-circle" src="assets/img/portrait/small/avatar-s-9.png"
-                    alt="Generic placeholder image">
-                  <i></i>
-                </span>
-                <div class="media-body  text-left">
-                  <h6 class="list-group-item-heading">Heather Howell
-                    <span class="font-small-3 float-right primary">Friday</span>
-                  </h6>
-                  <p class="list-group-item-text text-muted">
-                    <i class="ft-check font-small-2"></i> Thank you
-                    <span class="float-right primary">
-                      <span class="badge badge-pill badge-primary">4</span>
-                    </span>
-                  </p>
-                </div>
-              </span>
-            </a>
-            <a class="list-group-item no-border" (click)="SetActive($event,'chat6')">
-              <span class="media">
-                <span class="avatar avatar-md avatar-busy">
-                  <img class="media-object d-flex mr-3 bg-primary height-50 rounded-circle" src="assets/img/portrait/small/avatar-s-4.png"
-                    alt="Generic placeholder image">
-                  <i></i>
-                </span>
-                <div class="media-body  text-left">
-                  <h6 class="list-group-item-heading">Kelly Reyes
-                    <span class="font-small-3 float-right primary">Thrusday</span>
-                  </h6>
-                  <p class="list-group-item-text text-muted">
-                    <i class="ft-check font-small-2"></i> I love you </p>
-                </div>
-              </span>
-            </a>
-            <a class="list-group-item no-border" (click)="SetActive($event,'chat7')">
-              <span class="media">
-                <span class="avatar avatar-md avatar-online">
-                  <img class="media-object d-flex mr-3 bg-primary height-50 rounded-circle" src="assets/img/portrait/small/avatar-s-14.png"
-                    alt="Generic placeholder image">
-                  <i></i>
-                </span>
-                <div class="media-body  text-left">
-                  <h6 class="list-group-item-heading">Vincent Nelson</h6>
-                  <p class="list-group-item-text text-muted">
-                    <i class="ft-check primary font-small-2"></i> Who you are?</p>
-                </div>
-              </span>
-            </a>
+      </div>
+      <div class="mesgs">
+        <div class="msg_history">
+          <div class="incoming_msg">
+            <div class="incoming_msg_img"> <img src="https://ptetutorials.com/images/user-profile.png" alt="sunil">
+            </div>
+            <div class="received_msg">
+              <div class="received_withd_msg">
+                <p>Test which is a new approach to have all
+                  solutions</p>
+                <span class="time_date"> 11:01 AM | June 9</span>
+              </div>
+            </div>
+          </div>
+          <div class="outgoing_msg">
+            <div class="sent_msg">
+              <p>Test which is a new approach to have all
+                solutions</p>
+              <span class="time_date"> 11:01 AM | June 9</span>
+            </div>
+          </div>
+          <div class="incoming_msg">
+            <div class="incoming_msg_img"> <img src="https://ptetutorials.com/images/user-profile.png" alt="sunil">
+            </div>
+            <div class="received_msg">
+              <div class="received_withd_msg">
+                <p>Test, which is a new approach to have</p>
+                <span class="time_date"> 11:01 AM | Yesterday</span>
+              </div>
+            </div>
+          </div>
+          <div class="outgoing_msg">
+            <div class="sent_msg">
+              <p>Apollo University, Delhi, India Test</p>
+              <span class="time_date"> 11:01 AM | Today</span>
+            </div>
+          </div>
+          <div class="incoming_msg">
+            <div class="incoming_msg_img"> <img src="https://ptetutorials.com/images/user-profile.png" alt="sunil">
+            </div>
+            <div class="received_msg">
+              <div class="received_withd_msg">
+                <p>We work directly with our designers and suppliers,
+                  and sell direct to you, which means quality, exclusive
+                  products, at a price anyone can afford.</p>
+                <span class="time_date"> 11:01 AM | Today</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="type_msg">
+          <div class="input_msg_write">
+            <input type="text" class="write_msg" placeholder="Type a message" />
+            <button class="msg_send_btn" type="button"><i class="fa fa-paper-plane-o" aria-hidden="true"></i></button>
           </div>
         </div>
       </div>
     </div>
-    <div class="chat-name p-2 bg-white">
-      <div class="media">
-        <span class="chat-app-sidebar-toggle ft-align-justify font-large-1 mr-2 d-none d-block d-sm-block d-md-none" (click)="onSidebarToggle()"></span>
-        <div class="media-body text-left">
-          <img [src]="[activeChatUserImg]" width="37" class="rounded-circle mr-1" alt="avatar" />
-          <span>{{ activeChatUser }}</span>
-          <i class="ft-more-vertical float-right mt-1"></i>
-        </div>
-      </div>
-    </div>
-    <section class="chat-app-window" #scrollMe [scrollTop]="scrollMe.scrollHeight">
-      <div class="badge badge-dark mb-1">Chat History</div>
-      <div class="chats">
-        <div class="chats">
-          <div [ngClass]="[chat.chatClass]" *ngFor="let chat of chat">
-            <div class="chat-avatar">
-              <a class="avatar" data-toggle="tooltip" data-placement="[chat.avatar]" title="" data-original-title="">
-                <img [src]="[chat.imagePath]" class="width-50" alt="avatar" />
-              </a>
-            </div>
-            <div class="chat-body">
-              <div class="chat-content" *ngFor="let message of chat.messages">
-                <p *ngIf="chat.messageType === 'text'">{{ message }}</p>
-                
-              </div>
-            </div>
-            <p class="time" *ngIf="chat.time !='' ">{{chat.time}}</p>
-          </div>
-  
-          <div class="chat" *ngIf="messages.length > 0">
-            <div class="chat-avatar">
-              <a class="avatar" data-toggle="tooltip" data-placement="right" title="" data-original-title="">
-                <img src="assets/img/portrait/small/avatar-s-1.png" class="width-50" alt="avatar" />
-              </a>
-            </div>
-            <div class="chat-body">
-              <div class="chat-content" *ngFor="let message of messages">
-                <p>{{ message }}</p>
-              </div>
-            </div>
-          </div>
-  
-        </div>
-      </div>
-    </section>
-    <section class="chat-app-form bg-blue-grey bg-lighten-5">
-      <form class="chat-app-input row mt-2">
-        <fieldset class="form-group position-relative has-icon-left col-lg-10 col-8 m-0 px-3">
-          <div class="form-control-position">
-            <i class="icon-emoticon-smile"></i>
-          </div>
-          <input type="text" class="form-control" id="iconLeft4" placeholder="Type your message"  (keydown.enter)="onAddMessage();$event.preventDefault()"
-          #messageInput>
-          <div class="form-control-position control-position-right">
-            <i class="ft-image mr-1"></i>
-          </div>
-        </fieldset>
-        <fieldset class="form-group position-relative has-icon-left col-lg-2 col-4 m-0">
-          <button type="button" class="btn btn-raised btn-primary px-4" (click)="onAddMessage()">
-            <i class="fa fa-paper-plane-o d-block d-xl-inline-block d-lg-none p-0"></i>
-            <span class="d-none d-lg-inline-block ml-1">Send</span>
-          </button>
-        </fieldset>
-      </form>
-    </section>
-  </div>
-  
