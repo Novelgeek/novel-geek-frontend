@@ -16,6 +16,10 @@ constructor(private http: HttpClient) { }
     return this.http.get('http://localhost:8080/friend/requests');
   }
 
+  getFriendRecommendations() {
+    return this.http.get('http://localhost:8080/friend/recommended-users');
+  }
+
   acceptFriendRequest(userId) {
     return this.http.post('http://localhost:8080/friend/accept-request/' + userId, {});
   }

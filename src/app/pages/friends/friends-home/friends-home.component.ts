@@ -34,7 +34,10 @@ export class FriendsHomeComponent implements OnInit {
       this.requests = data;
     })
 
-    console.log(this.friends.length === 0);
+    this.friendService.getFriendRecommendations().subscribe(data => {
+      console.log(data);
+      
+    })
 
   }
 
