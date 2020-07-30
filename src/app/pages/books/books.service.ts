@@ -65,4 +65,13 @@ export class BooksService {
       reviewDescription: myReview
     });
   }
+
+  addNewBook(newBook: FormData) {
+    return this.http.post('http://localhost:8080/book/addNewBook', newBook);
+  }
+
+  getAllLocalBooks() {
+    return this.http.get('http://localhost:8080/book/allLocal')
+  }
+
 }

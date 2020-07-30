@@ -1,4 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { Poll } from 'app/core/_models/poll.model';
+import { PollService } from 'app/core/_services/poll.service';
+import { ToastrService } from 'ngx-toastr';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-polls-home',
@@ -7,9 +11,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PollsHomeComponent implements OnInit {
 
-  constructor() { }
-
-  ngOnInit() {
+  ngOnInit(): void {
+   
+    
   }
+
+  
+
 
 }

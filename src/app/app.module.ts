@@ -10,6 +10,7 @@ import { ToastrModule } from 'ngx-toastr';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { NgxUsefulSwiperModule } from 'ngx-useful-swiper';
 import { BarRatingModule } from 'ngx-bar-rating';
+import { NgSelectModule } from '@ng-select/ng-select';
 
 import { PerfectScrollbarModule, PERFECT_SCROLLBAR_CONFIG, PerfectScrollbarConfigInterface} from 'ngx-perfect-scrollbar';
 
@@ -54,16 +55,27 @@ import { ForgotPasswordComponent } from './pages/auth/forgot-password/forgot-pas
 import { ResetPasswordComponent } from './pages/auth/reset-password/reset-password.component';
 import { from } from 'rxjs';
 import { FriendCardComponent } from './pages/friends/friend-card/friend-card.component';
+
 import { AuctionHomeComponent } from './pages/auction/auction-home/auction-home.component';
 import { AuctionCardComponent } from './pages/auction/auction-card/auction-card.component';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatNativeDateModule} from '@angular/material';
+
+import { AddPollComponent } from './pages/polls/add-poll/add-poll.component';
+import { MyPollsComponent } from './pages/polls/my-polls/my-polls.component';
+import { PollModelComponent } from './pages/polls/poll-model/poll-model.component';
+
 
 import {MatInputModule} from '@angular/material/input';
 
 import {MatButtonModule} from '@angular/material/button';
 import { ManageAdminsComponent } from './pages/admin/manage-admins/manage-admins.component';
 import { ManagePostsComponent } from './pages/admin/manage-posts/manage-posts.component';
+import { AddBookComponent } from './pages/books/add-book/add-book.component';
+import { ArchwizardModule } from 'angular-archwizard';
+import { LocalBooksComponent } from './pages/books/local-books/local-books.component';
+import { LocalBookCardComponent } from './pages/books/local-books/local-book-card/local-book-card.component';
+
 export function tokenGetter() {
   return localStorage.getItem('token');
 }
@@ -97,6 +109,9 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     SalesHomeComponent,
     ProfileSettingsComponent,
     AuctionHomeComponent,
+    AddBookComponent,
+    LocalBooksComponent,
+    LocalBookCardComponent,
 
     BookletComponent,
     SearchResultsComponent,
@@ -110,8 +125,14 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     GroupHorizontalCardComponent,
     GroupDetailComponent,
     NotFoundComponent,
+
     AuctionHomeComponent,
-    AuctionCardComponent
+    AuctionCardComponent,
+
+    AddPollComponent,
+    MyPollsComponent,
+    PollModelComponent
+
   ],
   imports: [
     BrowserAnimationsModule,
@@ -120,13 +141,13 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     HttpClientModule,
     NgbModule,
     BarRatingModule,
-
+    NgSelectModule,
     MatDatepickerModule,
     MatSliderModule,
     MatInputModule,
     MatButtonModule,
     MatNativeDateModule,
-
+    ArchwizardModule,
     PerfectScrollbarModule,
     FormsModule,
     ToastrModule.forRoot(),
