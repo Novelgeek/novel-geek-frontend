@@ -13,6 +13,7 @@ export class FriendsHomeComponent implements OnInit {
   friends: any = [];
   notFriends: any = [];
   requests: any = [];
+  recommendations: any = [];
 
   constructor(private friendService: FriendService, private toastr: ToastrService, private spinner: NgxSpinnerService) { }
 
@@ -34,7 +35,10 @@ export class FriendsHomeComponent implements OnInit {
       this.requests = data;
     })
 
-    console.log(this.friends.length === 0);
+    this.friendService.getFriendRecommendations().subscribe(data => {
+      this.recommendations = data;
+      console.log(data)
+    })
 
   }
 
@@ -51,6 +55,9 @@ export class FriendsHomeComponent implements OnInit {
       })
       this.notFriends = this.allUsers.filter( user => {
         return !user.friend;
+      })
+      this.recommendations = this.recommendations.filter( user => {
+        return user.id !== id
       })
       this.spinner.hide()
     }, errorMsg => {
