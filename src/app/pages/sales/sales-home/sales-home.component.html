@@ -1,84 +1,177 @@
 <div class="row">
-  <div>OTHERS</div>
-  <div class="col-12">
-    <div class="card-deck-wrapper">
-      <div class="card-deck">
-        <div class="card">
-          <div class="card-content">
-            <div class="card-img">
-              <img src="https://novel-geek.s3.ap-south-1.amazonaws.com/1593969828549_four.jpg" alt="" class="card-img-top img-fluid">
-              <a href="" class="btn btn-floating halfway-fab btn-large bg-brimary">
-                <i class="ft-phone"></i>
-              </a>
+  <div class="col-md-12 col-lg-12">
+    <div class="card">
+      <div class="card-content">
+        <div class="card-body">
+          <div class="row">
+            <div class="col-6">
+              <h4 class="card-title">Buy Books</h4>
             </div>
-           <div class="card-body">
-             <h4 class="card-title">card title</h4>
-             <p class="card-text">
-               My card content for selling old books. here you can include 
-               short description about book.date of buying bla bla
-             </p>
-           </div>
-           <div class="card-footer">
-             <p class="card-text">
-               <small class="text-muted">
-                 some some details, uploaded date and such things
-               </small>
-             </p>
-           </div>
+            <div class="col-6">
+              <form class="form">
+                <div class="form-group">
+                  <div class="row">
+                    <div class="col-6">
+                      <button class="btn btn-outline-info mr-1 pull-right primary" (click)="onOpen()">
+                        <i class="ft-plus primary mr-1"></i>
+                        Sell a Book
+                      </button>
+                    </div>
+                    <div class="col-6">
+                      
+                      <div class="input-group ">
+                        <input type="text" class="form-control " placeholder="Search" aria-describedby="button-addon4">
+                        <div class="input-group-append">
+                          <button class="btn btn-raised btn-primary" type="button"><i class="ft-search"></i></button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </form>
+            </div>
           </div>
-        </div>
 
-        <div class="card">
-          <div class="card-content">
-            <div class="card-img">
-              <img src="https://novel-geek.s3.ap-south-1.amazonaws.com/1593969469239_two.jpg" alt="" class="card-img-top img-fluid">
-              <a href="" class="btn btn-floating halfway-fab btn-large bg-brimary">
-               <i class="ft-phone"></i>
-             </a>
+
+          <div class="row">
+            <div class="col-auto">
+              <ul ngbNav #nav="ngbNav" class="nav-pills">
+                <li ngbNavItem >
+                  <a ngbNavLink>My Sales Posts</a>
+                  <ng-template ngbNavContent>
+                    <!--<div class="row" matchHeight="card">
+                      <div class="col col-xl-3 col-lg-3 col-md-3 col-sm-6 col-12" *ngFor="let group of myGroups">
+                        <app-group-card [group]="group"></app-group-card>
+                      </div>
+                    </div>-->                  
+                    <div class="row justify-content-center  mt-2 font-medium-4" matchHeight="card">
+                      No posts yet. Click on Sell a Book to start selling.
+                    </div>
+                  </ng-template>
+                </li>
+                <li ngbNavItem>
+                  <a ngbNavLink>All Sales Posts</a>
+                  <ng-template ngbNavContent>
+                    <!--<div class="row">
+                      <div class="col-sm-12 col-md-6" *ngFor="let group of allGroups">
+                        <app-group-horizontal-card [group]="group"></app-group-horizontal-card>
+                      </div>
+                    </div>-->
+                    <div class="card-columns">
+                      <app-sales-modal></app-sales-modal>
+                      <app-sales-modal></app-sales-modal>
+                      <app-sales-modal></app-sales-modal>
+                      <app-sales-modal></app-sales-modal>
+                      <app-sales-modal></app-sales-modal>
+                      <app-sales-modal></app-sales-modal>
+                    </div> 
+                    <div class="row justify-content-center  mt-2 font-medium-4" matchHeight="card">
+                      There are no Posts yet. Click on Sell a Book to get started.
+                    </div>
+                  </ng-template>
+                </li>
+              </ul>
             </div>
-           <div class="card-body">
-             <h4 class="card-title">card title</h4>
-             <p class="card-text">
-               My card content for selling old books. here you can include 
-               short description about book.date of buying bla bla
-             </p>
-           </div>
-           <div class="card-footer">
-             <p class="card-text">
-               <small class="text-muted">
-                 some some details, uploaded date and such things
-               </small>
-             </p>
-           </div>
           </div>
-        </div>
-        <div class="card">
-          <div class="card-content">
-            <div class="card-img">
-              <img src="https://novel-geek.s3.ap-south-1.amazonaws.com/1593114236067_dog.jpg" alt="" class="card-img-top img-fluid">
-              <a href="" class="btn btn-floating halfway-fab btn-large bg-brimary">
-               <i class="ft-phone"></i>
-             </a>
-            </div>
-           <div class="card-body">
-             <h4 class="card-title">card title</h4>
-             <p class="card-text">
-               My card content for selling old books. here you can include 
-               short description about book.date of buying bla bla
-             </p>
-           </div>
-           <div class="card-footer">
-             <p class="card-text">
-               <small class="text-muted">
-                 some some details, uploaded date and such things
-               </small>
-             </p>
-           </div>
-          </div>
+
+
         </div>
       </div>
     </div>
   </div>
 </div>
 
+
+<div [ngbNavOutlet]="nav"></div>
+
+<!--CREATE NEW POST CUSTOM MODAL SECTION-->
+ <div class="row">
+  <div class="backdrop" *ngIf="create">
+    <div class="col-10 modal-box" >
+       <form #createpost="ngForm" (ngSubmit)="onsubmit(createpost.value)">
+         <div class="card">
+             <div class="card-header d-flex justify-content-between">
+               <h4 class="card-title">Sell a Book</h4>
+               <i class="ft-x" style="cursor:pointer;" (click)="onClose()"></i>
+             </div>    
+             <div class="card-body form-group">
+              <mat-form-field class="example-full-width">
+                <mat-label>Title</mat-label>
+                <input matInput ngModel #title="ngModel" name="title" required>
+              </mat-form-field>
+              <div class="row">
+                <div class="col-6 card-content">
+                  <div class="card-content" *ngIf="imagePath!=''">
+                    <img [src]="imagePath" class="img-fluid">
+                  </div>
+                  <div class="form-group">
+                    <i class="primary icon-picture mr-2"></i>
+                    <label style="cursor:pointer;">
+                      <span class="primary">Attach Photo</span>
+                      <input (change)="uploadImage($event)" ngModel name="image" type="file" style="display:none;">
+                    </label>
+                  </div> 
+                </div>
+                <div class="col-6">
+                  <mat-form-field  class="example-full-width">
+                    <mat-label>Description</mat-label>
+                    <textarea matInput cols="100" rows="10"  name="description" ngModel #description="ngModel" required></textarea>
+                  </mat-form-field>
+                  <mat-form-field  class="example-full-width">
+                    <mat-label>Price</mat-label>
+                    <input matInput name="price" ngModel #price="ngModel" required/>
+                  </mat-form-field>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-6">
+                  <div class="example-full-width">
+                    Would you like to share your phone number with us ?
+                    <a class="btn btn-outline-info mr-1 primary" (click)="enableContact()">
+                      Yes
+                    </a>
+                    <a class="btn btn-outline-info mr-1 primary" (click)="showMessage()">
+                      No
+                    </a>
+                  </div>
+                  <div *ngIf="contact">
+                    <mat-form-field  class="example-full-width">
+                      <mat-label>Contact Number</mat-label>
+                      <input matInput name="telephone" ngModel #telephone="ngModel" [required]="contact"/>
+                    </mat-form-field>
+                  </div>
+                  <div *ngIf="!contact" style="color: red;">
+                    Make sure to puplish a way to contact you
+                  </div>
+                </div>
+                <div class="col-6">
+                  <div class="example-full-width">
+                    <img src="../../../assets/img/logos/payhere.png" 
+                    width="50" height="20" class="d-inline-flex mr-1">
+                    Don't you have a Merchent Id from PayHere ?
+                    <a href="https://www.payhere.lk" target="_blank" class="btn btn-outline-info mr-1 primary">
+                      No
+                    </a>
+                  </div>
+                  <div>
+                    <mat-form-field  class="example-full-width">
+                      <mat-label>Merchant ID</mat-label>
+                      <input  matInput name="merchentID" ngModel #merchentId="ngModel" required/>
+                    </mat-form-field>
+                  </div>
+                </div>
+              </div>
+
+             </div>    
+             <div class="card-footer d-flex justify-content-center">          
+                <input type="submit" [disabled]="!createpost.valid" value="Post to Sell" class="btn btn-raised gradient-purple-bliss white"> 
+             </div> 
+         </div>
+       </form>
+    </div>
+  </div>
+ </div>
+
+<ngx-spinner></ngx-spinner>
 
