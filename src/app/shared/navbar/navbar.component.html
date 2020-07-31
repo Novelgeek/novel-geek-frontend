@@ -1,16 +1,17 @@
-
 <!-- Navbar (Header) Starts -->
 <nav class="header-navbar navbar navbar-expand-lg navbar-light bg-shades">
     <div class="container-fluid">
         <div class="navbar-header">
-            <button type="button" class="navbar-toggle d-lg-none float-left" data-toggle="collapse" (click)="toggleSidebar()">
+            <button type="button" class="navbar-toggle d-lg-none float-left" data-toggle="collapse"
+                (click)="toggleSidebar()">
                 <span class="sr-only">Toggle navigation</span>
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
             <span class="d-lg-none navbar-right navbar-collapse-toggle">
-                <a class="open-navbar-container" (click)="isCollapsed = !isCollapsed" [attr.aria-expanded]="!isCollapsed" aria-controls="navbarSupportedContent">
+                <a class="open-navbar-container" (click)="isCollapsed = !isCollapsed"
+                    [attr.aria-expanded]="!isCollapsed" aria-controls="navbarSupportedContent">
                     <i class="ft-more-vertical"></i>
                 </a>
             </span>
@@ -24,7 +25,7 @@
                 </div>
             </form> -->
 
-           
+
         </div>
         <div class="navbar-container">
             <div class="collapse navbar-collapse" id="navbarSupportedContent" [ngbCollapse]="isCollapsed">
@@ -40,52 +41,64 @@
                             <!-- <span class="notification badge badge-pill badge-danger align-middle">4</span> -->
                             <!-- <p class="d-inline">Notifications</p> -->
                         </a>
-                        <div ngbDropdownMenu aria-labelledby="dropdownBasic2" class="notification-dropdown dropdown-menu-right">
+                        <div ngbDropdownMenu aria-labelledby="dropdownBasic2"
+                            class="notification-dropdown dropdown-menu-right">
                             <div class="noti-list" [perfectScrollbar]>
-                                <a class="dropdown-item noti-container py-3 border-bottom border-bottom-blue-grey border-bottom-lighten-4">
+                                <a *ngFor="let group of groupNotifications"
+                                    class="dropdown-item noti-container py-3 border-bottom border-bottom-blue-grey border-bottom-lighten-4"
+                                    [routerLink]="['/groups']">
                                     <i class="ft-bell info float-left d-block font-large-1 mt-1 mr-2"></i>
                                     <span class="noti-wrapper">
-                                        <span class="noti-title line-height-1 d-block text-bold-400 info">New Order Received</span>
-                                        <span class="noti-text">Lorem ipsum dolor sit ametitaque in, et!</span>
+                                        <span class="noti-title line-height-1 d-block text-bold-400 info">Group</span>
+                                        <span class="noti-text">{{group.firedUser.username}} invited you to join
+                                            {{group.group.groupName}}</span>
                                     </span>
                                 </a>
-                                <a class="dropdown-item noti-container py-3 border-bottom border-bottom-blue-grey border-bottom-lighten-4">
+                                <a *ngFor="let friend of friendNotifications"
+                                    class="dropdown-item noti-container py-3 border-bottom border-bottom-blue-grey border-bottom-lighten-4"
+                                    [routerLink]="['/friends']">
                                     <i class="ft-bell warning float-left d-block font-large-1 mt-1 mr-2"></i>
                                     <span class="noti-wrapper">
-                                        <span class="noti-title line-height-1 d-block text-bold-400 warning">New User Registered</span>
-                                        <span class="noti-text">Lorem ipsum dolor sit ametitaque in </span>
+                                        <span class="noti-title line-height-1 d-block text-bold-400 warning">Friend</span>
+                                        <span class="noti-text">{{friend.username}} Sent you a Friend Request</span>
                                     </span>
                                 </a>
-                                <a class="dropdown-item noti-container py-3 border-bottom border-bottom-blue-grey border-bottom-lighten-4">
+                                <a
+                                    class="dropdown-item noti-container py-3 border-bottom border-bottom-blue-grey border-bottom-lighten-4">
                                     <i class="ft-bell danger float-left d-block font-large-1 mt-1 mr-2"></i>
                                     <span class="noti-wrapper">
-                                        <span class="noti-title line-height-1 d-block text-bold-400 danger">New Order Received</span>
+                                        <span class="noti-title line-height-1 d-block text-bold-400 danger">New Order
+                                            Received</span>
                                         <span class="noti-text">Lorem ipsum dolor sit ametest?</span>
                                     </span>
                                 </a>
                                 <a class="dropdown-item noti-container py-3">
                                     <i class="ft-bell success float-left d-block font-large-1 mt-1 mr-2"></i>
                                     <span class="noti-wrapper">
-                                        <span class="noti-title line-height-1 d-block text-bold-400 success">New User Registered</span>
+                                        <span class="noti-title line-height-1 d-block text-bold-400 success">New User
+                                            Registered</span>
                                         <span class="noti-text">Lorem ipsum dolor sit ametnatus aut.</span>
                                     </span>
                                 </a>
                             </div>
-                            <a class="noti-footer primary text-center d-block border-top border-top-blue-grey border-top-lighten-4 text-bold-400 py-1">Read All Notifications</a>
+                            <a
+                                class="noti-footer primary text-center d-block border-top border-top-blue-grey border-top-lighten-4 text-bold-400 py-1">Read
+                                All Notifications</a>
                         </div>
                     </li>
                     <li></li>
                     <li class="nav-item" ngbDropdown [placement]="placement">
                         <a class="nav-link position-relative" id="dropdownBasic3" ngbDropdownToggle>
-                            
-                            <img *ngIf="user.photoUrl === null" src="../../../assets/img/portrait/default.svg" width="30" height="30" class="d-inline-flex rounded-circle mr-1">
-                            <img *ngIf="user.photoUrl !== null" [src]="user.photoUrl" width="30" height="30" 
-                            class="d-inline-flex rounded-circle mr-1"
-                            onerror="this.src='../../../assets/img/portrait/default.svg';">
+
+                            <img *ngIf="user.photoUrl === null" src="../../../assets/img/portrait/default.svg"
+                                width="30" height="30" class="d-inline-flex rounded-circle mr-1">
+                            <img *ngIf="user.photoUrl !== null" [src]="user.photoUrl" width="30" height="30"
+                                class="d-inline-flex rounded-circle mr-1"
+                                onerror="this.src='../../../assets/img/portrait/default.svg';">
                             <!-- <i class="ft-user font-medium-3 blue-grey darken-4"></i> -->
                             <p class="d-inline ">{{user.username}} </p>
                         </a>
-                        <div ngbDropdownMenu aria-labelledby="dropdownBasic3" class="text-left dropdown-menu-right">                           
+                        <div ngbDropdownMenu aria-labelledby="dropdownBasic3" class="text-left dropdown-menu-right">
                             <a *ngIf="!isAdmin" class="dropdown-item py-1" [routerLink]="['/profile']">
                                 <i class="ft-edit mr-2"></i>
                                 <span>My Profile</span>
@@ -111,11 +124,10 @@
                             <p class="d-none">Notifications Sidebar</p>
                         </a>
                     </li> -->
-                   
+
                 </ul>
             </div>
         </div>
-    </div> 
+    </div>
 </nav>
 <!-- Navbar (Header) Ends -->
-
