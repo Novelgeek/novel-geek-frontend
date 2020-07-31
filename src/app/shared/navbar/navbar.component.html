@@ -38,7 +38,7 @@
                     <li *ngIf="!isAdmin" class="nav-item" ngbDropdown [placement]="placement">
                         <a class="nav-link position-relative" id="dropdownBasic2" ngbDropdownToggle>
                             <i class="d-inline icon-bell font-medium-2 blue-grey darken-4 align-middle"></i>
-                            <!-- <span class="notification badge badge-pill badge-danger align-middle">4</span> -->
+                            <span class="notification badge badge-pill badge-danger align-middle">{{groupNotifications.length + friendNotifications.length}}</span>
                             <!-- <p class="d-inline">Notifications</p> -->
                         </a>
                         <div ngbDropdownMenu aria-labelledby="dropdownBasic2"

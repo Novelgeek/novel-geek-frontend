@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FriendService } from 'app/core/_services/friend.service';
 import { ToastrService } from 'ngx-toastr';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { NotificationService } from 'app/core/_services/notification.service';
 
 @Component({
   selector: 'app-friends-home',
@@ -15,10 +16,11 @@ export class FriendsHomeComponent implements OnInit {
   requests: any = [];
   recommendations: any = [];
 
-  constructor(private friendService: FriendService, private toastr: ToastrService, private spinner: NgxSpinnerService) { }
+  constructor(private friendService: FriendService, private toastr: ToastrService, private spinner: NgxSpinnerService,
+              private notificationService: NotificationService) { }
 
   search(){
-    console.log("searching");
+    console.log('searching');
   }
   ngOnInit() {
     this.friendService.getUsers().subscribe(data => {
@@ -50,6 +52,7 @@ export class FriendsHomeComponent implements OnInit {
       this.requests = this.requests.filter( request => {
         return request.id !== id
       })
+      this.notificationService.friendNotifications.next(this.requests)
       this.friends = this.allUsers.filter( user => {
         return user.friend;
       })
@@ -73,6 +76,7 @@ export class FriendsHomeComponent implements OnInit {
       this.requests = this.requests.filter( request => {
         return request.id !== id
       })
+      this.notificationService.friendNotifications.next(this.requests)
       this.spinner.hide()
     }, errorMsg => {
       this.toastr.error('Unable to decline request currently, please try again later!')

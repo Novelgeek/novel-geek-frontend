@@ -7,6 +7,7 @@ import { GroupService } from 'app/core/_services/group.service';
 import { group } from '@angular/animations';
 import { ToastrService } from 'ngx-toastr';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { NotificationService } from 'app/core/_services/notification.service';
 
 @Component({
   selector: 'app-group-home',
@@ -22,7 +23,8 @@ export class GroupHomeComponent implements OnInit {
 
   constructor(private authSerice: AuthService, private http: HttpClient,
               private modalService: NgbModal, private groupService: GroupService,
-              private toastr: ToastrService, private spinner: NgxSpinnerService) { }
+              private toastr: ToastrService, private spinner: NgxSpinnerService,
+              private notificationService: NotificationService) { }
 
   ngOnInit() {
     this.spinner.show();
@@ -82,6 +84,7 @@ export class GroupHomeComponent implements OnInit {
       this.groupInvites = this.groupInvites.filter(invite => {
         return invite.notificationId !== inviteId
       })
+      this.notificationService.groupNotifications.next(this.groupInvites)
       this.spinner.hide();
       this.toastr.success('Joined Group' + data.groupName)
     }, error => {
@@ -96,6 +99,7 @@ export class GroupHomeComponent implements OnInit {
       this.groupInvites = this.groupInvites.filter(invite => {
         return invite.notificationId !== inviteId
       })
+      this.notificationService.groupNotifications.next(this.groupInvites)
       this.spinner.hide();
     }, error => {
       this.toastr.error('Unable to decline request currently');
