@@ -1,12 +1,12 @@
 
-<div class="card card-outline-info boc-shadow-0">
+<div class="card boc-shadow-0">
   <div class="card-header d-flex justify-content-between"> 
     <div>
       <img src="../../../assets/img/portrait/default.svg" 
       width="30" height="30" class="d-inline-flex rounded-circle mr-1">
-      <span class="text-muted"><b>username </b></span>
+      <span class="text-muted"><b>{{item.username}}</b></span>
       <br/>
-      <span class="card-subtitle text-muted">publish date</span>
+      <span class="card-subtitle text-muted">{{item.publishedDate|date:'medium'}}</span>
     </div>
     <div>
       <a href="" class="btn btn-floating btn-large bg-brimary">
@@ -18,18 +18,22 @@
     <div class="card-body">
       <div class="row d-flex">
         <div class="col-lg-6 col-12 align-self-center mb-2 mb-lg-0">
-          <img src="https://novel-geek.s3.ap-south-1.amazonaws.com/1593970345795_five.jpg" 
+          <div *ngIf="item.imagePath!= null ">
+            <img [src]="item.imagePath" 
           alt="" width="135" 
           class="mt-sm-2">
-          <p class="btn btn-outline-warning mr-1 warning">PRICE: 200/=</p>
+          </div>
+          <p class="btn btn-outline-warning mr-1 warning">PRICE: {{item.price}}/=</p>
         </div>
         <div class="col-lg-6 col-12 align-self-center">
-          <h4 class="card-title mb-3">card title</h4>
-          <p class="card-text">
-            My card content for selling old books. here you can include 
-            short description about book.date of buying bla bla
-          </p>
-          <button class="btn btn-outline-danger mr-1 danger">BUY THIS BOOK</button>
+          <h4 class="card-title mb-3">{{item.title}}</h4>
+          <p class="card-text">{{item.description}}</p>
+          <div *ngIf="item.owned">
+            <button class="btn btn-outline-info mr-1 info">MORE INFO</button>
+          </div>
+          <div *ngIf="!item.owned && !item.sold">
+            <button class="btn btn-outline-danger mr-1 danger" (click)="openPayment()">BUY THIS BOOK</button>
+          </div>
         </div>
       </div>
 
@@ -37,3 +41,72 @@
   </div>
 </div>
 
+<!--HANDLE PAYMENT- PAYMENT INFO-->
+<div class="row">
+  <div class="backdrop" *ngIf="pay">
+    <div class="col-10 modal-box" >
+       <form #buybook="ngForm" method="post" action="https://sandbox.payhere.lk/pay/checkout">
+         <div class="card">
+             <div class="card-header d-flex justify-content-between">
+               <h4 class="card-title">{{item.title}}</h4>
+               <i class="ft-x" style="cursor:pointer;" (click)="onClose()"></i>
+             </div> 
+                
+             <div class="card-body form-group">
+                <div class="row">
+                  <div class="col-6 card-content">
+                    <mat-form-field  class="example-full-width">
+                      <mat-label>First Name</mat-label>
+                      <input matInput name="first_name" ngModel #first_name="ngModel" required/>
+                    </mat-form-field>
+                  </div>
+                  <div class="col-6">
+                    <mat-form-field  class="example-full-width">
+                      <mat-label>Last Name</mat-label>
+                      <input matInput  name="last_name" ngModel #last_name="ngModel" required/>
+                    </mat-form-field>
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="col-6">
+                    <mat-form-field  class="example-full-width">
+                      <mat-label>Email</mat-label>
+                      <input matInput name="email" ngModel #email="ngModel" type="email" required/>
+                    </mat-form-field>
+                    <mat-form-field  class="example-full-width">
+                      <mat-label>Contact Number</mat-label>
+                      <input matInput name="phone" ngModel #phone="ngModel" required/>
+                    </mat-form-field>                
+                  </div>
+                  <div class="col-6">
+                    <mat-form-field  class="example-full-width">
+                      <mat-label>Address</mat-label>
+                      <input matInput name="address" ngModel #address="ngModel" type="email" required/>
+                    </mat-form-field>
+                    <mat-form-field  class="example-full-width">
+                      <mat-label>City</mat-label>
+                      <input matInput name="city" ngModel #city="ngModel" required/>
+                    </mat-form-field> 
+                  </div>
+                </div>
+                <input type="hidden" ngModel  name="merchant_id" value="{{item.merchantid}}">    <!-- Replace your Merchant ID -->
+                <input type="hidden" ngModel  name="return_url" value="http://localhost:4200/posts">
+                <input type="hidden" ngModel  name="cancel_url" value="http://localhost:4200/profile">
+                <input type="hidden" ngModel  name="notify_url" value="http://localhost:8080/selling/newpayment"> 
+                <input type="hidden" ngModel name="order_id" value="{{item.sellingid}}">
+                <input type="hidden" ngModel name="items" value="{{item.title}}">
+                <input type="hidden" ngModel  name="currency" value="LKR">
+                <input type="hidden" ngModel  name="amount" value="{{item.price}}"> 
+                <input type="hidden" ngModel  name="country" value="Sri Lanka">
+             </div>    
+             <div class="card-footer d-flex justify-content-center form-group">          
+                <input type="submit" [disabled]="!buybook.valid" value="Buy Book" class="btn btn-raised gradient-purple-bliss white"> 
+             </div> 
+          </div>
+        </form>
+    </div>
+  </div>
+</div>
+
+<ngx-spinner></ngx-spinner>

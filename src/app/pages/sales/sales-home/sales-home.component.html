@@ -43,8 +43,14 @@
                       <div class="col col-xl-3 col-lg-3 col-md-3 col-sm-6 col-12" *ngFor="let group of myGroups">
                         <app-group-card [group]="group"></app-group-card>
                       </div>
-                    </div>-->                  
-                    <div class="row justify-content-center  mt-2 font-medium-4" matchHeight="card">
+                    </div>--> 
+                    <div class="card-columns">
+                      <ng-container *ngFor="let item of myPosts; let itemindex = index;">
+                        <app-sales-modal [item]="item" [itemindex]="itemindex" (ondelete)="onDeletePost($event)"></app-sales-modal>
+                      </ng-container>                 
+                    </div>
+
+                    <div class="row justify-content-center  mt-2 font-medium-4" matchHeight="card" *ngIf="myPosts.length === 0">
                       No posts yet. Click on Sell a Book to start selling.
                     </div>
                   </ng-template>
@@ -52,20 +58,14 @@
                 <li ngbNavItem>
                   <a ngbNavLink>All Sales Posts</a>
                   <ng-template ngbNavContent>
-                    <!--<div class="row">
-                      <div class="col-sm-12 col-md-6" *ngFor="let group of allGroups">
-                        <app-group-horizontal-card [group]="group"></app-group-horizontal-card>
-                      </div>
-                    </div>-->
+
                     <div class="card-columns">
-                      <app-sales-modal></app-sales-modal>
-                      <app-sales-modal></app-sales-modal>
-                      <app-sales-modal></app-sales-modal>
-                      <app-sales-modal></app-sales-modal>
-                      <app-sales-modal></app-sales-modal>
-                      <app-sales-modal></app-sales-modal>
+                      <ng-container *ngFor="let item of allPosts; let itemindex = index;">
+                        <app-sales-modal [item]="item" [itemindex]="itemindex" (ondelete)="onDeletePost($event)"></app-sales-modal>
+                      </ng-container>      
                     </div> 
-                    <div class="row justify-content-center  mt-2 font-medium-4" matchHeight="card">
+
+                    <div class="row justify-content-center  mt-2 font-medium-4" matchHeight="card" *ngIf="allPosts.length === 0">
                       There are no Posts yet. Click on Sell a Book to get started.
                     </div>
                   </ng-template>
@@ -157,7 +157,7 @@
                   <div>
                     <mat-form-field  class="example-full-width">
                       <mat-label>Merchant ID</mat-label>
-                      <input  matInput name="merchentID" ngModel #merchentId="ngModel" required/>
+                      <input  matInput name="merchantid" ngModel #merchantid="ngModel" required/>
                     </mat-form-field>
                   </div>
                 </div>
