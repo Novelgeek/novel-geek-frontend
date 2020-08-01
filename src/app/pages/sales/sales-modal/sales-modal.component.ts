@@ -5,7 +5,7 @@ import { HttpClient } from '@angular/common/http';
 import { SellingService } from 'app/core/_services/selling.service';
 import { ToastrService } from 'ngx-toastr';
 import { NgxSpinnerService } from 'ngx-spinner';
-
+//declare const myTest: any;
 @Component({
   selector: 'app-sales-modal',
   templateUrl: './sales-modal.component.html',
@@ -20,7 +20,7 @@ export class SalesModalComponent implements OnInit {
   // cancel: string;
   // notify: string;
   // order: string;
-  // title: string;
+   //title: string;
   // merchant: string;
   // country: string;
   // price: string;
@@ -35,7 +35,7 @@ export class SalesModalComponent implements OnInit {
     // this.cancel="http://localhost:4200/profile";
     // this.notify="http://localhost:8080/selling/newpayment";
     // this.order=this.item.sellingid.toString();
-    // this.title=this.item.title;
+     //this.title=this.item.title;
     // this.merchant=this.item.merchantid;
     // this.price=this.item.price.toString();
     // this.country="Sri Lanka";
@@ -63,6 +63,7 @@ export class SalesModalComponent implements OnInit {
 
   public onSubmit(Values:any){
     console.log(Values);
+    //myTest()
     // this.pay=false
     // this.new_payment = new Payment_modal();
     // this.new_payment.merchant_id = this.item.merchantid;
