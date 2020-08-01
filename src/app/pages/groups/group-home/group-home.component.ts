@@ -21,6 +21,8 @@ export class GroupHomeComponent implements OnInit {
   groupInvites: any = [];
   selectedFile: File;
 
+  searchTerm;
+
   constructor(private authSerice: AuthService, private http: HttpClient,
               private modalService: NgbModal, private groupService: GroupService,
               private toastr: ToastrService, private spinner: NgxSpinnerService,
@@ -107,6 +109,12 @@ export class GroupHomeComponent implements OnInit {
     })
   }
 
+  transform(list: any[], filterText: string): any {
+    return list ? list.filter(item => item.name.search(new RegExp(filterText, 'i')) > -1) : [];
+  }
 
+  onSearch() {
+    this.allGroups = this.transform(this.allGroups, this.searchTerm);
+  }
 
 }

@@ -28,9 +28,9 @@
                     <div class="col-6">
                       
                       <div class="input-group ">
-                        <input type="text" class="form-control " placeholder="Search" aria-describedby="button-addon4">
+                        <input type="text" class="form-control" [(ngModel)]="searchTerm" placeholder="Search" aria-describedby="button-addon4">
                         <div class="input-group-append">
-                          <button class="btn btn-raised btn-primary" type="button"><i class="ft-search"></i></button>
+                          <button class="btn btn-raised btn-primary" (click)="onSearch()" type="button"><i class="ft-search"></i></button>
                         </div>
                       </div>
                     </div>
