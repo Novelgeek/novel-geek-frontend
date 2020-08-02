@@ -27,6 +27,7 @@ import { PostsHomeComponent } from './pages/posts/posts-home/posts-home.componen
 import { PostModalComponent } from './pages/posts/post-modal/post-modal.component';
 import { ProfileHomeComponent } from './pages/profile/profile-home/profile-home.component';
 import { SalesHomeComponent } from './pages/sales/sales-home/sales-home.component';
+import {SalesModalComponent} from './pages/sales/sales-modal/sales-modal.component';
 import { ProfileSettingsComponent } from './pages/profile/profile-settings/profile-settings.component';
 import { TokenInterceptor } from './core/_services/token.interceptor';
 import { ChartsModule } from 'ng2-charts';
@@ -107,6 +108,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     PostModalComponent,
     ProfileHomeComponent,
     SalesHomeComponent,
+    SalesModalComponent,
     ProfileSettingsComponent,
     AuctionHomeComponent,
     AddBookComponent,

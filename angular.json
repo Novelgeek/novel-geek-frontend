@@ -30,7 +30,8 @@
               "node_modules/@ng-select/ng-select/themes/default.theme.css"
             ],
             "scripts": [
-              "src/assets/vendor/pace/pace.min.js"
+              "src/assets/vendor/pace/pace.min.js",
+              "src/assets/js/custom.js"
             ]
           },
           "configurations": {
