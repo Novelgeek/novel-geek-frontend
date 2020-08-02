@@ -16,6 +16,8 @@ export class AuctionProcessComponent implements OnInit {
   remainingTime: any;
   auctionId: any;
   bidders: any = [];
+  highestBidder: any;
+
   constructor(private auctionService:AuctionService,private route: ActivatedRoute, private spinner: NgxSpinnerService) { }
 
   ngOnInit(): void {
@@ -41,6 +43,9 @@ export class AuctionProcessComponent implements OnInit {
       this.remainingTime = this.dhm(time);
 
       this.bidders = this.data.auctionUserHitory;
+      this.filter();
+      this.highestBidder = this.data.currentBidUser.id;
+
     },
     error => {
       console.log(error);
@@ -59,4 +64,16 @@ export class AuctionProcessComponent implements OnInit {
     return days+" days and "+hours+" hours";
   }
 
+  filter(){
+    let resArr = [];
+    this.bidders.forEach(item => {
+
+      let i = resArr.findIndex(x => x.bidUser.id == item.bidUser.id);
+      console.log(i);
+      if(i <= -1){
+        resArr.push(item);
+      }
+    });
+    this.bidders = resArr;
+  }
 }

@@ -19,9 +19,9 @@
 </div>
 <div class="row" style="margin-top: auto;">
 
-        <div class="col-12" *ngFor="let bidder of bidders">
+        <div class="col-12" *ngFor="let bidder of bidders ">
             <div class="container" style="text-align: center;">
-                <app-bidder-card></app-bidder-card>
+                <app-bidder-card [bidder] = "bidder" [highestBidder]="highestBidder"></app-bidder-card>
             </div>
 
          </div>

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,Input } from '@angular/core';
 
 @Component({
   selector: 'app-bidder-card',
@@ -7,9 +7,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class BidderCardComponent implements OnInit {
 
+  @Input() bidder: any = [];
+  @Input() highestBidder: any;
+  isBidder = false;
   constructor() { }
 
   ngOnInit(): void {
+    if(this.bidder.bidUser.id==this.highestBidder){
+      this.isBidder = true;
+    }else{
+      this.isBidder = false;
+    }
   }
 
 }
