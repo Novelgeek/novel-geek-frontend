@@ -31,7 +31,9 @@ export class PollModelComponent implements OnInit {
   vote() {
     this.spinner.show();
     this.pollService.vote(this.poll.id, this.selected).subscribe(success => {
+
       //this.poll.voted = true;
+
       this.toastr.success('Vote submitted!');
     }, error => {
       console.log(error);
