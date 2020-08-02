@@ -21,8 +21,8 @@
 
                         <a  mat-button [matMenuTriggerFor]="menu"  href="javascript:void(0)" class="btn"><i class="fa fa-ellipsis-h" aria-hidden="true"></i></a>
                         <mat-menu #menu="matMenu">
-                            <button mat-menu-item> <mat-icon>dialpad</mat-icon>Prcess</button>
-                            <button mat-menu-item>Delete</button>
+                            <button mat-menu-item (click)="onProcess()"> <mat-icon>dialpad</mat-icon>Prcess</button>
+                            <button mat-menu-item (click)="onDelete()"><mat-icon>delete_outline</mat-icon>Delete</button>
                         </mat-menu>
                     </div>
             </div>

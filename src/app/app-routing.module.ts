@@ -57,6 +57,7 @@ const appRoutes: Routes = [
       {path: 'books/reviewbook', component: BookReviewComponent},
       {path: 'auctions', component: AuctionHomeComponent},
       {path: 'auctions/process', component: AuctionProcessComponent},
+      {path: 'auctions/process/:id', component: AuctionProcessComponent},
       {path: 'store', component: StoreComponent},
 
       {path: 'friends', component: FriendsHomeComponent},

@@ -5,7 +5,7 @@ import {HttpClient} from '@angular/common/http'
   providedIn: 'root'
 })
 export class AuctionService {
-
+  aid = '';
   constructor(private http: HttpClient) { }
   
   addAuction(auction: FormData){
@@ -19,5 +19,10 @@ export class AuctionService {
   addNewBid(bid){
     console.log(bid);
     return this.http.post('http://localhost:8080/auction/addnewbid', bid);
+  }
+  
+  getAuctionData(aid) {
+    this.aid = aid;
+    return this.http.get('http://localhost:8080/auction/getauctiondata/' + this.aid);
   }
 }
