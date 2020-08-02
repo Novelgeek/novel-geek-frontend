@@ -16,30 +16,23 @@ export class SalesModalComponent implements OnInit {
   @Input() item: Selling_modal;
   @Input() itemindex: number;
   public new_payment: Payment_modal;
-  // return: string;
-  // cancel: string;
-  // notify: string;
-  // order: string;
-   //title: string;
-  // merchant: string;
-  // country: string;
-  // price: string;
-  // currency:string;
+  return: string;
+  cancel: string;
+  notify: string;
+  country: string;
+  
+  currency:string;
   pay=false;
   constructor(private http: HttpClient, private sellingService: SellingService,
     private toastr: ToastrService, private spinner: NgxSpinnerService) { }
 
   ngOnInit() {
 
-    // this.return="http://localhost:4200/posts";
-    // this.cancel="http://localhost:4200/profile";
-    // this.notify="http://localhost:8080/selling/newpayment";
-    // this.order=this.item.sellingid.toString();
-     //this.title=this.item.title;
-    // this.merchant=this.item.merchantid;
-    // this.price=this.item.price.toString();
-    // this.country="Sri Lanka";
-    // this.currency="LKR";
+    this.return="http://localhost:4200/sales";
+    this.cancel="http://localhost:4200/sales";
+    this.notify="http://localhost:8080/selling/newpayment";
+    this.country="Sri Lanka";
+    this.currency="LKR";
   }
 
   public deletePost(postid: number) {
