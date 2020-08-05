@@ -47,7 +47,6 @@ export class GroupDetailComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.spinner.show();
     this.userId = +this.authService.currentUser.id;
-    console.log(this.userId);
     this.sub = this.route.params.subscribe(params => {
       this.id = +params['id'];
    });
@@ -61,6 +60,7 @@ export class GroupDetailComponent implements OnInit, OnDestroy {
     this.groupName = this.group.groupName;
     this.description = this.group.description;
     this.avatar = this.group.groupAvatar;
+    console.log(this.avatar)
     this.spinner.hide();
    }, error => {
      // tslint:disable-next-line: no-unused-expression

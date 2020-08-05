@@ -1,8 +1,8 @@
 <div class="row">
   <div class="col-12">
       <div class="card profile-with-cover">
-          <div *ngIf="group.groupAvatar === null" class="card-img-top img-fluid bg-cover height-200" style="background: url('../assets/img/group/default.jpg') 50%;"></div>
-          <div *ngIf="group.groupAvatar !== null" class="card-img-top img-fluid bg-cover height-200" [ngStyle]="{'background': 'url(' + group.groupAvatar + ')'}" ></div>
+          <div *ngIf="avatar === null" class="card-img-top img-fluid bg-cover height-200" style="background: url('../assets/img/group/default.jpg') 50%;"></div>
+          <div *ngIf="avatar !== null" class="card-img-top img-fluid bg-cover height-200" [ngStyle]="{'background': 'url(' + avatar + ')'}" ></div>
           <div class="media profil-cover-details row mt-2 mb-1">
               <div class="col-5">
                   <div class="align-self-start halfway-fab pl-3 pt-2">
