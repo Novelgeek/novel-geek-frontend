@@ -78,4 +78,8 @@ export class GroupService {
     return this.http.get('http://localhost:8080/group/getAllUsers/' + groupId)
   }
 
+  createPost(newpost: FormData, groupId) {
+    return this.http.post('http://localhost:8080/group/' + groupId + '/newpost', newpost)
+}
+
 }
