@@ -7,6 +7,10 @@ export class Poll {
     endDate: string;
     voted: boolean;
 
+    constructor() {
+    this.voted = false;
+  }
+
   
 
   }

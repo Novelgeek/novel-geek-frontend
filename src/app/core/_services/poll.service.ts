@@ -25,11 +25,13 @@ export class PollService {
     return this.http.post('http://localhost:8080/poll/newpoll', poll);
   }
 
-  deletePoll(pollId: number) {
-    return this.http.delete('http://localhost:8080/poll/delete' + pollId);
+  deletePoll(pollid: number) {
+    return this.http.delete('http://localhost:8080/poll/delete/' + pollid);
   }
 
   vote(pollId: number, selectedOption: number){
     return this.http.post('http://localhost:8080/poll/' + pollId + '/vote/' + selectedOption, {});
   }
+
+
 }

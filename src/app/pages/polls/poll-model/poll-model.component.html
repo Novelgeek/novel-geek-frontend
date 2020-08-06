@@ -1,19 +1,22 @@
 <!-- view all polls -->
+<div class="card">
+  <div class="card-body">
 <div class="icon-block">
-    <h2 class="center light-blue-text">
+    <!-- <h2 class="center light-blue-text">
       <i class="material-icons">insert_chart</i>
-    </h2>
-    <h5 class="center">{{poll.title}}</h5>
+    </h2> -->
+    <h5 class="card-title">{{poll.title}}</h5>
+    <br>
     <form *ngIf="!votingEnded">
       <div *ngFor="let option of poll.options,  let i = index"
            class="left-align">
-        <p>
+        <p class="card-text">
           <label>
-            <input (click)="selected=option.id"
+            <input (click)="selected=option.optionid"
                    name="group1"
                    type="radio"
                    [disabled]="poll.voted" />
-            <span>{{option?.option}}</span>
+            <span>  {{option?.option}}</span>
           </label>
         </p>
       </div>
@@ -29,6 +32,8 @@
     <button routerLink="/poll/{{poll.id}}"
             class="btn waves-effect waves-light cyan accent-4">See results</button>
   </div>
+</div>
+</div>
 
   <!-- <ng-template #results>
     <div class="row">
