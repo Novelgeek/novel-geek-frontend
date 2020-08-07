@@ -52,20 +52,28 @@
                   <section id="posts">
                     <div class="row">
                       <div class="col-12">
-                          <div class="content-header">Posts</div>
-                          <div class="row">
+                          
+                          <div class="row justify-content-between">
+                            <div class="content-header">Posts</div>
                             <button class="btn btn-outline-info mr-1 pull-right primary" (click)="open(createPost)">
                               <i class="ft-plus primary mr-1"></i>
-                              Create Group
+                              Add New Post
                             </button>
                           </div>
-
-                          <ng-container *ngFor="let item of posts; let itemindex = index;">
-                            <app-post-modal [item]="item" [itemindex]="itemindex" ></app-post-modal>
-                          </ng-container>
-                          <div *ngIf="posts?.length === 0">
-                            <span class="card-body text-muted" >Currently, No Post Available</span>
+                          <div class="row">
+                            <div class="col-sm-6">
+                              <ng-container *ngFor="let item of posts; let itemindex = index;">
+                                <app-post-modal [item]="item" [itemindex]="itemindex" ></app-post-modal>
+                              </ng-container>
+                            </div>
                           </div>
+                          <div class="row justify-content-center">
+                            <div *ngIf="posts?.length === 0">
+                              <br>
+                              <span class="mt-2 font-medium-4" >No Post Available, Add a post to fuel up the group</span>
+                            </div>
+                          </div>
+
                       </div>
                     </div>
                   </section>
