@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-local-book-card',
@@ -7,9 +8,16 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class LocalBookCardComponent implements OnInit {
   @Input() book: any;
-  constructor() { }
+  totalPrice = 1000;
+  constructor(private modalService: NgbModal) { }
 
   ngOnInit() {
+  }
+
+  open(content) {
+    this.modalService.open(content, {ariaLabelledBy: 'create-group'}).result.then((result) => {
+    }, (reason) => {
+    });
   }
 
 }
