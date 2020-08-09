@@ -9,13 +9,18 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 export class LocalBookCardComponent implements OnInit {
   @Input() book: any;
   totalPrice = 1000;
+  merchantId = 1215152;
+  qty = 1
+  price = 1000;
+  currency = 'LKR';
+  
   constructor(private modalService: NgbModal) { }
 
   ngOnInit() {
   }
 
   open(content) {
-    this.modalService.open(content, {ariaLabelledBy: 'create-group'}).result.then((result) => {
+    this.modalService.open(content).result.then((result) => {
     }, (reason) => {
     });
   }
