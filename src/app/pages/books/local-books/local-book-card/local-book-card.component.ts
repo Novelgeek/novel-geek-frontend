@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-local-book-card',
@@ -13,8 +14,8 @@ export class LocalBookCardComponent implements OnInit {
   qty = 1
   price = 1000;
   currency = 'LKR';
-  
-  constructor(private modalService: NgbModal) { }
+
+  constructor(private modalService: NgbModal, private http: HttpClient) { }
 
   ngOnInit() {
   }
@@ -23,6 +24,14 @@ export class LocalBookCardComponent implements OnInit {
     this.modalService.open(content).result.then((result) => {
     }, (reason) => {
     });
+  }
+
+  onClick() {
+    this.http.post('https://sandbox.payhere.lk/pay/checkout', {
+
+    })
+    console.log('aa')
+    this.http.request('POST', 'https://sandbox.payhere.lk/pay/checkout')
   }
 
 }
