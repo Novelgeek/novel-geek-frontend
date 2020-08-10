@@ -26,8 +26,8 @@
                   <a ngbNavLink>My Polls</a>
                   <ng-template ngbNavContent>
                     <div class="row">
-                      <div *ngFor="let poll of mypolls" class="col-sm-12 col-md-6">
-                        <app-my-polls [poll]="poll"></app-my-polls>
+                      <div *ngFor="let poll of mypolls; let itemindex = index;" class="col-sm-12 col-md-6">
+                        <app-my-polls [poll]="poll"  [itemindex]="itemindex" (ondelete)="onDeletePoll($event)"></app-my-polls>
                       </div>
                     </div>
                   </ng-template>

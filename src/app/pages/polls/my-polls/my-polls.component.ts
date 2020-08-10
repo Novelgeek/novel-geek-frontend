@@ -20,7 +20,8 @@ export class MyPollsComponent implements OnInit {
     ) { }
 
     @Input() poll: any;
-    @Output() ondelete  = new EventEmitter ();
+    @Input() itemindex: number;
+    @Output() ondelete  = new EventEmitter<{id: number}> ();
     isShow:boolean = false;
  
     ngOnInit(): void {
@@ -30,12 +31,12 @@ export class MyPollsComponent implements OnInit {
     }
 
 
-  deletePoll() {
+  deletePoll(pollid: number) {
     this.spinner.show()
-    this.pollService.deletePoll(this.poll.pollid)
+    this.pollService.deletePoll(pollid)
       .subscribe(success => {
         this.isShow = false;
-        this.ondelete.emit({id: this.poll.pollid});
+        this.ondelete.emit({id: this.itemindex});
         this.toastr.success('poll deleted!');
         this.spinner.hide()
       }, error => {
