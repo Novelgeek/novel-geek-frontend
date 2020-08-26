@@ -24,7 +24,6 @@ export class PostModalComponent implements OnInit {
   isShow:boolean = false;
   report :boolean = false;
 
-
   commentList: Comment_modal [];
   public new_comment: Comment_modal;
   likeList: Like_modal [];
@@ -163,9 +162,11 @@ export class PostModalComponent implements OnInit {
     .subscribe(response => {
       this.new_comment = response;
       this.commentList.splice(0, 0, this.new_comment);
+      this.item.commentcount+=1;
     })
     this.addcomment.reset();
   }
+
 
   public toggleList() {
     this.isShow = !this.isShow;
@@ -176,4 +177,7 @@ export class PostModalComponent implements OnInit {
     this.showComments = false;
   }
 
+  onDeleteComment(data: {id: number}){
+    this.commentList.splice(data.id, 1);
+  }
 }

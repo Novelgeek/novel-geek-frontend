@@ -1,12 +1,21 @@
 <div class="card">
   <div class="card-header d-flex justify-content-between">
-    <div>
+    <div *ngIf="item.userimg !=null">
+      <img [src]="item.userimg" 
+      width="30" height="30" class="d-inline-flex rounded-circle mr-1">
+      <span class="text-muted"><b>{{item.username}} </b></span>
+      <br/>
+      <span class="card-subtitle text-muted"> {{item.publishedDate|date:'medium'}}</span>
+    </div>
+
+    <div *ngIf="item.userimg == null">
       <img src="../../../assets/img/portrait/default.svg" 
       width="30" height="30" class="d-inline-flex rounded-circle mr-1">
       <span class="text-muted"><b>{{item.username}} </b></span>
       <br/>
       <span class="card-subtitle text-muted"> {{item.publishedDate|date:'medium'}}</span>
     </div>
+
     <div>
       <a (click)="toggleList()"><i  class="ft-more-horizontal"></i></a>
       <div style="position:relative">
@@ -80,19 +89,8 @@
       No comments yet :D
     </div>
     <div>
-      <ng-container *ngFor="let com of commentList">
-        <div class="row">
-          <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60" 
-          width="30" height="30" class="rounded-circle mr-1" >
-          <div class="col chat-bubble mb-1" style="float: right;">
-            <div class="row">
-              <b style="font-size: small; padding-bottom: 0px;">{{com.username}}</b>
-            </div>
-            <div class="row">
-              <p>{{com.comment}}</p>
-            </div>
-          </div>
-        </div>
+      <ng-container *ngFor="let comment of commentList; let commentindex = index;">
+        <app-post-comment-modal [comment]="comment" [commentindex]="commentindex" (ondelete)="onDeleteComment($event)"></app-post-comment-modal>
       </ng-container>
     </div>
     <div style="float: right; font-size: small; color: rgb(16, 80, 175); text-decoration: underline;">
