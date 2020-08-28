@@ -11,7 +11,7 @@ import { NgxSpinnerService } from 'ngx-spinner';
 })
 export class PollModelComponent implements OnInit {
 
-  @Input() poll: Poll;
+  @Input() poll: any;
   selected: number;
   votingEnded = false;
 
@@ -30,14 +30,14 @@ export class PollModelComponent implements OnInit {
 
   vote() {
     // this.spinner.show();
-    this.pollService.vote(this.poll.id, this.selected).subscribe(success => {
+    this.pollService.vote(this.poll.pollid, this.selected).subscribe(success => {
       console.log(this.selected);
       this.poll.voted = true;
       // this.spinner.hide();
       this.toastr.success('Vote submitted!');
     }, error => {
       console.log(error);
-      this.toastr.error(error);
+      this.toastr.success('You can\'t vote twise!');
       // this.spinner.hide();
     });
   }

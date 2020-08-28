@@ -1,5 +1,13 @@
 <!-- view all polls -->
 <div class="card">
+  <div class="card-header">
+    <div class="col">
+      <img src="../../../assets/img/portrait/default.svg" 
+      width="30" height="30" class="d-inline-flex rounded-circle mr-1">
+      <span class="text-muted"><b>{{poll.user.username}} </b></span>
+      <br/>
+    </div>
+  </div>
   <div class="card-body">
 <div class="icon-block">
     <!-- <h2 class="center light-blue-text">
@@ -20,6 +28,7 @@
           </label>
         </p>
       </div>
+      <p *ngIf="poll.voted">Already Voted.</p>
     </form>
     <div *ngIf="votingEnded">
       Voting has ended.
@@ -29,13 +38,13 @@
             (click)="vote()"
             class="btn waves-effect waves-light cyan accent-4">Vote</button>
     <!-- TO-DO: if end date passed -->
-    <button routerLink="/poll/{{poll.id}}"
+    <button (click)="open(result)"
             class="btn waves-effect waves-light cyan accent-4">See results</button>
   </div>
 </div>
 </div>
 
-  <!-- <ng-template #results>
+  <ng-template #result>
     <div class="row">
         <div class="input-field col s8 offset-s2">
           <div class="poll-container">
@@ -48,4 +57,4 @@
         </div>
       </div>
   </ng-template>
-   -->
+  
