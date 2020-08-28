@@ -18,28 +18,33 @@
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                <td>1</td>
+                <tr *ngFor="let report of reportList; let i = index;">
+                <td>{{i+1}}</td>
                 <td>
-                    <div>
+                    <div *ngIf="report.userimg !=null">
+                        <img [src]="report.userimg" 
+                    width="30" height="30" class="rounded-circle mr-1" >
+                    {{report.username}}
+                    </div>
+                    <div *ngIf="report.userimg ==null">
                         <img src="../../../assets/img/portrait/default.svg" 
                     width="30" height="30" class="rounded-circle mr-1" >
-                    User Name
+                    {{report.username}}
                     </div>                    
                 </td>
                 <td>
-                    post id
-                    <a class="badge bg-info" style="color:white;">view</a>
+                    {{report.postid}}
+                    <a (click)="getreportedPost(report.postid)" class="badge bg-info" style="color:white;">view</a>
                 </td>
                 <td>
-                    total of reports
-                    <a class="badge bg-info" style="color:white;">view</a>
+                    {{report.reportcount}}
+                    <a (click)="getReportedData(report.postid, i)" class="badge bg-info" style="color:white;">view</a>
                 </td>
                 <td>
-                    <a class="danger p-0" data-original-title="" title="">
+                    <a (click)="deleteReportedPost(report.postid, i)" class="danger p-0" data-original-title="" title="">
                     <i class="ft-trash-2 font-medium-3 mr-2"></i>
                     </a>
-                    <a class="success p-0" data-original-title="" title="">
+                    <a  (click)="cancelReport(report.postid)" class="success p-0" data-original-title="" title="">
                     <i class="ft-x font-medium-3 mr-2"></i>
                     </a>
                 </td>
@@ -51,3 +56,111 @@
     </div>
     </div>
 </div>
+
+<!--VIEW REPORTED POST-->
+<div class="row">
+    <div class="backdrop" *ngIf="showpost">
+      <div class="col-3"></div>
+      <div class="col-4 modal-box" >
+        <div class="card">
+            <div class="card-header d-flex justify-content-between">
+              <div *ngIf="post.userimg !=null">
+                <img [src]="post.userimg" 
+                width="30" height="30" class="d-inline-flex rounded-circle mr-1">
+                <span class="text-muted"><b>{{post.username}} </b></span>
+                <br/>
+                <span class="card-subtitle text-muted"> {{post.publishedDate|date:'medium'}}</span>
+              </div>
+          
+              <div *ngIf="post.userimg == null">
+                <img src="../../../assets/img/portrait/default.svg" 
+                width="30" height="30" class="d-inline-flex rounded-circle mr-1">
+                <span class="text-muted"><b>{{post.username}} </b></span>
+                <br/>
+                <span class="card-subtitle text-muted"> {{post.publishedDate|date:'medium'}}</span>
+              </div>
+          
+              <div>
+                <a (click)="closePost()"><i  class="ft-x"></i></a>
+              </div>
+            </div>
+          
+            <div class="card-body">
+              <h5 class="card-title">{{post.title}}</h5>
+              <div class="card-content" *ngIf="post.imagePath!= null ">
+                <img [src]="post.imagePath" alt="img"  class="img-fluid">
+              </div>
+              <div class="card-content">
+                  <p class="card-text">
+                    {{post.description}}
+                  </p>
+              </div>
+              <br>
+              <div class="card-content d-flex justify-content-between text-muted">
+                <a style="font-size: small; padding-bottom: 0px;">{{post.likecount}} Likes</a>
+                <a style="font-size: small; padding-bottom: 0px;">{{post.commentcount}} comments</a>
+              </div>
+            </div>
+        </div>
+      <div class="col-5"></div>
+    </div>
+</div>
+<!--VIEW REPORTED DATA-->
+<div class="row">
+    <div class="backdrop" *ngIf="showreports">
+      <div class="col-3"></div>
+      <div class="col-4 modal-box" >
+        <div class="row text-left">
+            <div class="col-sm-12">
+            <div class="card">
+                <div class="card-header d-flex justify-content-between">
+                <h4 class="card-title">Reports Received Data</h4>
+                <div>
+                    <a (click)="closeReport()"><i  class="ft-x"></i></a>
+                </div>
+                </div>
+                <div class="card-content">
+                <div class="card-body">
+                    <table class="table table-responsive-md text-center">
+                    <thead>
+                        <tr>
+                            <th>No</th>
+                            <th>User</th>
+                            <th>Report ID</th>
+                            <th>Reason</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let reportdata of reportDataList; let index = index;">
+                        <td>{{index+1}}</td>
+                        <td>
+                            <div *ngIf="reportdata.userimg !=null">
+                                <img [src]="report.userimg" 
+                            width="30" height="30" class="rounded-circle mr-1" >
+                            {{reportdata.username}}
+                            </div>
+                            <div *ngIf="reportdata.userimg ==null">
+                                <img src="../../../assets/img/portrait/default.svg" 
+                            width="30" height="30" class="rounded-circle mr-1" >
+                            {{reportdata.username}}
+                            </div>                    
+                        </td>
+                        <td>
+                            {{reportdata.reportid}}
+                        </td>
+                        <td>
+                            {{reportdata.reason}}
+                        </td>
+                        </tr>
+                    </tbody>
+                    </table>
+                </div>
+                </div>
+            </div>
+            </div>
+        </div>
+      </div>
+      <div class="col-5"></div>
+    </div>
+</div>
+<ngx-spinner></ngx-spinner>

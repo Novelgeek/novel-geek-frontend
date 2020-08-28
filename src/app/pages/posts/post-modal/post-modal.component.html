@@ -48,10 +48,17 @@
     <div class="card-content" *ngIf="item.imagePath!= null ">
       <img [src]="item.imagePath" alt="img"  class="img-fluid">
     </div>
-    <div class="card-content">
-        <p class="card-text">
-          {{item.description}}
-        </p>
+    <div class="card-content" >
+        <div class="card-text">
+          <div [ngClass]="{'show-less': shortDescription}">
+            <p>
+              {{item.description}}
+            </p>
+          </div>    
+        </div>
+        <a type="button" (click)="alterDescription()" class="primary" style="font-size:12px;">
+          {{ shortDescription ? 'read more...': 'read less' }}
+        </a> 
     </div>
     <br>
     <div class="card-content d-flex justify-content-between text-muted">

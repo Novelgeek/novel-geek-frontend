@@ -18,7 +18,7 @@ export class PostModalComponent implements OnInit {
   @Input() itemindex: number;
   @ViewChild('addcomment') addcomment: NgForm;
   isLiked: boolean;
-
+  shortDescription: boolean=true;
   showComments:boolean=false;
   showLikes:boolean=false;
   isShow:boolean = false;
@@ -37,7 +37,8 @@ export class PostModalComponent implements OnInit {
     this.showLikes = false;
     this.showLikes = false;
     this.report = false;
-   }
+    this.shortDescription=true;
+  }
 
   ngOnInit() {
     if (this.item.liked) {
@@ -179,5 +180,9 @@ export class PostModalComponent implements OnInit {
 
   onDeleteComment(data: {id: number}){
     this.commentList.splice(data.id, 1);
+  }
+
+  alterDescription(){
+    this.shortDescription = !this.shortDescription;
   }
 }
