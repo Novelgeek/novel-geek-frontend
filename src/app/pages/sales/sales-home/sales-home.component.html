@@ -99,6 +99,9 @@
                 <mat-label>Title</mat-label>
                 <input matInput ngModel #title="ngModel" name="title" required>
               </mat-form-field>
+              <div *ngIf="description.errors?.pattern" style="color: red;"> 
+                Inavalid Title
+             </div>
               <div class="row">
                 <div class="col-6 card-content">
                   <div class="card-content" *ngIf="imagePath!=''">
@@ -117,9 +120,15 @@
                     <mat-label>Description</mat-label>
                     <textarea matInput cols="100" rows="10"  name="description" ngModel #description="ngModel" required></textarea>
                   </mat-form-field>
+                  <div *ngIf="description.errors?.pattern" style="color: red;"> 
+                    Inavalid Description
+                 </div>
                   <mat-form-field  class="example-full-width">
                     <mat-label>Price</mat-label>
-                    <input matInput name="price" ngModel #price="ngModel" required/>
+                    <input matInput name="price" ngModel #price="ngModel" required pattern="^[0-9]*"/>
+                    <div *ngIf="price.errors?.pattern" style="color: red;"> 
+                      Inavalid Price
+                   </div>
                   </mat-form-field>
                 </div>
               </div>
@@ -138,8 +147,11 @@
                   <div *ngIf="contact">
                     <mat-form-field  class="example-full-width">
                       <mat-label>Contact Number</mat-label>
-                      <input matInput name="telephone" ngModel #telephone="ngModel" [required]="contact"/>
+                      <input matInput name="telephone" ngModel #telephone="ngModel" [required]="contact" pattern="^[0-9]{10,10}"/>
                     </mat-form-field>
+                    <div *ngIf="telephone.errors?.pattern" style="color: red;"> 
+                      Inavalid Telephone number
+                   </div> 
                   </div>
                   <div *ngIf="!contact" style="color: red;">
                     Make sure to puplish a way to contact you
@@ -157,8 +169,11 @@
                   <div>
                     <mat-form-field  class="example-full-width">
                       <mat-label>Merchant ID</mat-label>
-                      <input  matInput name="merchantid" ngModel #merchantid="ngModel" required/>
+                      <input  matInput name="merchantid" ngModel #merchantid="ngModel" required pattern="^[0-9]{7,7}"/>
                     </mat-form-field>
+                    <div *ngIf="merchantid.errors?.pattern" style="color: red;"> 
+                      Inavalid merchant id.
+                   </div>
                   </div>
                 </div>
               </div>
@@ -172,6 +187,5 @@
     </div>
   </div>
  </div>
-
 <ngx-spinner></ngx-spinner>
 

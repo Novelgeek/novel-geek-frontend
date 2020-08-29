@@ -1,0 +1,49 @@
+<div class="row justify-content-center align-items-center">
+  <div class="col-md-6 col-sm-12">
+    <form #editData="ngForm" (ngSubmit)="onsubmit(editData.value)">
+    <div class="card">
+        <div class="card-header">
+          <h4 class="card-title">Edit Detail</h4>
+        </div> 
+           
+        <div class="card-body form-group">
+          {{myPost.title}}
+          <input type="text" name="Title" ngModel #Title="ngModel" class="form-control card-title" placeholder="Post Title" required>
+          <div class="card-content">
+            {{myPost.description}}
+            <textarea cols="100" rows="10" name="Description" ngModel #Description="ngModel" class="form-control" placeholder="description" required></textarea>
+            <br/>
+            {{myPost.merchantid}}
+            <input cols="100" rows="10" name="Merchantid" ngModel #Merchantid="ngModel" class="form-control" placeholder="merchantid" required/>
+            <br/>
+            {{myPost.telephone}}
+            <input cols="100" rows="10" name="Telephone" ngModel #Telephone="ngModel" class="form-control" placeholder="telephone" required/>
+            <br/>
+            {{myPost.price}}
+            <input cols="100" rows="10" name="Price" ngModel #Price="ngModel" class="form-control" placeholder="price" required/>
+            <br/>
+          </div>
+          <div class="card-content" *ngIf="myPost.imagePath!=null && !isImage">
+            <img [src]="myPost.imagePath" class="img-fluid">
+          </div>
+          <div class="card-content" *ngIf="isImage">
+            <img [src]="newImage" class="img-fluid">
+          </div>
+        </div>    
+        <div class="card-footer d-flex justify-content-between">
+            <div class="form-group">
+              <i class="primary icon-picture mr-2"></i>
+              <label style="cursor:pointer;">
+                <span class="primary">Attach Photo</span>
+                <input (change)="uploadImage($event)" ngModel name="image" type="file" style="display:none;">
+              </label>
+            </div>            
+          
+            <div>
+              <input type="submit" [disabled]="!editData.valid" value="change" class="btn btn-raised gradient-purple-bliss white">
+            </div> 
+        </div> 
+    </div>
+  </form>
+  </div>
+</div>

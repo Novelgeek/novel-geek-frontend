@@ -18,8 +18,7 @@
     <ng-container *ngFor="let item of postList; let itemindex = index;">
       <ng-container *ngIf="item!=null">
         <app-post-modal [item]="item" [itemindex]="itemindex" (ondelete)="onDeletePost($event)"></app-post-modal>
-      </ng-container>
-      
+      </ng-container>      
     </ng-container>
     <div *ngIf="postList.length === 0">
       <span class="card-body text-muted" >Currently, No Post Available</span>

@@ -8,8 +8,8 @@
       <br/>
       <span class="card-subtitle text-muted">{{item.publishedDate|date:'medium'}}</span>
     </div>
-    <div>
-      <a href="" class="btn btn-floating btn-large bg-brimary">
+    <div *ngIf="item.telephone!=null">
+      <a href="" class="btn btn-floating btn-large bg-brimary" [ngbTooltip]="item.telephone">
         <i class="ft-phone"></i>
       </a>
     </div>
@@ -30,9 +30,18 @@
           <p class="card-text">{{item.description}}</p>
           <div *ngIf="item.owned">
             <button class="btn btn-outline-info mr-1 info">MORE INFO</button>
+            <i class="danger p-0 ft-trash-2" style="cursor: pointer;"></i>
+            <div *ngIf="!item.sold">
+              <a [routerLink]="['/salesinfo', item.sellingid]">
+                <i class="ft-edit" style="cursor: pointer;"></i>
+              </a> 
+            </div>
           </div>
           <div *ngIf="!item.owned && !item.sold">
             <button class="btn btn-outline-danger mr-1 danger" (click)="openPayment()">BUY THIS BOOK</button>
+          </div>
+          <div *ngIf="!item.owned && item.sold">
+            <a class="btn btn-outline-danger mr-1 success" >SOLD</a>
           </div>
         </div>
       </div>
@@ -42,80 +51,156 @@
 </div>
 
 <!--HANDLE PAYMENT- PAYMENT INFO-->
-<!-- (ngSubmit)="onSubmit(buybook.value)" -->
 <div class="row">
   <div class="backdrop" *ngIf="pay">
     <div class="col-10 modal-box" >
-       <form #buybook method="POST" action="https://sandbox.payhere.lk/pay/checkout">
-         <div class="card">
-             <div class="card-header d-flex justify-content-between">
-               <h4 class="card-title">{{item.title}}</h4>
-               <i class="ft-x" style="cursor:pointer;" (click)="onClose()"></i>
-             </div> 
-                
-             <div class="card-body form-group">
-                <div class="row">
-                  <div class="col-6 card-content">
-                    <mat-form-field  class="example-full-width">
-                      <mat-label>First Name</mat-label>
-                      <input matInput name="first_name" ngModel #first_name="ngModel" required/>
-                    </mat-form-field>
-                  </div>
-                  <div class="col-6">
-                    <mat-form-field  class="example-full-width">
-                      <mat-label>Last Name</mat-label>
-                      <input matInput  name="last_name" ngModel #last_name="ngModel" required/>
-                    </mat-form-field>
-                  </div>
-                </div>
-
-                <div class="row">
-                  <div class="col-6">
-                    <mat-form-field  class="example-full-width">
-                      <mat-label>Email</mat-label>
-                      <input matInput name="email" ngModel #email="ngModel" type="email" required/>
-                    </mat-form-field>
-                    <mat-form-field  class="example-full-width">
-                      <mat-label>Contact Number</mat-label>
-                      <input matInput name="phone" ngModel #phone="ngModel" required/>
-                    </mat-form-field>                
-                  </div>
-                  <div class="col-6">
-                    <mat-form-field  class="example-full-width">
-                      <mat-label>Address</mat-label>
-                      <input matInput name="address" ngModel #address="ngModel" type="email" required/>
-                    </mat-form-field>
-                    <mat-form-field  class="example-full-width">
-                      <mat-label>City</mat-label>
-                      <input matInput name="city" ngModel #city="ngModel" required/>
-                    </mat-form-field> 
-                  </div>
-                </div>
-                <!-- <input type="hidden" id="merchant_id" [(ngModel)]="item.merchantid" name="merchant_id" value="{{item.merchantid}}">    
-                <input type="hidden" ngModel  name="return_url" value="http://localhost:4200/posts">
-                <input type="hidden" ngModel  name="cancel_url" value="http://localhost:4200/profile">
-                <input type="hidden" ngModel  name="notify_url" value="http://localhost:8080/selling/newpayment"> 
-                <input type="hidden" [(ngModel)]="item.sellingid" name="order_id" value="{{item.sellingid}}">
-                <input type="hidden" [(ngModel)]="item.title" name="items" value="{{item.title}}">
-                <input type="hidden" ngModel  name="currency" value="LKR">
-                <input type="hidden" [(ngModel)]="item.price"  name="amount" value="{{item.price}}"> 
-                <input type="hidden" ngModel  name="country" value="Sri Lanka"> -->
-                <input type="hidden" id="merchant_id" [(ngModel)]="item.merchantid" name="merchant_id">    <!-- Replace your Merchant ID -->
-                <input type="hidden" [(ngModel)]="return"  name="return_url">
-                <input type="hidden" [(ngModel)]="cancel"  name="cancel_url">
-                <input type="hidden" [(ngModel)]="notify" name="notify_url"> 
-                <input type="hidden" [(ngModel)]="item.sellingid" name="order_id" >
-                <input type="hidden" [(ngModel)]="item.title" name="items">
-                <input type="hidden" [(ngModel)]="currency"  name="currency" >
-                <input type="hidden" [(ngModel)]="item.price"  name="amount"> 
-                <input type="hidden" [(ngModel)]="country"  name="country"> 
-             </div>  
-             <!-- [disabled]="!buybook.valid"   -->
-             <div class="card-footer d-flex justify-content-center form-group">          
-                <input type="submit" (click)="buybook.submit()" id="payhere-payment"  value="Buy Book" class="btn btn-raised gradient-purple-bliss white"> 
-             </div> 
-          </div>
-        </form>
+      <div class="card">
+        <div class="card-content">
+            <div class="card-body">
+              <div class="card-header d-flex justify-content-between">
+                <h4 class="card-title">{{item.title}}</h4>
+                <i class="ft-x" style="cursor:pointer;" (click)="onClose()"></i>
+              </div> 
+                <aw-wizard #wizard navBarLayout="large-empty-symbols">
+                    <aw-wizard-step [stepTitle]="'Personal Info'" [navigationSymbol]="{ symbol: '&#xf007;', fontFamily: 'FontAwesome' }">
+                        <form #basicInfo="ngForm" class="editForm">
+                            <h4 class="head text-center">Enter your basic details.</h4>
+                            <br/>
+                            <div class='row'>
+                                <div class='col-12'>
+                                    <div class="row justify-content-center">
+                                      <div class="col-md-6 col-sm-12">
+                                        <mat-form-field  class="example-full-width">
+                                          <mat-label>First Name</mat-label>
+                                          <input matInput name="first_name" ngModel #first_name="ngModel" required pattern="^[A-Za-z]*"/>
+                                        </mat-form-field>
+                                        <div *ngIf="first_name.errors?.pattern" style="color: red;"> 
+                                          Inavalid pattern.
+                                       </div> 
+                                      </div>
+                                      <div class="col-md-6 col-sm-12">
+                                        <mat-form-field  class="example-full-width">
+                                          <mat-label>Last Name</mat-label>
+                                          <input matInput  name="last_name" ngModel #last_name="ngModel" required pattern="^[A-Za-z]*"/>
+                                        </mat-form-field>
+                                        <div *ngIf="last_name.errors?.pattern" style="color: red;"> 
+                                          Inavalid pattern.
+                                       </div> 
+                                      </div>
+                                      <div class="col-md-6 col-sm-12">
+                                        <mat-form-field  class="example-full-width">
+                                          <mat-label>Email</mat-label>
+                                          <input matInput name="email" ngModel #email="ngModel" type="email" required pattern="^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"/>
+                                        </mat-form-field>
+                                        <div *ngIf="email.errors?.pattern" style="color: red;"> 
+                                          Inavalid pattern.
+                                       </div> 
+                                      </div>
+                                      <div class="col-md-6 col-sm-12">
+                                        <mat-form-field  class="example-full-width">
+                                          <mat-label>Contact Number</mat-label>
+                                          <input matInput name="phone" ngModel #phone="ngModel" required pattern="^[0-9]{10,10}"/>
+                                        </mat-form-field>
+                                        <div *ngIf="phone.errors?.pattern" style="color: red;"> 
+                                          Inavalid Telephone number
+                                        </div>
+                                      </div>
+                                      <div class="col-md-6 col-sm-12">
+                                        <mat-form-field  class="example-full-width">
+                                          <mat-label>Address</mat-label>
+                                          <input matInput name="address" ngModel #address="ngModel" required/>
+                                        </mat-form-field>
+                                      </div>
+                                      <div class="col-md-6 col-sm-12">
+                                        <mat-form-field  class="example-full-width">
+                                          <mat-label>City</mat-label>
+                                          <input matInput name="city" ngModel #city="ngModel" required pattern="^[a-zA-Z]*"/>
+                                        </mat-form-field>
+                                        <div *ngIf="city.errors?.pattern" style="color: red;"> 
+                                          Inavalid pattern.
+                                       </div> 
+                                      </div>            
+                                    </div>
+                                    <div class="form-group text-center">
+                                        <button type="button" uiSref="next" (click)="bindData(basicInfo.value)" [disabled]="!basicInfo.valid" class="btn btn-info btn-raised" awNextStep>
+                                            Next
+                                            <span style="margin-left:10px;">
+                                                <i class="ft-chevron-right"></i>
+                                            </span>
+                                        </button>
+                                    </div>
+                              </div>
+                            </div>
+                        </form>
+                    </aw-wizard-step>
+                    <aw-wizard-step [stepTitle]="'Confime Data & Pay'" [navigationSymbol]="{ symbol: '&#xf0ac;', fontFamily: 'FontAwesome' }">
+                        <form #buybooktemp method="POST" action="https://sandbox.payhere.lk/pay/checkout" class="editForm">
+                          <div class="row">
+                            <div class="col-md-6 col-sm-12">
+                              <mat-form-field  class="example-full-width">
+                                <mat-label>First Name</mat-label>
+                                <input matInput name="first_name" [(ngModel)]="firstname" readonly/>
+                              </mat-form-field>
+                            </div>
+                            <div class="col-md-6 col-sm-12">
+                              <mat-form-field  class="example-full-width">
+                                <mat-label>Last Name</mat-label>
+                                <input matInput  name="last_name" [(ngModel)]="lastname" readonly/>
+                              </mat-form-field>
+                            </div>
+                            <div class="col-md-6 col-sm-12">
+                              <mat-form-field  class="example-full-width">
+                                <mat-label>Email</mat-label>
+                                <input matInput name="email" [(ngModel)]="Email" type="email" readonly/>
+                              </mat-form-field>
+                            </div>
+                            <div class="col-md-6 col-sm-12">
+                              <mat-form-field  class="example-full-width">
+                                <mat-label>Contact Number</mat-label>
+                                <input matInput name="phone" [(ngModel)]="Phone" readonly/>
+                              </mat-form-field>
+                            </div>
+                            <div class="col-md-6 col-sm-12">
+                              <mat-form-field  class="example-full-width">
+                                <mat-label>Address</mat-label>
+                                <input matInput name="address"[(ngModel)]="Address" readonly/>
+                              </mat-form-field>
+                            </div>
+                            <div class="col-md-6 col-sm-12">
+                              <mat-form-field  class="example-full-width">
+                                <mat-label>City</mat-label>
+                                <input matInput name="city" [(ngModel)]="City" readonly/>
+                              </mat-form-field> 
+                            </div>
+                          </div>
+                          <input type="hidden" id="merchant_id" [(ngModel)]="item.merchantid" name="merchant_id">    <!-- Replace your Merchant ID -->
+                          <input type="hidden" [(ngModel)]="return"  name="return_url">
+                          <input type="hidden" [(ngModel)]="cancel"  name="cancel_url">
+                          <input type="hidden" [(ngModel)]="notify" name="notify_url"> 
+                          <input type="hidden" [(ngModel)]="item.sellingid" name="order_id" >
+                          <input type="hidden" [(ngModel)]="item.title" name="items">
+                          <input type="hidden" [(ngModel)]="currency"  name="currency" >
+                          <input type="hidden" [(ngModel)]="item.price"  name="amount"> 
+                          <input type="hidden" [(ngModel)]="country"  name="country"> 
+                          <div class="form-group text-center">
+                              <button uiSref="pre" type="button" class="btn btn-raised btn-secondary mr-1" awPreviousStep>
+                                <span style="margin-right:10px;">
+                                    <i class="ft-chevron-left"></i>
+                                </span> 
+                                Previous
+                              </button>
+                              <input uiSref="confirm" type="submit" (click)="buybooktemp.submit()" 
+                              class="btn btn-raised btn-success" value="Confirm and Proceed" awResetWizard/>   
+                                <span style="margin-left:10px;">
+                                    <i class="ft-chevron-right"></i>
+                                </span>   
+                          </div>
+                        </form>    
+                    </aw-wizard-step>
+                </aw-wizard>
+            </div>
+        </div>
+    </div>  
     </div>
   </div>
 </div>
@@ -127,5 +212,8 @@
         console.log(document.getElementById('merchant_id').value);
   };
 </script> -->
+
+<section id="ngx">
+</section>
 
 <ngx-spinner></ngx-spinner>

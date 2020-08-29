@@ -36,4 +36,8 @@ export class SellingService {
         return this.http.delete('http://localhost:8080/selling/delete/'+ sellingid)
 
     }
+
+    getPost(sellingid: number) {
+        return this.http.get<any>('http://localhost:8080/selling/getpost/' + sellingid)
+    }
 }
