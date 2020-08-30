@@ -5,7 +5,7 @@ import { HttpClient } from '@angular/common/http';
 import { SellingService } from 'app/core/_services/selling.service';
 import { ToastrService } from 'ngx-toastr';
 import { NgxSpinnerService } from 'ngx-spinner';
-
+import {Router} from '@angular/router';
 @Component({
   selector: 'app-sales-home',
   templateUrl: './sales-home.component.html',
@@ -24,7 +24,8 @@ export class SalesHomeComponent implements OnInit {
   telephone:any='';
 
   constructor(private http: HttpClient, private sellingService: SellingService,
-    private toastr: ToastrService, private spinner: NgxSpinnerService) {
+    private toastr: ToastrService, private spinner: NgxSpinnerService,
+    private router: Router) {
     this.new_post = new Selling_modal();
     this.myPosts = [];
     this.allPosts = [];
@@ -114,5 +115,15 @@ export class SalesHomeComponent implements OnInit {
     this.create = false;
     this.imagePath = '';
     this.contact = false;
+  }
+
+  onDeletePostAll(data: {id: number}) {
+    this.allPosts.splice(data.id,1);
+   location.reload();
+  }
+
+  onDeletePostMy(data: {id: number}) {
+    this.myPosts.splice(data.id, 1);
+    location.reload();
   }
 }

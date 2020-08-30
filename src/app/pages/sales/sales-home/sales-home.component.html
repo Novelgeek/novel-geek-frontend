@@ -46,7 +46,7 @@
                     </div>--> 
                     <div class="card-columns">
                       <ng-container *ngFor="let item of myPosts; let itemindex = index;">
-                        <app-sales-modal [item]="item" [itemindex]="itemindex" (ondelete)="onDeletePost($event)"></app-sales-modal>
+                        <app-sales-modal [item]="item" [itemindex]="itemindex" (ondelete)="onDeletePostMy($event)"></app-sales-modal>
                       </ng-container>                 
                     </div>
 
@@ -61,7 +61,7 @@
 
                     <div class="card-columns">
                       <ng-container *ngFor="let item of allPosts; let itemindex = index;">
-                        <app-sales-modal [item]="item" [itemindex]="itemindex" (ondelete)="onDeletePost($event)"></app-sales-modal>
+                        <app-sales-modal [item]="item" [itemindex]="itemindex" (ondelete)="onDeletePostAll($event)"></app-sales-modal>
                       </ng-container>      
                     </div> 
 

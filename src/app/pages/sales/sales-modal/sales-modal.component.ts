@@ -49,14 +49,15 @@ export class SalesModalComponent implements OnInit {
     this.currency="LKR";
   }
 
-  public deletePost(postid: number) {
-    // this.postService.deletePost(postid).
-    // subscribe(response => {
-    //   this.isShow = false;
-    //   this.ondelete.emit({id: this.itemindex});
-    // })
-
-    console.log(postid);
+  public deletePost(sellingid: number) {
+    if(confirm("Are you sure , you want to delete this content ?")){
+      this.sellingService.deletePost(sellingid).
+        subscribe(response => {
+          this.ondelete.emit({id: this.itemindex});
+      })
+    }else{
+      return;
+    }
   }
 
 

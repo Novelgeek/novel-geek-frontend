@@ -11,6 +11,10 @@ export class SellingService {
         return this.http.post<Selling_modal>('http://localhost:8080/selling/newpost', newpost)
     }
 
+    editPost(newpost: FormData) {
+        return this.http.post<Selling_modal>('http://localhost:8080/selling/editpost', newpost)
+    }
+
     storeCustomer(data) {
         return this.http.post<any>('http://localhost:8080/selling/newcustomer', {
             first_name:data.first_name,
@@ -33,7 +37,7 @@ export class SellingService {
 
 
     deletePost(sellingid: number) {
-        return this.http.delete('http://localhost:8080/selling/delete/'+ sellingid)
+        return this.http.delete<any>('http://localhost:8080/selling/delete/'+ sellingid)
 
     }
 

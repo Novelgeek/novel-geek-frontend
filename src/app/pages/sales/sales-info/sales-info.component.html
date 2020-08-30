@@ -8,19 +8,28 @@
            
         <div class="card-body form-group">
           {{myPost.title}}
-          <input type="text" name="Title" ngModel #Title="ngModel" class="form-control card-title" placeholder="Post Title" required>
+          <input type="text" name="Title" ngModel #Title="ngModel" class="form-control card-title" placeholder="Post Title">
           <div class="card-content">
             {{myPost.description}}
-            <textarea cols="100" rows="10" name="Description" ngModel #Description="ngModel" class="form-control" placeholder="description" required></textarea>
+            <textarea cols="100" rows="10" name="Description" ngModel #Description="ngModel" class="form-control" placeholder="description"></textarea>
             <br/>
             {{myPost.merchantid}}
-            <input cols="100" rows="10" name="Merchantid" ngModel #Merchantid="ngModel" class="form-control" placeholder="merchantid" required/>
+            <input cols="100" rows="10" name="Merchantid" ngModel #Merchantid="ngModel" class="form-control" placeholder="merchantid" pattern="^[0-9]{7,7}"/>
+            <div *ngIf="Merchantid.errors?.pattern" style="color: red;"> 
+              Inavalid merchant id.
+           </div>
             <br/>
             {{myPost.telephone}}
-            <input cols="100" rows="10" name="Telephone" ngModel #Telephone="ngModel" class="form-control" placeholder="telephone" required/>
+            <input cols="100" rows="10" name="Telephone" ngModel #Telephone="ngModel" class="form-control" placeholder="telephone" pattern="^[0-9]{10,10}"/>
+            <div *ngIf="Telephone.errors?.pattern" style="color: red;"> 
+              Inavalid Telephone number
+           </div>
             <br/>
             {{myPost.price}}
-            <input cols="100" rows="10" name="Price" ngModel #Price="ngModel" class="form-control" placeholder="price" required/>
+            <input cols="100" rows="10" name="Price" ngModel #Price="ngModel" class="form-control" placeholder="price" pattern="^[0-9]*"/>
+            <div *ngIf="Price.errors?.pattern" style="color: red;"> 
+              Inavalid Price
+           </div>
             <br/>
           </div>
           <div class="card-content" *ngIf="myPost.imagePath!=null && !isImage">
@@ -35,7 +44,7 @@
               <i class="primary icon-picture mr-2"></i>
               <label style="cursor:pointer;">
                 <span class="primary">Attach Photo</span>
-                <input (change)="uploadImage($event)" ngModel name="image" type="file" style="display:none;">
+                <input (change)="uploadImage($event)" ngModel name="Image" type="file" style="display:none;">
               </label>
             </div>            
           

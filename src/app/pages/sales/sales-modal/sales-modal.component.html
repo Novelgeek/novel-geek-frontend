@@ -23,6 +23,7 @@
           alt="" width="135" 
           class="mt-sm-2">
           </div>
+          <br/>
           <p class="btn btn-outline-warning mr-1 warning">PRICE: {{item.price}}/=</p>
         </div>
         <div class="col-lg-6 col-12 align-self-center">
@@ -30,7 +31,7 @@
           <p class="card-text">{{item.description}}</p>
           <div *ngIf="item.owned">
             <button class="btn btn-outline-info mr-1 info">MORE INFO</button>
-            <i class="danger p-0 ft-trash-2" style="cursor: pointer;"></i>
+            <a (click)="deletePost(item.sellingid)"><i class="danger p-0 ft-trash-2" style="cursor: pointer;"></i></a>
             <div *ngIf="!item.sold">
               <a [routerLink]="['/salesinfo', item.sellingid]">
                 <i class="ft-edit" style="cursor: pointer;"></i>
