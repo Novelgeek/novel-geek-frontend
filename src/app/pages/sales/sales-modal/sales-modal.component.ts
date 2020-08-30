@@ -1,6 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import Selling_modal from '../selling_modal';
 import Payment_modal from '../payment_modal';
+import Purchase_info_modal from '../purchase_info_modal';
 import { HttpClient } from '@angular/common/http';
 import { SellingService } from 'app/core/_services/selling.service';
 import { ToastrService } from 'ngx-toastr';
@@ -16,6 +17,8 @@ export class SalesModalComponent implements OnInit {
   @Input() item: Selling_modal;
   @Input() itemindex: number;
   public new_payment: Payment_modal;
+  purchaseInfo: boolean=false;
+  purchaseData: Purchase_info_modal;
   return: string;
   cancel: string;
   notify: string;
@@ -38,11 +41,13 @@ export class SalesModalComponent implements OnInit {
       this.Address="";
       this.City="";
       this.Email="";
+      this.purchaseInfo=false;
+      this.purchaseData = new Purchase_info_modal();
      }
 
   ngOnInit() {
 
-    this.return="http://localhost:4200/sales";
+    this.return="http://localhost:4200/sales?statuscode=2&message=success";
     this.cancel="http://localhost:4200/sales";
     this.notify="http://localhost:8080/selling/newpayment";
     this.country="Sri Lanka";
@@ -78,5 +83,23 @@ export class SalesModalComponent implements OnInit {
     this.City=Values.city;
     this.Email=Values.email;
   }
+
+  openBuyerInfo(sellingid : number){
+    this.spinner.show()
+    console.log(sellingid);
+    this.sellingService.getPurchaseData(sellingid).subscribe(response=>{
+      this.purchaseInfo = true;
+      this.purchaseData = response;
+      this.spinner.hide();
+
+    },error=>{
+      this.spinner.hide();
+      this.toastr.error("Something went wrong");
+    })
+    
+  }
   
+  onClosePurchaseInfo(){
+    this.purchaseInfo = false;
+  }
 }

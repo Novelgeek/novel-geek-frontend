@@ -80,6 +80,7 @@ import { LocalBooksComponent } from './pages/books/local-books/local-books.compo
 import { LocalBookCardComponent } from './pages/books/local-books/local-book-card/local-book-card.component';
 import { PostCommentModalComponent } from './pages/posts/post-comment-modal/post-comment-modal.component';
 import { SalesInfoComponent } from './pages/sales/sales-info/sales-info.component';
+import {MoreInfoComponent} from './pages/sales/more-info/more-info.component';
 
 export function tokenGetter() {
   return localStorage.getItem('token');
@@ -119,7 +120,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     SalesHomeComponent,
     SalesModalComponent,
     SalesInfoComponent,
-
+    MoreInfoComponent,
     AuctionHomeComponent,
     AddBookComponent,
     LocalBooksComponent,

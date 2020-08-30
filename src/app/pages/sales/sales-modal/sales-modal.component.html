@@ -30,19 +30,21 @@
           <h4 class="card-title mb-3">{{item.title}}</h4>
           <p class="card-text">{{item.description}}</p>
           <div *ngIf="item.owned">
-            <button class="btn btn-outline-info mr-1 info">MORE INFO</button>
+            <p  *ngIf="item.sold" class="btn btn-outline-info mr-1 info">Sold</p>
+            <a *ngIf="item.sold" (click)="openBuyerInfo(item.sellingid)" class="btn btn-outline-info mr-1 info">
+              Purchase Info
+            </a>
+            <p  *ngIf="!item.sold" class="btn btn-outline-info mr-1 info">Not Yet Sold</p>
+            <a  *ngIf="!item.sold" class="btn btn-outline-info mr-1 info" [routerLink]="['/salesinfo', item.sellingid]">
+              <i class="ft-edit" style="cursor: pointer;"></i>
+            </a>  
             <a (click)="deletePost(item.sellingid)"><i class="danger p-0 ft-trash-2" style="cursor: pointer;"></i></a>
-            <div *ngIf="!item.sold">
-              <a [routerLink]="['/salesinfo', item.sellingid]">
-                <i class="ft-edit" style="cursor: pointer;"></i>
-              </a> 
-            </div>
           </div>
           <div *ngIf="!item.owned && !item.sold">
             <button class="btn btn-outline-danger mr-1 danger" (click)="openPayment()">BUY THIS BOOK</button>
           </div>
           <div *ngIf="!item.owned && item.sold">
-            <a class="btn btn-outline-danger mr-1 success" >SOLD</a>
+            <a class="btn btn-outline-success mr-1 success" >SOLD</a>
           </div>
         </div>
       </div>
@@ -205,16 +207,60 @@
     </div>
   </div>
 </div>
-
-<!-- <script >
-  document.getElementById('payhere-payment').onclick = function (e) {
-        //payhere.startPayment(payment);
-        console.log("inline script");
-        console.log(document.getElementById('merchant_id').value);
-  };
-</script> -->
-
 <section id="ngx">
 </section>
 
+<div class="row">
+  <div class="backdrop" *ngIf="purchaseInfo">
+    <div class="col-3"></div>
+    <div class="col-5 modal-box-buyer" >
+      <div class="card">
+        <div class="card-header d-flex justify-content-between">
+          <h4 class="card-title">Purchase Info</h4>
+          <i class="ft-x" style="cursor:pointer;" (click)="onClosePurchaseInfo()"></i>
+        </div>
+        <div class="card-content">
+          <div class="row justify-content-center align-items-center">
+            <img *ngIf="purchaseData.imagePath==null" src="../../../assets/img/portrait/default.svg" 
+            width="64" height="64" class="d-inline-flex rounded-circle mr-1">
+            <img *ngIf="purchaseData.imagePath!=null" [src]="purchaseData.imagePath" 
+            width="64" height="64" class="d-inline-flex rounded-circle mr-1">
+            <span class="text-muted"><b>{{purchaseData.buyer_name}}</b></span>
+          </div>
+          <div class="card-body">
+            <div class="row">
+              <div class="col">
+                <div class="form-group">
+                  <div class="controls">
+                    <label>Payment Id</label>
+                    <input class="form-control" placeholder="{{purchaseData.payment_id}}" readonly>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <div class="controls">
+                    <label>Order_Id</label>
+                    <input class="form-control" placeholder="{{purchaseData.order_id}}" readonly>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <div class="controls">
+                    <label>Paid Date</label>
+                    <input class="form-control" placeholder="{{purchaseData.paid_date|date:'medium'}}" readonly>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <div class="controls">
+                    <label>Email</label>
+                    <input class="form-control" placeholder="{{purchaseData.email}}" readonly>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>    
+      </div>
+    </div>
+    <div class="col-4"></div>
+  </div>
+</div>
 <ngx-spinner></ngx-spinner>

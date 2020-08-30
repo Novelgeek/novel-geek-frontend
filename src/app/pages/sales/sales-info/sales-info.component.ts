@@ -32,6 +32,7 @@ export class SalesInfoComponent implements OnInit {
       this.sellingService.getPost(params['id']).subscribe(response => {
         console.log(response)
         this.myPost = response;
+        this.spinner.hide();
       },
       error => {
       this.spinner.hide();

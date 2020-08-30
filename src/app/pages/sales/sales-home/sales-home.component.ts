@@ -1,11 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
 import Selling_modal from '../selling_modal';
+import Payment_temp from '../payment_temp';
 import { HttpClient } from '@angular/common/http';
 import { SellingService } from 'app/core/_services/selling.service';
 import { ToastrService } from 'ngx-toastr';
 import { NgxSpinnerService } from 'ngx-spinner';
 import {Router} from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 @Component({
   selector: 'app-sales-home',
   templateUrl: './sales-home.component.html',
@@ -15,7 +17,7 @@ export class SalesHomeComponent implements OnInit {
   public myPosts: Selling_modal[];
   public allPosts: Selling_modal[];
   public new_post: Selling_modal;
-  
+  public new_payment : Payment_temp; 
   create=false;
   contact=false;
 
@@ -25,13 +27,44 @@ export class SalesHomeComponent implements OnInit {
 
   constructor(private http: HttpClient, private sellingService: SellingService,
     private toastr: ToastrService, private spinner: NgxSpinnerService,
-    private router: Router) {
+    private router: Router,
+    private route: ActivatedRoute) {
     this.new_post = new Selling_modal();
     this.myPosts = [];
     this.allPosts = [];
+    this.new_payment = new Payment_temp();
+    this.router.routeReuseStrategy.shouldReuseRoute = function(){
+      return false;
+    }
   }
   ngOnInit() {
     this.spinner.show();
+
+    this.route.queryParams.subscribe(params =>{
+      if(params.order_id !=null){
+        this.new_payment.order_id = params.order_id;
+      }
+      if(params.message !=null){
+        this.new_payment.status_message = params.message;
+      }
+
+      if(params.statuscode !=null){
+        this.new_payment.status_code = params.statuscode;
+      }
+
+      if(params.order_id !=null && params.message !=null && params.statuscode !=null){
+        //console.log(this.new_payment);
+        this.sellingService.soldBook(this.new_payment).subscribe(response=>{
+          console.log(response);
+          this.toastr.success("Payment data recorded");
+          this.router.navigate(['/sales']);
+        }, error =>{
+          this.spinner.hide();
+          this.toastr.error("something went wrong");
+        })
+      }
+    });
+
     this.sellingService.getAllPosts().subscribe(response => {
       this.allPosts = response;
       this.spinner.hide();
