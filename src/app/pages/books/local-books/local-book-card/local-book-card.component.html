@@ -1,0 +1,92 @@
+
+
+<div class="card horizontal text-center" style="overflow: hidden;">
+  <div class="card-content d-flex ">
+    <div class="card-stacked align-self-center pt-3">
+      <div class="px-3">
+        <h4 class="card-title">{{(book.title | slice:0:50) + (book.title.length > 50 ? '...': '')}}</h4>
+        <p class="card-text">{{book.description | slice:0:10}}</p>
+        <button  class="btn btn-raised btn-primary btn-darken-3 white" (click)="onClick()">View Book</button>
+      </div>
+      <div class="px-3">
+        <button class="btn btn-outline-primary primary" type="button" (click)="open(boostBook)" >Boost</button>
+      </div>
+    </div>
+    <div class="card-img p-3">
+      <img *ngIf="book.imgUrl" class="card-img-top img-fluid float-right" src="{{book.imgUrl}}" alt="Card image cap" width="80%" >
+      <img *ngIf="!book.imgUrl" class="card-img-top img-fluid float-right" src="../../../../../assets/img/book/default.png" alt="Card image cap" width="80%" >
+    </div>
+  </div>
+</div>
+
+<!-- boost modal -->
+<ng-template #boostBook let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="create-group">Create new Group</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <form #form method="POST" action="https://sandbox.payhere.lk/pay/checkout">
+    <div class="card">
+        
+           
+        <div class="card-body form-group">
+           <div class="row">
+             <div class="col-6 card-content">
+               <mat-form-field  class="example-full-width">
+                 <mat-label>First Name</mat-label>
+                 <input matInput name="first_name" ngModel #first_name="ngModel" required/>
+               </mat-form-field>
+             </div>
+             <div class="col-6">
+               <mat-form-field  class="example-full-width">
+                 <mat-label>Last Name</mat-label>
+                 <input matInput  name="last_name" ngModel #last_name="ngModel" required/>
+               </mat-form-field>
+             </div>
+           </div>
+
+           <div class="row">
+             <div class="col-6">
+               <mat-form-field  class="example-full-width">
+                 <mat-label>Email</mat-label>
+                 <input matInput name="email" ngModel #email="ngModel" type="email" required/>
+               </mat-form-field>
+               <mat-form-field  class="example-full-width">
+                 <mat-label>Contact Number</mat-label>
+                 <input matInput name="phone" ngModel #phone="ngModel" required/>
+               </mat-form-field>                
+             </div>
+             <div class="col-6">
+               <mat-form-field  class="example-full-width">
+                 <mat-label>Address</mat-label>
+                 <input matInput name="address" ngModel #address="ngModel" type="email" required/>
+               </mat-form-field>
+               <mat-form-field  class="example-full-width">
+                 <mat-label>City</mat-label>
+                 <input matInput name="city" ngModel #city="ngModel" required/>
+               </mat-form-field> 
+             </div>
+           </div>
+
+           <input type="hidden" id="merchant_id" [(ngModel)]="merchantId" name="merchant_id" value="1215088">    <!-- Replace your Merchant ID -->
+           <input type="hidden" name="return_url" value="http://localhost:4200/books/local-books">
+           <input type="hidden" name="cancel_url" value="http://localhost:4200/books/local-books">
+           <input type="hidden" name="notify_url" value="http://localhost:8080/book/boost-book"> 
+           <input type="hidden" name="order_id" value="1">
+           <input type="hidden" name="items" value="narnia">
+           <input type="hidden" name="currency" value="LKR">
+           <input type="hidden" name="amount" value="1000"> 
+           <input type="hidden" name="country" value="Sri Lanka"> 
+        </div>  
+        <!-- [disabled]="!buybook.valid"   -->
+        <div class="card-footer d-flex justify-content-center form-group">          
+           <input type="submit" (click)="form.submit()" id="payhere-payment"  value="Buy Book" class="btn btn-raised gradient-purple-bliss white"> 
+        </div> 
+     </div>
+   </form>
+</ng-template>
+
+
+

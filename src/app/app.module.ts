@@ -10,6 +10,7 @@ import { ToastrModule } from 'ngx-toastr';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { NgxUsefulSwiperModule } from 'ngx-useful-swiper';
 import { BarRatingModule } from 'ngx-bar-rating';
+import { NgSelectModule } from '@ng-select/ng-select';
 
 import { PerfectScrollbarModule, PERFECT_SCROLLBAR_CONFIG, PerfectScrollbarConfigInterface} from 'ngx-perfect-scrollbar';
 
@@ -26,6 +27,7 @@ import { PostsHomeComponent } from './pages/posts/posts-home/posts-home.componen
 import { PostModalComponent } from './pages/posts/post-modal/post-modal.component';
 import { ProfileHomeComponent } from './pages/profile/profile-home/profile-home.component';
 import { SalesHomeComponent } from './pages/sales/sales-home/sales-home.component';
+import {SalesModalComponent} from './pages/sales/sales-modal/sales-modal.component';
 import { ProfileSettingsComponent } from './pages/profile/profile-settings/profile-settings.component';
 import { TokenInterceptor } from './core/_services/token.interceptor';
 import { ChartsModule } from 'ng2-charts';
@@ -70,6 +72,11 @@ import {MatInputModule} from '@angular/material/input';
 import {MatButtonModule} from '@angular/material/button';
 import { ManageAdminsComponent } from './pages/admin/manage-admins/manage-admins.component';
 import { ManagePostsComponent } from './pages/admin/manage-posts/manage-posts.component';
+import { AddBookComponent } from './pages/books/add-book/add-book.component';
+import { ArchwizardModule } from 'angular-archwizard';
+import { LocalBooksComponent } from './pages/books/local-books/local-books.component';
+import { LocalBookCardComponent } from './pages/books/local-books/local-book-card/local-book-card.component';
+
 export function tokenGetter() {
   return localStorage.getItem('token');
 }
@@ -101,8 +108,12 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     PostModalComponent,
     ProfileHomeComponent,
     SalesHomeComponent,
+    SalesModalComponent,
     ProfileSettingsComponent,
     AuctionHomeComponent,
+    AddBookComponent,
+    LocalBooksComponent,
+    LocalBookCardComponent,
 
     BookletComponent,
     SearchResultsComponent,
@@ -132,13 +143,13 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     HttpClientModule,
     NgbModule,
     BarRatingModule,
-
+    NgSelectModule,
     MatDatepickerModule,
     MatSliderModule,
     MatInputModule,
     MatButtonModule,
     MatNativeDateModule,
-
+    ArchwizardModule,
     PerfectScrollbarModule,
     FormsModule,
     ToastrModule.forRoot(),
