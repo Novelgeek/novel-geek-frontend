@@ -36,7 +36,7 @@
                   <a ngbNavLink>Add Poll</a>
                   <ng-template ngbNavContent>
                     <div class="col-md-6">
-                      <app-add-poll></app-add-poll>
+                      <app-add-poll (newPoll)="onAddNewPoll($event)"></app-add-poll>
                     </div>
                   </ng-template>
                 </li>

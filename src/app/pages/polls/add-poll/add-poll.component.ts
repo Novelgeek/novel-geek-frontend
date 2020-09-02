@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { Poll } from 'app/core/_models/poll.model';
 import { PollService } from 'app/core/_services/poll.service';
 import { Router } from '@angular/router';
@@ -13,6 +13,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
   styleUrls: ['./add-poll.component.css']
 })
 export class AddPollComponent implements OnInit {
+  @Output() newPoll = new EventEmitter();
 
   options: string[] = [];
   poll: Poll = {
@@ -50,9 +51,8 @@ export class AddPollComponent implements OnInit {
     this.poll.options = this.options;
     this.poll.endDate = new Date(f.value.endDate).toDateString();
     console.log(this.poll);
-    
     this.pollService.savePoll(this.poll).subscribe(success => {
-      this.router.navigate(['/polls']);
+      this.newPoll.emit({status: true, data: success})
       this.spinner.hide();
       this.toastr.success('Successfully added!');
     }, error => {
