@@ -1,23 +1,33 @@
-<div class="row">
-    <div class="col s12">
-      <table class="striped centered responsive-table">
-        <thead>
-          <tr>
-            <th>Title</th>
-            <th>Open till</th>
-            <th></th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let poll of polls">
-            <td routerLink="/poll/{{poll.id}}">{{poll.title}}</td>
-            <td routerLink="/poll/{{poll.id}}">{{poll.endDate | date: 'fullDate'}} </td>
-            <td>
-              <button class="btn waves-effect waves-light red lighten-1"
-                      (click)="deletePoll(poll.id)">Delete poll</button>
-            </td>
-          </tr>
-        </tbody>
-      </table>
+<div class="card">
+    <div class="card-header d-flex justify-content-between">
+      <div class="col text-right">
+        <a (click)="toggleList()"><i  class="ft-more-horizontal"></i></a>
+        <div style="position:relative">
+          <div *ngIf = "isShow" style="position: absolute; z-index: 1000;" class="text-left dropdown-menu show">
+            <div>
+              <a (click)="deletePoll(poll.pollid)" class="dropdown-item py-1">
+                <i class="ft-trash-2 mr-2"></i>
+                <span> Delete Poll</span>
+              </a> 
+            </div> 
+          </div>
+        </div>
+      </div>
     </div>
-  </div>
+  
+    <div class="card-body">
+      <h5 class="card-title">{{poll.title}}</h5>
+      <div class="card-content" >
+        
+      </div>
+      <div class="card-content">
+          <p class="card-text">
+            End Date - {{poll.endDate | date: 'medium'}}
+          </p>
+      </div>
+      <br>
+    </div>
+  
+    <div class="card-footer">
+      
+    </div>
