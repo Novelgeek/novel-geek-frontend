@@ -12,15 +12,15 @@ export class SellingService {
     }
 
     editPost(newpost: FormData) {
-        return this.http.post<Selling_modal>('http://localhost:8080/selling/editpost', newpost)
+        return this.http.post<Selling_modal>('/selling/editpost', newpost)
     }
 
     soldBook(newpayment: Payment_temp){
-        return this.http.post<any>('http://localhost:8080/selling/soldbook', newpayment)
+        return this.http.post<any>('/selling/soldbook', newpayment)
     }
 
     getPurchaseData(sellingid: number){
-        return this.http.get<any>('http://localhost:8080/selling/getpurchasedata/'+sellingid)
+        return this.http.get<any>('/selling/getpurchasedata/'+sellingid)
     }
     storeCustomer(data) {
         return this.http.post<any>('/selling/newcustomer', {
@@ -45,12 +45,12 @@ export class SellingService {
 
     deletePost(sellingid: number) {
 
-        return this.http.delete<any>('http://localhost:8080/selling/delete/'+ sellingid)
+        return this.http.delete<any>('/selling/delete/'+ sellingid)
 
     }
 
 
     getPost(sellingid: number) {
-        return this.http.get<any>('http://localhost:8080/selling/getpost/' + sellingid)
+        return this.http.get<any>('/selling/getpost/' + sellingid)
     }
 }

@@ -50,7 +50,7 @@ export class SalesModalComponent implements OnInit {
 
     this.return="http://localhost:4200/sales?statuscode=2&message=success";
     this.cancel="http://localhost:4200/sales";
-    this.notify="http://localhost:8080/selling/newpayment";
+    this.notify="/selling/newpayment";
     this.country="Sri Lanka";
     this.currency="LKR";
 

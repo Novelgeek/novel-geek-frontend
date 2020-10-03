@@ -44,21 +44,21 @@ export class PostsService {
     }
 
     deleteComment(commentid:number){
-        return this.http.delete('http://localhost:8080/post/deletecomment/'+ commentid)
+        return this.http.delete('/post/deletecomment/'+ commentid)
     }
 
     addReply(comment: string, commentid: number) {
-        return this.http.post<any>('http://localhost:8080/post/addreply/' + commentid, {
+        return this.http.post<any>('/post/addreply/' + commentid, {
             comment: comment
         })
     }
 
     getReplies(commentid: number) {
-        return this.http.get<any>('http://localhost:8080/post/getreplies/' + commentid)
+        return this.http.get<any>('/post/getreplies/' + commentid)
     }
 
     deleteReply(replyid:number){
-        return this.http.delete('http://localhost:8080/post/deletereply/'+ replyid)
+        return this.http.delete('/post/deletereply/'+ replyid)
     }
 
     deletePost(postid: number) {

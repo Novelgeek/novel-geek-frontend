@@ -24,23 +24,23 @@ export class AdminService {
   }
 
   getReports(){
-    return this.http.get<any>('http://localhost:8080/admin/posts/getreports');
+    return this.http.get<any>('/admin/posts/getreports');
   }
 
   getreportedPost(postid: number){
-    return this.http.get<any>('http://localhost:8080/admin/posts/getreportedpost/'+ postid);
+    return this.http.get<any>('/admin/posts/getreportedpost/'+ postid);
   }
 
   getReportedData(postid : number){
-    return this.http.get<any>('http://localhost:8080/admin/posts/getreporteddata/'+ postid);
+    return this.http.get<any>('/admin/posts/getreporteddata/'+ postid);
   }
 
   deleteReportedPost(postid: number){
-    return this.http.delete('http://localhost:8080/admin/posts/deletereportedpost/'+ postid)
+    return this.http.delete('/admin/posts/deletereportedpost/'+ postid)
   }
 
   cancelReport(postid: number){
-    return this.http.delete('http://localhost:8080/admin/posts/cancelreport/'+ postid)
+    return this.http.delete('/admin/posts/cancelreport/'+ postid)
   }
 
 }
