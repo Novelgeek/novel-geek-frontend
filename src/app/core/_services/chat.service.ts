@@ -5,15 +5,20 @@ import { Router } from '@angular/router';
 import { firestore } from 'firebase/app';
 import { map, switchMap } from 'rxjs/operators';
 import { Observable, combineLatest, of } from 'rxjs';
+import { UserService } from './user.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ChatService {
+
+  users: any = [];
+
   constructor(
     private afs: AngularFirestore,
     private auth: AuthService,
-    private router: Router
+    private router: Router,
+    private userService: UserService
   ) {}
 
 
@@ -57,6 +62,13 @@ export class ChatService {
         .collection(collId.toString())
       return ref.add(data);
     }
+  }
+
+
+  getNotifications() {
+    this.userService.getAllUsersExceptMe().subscribe(data => {
+      this.users = data;
+    })
   }
 
 

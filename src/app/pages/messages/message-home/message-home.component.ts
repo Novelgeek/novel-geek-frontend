@@ -16,8 +16,6 @@ export class MessageHomeComponent implements OnInit, OnDestroy {
   message: String = '';
   messageHistory: any = [];
 
-  incoming: any = [];
-  outgoing: any = [];
 
   messageSubscription: Subscription;
 
@@ -37,17 +35,16 @@ export class MessageHomeComponent implements OnInit, OnDestroy {
   }
 
   setCurrentUser(user) {
-    console.log(user)
+    this.messageHistory = []
     this.activeUser = user
+
     if (this.messageSubscription !== undefined) {
       this.messageSubscription.unsubscribe();
     }
 
     this.messageSubscription = this.chatService.get(this.activeUser.id).subscribe(data => {
       this.messageHistory = data;
-      this.outgoing = this.messageHistory.filter(message => message.to === this.activeUser.id)
-      this.incoming = this.messageHistory.filter(message => message.to !== this.activeUser.id)
-      console.log(data)
+      this.messageHistory.sort((a, b) => (a.createdAt > b.createdAt)? 1: -1);
     })
   }
 
