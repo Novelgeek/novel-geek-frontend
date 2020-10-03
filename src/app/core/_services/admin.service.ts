@@ -6,6 +6,7 @@ import { HttpClient } from '@angular/common/http';
 })
 export class AdminService {
 
+
   constructor(private http: HttpClient) { }
 
 
@@ -41,6 +42,10 @@ export class AdminService {
 
   cancelReport(postid: number){
     return this.http.delete('/admin/posts/cancelreport/'+ postid)
+  }
+
+  deleteAdmin(adminId: any) {
+    return this.http.delete('http://localhost:8080/admin/' + adminId);
   }
 
 }

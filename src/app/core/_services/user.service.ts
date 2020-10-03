@@ -28,5 +28,9 @@ export class UserService {
     return this.http.get('/user');
   }
 
+  getAllUsersExceptMe() {
+    return this.http.get('http://localhost:8080/user/all');
+  }
+
 }
 
