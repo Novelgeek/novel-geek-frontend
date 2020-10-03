@@ -10,9 +10,16 @@ import { ToastrModule } from 'ngx-toastr';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { NgxUsefulSwiperModule } from 'ngx-useful-swiper';
 import { BarRatingModule } from 'ngx-bar-rating';
+
+import { AngularFireModule } from '@angular/fire';
 import { NgSelectModule } from '@ng-select/ng-select';
 
-import { PerfectScrollbarModule, PERFECT_SCROLLBAR_CONFIG, PerfectScrollbarConfigInterface} from 'ngx-perfect-scrollbar';
+
+import {
+  PerfectScrollbarModule,
+  PERFECT_SCROLLBAR_CONFIG,
+  PerfectScrollbarConfigInterface,
+} from 'ngx-perfect-scrollbar';
 
 import { AppComponent } from './app.component';
 import { LoginComponent } from './pages/auth/login/login.component';
@@ -36,11 +43,7 @@ import { ChartsModule } from 'ng2-charts';
 
 import { MatSliderModule } from '@angular/material/slider';
 
-
-
 import { BookletComponent } from './pages/books/booklet/booklet.component';
-
-
 
 import { SearchResultsComponent } from './pages/books/search-results/search-results.component';
 import { BookReviewComponent } from './pages/books/book-review/book-review.component';
@@ -61,8 +64,11 @@ import { FriendCardComponent } from './pages/friends/friend-card/friend-card.com
 
 import { AuctionHomeComponent } from './pages/auction/auction-home/auction-home.component';
 import { AuctionCardComponent } from './pages/auction/auction-card/auction-card.component';
-import {MatDatepickerModule} from '@angular/material/datepicker';
-import {MatNativeDateModule} from '@angular/material';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material';
+
+
+import { MatInputModule } from '@angular/material/input';
 
 import { AddPollComponent } from './pages/polls/add-poll/add-poll.component';
 import { MyPollsComponent } from './pages/polls/my-polls/my-polls.component';
@@ -71,7 +77,8 @@ import { PollModelComponent } from './pages/polls/poll-model/poll-model.componen
 
 import {MatInputModule} from '@angular/material/input';
 
-import {MatButtonModule} from '@angular/material/button';
+
+import { MatButtonModule } from '@angular/material/button';
 import { ManageAdminsComponent } from './pages/admin/manage-admins/manage-admins.component';
 import { ManagePostsComponent } from './pages/admin/manage-posts/manage-posts.component';
 import { AddBookComponent } from './pages/books/add-book/add-book.component';
@@ -87,9 +94,20 @@ export function tokenGetter() {
 }
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
-    suppressScrollX: true,
-    wheelPropagation: false
-  };
+  suppressScrollX: true,
+  wheelPropagation: false,
+};
+
+let firebaseConfig = {
+  apiKey: 'AIzaSyCla-JAP3zoxs3DXKPYCELoiUKqmu38IZM',
+  authDomain: 'novel-geek.firebaseapp.com',
+  databaseURL: 'https://novel-geek.firebaseio.com',
+  projectId: 'novel-geek',
+  storageBucket: 'novel-geek.appspot.com',
+  messagingSenderId: '223164082705',
+  appId: '1:223164082705:web:0a5bae54a6a444c7d15fb0',
+  measurementId: 'G-JGS3TP464K',
+};
 
 @NgModule({
   declarations: [
@@ -146,6 +164,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     MyPollsComponent,
     PollModelComponent
 
+
   ],
   imports: [
     BrowserAnimationsModule,
@@ -160,7 +179,11 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     MatInputModule,
     MatButtonModule,
     MatNativeDateModule,
+
+    AngularFireModule.initializeApp(firebaseConfig),
+
     ArchwizardModule,
+
     PerfectScrollbarModule,
     FormsModule,
     ToastrModule.forRoot(),
@@ -175,20 +198,23 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
         blacklistedRoutes: ['http://example.com/examplebadroute/'],
       },
     }),
-    NgxUsefulSwiperModule
+    NgxUsefulSwiperModule,
   ],
   providers: [
     {
       provide: PERFECT_SCROLLBAR_CONFIG,
-      useValue: DEFAULT_PERFECT_SCROLLBAR_CONFIG
+      useValue: DEFAULT_PERFECT_SCROLLBAR_CONFIG,
     },
-    { provide: PERFECT_SCROLLBAR_CONFIG, useValue: DEFAULT_PERFECT_SCROLLBAR_CONFIG },
+    {
+      provide: PERFECT_SCROLLBAR_CONFIG,
+      useValue: DEFAULT_PERFECT_SCROLLBAR_CONFIG,
+    },
     {
       provide: HTTP_INTERCEPTORS,
       useClass: TokenInterceptor,
-      multi: true
-    }
+      multi: true,
+    },
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
 export class AppModule {}
