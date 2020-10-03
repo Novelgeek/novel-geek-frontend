@@ -1,3 +1,4 @@
+<!-- polls home view -->
 <div class="row">
   <div class="col-md-12- col-lg-12">
     <div class="card">
@@ -9,14 +10,14 @@
             </div>
           </div>
           <div class="row">
-            <div class="col-auto">
+            <div class="col-sm-12 col-md-6">
               <ul ngbNav #nav=ngbNav class="nav-pills">
                 <li ngbNavItem>
                   <a ngbNavLink>All Polls</a>
                   <ng-template ngbNavContent>
                     <div class="row">
-                      <div class="col col-xl-3 col-md-3 col-sm-6 col-12" >
-                          <app-poll-model></app-poll-model>
+                      <div *ngFor="let poll of allpolls" class="col col-xl-3 col-md-3 col-sm-6 col-12" >
+                          <app-poll-model [poll]="poll"></app-poll-model>
                       </div>
                     </div>
                   </ng-template>
@@ -25,8 +26,8 @@
                   <a ngbNavLink>My Polls</a>
                   <ng-template ngbNavContent>
                     <div class="row">
-                      <div class="col-sm-12 col-md-6">
-                        <app-my-polls></app-my-polls>
+                      <div *ngFor="let poll of mypolls; let itemindex = index;" class="col-sm-12 col-md-6">
+                        <app-my-polls [poll]="poll"  [itemindex]="itemindex" (ondelete)="onDeletePoll($event)"></app-my-polls>
                       </div>
                     </div>
                   </ng-template>
@@ -35,7 +36,7 @@
                   <a ngbNavLink>Add Poll</a>
                   <ng-template ngbNavContent>
                     <div class="col-md-6">
-                      <app-add-poll></app-add-poll>
+                      <app-add-poll (newPoll)="onAddNewPoll($event)"></app-add-poll>
                     </div>
                   </ng-template>
                 </li>

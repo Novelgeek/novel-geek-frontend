@@ -47,11 +47,13 @@ export class SalesModalComponent implements OnInit {
 
   ngOnInit() {
 
+
     this.return="http://localhost:4200/sales?statuscode=2&message=success";
     this.cancel="http://localhost:4200/sales";
     this.notify="http://localhost:8080/selling/newpayment";
     this.country="Sri Lanka";
     this.currency="LKR";
+
   }
 
   public deletePost(sellingid: number) {
@@ -83,6 +85,8 @@ export class SalesModalComponent implements OnInit {
     this.City=Values.city;
     this.Email=Values.email;
   }
+
+
 
   openBuyerInfo(sellingid : number){
     this.spinner.show()

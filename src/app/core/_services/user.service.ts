@@ -17,15 +17,15 @@ export class UserService {
   constructor(private http: HttpClient, private router: Router, private jwtService: JwtHelperService) { }
 
   getUserDetais() {
-    return this.http.get<Userdetails>('http://localhost:8080/user/me');
+    return this.http.get<Userdetails>('/user/me');
   }
 
   saveUserDetails(userDetails: Userdetails) {
-    return this.http.post('http://localhost:8080/user/save', userDetails);
+    return this.http.post('/user/save', userDetails);
   }
 
   getAllUsers() {
-    return this.http.get('http://localhost:8080/user');
+    return this.http.get('/user');
   }
 
 }

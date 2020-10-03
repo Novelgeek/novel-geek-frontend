@@ -11,12 +11,54 @@ import { NgxSpinnerService } from 'ngx-spinner';
 })
 export class PollsHomeComponent implements OnInit {
 
+  allpolls: Poll[];
+  mypolls: Poll[];
+
+
+  constructor(
+    private pollService: PollService) { 
+      this.mypolls=[];
+    }
+
+    
   ngOnInit(): void {
    
-    
+    this.pollService.getPolls().subscribe(polls => {
+      // console.log(polls)
+      this.allpolls = polls;
+    }, error => {
+      console.log(error);
+    });
+
+    this.pollService.getPollsForUser().subscribe(polls =>{
+      console.log(polls)
+      this.mypolls = polls;
+    }, error =>{
+      console.log(error);
+    });
   }
 
-  
+  onDeletePoll(data: {id: number}){
+    this.mypolls.splice(data.id, 1);
+  }
 
+
+  onAddNewPoll($event) {
+    if ($event.status === true) {
+      this.pollService.getPolls().subscribe(polls => {
+        // console.log(polls)
+        this.allpolls = polls;
+      }, error => {
+        console.log(error);
+      });
+  
+      this.pollService.getPollsForUser().subscribe(polls =>{
+        console.log(polls)
+        this.mypolls = polls;
+      }, error =>{
+        console.log(error);
+      });
+    }
+  }
 
 }
