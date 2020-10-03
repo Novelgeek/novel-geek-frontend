@@ -26,8 +26,10 @@ import { PollsHomeComponent } from './pages/polls/polls-home/polls-home.componen
 import { PostsHomeComponent } from './pages/posts/posts-home/posts-home.component';
 import { PostModalComponent } from './pages/posts/post-modal/post-modal.component';
 import { ProfileHomeComponent } from './pages/profile/profile-home/profile-home.component';
+
 import { SalesHomeComponent } from './pages/sales/sales-home/sales-home.component';
 import {SalesModalComponent} from './pages/sales/sales-modal/sales-modal.component';
+
 import { ProfileSettingsComponent } from './pages/profile/profile-settings/profile-settings.component';
 import { TokenInterceptor } from './core/_services/token.interceptor';
 import { ChartsModule } from 'ng2-charts';
@@ -76,6 +78,9 @@ import { AddBookComponent } from './pages/books/add-book/add-book.component';
 import { ArchwizardModule } from 'angular-archwizard';
 import { LocalBooksComponent } from './pages/books/local-books/local-books.component';
 import { LocalBookCardComponent } from './pages/books/local-books/local-book-card/local-book-card.component';
+import { PostCommentModalComponent } from './pages/posts/post-comment-modal/post-comment-modal.component';
+import { SalesInfoComponent } from './pages/sales/sales-info/sales-info.component';
+import {MoreInfoComponent} from './pages/sales/more-info/more-info.component';
 
 export function tokenGetter() {
   return localStorage.getItem('token');
@@ -104,12 +109,18 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     GroupHomeComponent,
     MessageHomeComponent,
     PollsHomeComponent,
+
     PostsHomeComponent,
     PostModalComponent,
+    PostCommentModalComponent,
+
     ProfileHomeComponent,
+    ProfileSettingsComponent,
+    
     SalesHomeComponent,
     SalesModalComponent,
-    ProfileSettingsComponent,
+    SalesInfoComponent,
+    MoreInfoComponent,
     AuctionHomeComponent,
     AddBookComponent,
     LocalBooksComponent,

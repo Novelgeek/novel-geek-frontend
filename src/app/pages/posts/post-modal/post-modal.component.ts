@@ -19,10 +19,11 @@ export class PostModalComponent implements OnInit {
   @ViewChild('addcomment') addcomment: NgForm;
   isLiked: boolean;
 
-  showComments = false;
-  showLikes = false;
-  isShow = false;
-  report = false;
+  shortDescription: boolean=true;
+  showComments:boolean=false;
+  showLikes:boolean=false;
+  isShow:boolean = false;
+  report :boolean = false;
 
 
   commentList: Comment_modal [];
@@ -38,7 +39,8 @@ export class PostModalComponent implements OnInit {
     this.showLikes = false;
     this.showLikes = false;
     this.report = false;
-   }
+    this.shortDescription=true;
+  }
 
   ngOnInit() {
     if (this.item.liked) {
@@ -163,9 +165,11 @@ export class PostModalComponent implements OnInit {
     .subscribe(response => {
       this.new_comment = response;
       this.commentList.splice(0, 0, this.new_comment);
+      this.item.commentcount+=1;
     })
     this.addcomment.reset();
   }
+
 
   public toggleList() {
     this.isShow = !this.isShow;
@@ -176,4 +180,11 @@ export class PostModalComponent implements OnInit {
     this.showComments = false;
   }
 
+  onDeleteComment(data: {id: number}){
+    this.commentList.splice(data.id, 1);
+  }
+
+  alterDescription(){
+    this.shortDescription = !this.shortDescription;
+  }
 }
