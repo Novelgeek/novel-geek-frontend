@@ -10,7 +10,10 @@ import { ToastrModule } from 'ngx-toastr';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { NgxUsefulSwiperModule } from 'ngx-useful-swiper';
 import { BarRatingModule } from 'ngx-bar-rating';
+
 import { AngularFireModule } from '@angular/fire';
+import { NgSelectModule } from '@ng-select/ng-select';
+
 
 import {
   PerfectScrollbarModule,
@@ -30,7 +33,10 @@ import { PollsHomeComponent } from './pages/polls/polls-home/polls-home.componen
 import { PostsHomeComponent } from './pages/posts/posts-home/posts-home.component';
 import { PostModalComponent } from './pages/posts/post-modal/post-modal.component';
 import { ProfileHomeComponent } from './pages/profile/profile-home/profile-home.component';
+
 import { SalesHomeComponent } from './pages/sales/sales-home/sales-home.component';
+import {SalesModalComponent} from './pages/sales/sales-modal/sales-modal.component';
+
 import { ProfileSettingsComponent } from './pages/profile/profile-settings/profile-settings.component';
 import { TokenInterceptor } from './core/_services/token.interceptor';
 import { ChartsModule } from 'ng2-charts';
@@ -55,16 +61,34 @@ import { ForgotPasswordComponent } from './pages/auth/forgot-password/forgot-pas
 import { ResetPasswordComponent } from './pages/auth/reset-password/reset-password.component';
 import { from } from 'rxjs';
 import { FriendCardComponent } from './pages/friends/friend-card/friend-card.component';
+
 import { AuctionHomeComponent } from './pages/auction/auction-home/auction-home.component';
 import { AuctionCardComponent } from './pages/auction/auction-card/auction-card.component';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material';
 
+
 import { MatInputModule } from '@angular/material/input';
+
+import { AddPollComponent } from './pages/polls/add-poll/add-poll.component';
+import { MyPollsComponent } from './pages/polls/my-polls/my-polls.component';
+import { PollModelComponent } from './pages/polls/poll-model/poll-model.component';
+
+
+import {MatInputModule} from '@angular/material/input';
+
 
 import { MatButtonModule } from '@angular/material/button';
 import { ManageAdminsComponent } from './pages/admin/manage-admins/manage-admins.component';
 import { ManagePostsComponent } from './pages/admin/manage-posts/manage-posts.component';
+import { AddBookComponent } from './pages/books/add-book/add-book.component';
+import { ArchwizardModule } from 'angular-archwizard';
+import { LocalBooksComponent } from './pages/books/local-books/local-books.component';
+import { LocalBookCardComponent } from './pages/books/local-books/local-book-card/local-book-card.component';
+import { PostCommentModalComponent } from './pages/posts/post-comment-modal/post-comment-modal.component';
+import { SalesInfoComponent } from './pages/sales/sales-info/sales-info.component';
+import {MoreInfoComponent} from './pages/sales/more-info/more-info.component';
+
 export function tokenGetter() {
   return localStorage.getItem('token');
 }
@@ -103,12 +127,22 @@ let firebaseConfig = {
     GroupHomeComponent,
     MessageHomeComponent,
     PollsHomeComponent,
+
     PostsHomeComponent,
     PostModalComponent,
+    PostCommentModalComponent,
+
     ProfileHomeComponent,
-    SalesHomeComponent,
     ProfileSettingsComponent,
+    
+    SalesHomeComponent,
+    SalesModalComponent,
+    SalesInfoComponent,
+    MoreInfoComponent,
     AuctionHomeComponent,
+    AddBookComponent,
+    LocalBooksComponent,
+    LocalBookCardComponent,
 
     BookletComponent,
     SearchResultsComponent,
@@ -122,8 +156,15 @@ let firebaseConfig = {
     GroupHorizontalCardComponent,
     GroupDetailComponent,
     NotFoundComponent,
+
     AuctionHomeComponent,
     AuctionCardComponent,
+
+    AddPollComponent,
+    MyPollsComponent,
+    PollModelComponent
+
+
   ],
   imports: [
     BrowserAnimationsModule,
@@ -132,13 +173,17 @@ let firebaseConfig = {
     HttpClientModule,
     NgbModule,
     BarRatingModule,
-
+    NgSelectModule,
     MatDatepickerModule,
     MatSliderModule,
     MatInputModule,
     MatButtonModule,
     MatNativeDateModule,
+
     AngularFireModule.initializeApp(firebaseConfig),
+
+    ArchwizardModule,
+
     PerfectScrollbarModule,
     FormsModule,
     ToastrModule.forRoot(),

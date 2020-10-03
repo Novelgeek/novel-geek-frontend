@@ -8,6 +8,6 @@ export class StatisticService {
   constructor(private http: HttpClient) {}
 
   getBasicStat() {
-    return this.http.get('http://localhost:8080/admin/basic-stat');
+    return this.http.get('/admin/basic-stat');
   }
 }

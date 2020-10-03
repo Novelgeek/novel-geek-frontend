@@ -12,6 +12,9 @@ import { PostsHomeComponent } from './pages/posts/posts-home/posts-home.componen
 import { ProfileHomeComponent } from './pages/profile/profile-home/profile-home.component';
 import { ProfileSettingsComponent } from './pages/profile/profile-settings/profile-settings.component';
 import { SalesHomeComponent } from './pages/sales/sales-home/sales-home.component';
+import {SalesInfoComponent} from './pages/sales/sales-info/sales-info.component';
+import {MoreInfoComponent} from './pages/sales/more-info/more-info.component';
+
 import { SignupComponent } from './pages/auth/signup/signup.component';
 
 import { AuthGuard } from './core/_guards/auth.guard';
@@ -32,6 +35,8 @@ import {HttpClientModule} from '@angular/common/http';
 import { ManagePostsComponent } from './pages/admin/manage-posts/manage-posts.component';
 import { ManageAdminsComponent } from './pages/admin/manage-admins/manage-admins.component';
 import { AuctionHomeComponent } from './pages/auction/auction-home/auction-home.component';
+import { AddBookComponent } from './pages/books/add-book/add-book.component';
+import { LocalBooksComponent } from './pages/books/local-books/local-books.component';
 
 const appRoutes: Routes = [
   { path: 'login', component: LoginComponent},
@@ -53,6 +58,8 @@ const appRoutes: Routes = [
       {path: 'books/search/:id', component: BookReviewComponent},
       {path: 'books/search', component: SearchResultsComponent},
       {path: 'books/reviewbook', component: BookReviewComponent},
+      {path: 'books/add', component: AddBookComponent},
+      {path: 'books/local-books', component: LocalBooksComponent},
       {path: 'auctions', component: AuctionHomeComponent},
 
       {path: 'friends', component: FriendsHomeComponent},
@@ -63,6 +70,8 @@ const appRoutes: Routes = [
       {path: 'posts', component: PostsHomeComponent},
       {path: 'profile', component: ProfileHomeComponent},
       {path: 'sales', component: SalesHomeComponent},
+      {path: 'salesinfo/:id', component: SalesInfoComponent},
+      {path: 'moreinfo/:id', component: MoreInfoComponent},
       {path: 'profile/settings', component: ProfileSettingsComponent},
       {path: 'booklet', component: BookletComponent},
       {path: '', component: PostsHomeComponent},

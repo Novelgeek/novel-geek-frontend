@@ -11,7 +11,7 @@ export class AdminService {
 
 
   addAdmin(username: string, email: string, password: string) {
-    return this.http.post('http://localhost:8080/admin/auth/signup',
+    return this.http.post('/admin/auth/signup',
       {
         username: username,
         email: email,
@@ -21,7 +21,27 @@ export class AdminService {
   }
 
   getAllAdmins() {
-    return this.http.get('http://localhost:8080/admin/all');
+    return this.http.get('/admin/all');
+  }
+
+  getReports(){
+    return this.http.get<any>('http://localhost:8080/admin/posts/getreports');
+  }
+
+  getreportedPost(postid: number){
+    return this.http.get<any>('http://localhost:8080/admin/posts/getreportedpost/'+ postid);
+  }
+
+  getReportedData(postid : number){
+    return this.http.get<any>('http://localhost:8080/admin/posts/getreporteddata/'+ postid);
+  }
+
+  deleteReportedPost(postid: number){
+    return this.http.delete('http://localhost:8080/admin/posts/deletereportedpost/'+ postid)
+  }
+
+  cancelReport(postid: number){
+    return this.http.delete('http://localhost:8080/admin/posts/cancelreport/'+ postid)
   }
 
   deleteAdmin(adminId: any) {

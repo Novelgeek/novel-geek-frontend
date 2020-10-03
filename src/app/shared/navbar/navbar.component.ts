@@ -5,6 +5,8 @@ import { AuthService } from 'app/core/_services/auth.service';
 import { Subscription } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
 import { Router } from '@angular/router';
+import { FriendService } from 'app/core/_services/friend.service';
+import { NotificationService } from 'app/core/_services/notification.service';
 
 
 @Component({
@@ -24,12 +26,16 @@ export class NavbarComponent implements OnInit, AfterViewInit, OnDestroy {
 
   public config: any = {};
 
+  groupNotifications: any = [];
+  friendNotifications: any = [];
+
   constructor(
-    private layoutService: LayoutService, 
-    private configService: ConfigService, 
+    private layoutService: LayoutService,
+    private configService: ConfigService,
     private authService: AuthService,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private notificationService: NotificationService
     ) { }
 
 
@@ -49,6 +55,15 @@ export class NavbarComponent implements OnInit, AfterViewInit, OnDestroy {
     if (this.router.routerState.snapshot.url.search('admin') === 1) {
       this.isAdmin = true;
     }
+
+    this.notificationService.groupNotifications.subscribe(data => {
+      this.groupNotifications = data;
+    })
+
+    this.notificationService.friendNotifications.subscribe(data => {
+      this.friendNotifications = data;
+    })
+
   }
 
   ngAfterViewInit() {

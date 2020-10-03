@@ -18,7 +18,6 @@ export class PostsHomeComponent implements OnInit {
   public new_post: Post_modal;
   public url: any;
   selectedImage: File;
-  public flag = '#009da0';
   default = 'Public';
   isShow = false;
   create = false;
@@ -47,6 +46,7 @@ export class PostsHomeComponent implements OnInit {
     newpost.append('description', Values.description)
     newpost.append('sharedtype', Values.sharedtype)
     newpost.append('file', this.selectedImage);
+    
     this.spinner.show();
     this.postsService.createPost(newpost)
     .subscribe(response => {
@@ -70,7 +70,6 @@ export class PostsHomeComponent implements OnInit {
     if (event.target.files) {
       const reader = new FileReader();
       reader.readAsDataURL(event.target.files[0]);
-      // tslint:disable-next-line: no-shadowed-variable
       reader.onload = (event: any) => {
         this.new_post.imagePath = event.target.result;
       }
