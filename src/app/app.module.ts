@@ -74,10 +74,6 @@ import { AddPollComponent } from './pages/polls/add-poll/add-poll.component';
 import { MyPollsComponent } from './pages/polls/my-polls/my-polls.component';
 import { PollModelComponent } from './pages/polls/poll-model/poll-model.component';
 
-
-import {MatInputModule} from '@angular/material/input';
-
-
 import { MatButtonModule } from '@angular/material/button';
 import { ManageAdminsComponent } from './pages/admin/manage-admins/manage-admins.component';
 import { ManagePostsComponent } from './pages/admin/manage-posts/manage-posts.component';

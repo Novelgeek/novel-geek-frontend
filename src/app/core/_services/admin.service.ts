@@ -45,7 +45,7 @@ export class AdminService {
   }
 
   deleteAdmin(adminId: any) {
-    return this.http.delete('http://localhost:8080/admin/' + adminId);
+    return this.http.delete('/admin/' + adminId);
   }
 
 }
