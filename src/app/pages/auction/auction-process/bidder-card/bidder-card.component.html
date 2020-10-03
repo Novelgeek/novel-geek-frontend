@@ -1,21 +1,18 @@
-<div  class="card horizontal" style="width: 500px;margin-left: 300px;">
+<div  class="card horizontal" style="width: 300px;margin-left: 300px;">
                     <div class="card-content d-flex justify-content-between">
                         <div class="card-stacked align-self-center">
                             <div class="px-3" style="margin: 10px;">
                                 <h4 class="card-title">{{bidder.bidUser.username}}</h4>
                                 <p class="card-text">Bid Amount : {{bidder.bidAmount}}</p>
                                 <mat-chip *ngIf="isBidder" color="warn"  selected>Highest Bidder</mat-chip>
-                                <!-- <a href="javascript:void(0)" class="btn btn-raised btn-round mr-1 btn-warning" style="height: 30px;">Highest Bidder</a> -->
-                                <!-- <a class="btn btn-raised btn-primary"></a> -->
                             </div>
                         </div>
                         <div class="card-img" style="text-align: left;margin-top: 20px;">
                             <img style="height: 70px;width:68px; margin-bottom: 20px;" class="card-img-top media-object d-flex mr-3 bg-successs rounded-circle" src="{{bidder.bidUser.imageUrl}}"
                             alt="Generic placeholder image"
                             onerror="this.src='../../../../../assets/img/portrait/default.svg';">
+                            <a (click)="makeSale()" class="btn btn-raised btn-primary">Sell</a>
                         </div>
-                        <div>
                             
-                        </div>
                     </div>
 </div>

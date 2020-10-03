@@ -1,4 +1,5 @@
-import { Component, OnInit,Input } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import {AuctionService} from '../../auction.service';
 
 @Component({
   selector: 'app-bidder-card',
@@ -9,15 +10,29 @@ export class BidderCardComponent implements OnInit {
 
   @Input() bidder: any = [];
   @Input() highestBidder: any;
+  @Input() auctionId: any;
   isBidder = false;
-  constructor() { }
+  constructor(private auctionService: AuctionService) { }
 
   ngOnInit(): void {
-    if(this.bidder.bidUser.id==this.highestBidder){
+    console.log(this.bidder);
+    if (this.bidder.bidUser.id == this.highestBidder){
       this.isBidder = true;
-    }else{
+    } else {
       this.isBidder = false;
     }
+  }
+  makeSale() {
+    const sale = {
+      'auctionId': this.auctionId,
+      'bidderId': this.bidder.bidUser.id
+    };
+    this.auctionService.makeSale(sale).subscribe(data => {
+      console.log(data);
+    },
+    error => {
+      console.log(error)
+    });
   }
 
 }

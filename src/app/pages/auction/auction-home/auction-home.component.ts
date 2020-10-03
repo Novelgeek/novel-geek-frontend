@@ -30,15 +30,34 @@ export class AuctionHomeComponent implements OnInit {
       console.log(data);
       this.spinner.hide();
       this.auctions = data;
-      this.auctions = this.auctions.filter(auc=>{
-        return auc.auctionStatus=="ONGOING";
-      })
+      this.filter();
+
+
     },
     error=>{
       this.spinner.hide();
       this.toastr.error("Error Occured")
     }
     );
+  }
+  filter(){
+    this.auctions = this.auctions.filter(auc=>{
+      return auc.auctionStatus=="ONGOING";
+    });
+    // this.auctions = this.auctions.filter(auc=>{
+    //     const time = new Date(auc.finishDate).getTime() - new Date().getTime();
+    //     return this.dhm(time) >= 0;
+    // });
+  }
+  dhm(ms) {
+    const days = Math.floor(ms / (24*60*60*1000));
+    const daysms=ms % (24*60*60*1000);
+    const hours = Math.floor((daysms)/(60*60*1000));
+    const hoursms=ms % (60*60*1000);
+    const minutes = Math.floor((hoursms)/(60*1000));
+    const minutesms=ms % (60*1000);
+    const sec = Math.floor((minutesms)/(1000));
+    return days;
   }
 
   onClick(){

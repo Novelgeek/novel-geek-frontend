@@ -21,7 +21,7 @@
 
         <div class="col-12" *ngFor="let bidder of bidders ">
             <div class="container" style="text-align: center;">
-                <app-bidder-card [bidder] = "bidder" [highestBidder]="highestBidder"></app-bidder-card>
+                <app-bidder-card [auctionId]="auctionId" [bidder] = "bidder" [highestBidder]="highestBidder"></app-bidder-card>
             </div>
 
          </div>
