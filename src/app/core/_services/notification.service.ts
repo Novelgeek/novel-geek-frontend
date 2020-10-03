@@ -10,6 +10,7 @@ import { BehaviorSubject } from 'rxjs';
 export class NotificationService {
   groupNotifications = new BehaviorSubject<any>([]);
   friendNotifications = new BehaviorSubject<any>([]);
+  
 
   constructor(
     private friendService: FriendService,
@@ -25,5 +26,8 @@ export class NotificationService {
     this.friendService.getFriendRequests().subscribe(data => {
       this.friendNotifications.next(data)
     })
+
+
+
   }
 }

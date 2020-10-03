@@ -8,11 +8,11 @@ export class SellingService {
     constructor(private http: HttpClient) {}
 
     createPost(newpost: FormData) {
-        return this.http.post<Selling_modal>('http://localhost:8080/selling/newpost', newpost)
+        return this.http.post<Selling_modal>('/selling/newpost', newpost)
     }
 
     storeCustomer(data) {
-        return this.http.post<any>('http://localhost:8080/selling/newcustomer', {
+        return this.http.post<any>('/selling/newcustomer', {
             first_name:data.first_name,
             last_name:data.last_name,
             email:data.email,
@@ -24,16 +24,16 @@ export class SellingService {
     }
 
     getAllPosts() {
-        return this.http.get<any>('http://localhost:8080/selling/allposts')
+        return this.http.get<any>('/selling/allposts')
     }
 
     getMyPosts() {
-        return this.http.get<any>('http://localhost:8080/selling/myposts')
+        return this.http.get<any>('/selling/myposts')
     }
 
 
     deletePost(sellingid: number) {
-        return this.http.delete('http://localhost:8080/selling/delete/'+ sellingid)
+        return this.http.delete('/selling/delete/'+ sellingid)
 
     }
 }

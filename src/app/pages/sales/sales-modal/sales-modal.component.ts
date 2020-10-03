@@ -33,7 +33,7 @@ export class SalesModalComponent implements OnInit {
 
     // this.return="http://localhost:4200/posts";
     // this.cancel="http://localhost:4200/profile";
-    // this.notify="http://localhost:8080/selling/newpayment";
+    // this.notify="/selling/newpayment";
     // this.order=this.item.sellingid.toString();
      //this.title=this.item.title;
     // this.merchant=this.item.merchantid;
@@ -69,7 +69,7 @@ export class SalesModalComponent implements OnInit {
     // this.new_payment.merchant_id = this.item.merchantid;
     // this.new_payment.return_url="http://localhost:4200/posts"
     // this.new_payment.cancel_url="http://localhost:4200/profile"
-    // this.new_payment.notify_url="http://localhost:8080/selling/newpayment"
+    // this.new_payment.notify_url="/selling/newpayment"
     // this.new_payment.order_id=this.item.sellingid.toString();
     // this.new_payment.currency="LKR"
     // this.new_payment.items=this.item.title

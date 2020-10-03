@@ -30,49 +30,49 @@ export class BooksService {
 
   getReviews(bookId) {
     this.bookId = bookId;
-    return this.http.get('http://localhost:8080/book/getreviews/' + this.bookId);
+    return this.http.get('/book/getreviews/' + this.bookId);
   }
   addComment(comment) {
-    return this.http.post('http://localhost:8080/book/addcomment', comment);
+    return this.http.post('/book/addcomment', comment);
   }
 
   rateBook(bookDetail: Book) {
-    return this.http.post('http://localhost:8080/book/addRating', bookDetail);
+    return this.http.post('/book/addRating', bookDetail);
   }
 
   getRecommendations() {
-    return this.http.get('http://localhost:8080/book/getRecommendations');
+    return this.http.get('/book/getRecommendations');
   }
 
   getRecentlyViewed() {
-    return this.http.get('http://localhost:8080/book/recentlyViewed');
+    return this.http.get('/book/recentlyViewed');
   }
 
   updateRecentlyViewed(bookDetail: Book) {
-    return this.http.post('http://localhost:8080/book/updateView', bookDetail);
+    return this.http.post('/book/updateView', bookDetail);
   }
 
   getUserRating(bookId) {
-    return this.http.get('http://localhost:8080/book/userRating/' + bookId);
+    return this.http.get('/book/userRating/' + bookId);
   }
 
   getMyBookRatings(){
-    return this.http.get('http://localhost:8080/book/bookRatings');
+    return this.http.get('/book/bookRatings');
   }
 
   addReview(myReview: String, bookId: any) {
-    return this.http.post('http://localhost:8080/book/addreview', {
+    return this.http.post('/book/addreview', {
       bookId: bookId,
       reviewDescription: myReview
     });
   }
 
   addNewBook(newBook: FormData) {
-    return this.http.post('http://localhost:8080/book/addNewBook', newBook);
+    return this.http.post('/book/addNewBook', newBook);
   }
 
   getAllLocalBooks() {
-    return this.http.get('http://localhost:8080/book/allLocal')
+    return this.http.get('/book/allLocal')
   }
 
 }

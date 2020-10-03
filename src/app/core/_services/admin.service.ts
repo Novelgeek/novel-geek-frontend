@@ -10,7 +10,7 @@ export class AdminService {
 
 
   addAdmin(username: string, email: string, password: string) {
-    return this.http.post('http://localhost:8080/admin/auth/signup',
+    return this.http.post('/admin/auth/signup',
       {
         username: username,
         email: email,
@@ -20,7 +20,7 @@ export class AdminService {
   }
 
   getAllAdmins() {
-    return this.http.get('http://localhost:8080/admin/all');
+    return this.http.get('/admin/all');
   }
 
 }
