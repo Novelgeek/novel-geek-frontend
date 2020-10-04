@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
 import { PollService } from 'app/core/_services/poll.service';
 import { ToastrService } from 'ngx-toastr';
 import { NgxSpinnerService } from 'ngx-spinner';
@@ -19,39 +19,44 @@ export class MyPollsComponent implements OnInit {
     private spinner: NgxSpinnerService
     ) { }
 
-    polls: Poll[] = [];
-
-  private userSub: Subscription;
-  public user: any;
-  isAuthenticated = false;
-  url: any;
-  userId: number;
-
-  ngOnInit(): void {
-    this.userSub = this.authService.user.subscribe( user => {
-      this.isAuthenticated = !!user; // !user ? false : true
-      this.user = user;
-    });
-    this.loadMyPolls();
-  }
+    @Input() poll: any;
+    @Input() itemindex: number;
+    @Output() ondelete  = new EventEmitter<{id: number}> ();
+    isShow:boolean = false;
+ 
+    ngOnInit(): void {
+        //this.loadMyPolls();
+        console.log(this.poll.pollid);
+        console.log(this.poll);
+    }
 
 
-  deletePoll(id) {
-    this.pollService.deletePoll(id)
+  deletePoll(pollid: number) {
+    this.spinner.show()
+    this.pollService.deletePoll(pollid)
       .subscribe(success => {
-        this.loadMyPolls();
+        this.isShow = false;
+        this.ondelete.emit({id: this.itemindex});
+        this.toastr.success('poll deleted!');
+        this.spinner.hide()
       }, error => {
         console.log(error);
       });
   }
 
+  
+
   loadMyPolls() {
-    let userId = this.authService.currentUser.id;
-    this.pollService.getPollsForUser(userId).subscribe(polls => {
-      this.polls = polls;
+    // let userId = this.authService.currentUser.id;
+    this.pollService.getPollsForUser().subscribe(polls => {
+      this.poll = polls;
     }, error => {
       console.log(error);
     });
+  }
+
+  public toggleList() {
+    this.isShow = !this.isShow;
   }
 
 }

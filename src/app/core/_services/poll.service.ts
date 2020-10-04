@@ -10,26 +10,28 @@ export class PollService {
   constructor(private http: HttpClient) { }
 
   getPolls(){
-    return this.http.get<any>('http://localhost:8080/poll/allpolls');
+    return this.http.get<any>('/poll/all');
   }
 
-  getPollsForUser(id) {
-    return this.http.get<any>('http://localhost:8080/poll/mypolls');
+  getPollsForUser() {
+    return this.http.get<any>('/poll/user');
   }
 
   getPoll(id) {
-    return this.http.get('http://localhost:8080/poll/' + id);
+    return this.http.get('/poll/' + id);
   }
 
   savePoll(poll: Poll) {
-    return this.http.post('http://localhost:8080/poll/newpoll', poll);
+    return this.http.post('/poll/newpoll', poll);
   }
 
-  deletePoll(pollId: number) {
-    return this.http.delete('http://localhost:8080/poll/delete' + pollId);
+  deletePoll(pollid: number) {
+    return this.http.delete('/poll/delete/' + pollid);
   }
 
-  vote(pollId: string, selectedOption: number){
-    return this.http.post('http://localhost:8080/poll/' + pollId + '/vote/' + selectedOption, {});
+  vote(pollId: number, selectedOption: number){
+    return this.http.post('/poll/' + pollId + '/vote/' + selectedOption, {});
   }
+
+
 }

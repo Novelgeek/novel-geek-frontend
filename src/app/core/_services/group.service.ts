@@ -9,11 +9,11 @@ export class GroupService {
   constructor(private http: HttpClient) { }
 
   createGroup(newGroup: FormData) {
-    return this.http.post('http://localhost:8080/group/new', newGroup);
+    return this.http.post('/group/new', newGroup);
   }
 
   updateGroup(name: String, description: String, photo: String, groupId) {
-    return this.http.post<any>('http://localhost:8080/group/' + groupId + '/update',
+    return this.http.post<any>('/group/' + groupId + '/update',
       {
         groupName: name,
         description: description,
@@ -23,63 +23,63 @@ export class GroupService {
   }
 
   getUserGroups() {
-    return this.http.get('http://localhost:8080/group/getGroups');
+    return this.http.get('/group/getGroups');
   }
 
   getAllGroups() {
-    return this.http.get('http://localhost:8080/group/all');
+    return this.http.get('/group/all');
   }
 
   getGroupInvites() {
-    return this.http.get('http://localhost:8080/group/invites');
+    return this.http.get('/group/invites');
   }
 
   getSingleGroup(groupId) {
-    return this.http.get('http://localhost:8080/group/' + groupId);
+    return this.http.get('/group/' + groupId);
   }
 
   inviteUser(groupId: number, userId: number) {
-    return this.http.post('http://localhost:8080/group/' + groupId + '/inviteUser/' + userId, {})
+    return this.http.post('/group/' + groupId + '/inviteUser/' + userId, {})
   }
 
   acceptInvite(inviteId) {
-    return this.http.post<any>('http://localhost:8080/group/acceptInvite/' + inviteId , {});
+    return this.http.post<any>('/group/acceptInvite/' + inviteId , {});
   }
 
   declineInvite(inviteId) {
-    return this.http.post<any>('http://localhost:8080/group/declineInvite/' + inviteId , {});
+    return this.http.post<any>('/group/declineInvite/' + inviteId , {});
   }
 
   requestMembership(groupId) {
-    return this.http.post('http://localhost:8080/group/' + groupId + '/requestMembership', {})
+    return this.http.post('/group/' + groupId + '/requestMembership', {})
   }
 
   getRequests(groupId) {
-    return this.http.get('http://localhost:8080/group/' + groupId + '/getRequests');
+    return this.http.get('/group/' + groupId + '/getRequests');
   }
 
   acceptRequest(requestId) {
-    return this.http.get('http://localhost:8080/group/acceptRequest/' + requestId);
+    return this.http.get('/group/acceptRequest/' + requestId);
   }
 
   leaveGroup(groupId) {
-    return this.http.get('http://localhost:8080/group/' + groupId + '/leaveGroup')
+    return this.http.get('/group/' + groupId + '/leaveGroup')
   }
 
   removeUser(groupId, userId) {
-    return this.http.get('http://localhost:8080/group/' + groupId + '/removeUser/' + userId)
+    return this.http.get('/group/' + groupId + '/removeUser/' + userId)
   }
 
   deleteGroup(groupId) {
-    return this.http.delete('http://localhost:8080/group/' + groupId);
+    return this.http.delete('/group/' + groupId);
   }
 
   getMembersAndNonMenbers(groupId) {
-    return this.http.get('http://localhost:8080/group/getAllUsers/' + groupId)
+    return this.http.get('/group/getAllUsers/' + groupId)
   }
 
   createPost(newpost: FormData, groupId) {
-    return this.http.post('http://localhost:8080/group/' + groupId + '/newpost', newpost)
+    return this.http.post('/group/' + groupId + '/newpost', newpost)
 }
 
 }

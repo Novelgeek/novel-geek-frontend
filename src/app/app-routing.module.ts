@@ -12,6 +12,9 @@ import { PostsHomeComponent } from './pages/posts/posts-home/posts-home.componen
 import { ProfileHomeComponent } from './pages/profile/profile-home/profile-home.component';
 import { ProfileSettingsComponent } from './pages/profile/profile-settings/profile-settings.component';
 import { SalesHomeComponent } from './pages/sales/sales-home/sales-home.component';
+import {SalesInfoComponent} from './pages/sales/sales-info/sales-info.component';
+import {MoreInfoComponent} from './pages/sales/more-info/more-info.component';
+
 import { SignupComponent } from './pages/auth/signup/signup.component';
 
 import { AuthGuard } from './core/_guards/auth.guard';
@@ -67,6 +70,8 @@ const appRoutes: Routes = [
       {path: 'posts', component: PostsHomeComponent},
       {path: 'profile', component: ProfileHomeComponent},
       {path: 'sales', component: SalesHomeComponent},
+      {path: 'salesinfo/:id', component: SalesInfoComponent},
+      {path: 'moreinfo/:id', component: MoreInfoComponent},
       {path: 'profile/settings', component: ProfileSettingsComponent},
       {path: 'booklet', component: BookletComponent},
       {path: '', component: PostsHomeComponent},
