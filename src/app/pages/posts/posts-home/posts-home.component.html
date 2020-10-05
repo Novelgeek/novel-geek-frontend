@@ -1,3 +1,4 @@
+
 <!--NEW POST SECTION-->
 <div class="row justify-content-center ">
   <div class="col-md-4 col-sm-12 col-xs-12">
@@ -11,21 +12,20 @@
   </div>
 </div>
 
-
+<!--POSTS APPEARS HEARE/POST SECTION-->
 <div class="card-columns">
 
     <ng-container *ngFor="let item of postList; let itemindex = index;">
-      <app-post-modal [item]="item" [itemindex]="itemindex" (ondelete)="onDeletePost($event)"></app-post-modal>
+      <ng-container *ngIf="item!=null">
+        <app-post-modal [item]="item" [itemindex]="itemindex" (ondelete)="onDeletePost($event)"></app-post-modal>
+      </ng-container>      
     </ng-container>
     <div *ngIf="postList.length === 0">
       <span class="card-body text-muted" >Currently, No Post Available</span>
     </div>
 
 </div>
-<!--POSTS APPEARS HEARE/POST SECTION-->
 
-<!-- <div class="col-md-3 col-12 col-sm-12 col-xs-12">
-</div> -->
 
 
 <!--CREATE NEW POST CUSTOM MODAL SECTION-->

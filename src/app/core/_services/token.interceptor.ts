@@ -25,6 +25,11 @@ export class TokenInterceptor implements HttpInterceptor {
       });
     }
 
+    const url = 'http://localhost:8080';
+    request = request.clone({
+      url: url + request.url
+    });
+
 
     return next.handle(request);
   }
