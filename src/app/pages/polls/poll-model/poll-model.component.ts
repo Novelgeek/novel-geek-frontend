@@ -4,11 +4,15 @@ import { PollService } from 'app/core/_services/poll.service';
 import { ToastrService } from 'ngx-toastr';
 import { NgxSpinnerService } from 'ngx-spinner';
 
+
+
 @Component({
   selector: 'app-poll-model',
   templateUrl: './poll-model.component.html',
   styleUrls: ['./poll-model.component.css']
 })
+
+
 export class PollModelComponent implements OnInit {
 
   @Input() poll: any;

@@ -1,10 +1,16 @@
 import { Component, OnInit, ViewChild , EventEmitter, OnDestroy } from '@angular/core';
 import { AuthService } from 'app/core/_services/auth.service';
 import { Subscription } from 'rxjs';
+
 // imports for image slider
 import { SwiperOptions } from 'swiper';
 import { SwiperComponent } from 'ngx-useful-swiper';
 import { BooksService } from 'app/pages/books/books.service';
+import { PostsService } from 'app/core/_services/posts.service';
+import { UserService } from 'app/core/_services/user.service';
+import { ToastrService } from 'ngx-toastr';
+import { NgxSpinnerService } from 'ngx-spinner';
+import Post_modal from 'app/pages/posts/post_modal';
 //
 @Component({
   selector: 'app-profile-home',
@@ -18,20 +24,25 @@ export class ProfileHomeComponent implements OnInit, OnDestroy {
   isAuthenticated = false;
 
   public url: any = null;
-
+  public selectedImage: File;
   public allBooks: any;
   public highRated: any;
   public lowRated: any;
+  public postList: Post_modal[];
 
   // image slider configuration
   @ViewChild('usefulSwiper', { static: false }) usefulSwiper: SwiperComponent;
   swconfig: SwiperOptions;
 
-
   constructor(
     private authService: AuthService,
-    private bookService: BooksService
-    ) { }
+    private bookService: BooksService,
+    private postsService: PostsService,
+    private userService: UserService,
+    private toastr: ToastrService, private spinner: NgxSpinnerService
+    ) { 
+      this.postList = [];
+    }
 
     ngOnDestroy(): void {
       this.userSub.unsubscribe();
@@ -44,10 +55,13 @@ export class ProfileHomeComponent implements OnInit, OnDestroy {
       this.isAuthenticated = !!user; // !user ? false : true
       this.user = user;
       this.url = user.photoUrl;
+      
     });
 
+    //load book list 
 
     this.bookService.getMyBookRatings().subscribe(data => {
+      console.log(data)
       this.allBooks = data;
       this.highRated = this.allBooks.filter(book => {
         return book.rating > 2
@@ -108,6 +122,16 @@ export class ProfileHomeComponent implements OnInit, OnDestroy {
       }
 
     };
+
+    // load posts of users
+
+    this.spinner.show();
+    this.postsService.getMyPosts().subscribe(response => {
+      this.postList = response;
+      this.spinner.hide();
+    }, errorMsg => {
+      this.spinner.hide()
+    })
 }
 
    nextSlide() {
@@ -126,6 +150,21 @@ export class ProfileHomeComponent implements OnInit, OnDestroy {
 
   // image upload
 
+  onSubmit(Values:any){
+    const newpicture = new FormData();
+    newpicture.append('file', this.selectedImage);
+    this.spinner.show();
+    this.userService.uploadImage(newpicture).subscribe(response => {
+      this.spinner.hide();
+      this.toastr.success('Profile Picture Uploaded succesfully');
+    }, errorMsg => {
+      this.spinner.hide();
+      this.toastr.error('Unable to upload the image.');
+    })
+  }
+
+  // image upload
+
   onSelectFile(event) {
     if (event.target.files && event.target.files[0]) {
       const reader = new FileReader();
@@ -139,6 +178,10 @@ export class ProfileHomeComponent implements OnInit, OnDestroy {
   }
   public delete() {
     this.url = null;
+  }
+
+  onDeletePost(data: {id: number}) {
+    this.postList.splice(data.id, 1);
   }
 
 }

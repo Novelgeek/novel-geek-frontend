@@ -28,5 +28,9 @@ export class UserService {
     return this.http.get('http://localhost:8080/user');
   }
 
+  uploadImage(newpicture: FormData){
+    return this.http.patch('http://localhost:8080/user/image', newpicture);
+  }
+
 }
 
