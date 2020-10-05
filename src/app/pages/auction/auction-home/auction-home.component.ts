@@ -30,6 +30,9 @@ export class AuctionHomeComponent implements OnInit {
       console.log(data);
       this.spinner.hide();
       this.auctions = data;
+      this.auctions.forEach(element => {
+        console.log(element.auctionStatus);
+      });
       this.filter();
 
 
