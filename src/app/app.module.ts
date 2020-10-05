@@ -171,7 +171,7 @@ let firebaseConfig = {
 
     AuctionProcessComponent,
     StoreComponent,
-    BidderCardComponent
+    BidderCardComponent,
 
 
     AddPollComponent,
