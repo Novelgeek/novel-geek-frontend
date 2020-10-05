@@ -43,6 +43,11 @@ import { ChartsModule } from 'ng2-charts';
 
 import { MatSliderModule } from '@angular/material/slider';
 
+import {MatMenuModule} from '@angular/material/menu';
+import {MatIconModule} from '@angular/material/icon';
+
+
+
 import { BookletComponent } from './pages/books/booklet/booklet.component';
 
 import { SearchResultsComponent } from './pages/books/search-results/search-results.component';
@@ -64,19 +69,26 @@ import { FriendCardComponent } from './pages/friends/friend-card/friend-card.com
 
 import { AuctionHomeComponent } from './pages/auction/auction-home/auction-home.component';
 import { AuctionCardComponent } from './pages/auction/auction-card/auction-card.component';
-import { MatDatepickerModule } from '@angular/material/datepicker';
-import { MatNativeDateModule } from '@angular/material';
 
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import {MatNativeDateModule} from '@angular/material';
+import {MatChipsModule} from '@angular/material/chips';
+import {MatInputModule} from '@angular/material/input';
 
-import { MatInputModule } from '@angular/material/input';
 
 import { AddPollComponent } from './pages/polls/add-poll/add-poll.component';
 import { MyPollsComponent } from './pages/polls/my-polls/my-polls.component';
 import { PollModelComponent } from './pages/polls/poll-model/poll-model.component';
 
+
 import { MatButtonModule } from '@angular/material/button';
 import { ManageAdminsComponent } from './pages/admin/manage-admins/manage-admins.component';
 import { ManagePostsComponent } from './pages/admin/manage-posts/manage-posts.component';
+
+import { AuctionProcessComponent } from './pages/auction/auction-process/auction-process.component';
+import { StoreComponent } from './pages/books/store/store.component';
+import { BidderCardComponent } from './pages/auction/auction-process/bidder-card/bidder-card.component';
+
 import { AddBookComponent } from './pages/books/add-book/add-book.component';
 import { ArchwizardModule } from 'angular-archwizard';
 import { LocalBooksComponent } from './pages/books/local-books/local-books.component';
@@ -84,6 +96,7 @@ import { LocalBookCardComponent } from './pages/books/local-books/local-book-car
 import { PostCommentModalComponent } from './pages/posts/post-comment-modal/post-comment-modal.component';
 import { SalesInfoComponent } from './pages/sales/sales-info/sales-info.component';
 import {MoreInfoComponent} from './pages/sales/more-info/more-info.component';
+
 
 export function tokenGetter() {
   return localStorage.getItem('token');
@@ -156,9 +169,15 @@ let firebaseConfig = {
     AuctionHomeComponent,
     AuctionCardComponent,
 
+    AuctionProcessComponent,
+    StoreComponent,
+    BidderCardComponent
+
+
     AddPollComponent,
     MyPollsComponent,
     PollModelComponent
+
 
 
   ],
@@ -169,12 +188,19 @@ let firebaseConfig = {
     HttpClientModule,
     NgbModule,
     BarRatingModule,
+
+    
+    MatMenuModule,
+    MatChipsModule,
+
     NgSelectModule,
+
     MatDatepickerModule,
     MatSliderModule,
     MatInputModule,
     MatButtonModule,
     MatNativeDateModule,
+    MatIconModule,
 
     AngularFireModule.initializeApp(firebaseConfig),
 

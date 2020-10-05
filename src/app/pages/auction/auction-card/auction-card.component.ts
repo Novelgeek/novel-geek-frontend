@@ -5,6 +5,7 @@ import { AuthService } from 'app/core/_services/auth.service';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { NgxSpinner } from 'ngx-spinner/lib/ngx-spinner.enum';
 import { ToastrService } from 'ngx-toastr';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-auction-card',
   templateUrl: './auction-card.component.html',
@@ -27,7 +28,9 @@ export class AuctionCardComponent implements OnInit {
   auction:any=[];
 
   constructor(private spinner:NgxSpinnerService,private toastr:ToastrService,
-    private auctionService: AuctionService,private authService:AuthService) { }
+    private auctionService: AuctionService,private authService:AuthService,
+    private router:Router
+    ) { }
 
   ngOnInit(): void {
     if (this.imageUrl == null){
@@ -51,7 +54,6 @@ export class AuctionCardComponent implements OnInit {
   }
 
   onAddBid(){
-    
     if (this.bid != ''){
       this.spinner.show();
       const newBid = <Number>this.bid;
@@ -80,10 +82,16 @@ export class AuctionCardComponent implements OnInit {
         this.spinner.hide();
         this.toastr.error("Please add a higher bid than the current bid")
       }
-      
-
-
     }
+  }
+
+  onProcess(){
+    console.log("process")
+    this.router.navigate(['/auctions/process'], {queryParams: {auctionId: this.auctionId} });
+
+  }
+  onDelete(){
+
   }
 
 }
