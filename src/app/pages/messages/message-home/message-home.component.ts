@@ -54,4 +54,8 @@ export class MessageHomeComponent implements OnInit, OnDestroy {
     this.message = '';
   }
 
+  test(){
+
+  }
+
 }
