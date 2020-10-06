@@ -170,7 +170,6 @@ export class PostModalComponent implements OnInit {
     this.addcomment.reset();
   }
 
-
   public toggleList() {
     this.isShow = !this.isShow;
   }

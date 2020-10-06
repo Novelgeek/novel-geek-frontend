@@ -1,0 +1,30 @@
+
+<div mat-dialog-content>
+  <button type="button" class="close" aria-label="Close" (click)="close()">
+    <span aria-hidden="true">&times;</span>
+  </button>
+
+    <div class="mat-elevation-z8">
+      <table datatable class="table">
+               <thead>
+          <tr>
+            <th>#</th>
+            <th>Book Name </th>
+            <th>Title 1</th>
+            <th></th>
+          </tr>
+          </thead>
+          <tbody *ngFor="let fanfiction of fanfictionList">
+          <tr>
+            <td><img src="../../../../../assets/books/book-1.jpg" style="width: 50px;"></td>
+            <td>{{fanfiction.bookName}}</td>
+            <td>{{fanfiction.title}}</td>
+            <td><button style="border: 0ch;" (click)="delete(fanfiction.id)"><i class="fa fa-trash" aria-hidden="true"></i></button></td>
+          </tr>
+          </tbody>
+        </table>
+      
+      
+      </div>
+</div>
+

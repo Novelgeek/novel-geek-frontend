@@ -81,10 +81,6 @@ import { MyPollsComponent } from './pages/polls/my-polls/my-polls.component';
 import { PollModelComponent } from './pages/polls/poll-model/poll-model.component';
 
 
-import { MatButtonModule } from '@angular/material/button';
-import { ManageAdminsComponent } from './pages/admin/manage-admins/manage-admins.component';
-import { ManagePostsComponent } from './pages/admin/manage-posts/manage-posts.component';
-
 import { AuctionProcessComponent } from './pages/auction/auction-process/auction-process.component';
 import { StoreComponent } from './pages/books/store/store.component';
 import { BidderCardComponent } from './pages/auction/auction-process/bidder-card/bidder-card.component';
@@ -98,6 +94,11 @@ import { SalesInfoComponent } from './pages/sales/sales-info/sales-info.componen
 import {MoreInfoComponent} from './pages/sales/more-info/more-info.component';
 
 
+import {MatButtonModule} from '@angular/material/button';
+import { ManageAdminsComponent } from './pages/admin/manage-admins/manage-admins.component';
+import { ManagePostsComponent } from './pages/admin/manage-posts/manage-posts.component';
+import { FanFictionComponent } from './pages/books/book-home/fan-fiction/fan-fiction.component';
+import { ViewFanFictionComponent } from './pages/books/book-home/view-fan-fiction/view-fan-fiction.component';
 export function tokenGetter() {
   return localStorage.getItem('token');
 }
@@ -171,15 +172,14 @@ let firebaseConfig = {
 
     AuctionProcessComponent,
     StoreComponent,
-    BidderCardComponent
+    BidderCardComponent,
 
 
     AddPollComponent,
     MyPollsComponent,
-    PollModelComponent
-
-
-
+    PollModelComponent,
+    FanFictionComponent,
+    ViewFanFictionComponent
   ],
   imports: [
     BrowserAnimationsModule,

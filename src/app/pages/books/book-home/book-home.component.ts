@@ -8,6 +8,10 @@ import { SwiperOptions } from 'swiper';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { BooksService } from '../books.service';
 import { Autoplay } from 'swiper/js/swiper.esm';
+import {MatDialog} from '@angular/material/dialog';
+import {FanFictionComponent} from './fan-fiction/fan-fiction.component'
+import { from } from 'rxjs';
+import { ViewFanFictionComponent } from './view-fan-fiction/view-fan-fiction.component';
 
 @Component({
   selector: 'app-book-home',
@@ -24,7 +28,7 @@ export class BookHomeComponent implements OnInit {
   public searchTerm = '';
   public recommendations: any;
   public recentlyViewed: any;
-  constructor(private router: Router, private bookService: BooksService) { }
+  constructor(private router: Router, private bookService: BooksService, public dialog: MatDialog) { }
 
 
   ngOnInit() {
@@ -104,7 +108,30 @@ export class BookHomeComponent implements OnInit {
     this.router.navigate(['/books/search'], {queryParams: {searchTerm: this.searchTerm} });
   }
 
+  fanFictionDialog() {
+    const dialogRef = this.dialog.open(FanFictionComponent, {
+      autoFocus: false,
+      width: '2000px',maxHeight: '90vh'
+    });
 
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+    });
+  }
+
+  viewFanFictionDialog() {
+    const dialogRef = this.dialog.open(ViewFanFictionComponent, {
+      autoFocus: false,
+      width: '2000px',maxHeight: '90vh'
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+    });
+  }
+ 
+
+  
 }
 
 

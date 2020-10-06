@@ -117,4 +117,8 @@ export class GroupHomeComponent implements OnInit {
     this.allGroups = this.transform(this.allGroups, this.searchTerm);
   }
 
+  
+
+
+
 }
