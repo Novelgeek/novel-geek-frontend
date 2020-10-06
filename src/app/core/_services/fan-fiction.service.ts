@@ -21,19 +21,19 @@ export class FanFictionService {
   public addFanFiction(data: any) {
    
 
-    return this.http.post('http://localhost:8080/fan-fiction/add', data);
+    return this.http.post('/fan-fiction/add', data);
   }
 
 
   getFanFictionsByUserid() {
-    return this.http.get<any>('http://localhost:8080/fan-fiction/get-fanfinctions-by-userid')
+    return this.http.get<any>('/fan-fiction/get-fanfinctions-by-userid')
 }
 deleteFanFiction(id) {
-  return this.http.delete('http://localhost:8080/fan-fiction/delete/' + id);
+  return this.http.delete('/fan-fiction/delete/' + id);
 }
 
 getAll() {
-  return this.http.get('http://localhost:8080/fanfiction/get-all')
+  return this.http.get('/fanfiction/get-all')
 }
 
 }
