@@ -26,6 +26,7 @@ constructor(private fanFictionService: FanFictionService,
   
   ){
     this.fanfictionForm = this.formBuilder.group({
+      bookName: '',
       imageName: '',
       title: '',
       description: ''
@@ -61,8 +62,23 @@ constructor(private fanFictionService: FanFictionService,
   }
 
   addFacFiction(data) {   
+    const formData = new FormData();
+    formData.append('imageName', data.imageName);
+    formData.append('bookName', data.bookName);
+    formData.append('title', data.title);
+    formData.append('description', data.description);
+   
+
+
     data.imageName = this.imageName; 
     console.log(data);
+    this.fanFictionService.addFanFiction(formData).subscribe(
+      res => {
+        console.log('sucess fully add');
+      }, error => {
+        console.log(error);
+      }
+    )
   }
 
 // image upload
@@ -87,10 +103,7 @@ public delete() {
 }
 
 close() {
-  console.log("dialog box cancel btn");
-  this.dialogRef.afterClosed().subscribe(result => {
-    console.log('The dialog was closed');
-  });
+  this.dialogRef.close();
 }
 
 }

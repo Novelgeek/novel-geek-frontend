@@ -22,7 +22,7 @@ export class GroupService {
     );
   }
 
-  getUserGroups() {
+  UserGroups() {
     return this.http.get('http://localhost:8080/group/getGroups');
   }
 

@@ -11,6 +11,7 @@ import { Autoplay } from 'swiper/js/swiper.esm';
 import {MatDialog} from '@angular/material/dialog';
 import {FanFictionComponent} from './fan-fiction/fan-fiction.component'
 import { from } from 'rxjs';
+import { ViewFanFictionComponent } from './view-fan-fiction/view-fan-fiction.component';
 
 @Component({
   selector: 'app-book-home',
@@ -109,13 +110,27 @@ export class BookHomeComponent implements OnInit {
 
   fanFictionDialog() {
     const dialogRef = this.dialog.open(FanFictionComponent, {
-      width: '2000px',
+      autoFocus: false,
+      width: '2000px',maxHeight: '90vh'
     });
 
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed');
     });
   }
+
+  viewFanFictionDialog() {
+    const dialogRef = this.dialog.open(ViewFanFictionComponent, {
+      autoFocus: false,
+      width: '2000px',maxHeight: '90vh'
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+    });
+  }
+ 
+
   
 }
 
