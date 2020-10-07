@@ -14,7 +14,7 @@
 
 <div class="row justify-content-end">
   <div class="col-12">
-    <button class="btn btn-outline-info mr-1 pull-right primary" >
+    <button class="btn btn-outline-info mr-1 pull-right primary" (click)="fanFictionDialog()">
       <i class="ft-plus primary mr-1"></i>
       Add New Fan-Fiction
     </button>
@@ -24,18 +24,6 @@
     </button>
   </div>
 </div>
-
-
-
-
-<div class="col-1.5">
-  <button class="button button4" (click)="fanFictionDialog()">Add Fan Fiction</button>
-</div>
-
-<div class="col-1.5">
-  <button class="button button4" (click)="viewFanFictionDialog()">My Fan Fictions</button>
-</div>
-
 
 <div class="row">
   <div class="col-6" >
@@ -107,6 +95,84 @@
       <div class="card-header text-center">
         <a routerLink="/books/local-books" class="pull-right align-items-start">View all</a>
         <h4 class="card-title">Local Books</h4>
+        
+        <p></p>
+      </div>
+      <div *ngIf="localBooks?.length === 0" class="card-content">
+        <div class="d-flex empty">
+          <h4 class="primary">Nothing to display</h4>
+        </div>
+      </div>
+      <div class="card-content">
+        <swiper [config]="config">
+          <div class="swiper-wrapper ">
+        
+            <div class="swiper-slide"  *ngFor="let localBook of localBooks">
+              <a [routerLink]="['/books/search',localBooks.bookId]">
+              <img [src]="localBooks.img" class="img-fluid card-img-top"/>
+              {{localBooks.title}}
+            </a>
+            </div>
+        
+          </div>
+        
+          <br/>
+          <br/>
+          <div class="swiper-pagination"></div>
+          
+          <div class="swiper-button-next"></div>
+          <div class="swiper-button-prev"></div>
+        
+        </swiper>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="col-md-6 col-sm-12" >
+    <div class="card pl-3 pr-3">
+      <div class="card-header text-center">
+        <a routerLink="/books/local-books" class="pull-right align-items-start">View all</a>
+        <h4 class="card-title">Featured Books</h4>
+        
+        <p></p>
+      </div>
+      <div *ngIf="featured?.length === 0" class="card-content">
+        <div class="d-flex empty">
+          <h4 class="primary">Nothing to display</h4>
+        </div>
+      </div>
+      <div class="card-content">
+        <swiper [config]="config">
+          <div class="swiper-wrapper ">
+        
+            <div class="swiper-slide"  *ngFor="let book of featured">
+              <a [routerLink]="['/books/search',book.bookId]">
+              <img [src]="book.img" class="img-fluid card-img-top"/>
+              {{book.title}}
+            </a>
+            </div>
+        
+          </div>
+        
+          <br/>
+          <br/>
+          <div class="swiper-pagination"></div>
+          
+          <div class="swiper-button-next"></div>
+          <div class="swiper-button-prev"></div>
+        
+        </swiper>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="col-md-6 col-sm-12" >
+    <div class="card pl-3 pr-3">
+      <div class="card-header text-center">
+        <a class="pull-right align-items-start" (click)="viewFanFictionDialog()">View all</a>
+        <h4 class="card-title">Fan Fictions</h4>
         
         <p></p>
       </div>

@@ -19,13 +19,15 @@ export class BooksService {
     this.name = searchTerm;
     return this.http.get('https://www.googleapis.com/books/v1/volumes?q=' + encodeURIComponent(this.name) + '+intitle&maxResults=12&printType=books&key=' + this.apiKey);
     // return this.http.get('https://www.googleapis.com/books/v1/volumes/oPIMmQEACAAJ?key=AIzaSyBXGwa67D5ZrrFuPP6YUNc9glwM8edWFck');
+    // encodeURIComponent(this.name)
   }
 
   getBooksById(bookId) {
     this.bookId = bookId;
-    console.log('book id'+ this.bookId);
+    console.log('book id' + this.bookId);
     return this.http.get('https://www.googleapis.com/books/v1/volumes/' + this.bookId + '?key=AIzaSyBXGwa67D5ZrrFuPP6YUNc9glwM8edWFck');
   }
+
 
   getReviews(bookId) {
     this.bookId = bookId;
@@ -55,7 +57,7 @@ export class BooksService {
     return this.http.get('/book/userRating/' + bookId);
   }
 
-  getMyBookRatings(){
+  getMyBookRatings() {
     return this.http.get('/book/bookRatings');
   }
 
@@ -72,6 +74,14 @@ export class BooksService {
 
   getAllLocalBooks() {
     return this.http.get('/book/allLocal')
+  }
+
+  getFeaturedBooks() {
+    return this.http.get('/book/featured')
+  }
+
+  boostLocalBook(bookId, orderId) {
+    return this.http.post('/book/boost-book', {bookId: bookId, orderId: orderId});
   }
 
 }
