@@ -2,13 +2,10 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class FanFictionService {
-  constructor(private http: HttpClient) { }
-
-
-
+  constructor(private http: HttpClient) {}
 
   // public addFanFiction(image: File) {
   //   const formData = new FormData();
@@ -19,21 +16,18 @@ export class FanFictionService {
   // }
 
   public addFanFiction(data: any) {
-   
-
     return this.http.post('/fan-fiction/add', data);
   }
 
-
   getFanFictionsByUserid() {
-    return this.http.get<any>('/fan-fiction/get-fanfinctions-by-userid')
-}
-deleteFanFiction(id) {
-  return this.http.delete('/fan-fiction/delete/' + id);
-}
+    return this.http.get<any>('/fan-fiction/get-fanfinctions-by-userid');
+  }
 
-getAll() {
-  return this.http.get('/fanfiction/get-all')
-}
+  deleteFanFiction(id) {
+    return this.http.delete('/fan-fiction/delete/' + id);
+  }
 
+  getAll() {
+    return this.http.get<any>('/fan-fiction/get-all');
+  }
 }

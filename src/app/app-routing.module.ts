@@ -41,6 +41,8 @@ import { StoreComponent } from './pages/books/store/store.component';
 
 import { AddBookComponent } from './pages/books/add-book/add-book.component';
 import { LocalBooksComponent } from './pages/books/local-books/local-books.component';
+import { ViewFanFictionComponent } from './pages/books/book-home/view-fan-fiction/view-fan-fiction.component';
+import { FanFictionDetailComponent } from './pages/books/book-home/fan-fiction-detail/fan-fiction-detail.component';
 
 
 const appRoutes: Routes = [
@@ -65,6 +67,8 @@ const appRoutes: Routes = [
       {path: 'books/reviewbook', component: BookReviewComponent},
       {path: 'books/add', component: AddBookComponent},
       {path: 'books/local-books', component: LocalBooksComponent},
+      {path: 'books/fan-fiction', component: ViewFanFictionComponent},
+      {path: 'books/fan-fiction/:id', component: FanFictionDetailComponent},
       {path: 'auctions', component: AuctionHomeComponent},
       {path: 'auctions/process', component: AuctionProcessComponent},
       {path: 'auctions/process/:id', component: AuctionProcessComponent},

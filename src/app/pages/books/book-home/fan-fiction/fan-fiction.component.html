@@ -1,46 +1,32 @@
+<div mat-dialog-content>
+  <form [formGroup]="fanfictionForm" (ngSubmit)="addFacFiction(fanfictionForm.value)">
 
-<div mat-dialog-content><form [formGroup]="fanfictionForm" (ngSubmit)="addFacFiction(fanfictionForm.value)">
+    <button type="button" class="close" aria-label="Close" (click)="close()">
+      <span aria-hidden="true">&times;</span>
+    </button>
 
-  <button type="button" class="close" aria-label="Close" (click)="close()">
-    <span aria-hidden="true">&times;</span>
-  </button>
-
-  <!-- <div class="card profile-card-1" > -->
-    <div class="upload">
-    <!-- <img src="https://images.pexels.com/photos/946351/pexels-photo-946351.jpeg?w=500&h=650&auto=compress&cs=tinysrgb" alt="profile-sample1" class="background"/> -->
-   <label class= "hoverable" for="fileInput">
-     <div class="text-center">
-      <img  [src]="url ? url: '../../../assets/img/portrait/upload.png'" alt="profile-image" />
-     </div>
-   
-      <div class="text">Upload Image</div>
-      <div class="background"></div>
-    </label>
-    <br/>
-    <input id="fileInput" type="file" (change)="onSelectFile($event)">
-  </div>
-
-      <div class="form-group">
-        <label for="textArea">Book Name</label>
-        <input class="form-control" type="text" formControlName="bookName" placeholder="Book Name">
-      </div>
-      
-      <div class="form-group">
-        <label for="textArea">Title</label>
-        <input class="form-control" type="text" formControlName="title" placeholder="Title">
-      </div>
-      
-      
     <div class="form-group">
-        <label for="textArea">Write Here</label>
-        <textarea class="form-control" id="description" rows="10" formControlName="description" ></textarea>
-        <!-- <button class="button button4" (click)="addFacFiction(imageInput,bookName,description)">Add</button> -->
-        <br>
-
-
-
-        <button type="reset" class="btn btn-outline-primary primary" value="reset">Clear</button>
-      <button type="submit" class="btn btn-primary"><div class="white">Add</div></button>
+      <label for="textArea">Title</label>
+      <input class="form-control" type="text" formControlName="title" placeholder="Title">
     </div>
-</form>
+
+    <div class="form-group">
+      <label for="textArea">Based on Book</label>
+      <input class="form-control" type="text" formControlName="bookName" placeholder="Book Name">
+    </div>
+
+    <div class="form-group">
+      <label for="textArea">Write Here</label>
+      <textarea class="form-control" id="description" rows="10" formControlName="description"></textarea>
+      <!-- <button class="button button4" (click)="addFacFiction(imageInput,bookName,description)">Add</button> -->
+      <br>
+
+
+
+      <button type="reset" class="btn btn-outline-primary primary" value="reset">Clear</button>
+      <button type="submit" class="btn btn-primary  ml-1">
+        <div class="white">Add</div>
+      </button>
+    </div>
+  </form>
 </div>
