@@ -124,11 +124,7 @@ export class PostModalComponent implements OnInit {
     }
 
     if (this.showLikes) {
-      this.postService.getLikes(postid).subscribe(response => {
-        this.likeList = response
-        this.showComments = false;
-        this.showLikes = true;
-      })
+      this.showLikes=false;
     }
 
   }
@@ -152,11 +148,7 @@ export class PostModalComponent implements OnInit {
     }
 
     if (this.showComments) {
-      this.postService.getComments(postid).subscribe(response => {
-        this.commentList = response
-        this.showComments = true;
-        this.showLikes = false;
-      })
+      this.showComments = false;
     }
   }
 

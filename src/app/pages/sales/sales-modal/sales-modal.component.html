@@ -1,57 +1,63 @@
 
-<div class="card boc-shadow-0">
-  <div class="card-header d-flex justify-content-between"> 
-    <div>
-      <img src="../../../assets/img/portrait/default.svg" 
-      width="30" height="30" class="d-inline-flex rounded-circle mr-1">
-      <span class="text-muted"><b>{{item.username}}</b></span>
-      <br/>
-      <span class="card-subtitle text-muted">{{item.publishedDate|date:'medium'}}</span>
-    </div>
-    <div *ngIf="item.telephone!=null">
-      <a href="" class="btn btn-floating btn-large bg-brimary" [ngbTooltip]="item.telephone">
-        <i class="ft-phone"></i>
-      </a>
-    </div>
-  </div>
-  <div  class="card-content text-center">
-    <div class="card-body">
-      <div class="row d-flex">
-        <div class="col-lg-6 col-12 align-self-center mb-2 mb-lg-0">
-          <div *ngIf="item.imagePath!= null ">
-            <img [src]="item.imagePath" 
-          alt="" width="135" 
-          class="mt-sm-2">
-          </div>
-          <br/>
-          <p class="btn btn-outline-warning mr-1 warning">PRICE: {{item.price}}/=</p>
-        </div>
-        <div class="col-lg-6 col-12 align-self-center">
-          <h4 class="card-title mb-3">{{item.title}}</h4>
-          <p class="card-text">{{item.description}}</p>
-          <div *ngIf="item.owned">
-            <p  *ngIf="item.sold" class="btn btn-outline-info mr-1 info">Sold</p>
-            <a *ngIf="item.sold" (click)="openBuyerInfo(item.sellingid)" class="btn btn-outline-info mr-1 info">
-              Purchase Info
-            </a>
-            <p  *ngIf="!item.sold" class="btn btn-outline-info mr-1 info">Not Yet Sold</p>
-            <a  *ngIf="!item.sold" class="btn btn-outline-info mr-1 info" [routerLink]="['/salesinfo', item.sellingid]">
-              <i class="ft-edit" style="cursor: pointer;"></i>
-            </a>  
-            <a (click)="deletePost(item.sellingid)"><i class="danger p-0 ft-trash-2" style="cursor: pointer;"></i></a>
-          </div>
-          <div *ngIf="!item.owned && !item.sold">
-            <button class="btn btn-outline-danger mr-1 danger" (click)="openPayment()">BUY THIS BOOK</button>
-          </div>
-          <div *ngIf="!item.owned && item.sold">
-            <a class="btn btn-outline-success mr-1 success" >SOLD</a>
-          </div>
-        </div>
-      </div>
-
-    </div>
-  </div>
+<div *ngIf="item.owned && item.sold && allpost then thenBlock else elseBlock">
 </div>
+<ng-template #thenBlock></ng-template>
+
+<ng-template #elseBlock>
+  <div class="card boc-shadow-0">
+    <div class="card-header d-flex justify-content-between"> 
+      <div>
+        <img src="../../../assets/img/portrait/default.svg" 
+        width="30" height="30" class="d-inline-flex rounded-circle mr-1">
+        <span class="text-muted"><b>{{item.username}}</b></span>
+        <br/>
+        <span class="card-subtitle text-muted">{{item.publishedDate|date:'medium'}}</span>
+      </div>
+      <div *ngIf="item.telephone!=null">
+        <a href="" class="btn btn-floating btn-large bg-brimary" [ngbTooltip]="item.telephone">
+          <i class="ft-phone"></i>
+        </a>
+      </div>
+    </div>
+    <div  class="card-content text-center">
+      <div class="card-body">
+        <div class="row d-flex">
+          <div class="col-lg-6 col-12 align-self-center mb-2 mb-lg-0">
+            <div *ngIf="item.imagePath!= null ">
+              <img [src]="item.imagePath" 
+            alt="" width="135" 
+            class="mt-sm-2">
+            </div>
+            <br/>
+            <p class="btn btn-outline-warning mr-1 warning">PRICE: {{item.price}}/=</p>
+          </div>
+          <div class="col-lg-6 col-12 align-self-center">
+            <h4 class="card-title mb-3">{{item.title}}</h4>
+            <p class="card-text">{{item.description}}</p>
+            <div *ngIf="item.owned">
+              <p  *ngIf="item.sold" class="btn btn-outline-info mr-1 info">Sold</p>
+              <a *ngIf="item.sold" (click)="openBuyerInfo(item.sellingid)" class="btn btn-outline-info mr-1 info">
+                Purchase Info
+              </a>
+              <p  *ngIf="!item.sold" class="btn btn-outline-info mr-1 info">Not Yet Sold</p>
+              <a  *ngIf="!item.sold" class="btn btn-outline-info mr-1 info" [routerLink]="['/salesinfo', item.sellingid]">
+                <i class="ft-edit" style="cursor: pointer;"></i>
+              </a>  
+              <a (click)="deletePost(item.sellingid)"><i class="danger p-0 ft-trash-2" style="cursor: pointer;"></i></a>
+            </div>
+            <div *ngIf="!item.owned && !item.sold">
+              <button class="btn btn-outline-danger mr-1 danger" (click)="openPayment()">BUY THIS BOOK</button>
+            </div>
+            <div *ngIf="!item.owned && item.sold">
+              <a class="btn btn-outline-success mr-1 success" >SOLD</a>
+            </div>
+          </div>
+        </div>
+  
+      </div>
+    </div>
+  </div>
+</ng-template>
 
 <!--HANDLE PAYMENT- PAYMENT INFO-->
 <div class="row">
