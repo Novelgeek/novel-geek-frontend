@@ -1,9 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
+import {
+  MatDialog,
+  MatDialogRef,
+  MAT_DIALOG_DATA,
+} from '@angular/material/dialog';
 import { FanFictionService } from 'app/core/_services/fan-fiction.service';
 import { FormBuilder } from '@angular/forms';
-
-
+import { NgxSpinner } from 'ngx-spinner/lib/ngx-spinner.enum';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 //  class ImageSnippet{
 //   constructor(public src:string, public file: File){}
@@ -12,98 +16,75 @@ import { FormBuilder } from '@angular/forms';
 @Component({
   selector: 'app-fan-fiction',
   templateUrl: './fan-fiction.component.html',
-  styleUrls: ['./fan-fiction.component.css']
+  styleUrls: ['./fan-fiction.component.css'],
 })
 export class FanFictionComponent implements OnInit {
+  // selectedFile: ImageSnippet;
+  private userId: number;
+  fanfictionForm;
+  imageName: String;
 
-// selectedFile: ImageSnippet;
-private userId: number;
-fanfictionForm;
-imageName: String;
-constructor(private fanFictionService: FanFictionService,
-  public dialogRef: MatDialogRef<FanFictionComponent>,
-  private formBuilder: FormBuilder
-  
-  ){
+  // image upload
+
+  public url: any = null;
+  constructor(
+    private fanFictionService: FanFictionService,
+    public dialogRef: MatDialogRef<FanFictionComponent>,
+    private formBuilder: FormBuilder,
+    private spinner: NgxSpinnerService
+  ) {
     this.fanfictionForm = this.formBuilder.group({
       bookName: '',
       imageName: '',
       title: '',
-      description: ''
-
-
+      description: '',
     });
   }
 
-// processFile(imageInput: any){
-//   const file: File = imageInput.files[0];
-//     const reader = new FileReader();
+  ngOnInit(): void {}
 
-
-// reader.addEventListener('load', (event: any) => {
-
-//   this.selectedFile = new ImageSnippet(event.target.result, file);
-
-//   this.fanFictionService.addFanFiction(this.selectedFile.file).subscribe(
-//     (res) => {
-    
-//     },
-//     (err) => {
-    
-//     })
-// });
-
-
-// reader.readAsDataURL(file);
-// }
-  
-
-  ngOnInit(): void {
-  }
-
-  addFacFiction(data) {   
+  addFacFiction(data) {
     const formData = new FormData();
     formData.append('imageName', data.imageName);
     formData.append('bookName', data.bookName);
     formData.append('title', data.title);
     formData.append('description', data.description);
-   
 
-
-    data.imageName = this.imageName; 
-    console.log(data);
+    data.imageName = this.imageName;
+    this.spinner.show();
     this.fanFictionService.addFanFiction(formData).subscribe(
-      res => {
+      (res) => {
         console.log('sucess fully add');
-      }, error => {
+        this.close();
+        this.spinner.hide();
+      },
+      (error) => {
         console.log(error);
+        this.close();
+        this.spinner.hide();
       }
-    )
+    );
   }
 
-// image upload
+  onSelectFile(event) {
+    this.imageName = null;
+    if (event.target.files && event.target.files[0]) {
+      const reader = new FileReader();
 
-public url: any = null;
-
-onSelectFile(event) {
-  this.imageName = null;
-  if (event.target.files && event.target.files[0]) {
-    const reader = new FileReader();
-
-    reader.readAsDataURL(event.target.files[0]); // read file as data url
-console.log(event.target.files[0].name);
-this.imageName = event.target.files[0].name;
-    reader.onload = (event) => { // called once readAsDataURL is completed
-      this.url = event.target.result;
+      reader.readAsDataURL(event.target.files[0]); // read file as data url
+      console.log(event.target.files[0].name);
+      this.imageName = event.target.files[0].name;
+      reader.onload = (event) => {
+        // called once readAsDataURL is completed
+        this.url = event.target.result;
+      };
     }
   }
-}
-public delete() {
-  this.url = null;
-}
+  public delete() {
+    this.url = null;
+  }
 
-close() {
-  this.dialogRef.close();
-}
-
+  close() {
+    this.dialogRef.close();
+  }
 }

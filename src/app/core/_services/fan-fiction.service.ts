@@ -5,6 +5,7 @@ import { HttpClient } from '@angular/common/http';
   providedIn: 'root',
 })
 export class FanFictionService {
+
   constructor(private http: HttpClient) {}
 
   // public addFanFiction(image: File) {
@@ -29,5 +30,13 @@ export class FanFictionService {
 
   getAll() {
     return this.http.get<any>('/fan-fiction/get-all');
+  }
+
+  getSpecific(id) {
+    return this.http.get<any>('/fan-fiction/' + id);
+  }
+
+  rateFanFiction(id: any, review: any) {
+    return this.http.post('/fan-fiction/add-review', {review: review, fanFictionId: id});
   }
 }
