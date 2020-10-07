@@ -1,8 +1,9 @@
-import { Component, OnInit, ElementRef, ViewChild, Renderer2, OnDestroy } from '@angular/core';
+import { Component, OnInit, ElementRef, ViewChild, Renderer2, OnDestroy, AfterViewChecked, AfterViewInit } from '@angular/core';
 import { Chat } from '../../../../../examples/chat/chat.model';
 import { UserService } from 'app/core/_services/user.service';
 import { ChatService } from 'app/core/_services/chat.service';
 import { Subscription } from 'rxjs';
+import { element } from 'protractor';
 
 @Component({
   selector: 'app-message-home',
@@ -16,10 +17,9 @@ export class MessageHomeComponent implements OnInit, OnDestroy {
   message: String = '';
   messageHistory: any = [];
 
-
   messageSubscription: Subscription;
-
   constructor(private userService: UserService, private chatService: ChatService) { }
+
 
   ngOnDestroy(): void {
     this.messageSubscription.unsubscribe();
@@ -31,8 +31,10 @@ export class MessageHomeComponent implements OnInit, OnDestroy {
       this.setCurrentUser(this.users[0]);
     })
 
-
   }
+
+
+
 
   setCurrentUser(user) {
     this.messageHistory = []
@@ -44,7 +46,7 @@ export class MessageHomeComponent implements OnInit, OnDestroy {
 
     this.messageSubscription = this.chatService.get(this.activeUser.id).subscribe(data => {
       this.messageHistory = data;
-      this.messageHistory.sort((a, b) => (a.createdAt > b.createdAt)? 1: -1);
+      this.messageHistory.sort((a, b) => (a.createdAt > b.createdAt) ? 1 : -1);
     })
   }
 
@@ -52,10 +54,6 @@ export class MessageHomeComponent implements OnInit, OnDestroy {
     console.log(this.message);
     this.chatService.sendMessage(this.activeUser.id, this.message)
     this.message = '';
-  }
-
-  test(){
-
   }
 
 }
