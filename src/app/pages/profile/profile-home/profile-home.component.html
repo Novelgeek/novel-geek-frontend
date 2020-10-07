@@ -43,10 +43,10 @@
     </div>
 
     <!--Profile Card 3-->
-    
+   
     <div class="col-lg-4">
       <div class="card profile-card-1" >
-        <form #changepicture="ngForm" (ngSubmit)="onsubmit(changepicture.value)">
+        <form (ngSubmit)="onSubmit(updateImage)" #updateImage="ngForm">
           <div class="form-group">
         <!-- <img src="https://images.pexels.com/photos/946351/pexels-photo-946351.jpeg?w=500&h=650&auto=compress&cs=tinysrgb" alt="profile-sample1" class="background"/> -->
        <label class= "hoverable" for="fileInput">
@@ -55,8 +55,8 @@
           <div class="background"></div>
         </label>
         <br/>
-        <input id="fileInput" type="file" (change)="onSelectFile($event)" ngModel name="image">
-      </div>
+        <input  class="form-control" id="fileInput" type="file" (change)="onSelectFile($event)" >
+        </div>
       </form>
         <!-- <button *ngIf="url !== null" (click)="delete()">remove image</button> -->
         <div class="card-content">

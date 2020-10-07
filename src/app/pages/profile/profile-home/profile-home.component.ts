@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild , EventEmitter, OnDestroy } from '@angular
 import { AuthService } from 'app/core/_services/auth.service';
 import { Subscription } from 'rxjs';
 
+
 // imports for image slider
 import { SwiperOptions } from 'swiper';
 import { SwiperComponent } from 'ngx-useful-swiper';
@@ -11,6 +12,7 @@ import { UserService } from 'app/core/_services/user.service';
 import { ToastrService } from 'ngx-toastr';
 import { NgxSpinnerService } from 'ngx-spinner';
 import Post_modal from 'app/pages/posts/post_modal';
+import { NgForm } from '@angular/forms';
 //
 @Component({
   selector: 'app-profile-home',
@@ -20,15 +22,17 @@ import Post_modal from 'app/pages/posts/post_modal';
 export class ProfileHomeComponent implements OnInit, OnDestroy {
 
   private userSub: Subscription;
-  public user: any;
+  user: any;
+  userId:number;
   isAuthenticated = false;
 
-  public url: any = null;
-  public selectedImage: File;
-  public allBooks: any;
-  public highRated: any;
-  public lowRated: any;
-  public postList: Post_modal[];
+  url: any = null;
+  selectedImage: File;
+  image: string;
+  allBooks: any;
+  highRated: any;
+  lowRated: any;
+  postList: Post_modal[];
 
   // image slider configuration
   @ViewChild('usefulSwiper', { static: false }) usefulSwiper: SwiperComponent;
@@ -54,6 +58,7 @@ export class ProfileHomeComponent implements OnInit, OnDestroy {
     this.userSub = this.authService.user.subscribe( user => {
       this.isAuthenticated = !!user; // !user ? false : true
       this.user = user;
+      this.userId = +this.authService.currentUser.id;
       this.url = user.photoUrl;
       
     });
@@ -150,11 +155,11 @@ export class ProfileHomeComponent implements OnInit, OnDestroy {
 
   // image upload
 
-  onSubmit(Values:any){
-    const newpicture = new FormData();
-    newpicture.append('file', this.selectedImage);
+  onSubmit(form:NgForm){
     this.spinner.show();
-    this.userService.uploadImage(newpicture).subscribe(response => {
+    const formData = new FormData();
+    formData.append('file', this.selectedImage);
+    this.userService.uploadImage(formData,this.userId).subscribe(response => {
       this.spinner.hide();
       this.toastr.success('Profile Picture Uploaded succesfully');
     }, errorMsg => {
