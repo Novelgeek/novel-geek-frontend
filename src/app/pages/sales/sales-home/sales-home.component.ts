@@ -59,7 +59,7 @@ export class SalesHomeComponent implements OnInit {
           this.toastr.success("Payment data recorded");
           this.router.navigate(['/sales']);
         }, error =>{
-          this.spinner.hide();
+          this.spinner.hide(); 
           this.toastr.error("something went wrong");
         })
       }

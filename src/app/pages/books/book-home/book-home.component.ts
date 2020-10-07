@@ -28,6 +28,8 @@ export class BookHomeComponent implements OnInit {
   public searchTerm = '';
   public recommendations: any;
   public recentlyViewed: any;
+  public featured: any;
+  public localBooks: any;
   constructor(private router: Router, private bookService: BooksService, public dialog: MatDialog) { }
 
 
@@ -38,6 +40,14 @@ export class BookHomeComponent implements OnInit {
     this.bookService.getRecentlyViewed().subscribe(data => {
       this.recentlyViewed = data;
     });
+    this.bookService.getFeaturedBooks().subscribe(data => {
+      this.featured = data;
+    });
+    this.bookService.getAllLocalBooks().subscribe(data => {
+      this.localBooks = data;
+    });
+    
+
 
 
 
