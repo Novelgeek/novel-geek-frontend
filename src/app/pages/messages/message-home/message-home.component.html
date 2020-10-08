@@ -4,21 +4,24 @@
       <div class="inbox_people">
         <div class="headind_srch">
           <div class="recent_heading">
-            <h4>Recent</h4>
+            <h4>Users</h4>
           </div>
           <div class="srch_bar">
             <div class="stylish-input-group">
-              <input type="text" class="search-bar" placeholder="Search">
+              <input type="text" class="search-bar" [(ngModel)]="searchTerm" placeholder="Search">
               <span class="input-group-addon">
                 <button type="button"> <i class="fa fa-search" aria-hidden="true"></i> </button>
               </span> </div>
           </div>
         </div>
-        <div class="inbox_chat">
-          <div class="chat_list" *ngFor="let user of users" [ngClass]="{'active_chat': user === activeUser}">
+        <div class="inbox_chat" >
+          <div class="chat_list" *ngFor="let user of users | filter:searchTerm" [ngClass]="{'active_chat': user === activeUser}">
             <a (click)="setCurrentUser(user)">
               <div class="chat_people">
-                <div class="chat_img"> <img src="https://ptetutorials.com/images/user-profile.png" alt="sunil"> </div>
+                <div class="chat_img rounded-circle"> 
+                  <img *ngIf="user.imageUrl != null" [src]="user.imageUrl" [alt]="user.username"> 
+                  <img *ngIf="user.imageUrl == null" src="../../../../assets/img/portrait/default.jpg" [alt]="user.username"> 
+                </div>
                 <div class="chat_ib">
                   <h5>{{user.username}} <span class="chat_date">Dec 25</span></h5>
                   <p>{{user.email}}</p>
@@ -31,22 +34,21 @@
         </div>
       </div>
       <div class="mesgs">
-        <div class="msg_history">
+        <div #scrollMe class="msg_history" [scrollTop]="scrollMe.scrollHeight">
           <div *ngFor="let message of messageHistory">
             <div *ngIf="message.to !== activeUser.id" class="incoming_msg">
-              <div class="incoming_msg_img"> <img src="https://ptetutorials.com/images/user-profile.png" alt="sunil">
-              </div>
+
               <div class="received_msg">
                 <div class="received_withd_msg">
                   <p>{{message.message}}</p>
-                  <span class="time_date"> 11:01 AM | June 9</span>
+                  <span class="time_date"> {{ message.createdAt | date:'medium' }} </span>
                 </div>
               </div>
             </div>
             <div *ngIf="message.to === activeUser.id" class="outgoing_msg">
               <div class="sent_msg">
                 <p>{{message.message}}</p>
-                <span class="time_date"> 11:01 AM | June 9</span>
+                <span class="time_date">  {{ message.createdAt | date:'medium' }}</span>
               </div>
             </div>
           </div>
@@ -55,7 +57,7 @@
           <div class="input_msg_write">
             <input type="text" class="write_msg" placeholder="Type a message" [(ngModel)]="message"
               (keydown.enter)="sendMessage()" />
-            <button class="msg_send_btn" type="button" (click)="sendMessage()"><i class="fa fa-paper-plane-o"
+            <button class="msg_send_btn" type="button" [disabled]="!message" (click)="sendMessage()"><i class="fa fa-paper-plane-o"
                 aria-hidden="true"></i></button>
           </div>
         </div>
