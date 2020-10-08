@@ -1,0 +1,122 @@
+<!-- <div class="card" style="width: 18rem;">
+    <img class="card-img-top" src="https://upload.wikimedia.org/wikipedia/commons/5/56/Kobe_Bryant_2014.jpg" alt="Card image cap">
+    <div class="card-body">
+      <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+    </div>
+  </div> -->
+
+  
+
+
+  <div class="container-fluid">
+    <div class="row justify-content-between">
+      <div class="col-lg-8">
+        <div class="card pl-3 pr-3">
+          <div class="card-header text-center">
+            <h4 class="card-title">Your Books</h4>
+            <p></p>
+          </div>
+          <div class="card-content">
+            <swiper [config]="swconfig">
+              <div class="swiper-wrapper ">
+            
+                <div class="swiper-slide"  *ngFor="let rating of allBooks">
+                  <a [routerLink]="['/books/search',rating.book.bookId]">
+                  <img [src]="rating.book.img" height="150" class="book-img card-img-top"/>
+                  {{rating.book.title}}
+                </a>
+                </div>
+            
+              </div>
+            
+              <br/>
+              <br/>
+              <div class="swiper-pagination"></div>
+              
+              <div class="swiper-button-next"></div>
+              <div class="swiper-button-prev"></div>
+            
+            </swiper>
+          </div>
+          
+        </div>
+      </div>
+  
+      <!--Profile Card 3-->
+     
+      <div class="col-lg-4">
+        <div class="card profile-card-1" >
+          <form (ngSubmit)="onSubmit(updateImage)" #updateImage="ngForm">
+            <div class="form-group">
+          <!-- <img src="https://images.pexels.com/photos/946351/pexels-photo-946351.jpeg?w=500&h=650&auto=compress&cs=tinysrgb" alt="profile-sample1" class="background"/> -->
+         <label class= "hoverable" for="fileInput">
+          <img  [src]="url ? url: '../../../assets/img/portrait/default.svg'" alt="profile-image" />
+            <div class="hover-text">Upload Image</div>
+            <div class="background"></div>
+          </label>
+          <br/>
+          <input  class="form-control" id="fileInput" type="file" (change)="onSelectFile($event)" >
+          </div>
+        </form>
+          <!-- <button *ngIf="url !== null" (click)="delete()">remove image</button> -->
+          <div class="card-content">
+            <h2>{{user.username}}<small>{{user.email}}</small></h2>
+            <div class="icon-block">
+              <a [routerLink]="'/friends'"><i class="icon-user-follow"  data-placement="bottom" ngbTooltip="Friends"></i></a>
+              <!-- if already friends  -->
+              <!-- <a href="#"><i class="icon-user-following" ></i></a> -->
+              <a [routerLink]="'/groups'"> <i class="icon-users" data-placement="bottom" ngbTooltip="Groups"></i></a>
+  
+              <a [routerLink]="'/books'"> <i class="icon-book-open"  data-placement="bottom" ngbTooltip="Books"></i></a>
+              
+            </div>
+          </div>
+        </div>
+      </div>
+  
+      <div class="col-8">
+        <div class="card pl-3 pr-3">
+          <div class="card-header text-center">
+            <h4 class="card-title">Your low rated Books</h4>
+            <p></p>
+          </div>
+          <div class="card-content">
+            <swiper [config]="swconfig">
+              <div class="swiper-wrapper ">
+            
+                <div class="swiper-slide"  *ngFor="let rating of lowRated">
+                  <a [routerLink]="['/books/search',rating.book.bookId]">
+                  <img [src]="rating.book.img" height="150" class="book-img"/>
+                  {{rating.book.title}}
+                </a>
+                </div>
+            
+              </div>
+            
+              <br/>
+              <br/>
+              <div class="swiper-pagination"></div>
+              
+              <div class="swiper-button-next"></div>
+              <div class="swiper-button-prev"></div>
+            
+            </swiper>
+          </div>
+          
+        </div>
+      </div>
+  
+    </div>
+  </div>
+    <!--POSTS APPEARS HEARE/POST SECTION-->
+  <div class="card-columns">
+  
+    <ng-container *ngFor="let item of postList; let itemindex = index;">
+      <app-post-modal [item]="item" [itemindex]="itemindex" (ondelete)="onDeletePost($event)"></app-post-modal>
+    </ng-container>
+    <div *ngIf="postList.length === 0">
+      <span class="card-body text-muted" >Currently, No Post Available</span>
+    </div>
+  
+  </div>
+  
