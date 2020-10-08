@@ -9,6 +9,7 @@ import { Book } from 'app/core/_models/book.model';
 export class BooksService {
 
 
+
   public apiKey = 'AIzaSyBXGwa67D5ZrrFuPP6YUNc9glwM8edWFck';
   public name = '';
   public bookId = '';
@@ -82,6 +83,21 @@ export class BooksService {
 
   boostLocalBook(bookId, orderId) {
     return this.http.post('/book/boost-book', {bookId: bookId, orderId: orderId});
+  }
+
+  addReviewLocal(review: any, bookId: any) {
+    return this.http.post('/book/local/addreview', {
+      bookId: bookId,
+      reviewDescription: review
+    });
+  }
+
+  getLocalBookReviews(id){
+    return this.http.get('/book/local/review/' + id);
+  }
+
+  getSpecificLocalBook(id){
+    return this.http.get('/book/local/' + id);
   }
 
 }

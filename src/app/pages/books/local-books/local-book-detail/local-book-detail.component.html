@@ -1,0 +1,122 @@
+<div class="row ">
+    <div class="col-md-4 col-sm-12 image-section">
+        <div class="card  box-shadow-0 text-center">
+            <div class="card-content">
+                <div class="card-body pt-3">
+                    <div class="row d-flex">
+                        <div class="col align-self-center">
+                            <img *ngIf="book?.imgUrl !== null" [src]="book?.imgUrl" alt="element 01" width="190">
+                            <img *ngIf="book?.imgUrl === null" src="../../../../../assets/img/book/default.png" alt="element 01" width="190">
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <div class="col-md-6 col-sm-12 detail-section">
+        <div class="row-12 align-self-auto ">
+            <div class="row justify-content-center">
+                <h3 class="card-title mt-3"><b>{{book?.title}}</b></h3>
+            </div>
+            <div class="row justify-content-between">
+                <div class="col-4">
+                    <div class="row">
+                        <h6 class="text-muted">Author:&nbsp;&nbsp;</h6>
+                        <p class="card-author">{{book?.author}}</p>
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class="row">
+                        <h6 class="text-muted">ISBN:&nbsp;&nbsp;</h6>
+                        <p class="card-author">{{book?.isbn}}</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div [innerHTML]="book?.description"></div>
+            </div>
+
+            <!-- <div class="row"><button class="btn btn-raised btn-primary">Buy Nows</button></div> -->
+        </div>
+
+    </div>
+</div>
+
+
+
+<div class="row justify-content-center">
+    <button type="button" class="btn btn-raised btn-warning  btn-review" (click)="open(addReview)">
+        <i class="fa fa-address-book d-block d-xl-inline-block d-lg-none p-0"></i>
+        <span class="d-none d-lg-inline-block ml-1">Review this book</span>
+    </button>
+    <a *ngIf="book?.fileUrl != null" type="button" class="btn btn-raised btn-warning ml-2 btn-review" [href]="book?.fileUrl">
+        <i class="fa fa-address-book d-block d-xl-inline-block d-lg-none p-0"></i>
+        <span class="d-none d-lg-inline-block ml-1">Download this book</span>
+    </a>
+</div>
+<br>
+
+<div class="row">
+    <div *ngFor="let review of reviews">
+        
+            <div class="col-12">
+
+                <a class="list-group-item no-border review">
+                    <span class="media">
+                        <span class="avatar avatar-md avatar-busy">
+                            <img class="media-object d-flex mr-3 bg-info height-50 rounded-circle"
+                                src="{{review.userId.imageUrl}}"
+                                onerror="this.src='../../../../../assets/img/portrait/default.svg';"
+                                alt="Generic placeholder image">
+                            <i></i>
+                        </span>
+
+                        <div class="media-body  text-left">
+                            <h6 class="list-group-item-heading" style="font-weight: bold;">{{review.userId.username}}
+
+                            </h6>
+                            <div class="list-group-item-text ">
+                                <i class="ft-circle info font-small-2"></i> {{review.review}}
+                                <span class="float-right info">
+                                </span>
+                            </div>
+
+                        </div>
+
+                    </span>
+                </a>
+            </div>
+        
+    </div>
+</div>
+
+
+
+<ng-template #addReview let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title" id="create-group">Add Review</h4>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <div class="form-group">
+            <label>Your Review</label>
+            <textarea class="form-control" placeholder="Your review here" name="review" [(ngModel)]="review">
+            </textarea>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-outline-primary primary"
+            (click)="modal.close('Save click')">Cancel</button>
+        <button (click)="onAddReview()" class="btn btn-primary">
+            <div class="white">Save</div>
+        </button>
+    </div>
+
+</ng-template>
+
+<ngx-spinner></ngx-spinner>

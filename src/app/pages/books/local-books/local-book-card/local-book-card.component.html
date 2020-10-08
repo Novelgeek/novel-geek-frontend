@@ -6,7 +6,7 @@
       <div class="px-3">
         <h4 class="card-title">{{(book.title | slice:0:50) + (book.title.length > 50 ? '...': '')}}</h4>
         <p class="card-text">{{book.description | slice:0:10}}</p>
-        <button  class="btn btn-raised btn-primary btn-darken-3 white" (click)="onClick()">View Book</button>
+        <button  class="btn btn-raised btn-primary btn-darken-3 white" [routerLink]="'/books/local-books/' + book.id">View Book</button>
       </div>
       <div class="px-3">
         <button class="btn btn-outline-primary primary" type="button" (click)="open(boostBook)" >Boost</button>
