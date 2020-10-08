@@ -37,6 +37,11 @@ export class FanFictionService {
   }
 
   rateFanFiction(id: any, review: any) {
-    return this.http.post('/fan-fiction/add-review', {review: review, fanFictionId: id});
+    return this.http.post('/fan-fiction/add-review', {reviewDescription: review, bookId: id});
   }
+
+  getFanFictionReviews(id){
+    return this.http.get('/fan-fiction/review/' + id);
+  }
+
 }

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { FanFictionService } from 'app/core/_services/fan-fiction.service';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-fan-fiction-detail',
@@ -12,7 +13,9 @@ export class FanFictionDetailComponent implements OnInit {
 
   id: any;
   fanFiction: any;
-  review: any;
+  review = '';
+  reviews: any = [];
+
   constructor(private route: ActivatedRoute, private fanFictionService: FanFictionService,
     private modalService: NgbModal) { }
 
@@ -23,6 +26,12 @@ export class FanFictionDetailComponent implements OnInit {
 
     this.fanFictionService.getSpecific(this.id).subscribe(data => {
      this.fanFiction = data;
+    })
+
+    this.fanFictionService.getFanFictionReviews(this.id).subscribe(data => {
+      console.log(data);
+      
+      this.reviews = data;
     })
 
   }
