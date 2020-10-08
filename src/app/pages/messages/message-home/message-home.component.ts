@@ -1,8 +1,10 @@
-import { Component, OnInit, ElementRef, ViewChild, Renderer2, OnDestroy } from '@angular/core';
+import { Component, OnInit, ElementRef, ViewChild, Renderer2, OnDestroy, AfterViewChecked, AfterViewInit } from '@angular/core';
 import { Chat } from '../../../../../examples/chat/chat.model';
 import { UserService } from 'app/core/_services/user.service';
 import { ChatService } from 'app/core/_services/chat.service';
 import { Subscription } from 'rxjs';
+import { element } from 'protractor';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-message-home',
@@ -15,11 +17,10 @@ export class MessageHomeComponent implements OnInit, OnDestroy {
   activeUser = null;
   message: String = '';
   messageHistory: any = [];
-
-
+  searchTerm = ''
   messageSubscription: Subscription;
+  constructor(private userService: UserService, private chatService: ChatService, public datepipe: DatePipe) { }
 
-  constructor(private userService: UserService, private chatService: ChatService) { }
 
   ngOnDestroy(): void {
     this.messageSubscription.unsubscribe();
@@ -31,8 +32,10 @@ export class MessageHomeComponent implements OnInit, OnDestroy {
       this.setCurrentUser(this.users[0]);
     })
 
-
   }
+
+
+
 
   setCurrentUser(user) {
     this.messageHistory = []
@@ -44,7 +47,7 @@ export class MessageHomeComponent implements OnInit, OnDestroy {
 
     this.messageSubscription = this.chatService.get(this.activeUser.id).subscribe(data => {
       this.messageHistory = data;
-      this.messageHistory.sort((a, b) => (a.createdAt > b.createdAt)? 1: -1);
+      this.messageHistory.sort((a, b) => (a.createdAt > b.createdAt) ? 1 : -1);
     })
   }
 
@@ -54,7 +57,7 @@ export class MessageHomeComponent implements OnInit, OnDestroy {
     this.message = '';
   }
 
-  test(){
+  filter() {
 
   }
 
