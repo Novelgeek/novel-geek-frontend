@@ -73,4 +73,16 @@ export class PostsService {
     unReportPost(postid:number){
         return this.http.delete<any>("/post/unreport/"+ postid)
     }
+
+    getReportNotifications(){
+        return this.http.get<any>("post/reportnotifications")
+    }
+
+    getCommentNotifications(){
+        return this.http.get<any>("post/commentnotifications")
+    }
+
+    getReplyNotifications(){
+        return this.http.get<any>("post/replynotifications")
+    }
 }
