@@ -4,6 +4,7 @@ import { UserService } from 'app/core/_services/user.service';
 import { ChatService } from 'app/core/_services/chat.service';
 import { Subscription } from 'rxjs';
 import { element } from 'protractor';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-message-home',
@@ -16,9 +17,9 @@ export class MessageHomeComponent implements OnInit, OnDestroy {
   activeUser = null;
   message: String = '';
   messageHistory: any = [];
-
+  searchTerm = ''
   messageSubscription: Subscription;
-  constructor(private userService: UserService, private chatService: ChatService) { }
+  constructor(private userService: UserService, private chatService: ChatService, public datepipe: DatePipe) { }
 
 
   ngOnDestroy(): void {
@@ -54,6 +55,10 @@ export class MessageHomeComponent implements OnInit, OnDestroy {
     console.log(this.message);
     this.chatService.sendMessage(this.activeUser.id, this.message)
     this.message = '';
+  }
+
+  filter() {
+
   }
 
 }

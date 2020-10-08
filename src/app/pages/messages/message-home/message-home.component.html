@@ -8,14 +8,14 @@
           </div>
           <div class="srch_bar">
             <div class="stylish-input-group">
-              <input type="text" class="search-bar" placeholder="Search">
+              <input type="text" class="search-bar" [(ngModel)]="searchTerm" placeholder="Search">
               <span class="input-group-addon">
                 <button type="button"> <i class="fa fa-search" aria-hidden="true"></i> </button>
               </span> </div>
           </div>
         </div>
         <div class="inbox_chat" >
-          <div class="chat_list" *ngFor="let user of users" [ngClass]="{'active_chat': user === activeUser}">
+          <div class="chat_list" *ngFor="let user of users | filter:searchTerm" [ngClass]="{'active_chat': user === activeUser}">
             <a (click)="setCurrentUser(user)">
               <div class="chat_people">
                 <div class="chat_img rounded-circle"> 
@@ -41,14 +41,14 @@
               <div class="received_msg">
                 <div class="received_withd_msg">
                   <p>{{message.message}}</p>
-                  <span class="time_date"> 11:01 AM | June 9</span>
+                  <span class="time_date"> {{ message.createdAt | date:'medium' }} </span>
                 </div>
               </div>
             </div>
             <div *ngIf="message.to === activeUser.id" class="outgoing_msg">
               <div class="sent_msg">
                 <p>{{message.message}}</p>
-                <span class="time_date"> 11:01 AM | June 9</span>
+                <span class="time_date">  {{ message.createdAt | date:'medium' }}</span>
               </div>
             </div>
           </div>
