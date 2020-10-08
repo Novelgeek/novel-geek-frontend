@@ -6,7 +6,7 @@
                     <div class="row d-flex">
                         <div class="col align-self-center">
                             <img *ngIf="book?.imgUrl !== null" [src]="book?.imgUrl" alt="element 01" width="190">
-                            <img src="../../../../../assets/img/book/default.png" alt="element 01" width="190">
+                            <img *ngIf="book?.imgUrl === null" src="../../../../../assets/img/book/default.png" alt="element 01" width="190">
                         </div>
 
                     </div>

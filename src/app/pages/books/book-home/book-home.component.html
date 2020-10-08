@@ -112,9 +112,10 @@
           <div class="swiper-wrapper ">
         
             <div class="swiper-slide"  *ngFor="let localBook of localBooks">
-              <a [routerLink]="['/books/search',localBooks.bookId]">
-              <img [src]="localBooks.img" class="img-fluid card-img-top"/>
-              {{localBooks.title}}
+              <a [routerLink]="['/books/local-books/' ,localBook.id]">
+              <img *ngIf="localBook?.imgUrl !== null" [src]="localBook?.imgUrl" class="img-fluid card-img-top"/>
+              <img *ngIf="localBook?.imgUrl === null" src="../../../../assets/img/book/default.png" class="img-fluid card-img-top"/>
+              {{localBook.title}}
             </a>
             </div>
         
@@ -136,7 +137,6 @@
   <div class="col-md-6 col-sm-12" >
     <div class="card pl-3 pr-3">
       <div class="card-header text-center">
-        <a routerLink="/books/local-books" class="pull-right align-items-start">View all</a>
         <h4 class="card-title">Featured Books</h4>
         
         <p></p>
@@ -151,8 +151,9 @@
           <div class="swiper-wrapper ">
         
             <div class="swiper-slide"  *ngFor="let book of featured">
-              <a [routerLink]="['/books/search',book.bookId]">
-              <img [src]="book.img" class="img-fluid card-img-top"/>
+              <a [routerLink]="['/books/local-books/' ,book.id]">
+                <img *ngIf="book?.imgUrl !== null" [src]="book?.imgUrl" class="img-fluid card-img-top"/>
+                <img *ngIf="book?.imgUrl === null" src="../../../../assets/img/book/default.png" class="img-fluid card-img-top"/>
               {{book.title}}
             </a>
             </div>

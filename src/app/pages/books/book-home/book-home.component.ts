@@ -44,6 +44,7 @@ export class BookHomeComponent implements OnInit {
       this.featured = data;
     });
     this.bookService.getAllLocalBooks().subscribe(data => {
+      console.log(data)
       this.localBooks = data;
     });
     
