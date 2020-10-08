@@ -28,7 +28,7 @@ export class LocalBookDetailComponent implements OnInit {
     });
 
     this.bookService.getSpecificLocalBook(this.bookId).subscribe((data) => {
-      console.log(data)
+      console.log(data);
       this.book = data;
     });
 
@@ -45,7 +45,10 @@ export class LocalBookDetailComponent implements OnInit {
         this.reviews.push(data);
         this.modalService.dismissAll();
       },
-      (error) => this.spinner.hide()
+      (error) => {
+        this.spinner.hide();
+        this.modalService.dismissAll();
+      }
     );
   }
 

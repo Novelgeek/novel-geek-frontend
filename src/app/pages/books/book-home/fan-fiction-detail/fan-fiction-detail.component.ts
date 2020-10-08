@@ -3,6 +3,8 @@ import { ActivatedRoute } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { FanFictionService } from 'app/core/_services/fan-fiction.service';
 import { NgForm } from '@angular/forms';
+import { NgxSpinner } from 'ngx-spinner/lib/ngx-spinner.enum';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-fan-fiction-detail',
@@ -17,7 +19,7 @@ export class FanFictionDetailComponent implements OnInit {
   reviews: any = [];
 
   constructor(private route: ActivatedRoute, private fanFictionService: FanFictionService,
-    private modalService: NgbModal) { }
+    private modalService: NgbModal, private spinner: NgxSpinnerService) { }
 
   ngOnInit() {
     this.route.params.subscribe(params => {
@@ -44,10 +46,16 @@ export class FanFictionDetailComponent implements OnInit {
 
   onAddReview() {
     console.log(this.review);
+    this.spinner.show()
     this.fanFictionService.rateFanFiction(this.id, this.review).subscribe(data => {
+      this.spinner.hide()
       console.log(data);
+      this.reviews.push(data)
+      this.modalService.dismissAll()
     }, errorMsg => {
+      this.spinner.hide()
       console.log(errorMsg);
+      this.modalService.dismissAll()
     })
   }
 

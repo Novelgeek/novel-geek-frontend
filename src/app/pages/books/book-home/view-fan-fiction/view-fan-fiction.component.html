@@ -10,10 +10,10 @@
             <div class="col-6">
               <form class="form">
                 <div class="form-group">
-                      <button class="btn btn-outline-info mr-1 pull-right primary" (click)="fanFictionDialog()">
-                        <i class="ft-plus primary mr-1"></i>
-                        Add Fan Fiction
-                      </button>
+                  <button class="btn btn-outline-info mr-1 pull-right primary" (click)="fanFictionDialog()">
+                    <i class="ft-plus primary mr-1"></i>
+                    Add Fan Fiction
+                  </button>
                 </div>
               </form>
             </div>
@@ -23,30 +23,26 @@
           <div class="row">
             <div class="col-auto">
               <ul ngbNav #nav="ngbNav" class="nav-pills">
-                <li ngbNavItem >
+                <li ngbNavItem>
                   <a ngbNavLink>All Fan Fictions</a>
                   <ng-template ngbNavContent>
                     <div class="col-12 web-result" *ngFor="let fanfiction of fanfictionList">
                       <div class="card">
                         <div class="card-header">
-                          <h4 class="card-title cursor-pointer"><a [routerLink]="'/books/fan-fiction/' + fanfiction.id">{{fanfiction.title}}</a></h4>
+                          <h4 class="card-title cursor-pointer"><a
+                              [routerLink]="'/books/fan-fiction/' + fanfiction.id">{{fanfiction.title}}</a></h4>
                         </div>
                         <div class="card-content">
                           <div class="card-body">
                             <p>{{fanfiction.description}}</p><span
-                              class="badge bg-light-primary mb-sm-0 mb-1 mr-2">{{fanfiction.bookName}}</span><span
-                              class="badge bg-light-primary mb-sm-0 mb-1 mr-2">Template</span><span
-                              class="badge bg-light-primary mb-sm-0 mb-1">HTML Admin Template</span>
+                              class="badge bg-light-primary mb-sm-0 mb-1 mr-2">{{fanfiction.bookName}}</span>
                           </div>
-                          <div class="card-footer border-top d-flex justify-content-between align-items-center">
-                            <small class="text-truncate"><a href="https://1.envato.market/vusax_admin" target="_blank"
-                                class="success darken-3">https://1.envato.market/vusax_admin</a></small><i
-                              class="ft-more-vertical- font-small-4 cursor-pointer"></i></div>
                         </div>
                       </div>
                     </div>
 
-                    <div class="row justify-content-center  mt-2 font-medium-4" matchHeight="card" *ngIf="fanfictionList.length === 0">
+                    <div class="row justify-content-center  mt-2 font-medium-4" matchHeight="card"
+                      *ngIf="fanfictionList?.length === 0">
                       No Fan fictions. Click on Add to add a fan fiction
                     </div>
                   </ng-template>
@@ -58,24 +54,26 @@
                     <div class="col-12 web-result" *ngFor="let fanfiction of myFanFictions">
                       <div class="card">
                         <div class="card-header">
-                          <h4 class="card-title cursor-pointer"><a [routerLink]="'/books/fan-fiction/' + fanfiction.id">{{fanfiction.title}}</a></h4>
+                          <h4 class="card-title cursor-pointer"><a
+                              [routerLink]="'/books/fan-fiction/' + fanfiction.id">{{fanfiction.title}}</a></h4>
                         </div>
                         <div class="card-content">
                           <div class="card-body">
                             <p>{{fanfiction.description}}</p><span
-                              class="badge bg-light-primary mb-sm-0 mb-1 mr-2">{{fanfiction.bookName}}</span><span
-                              class="badge bg-light-primary mb-sm-0 mb-1 mr-2">Template</span><span
-                              class="badge bg-light-primary mb-sm-0 mb-1">HTML Admin Template</span>
+                              class="badge bg-light-primary mb-sm-0 mb-1 mr-2">{{fanfiction.bookName}}</span>
                           </div>
                           <div class="card-footer border-top d-flex justify-content-between align-items-center">
-                            <small class="text-truncate"><a href="https://1.envato.market/vusax_admin" target="_blank"
-                                class="success darken-3">https://1.envato.market/vusax_admin</a></small><i
-                              class="ft-more-vertical- font-small-4 cursor-pointer"></i></div>
+                            <small class="text-truncate"><a (click)="delete(fanfiction.id)"
+                                class="warning darken-3">Delete</a></small>
+                            <small class="text-truncate"><a (click)="open(editFiction, fanfiction)"
+                                class="warning darken-3">Edit</a></small>
+                                <i class="ft-more-vertical- font-small-4 cursor-pointer"></i></div>
                         </div>
                       </div>
                     </div>
 
-                    <div class="row justify-content-center  mt-2 font-medium-4" matchHeight="card" *ngIf="myFanFictions.length === 0">
+                    <div class="row justify-content-center  mt-2 font-medium-4" matchHeight="card"
+                      *ngIf="myFanFictions?.length === 0">
                       No Fan fictions. Click on Add to add a fan fiction
                     </div>
                   </ng-template>
@@ -94,8 +92,37 @@
 
 <div [ngbNavOutlet]="nav"></div>
 
+<ng-template #editFiction let-modal>
+  <div class="p-2">
+
+    <button type="button" class="close" aria-label="Close" (click)="close()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+
+    <div class="form-group">
+      <label for="textArea">Title</label>
+      <input class="form-control" type="text"  placeholder="Title" [(ngModel)]="currentFanFiction.title">
+    </div>
+
+    <div class="form-group">
+      <label for="textArea">Based on Book</label>
+      <input class="form-control" type="text"  placeholder="Book Name" [(ngModel)]="currentFanFiction.bookName">
+    </div>
+
+    <div class="form-group">
+      <label for="textArea">Write Here</label>
+      <textarea class="form-control" id="description" rows="10"  [(ngModel)]="currentFanFiction.description"></textarea>
+      <!-- <button class="button button4" (click)="addFacFiction(imageInput,bookName,description)">Add</button> -->
+      <br>
 
 
 
+      <button (click)="close()" class="btn btn-outline-primary primary" value="reset">Cancel</button>
+      <button (click)="editFanFiction()" class="btn btn-primary  ml-1">
+        <div class="white">Edit</div>
+      </button>
+    </div>
+  </div>
+</ng-template>
 
-
+<ngx-spinner></ngx-spinner>

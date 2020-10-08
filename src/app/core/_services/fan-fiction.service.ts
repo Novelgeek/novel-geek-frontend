@@ -6,6 +6,7 @@ import { HttpClient } from '@angular/common/http';
 })
 export class FanFictionService {
 
+
   constructor(private http: HttpClient) {}
 
   // public addFanFiction(image: File) {
@@ -18,6 +19,10 @@ export class FanFictionService {
 
   public addFanFiction(data: any) {
     return this.http.post('/fan-fiction/add', data);
+  }
+
+  editFanFiction(data: any) {
+    return this.http.post('/fan-fiction/edit', data);
   }
 
   getFanFictionsByUserid() {

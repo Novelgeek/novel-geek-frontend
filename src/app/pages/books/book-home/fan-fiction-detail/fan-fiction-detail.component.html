@@ -4,25 +4,28 @@
             <div class="row justify-content-center">
                 <h3 class="card-title mt-3"><b>{{fanFiction?.title}}</b></h3>
             </div>
-            <div class="row justify-content-between ">
-                <div class="col-4">
-                    <div class="row">
-                        <h6 class="text-muted">Based On:&nbsp;&nbsp;</h6>
-                        <p class="card-author">{{fanFiction?.bookName}}</p>
+            <div class="list-group-item no-border review">
+                <div class="row justify-content-between ml-2">
+                    <div class="col-4">
+                        <div class="row">
+                            <h6 class="text-muted">Based On:&nbsp;&nbsp;</h6>
+                            <p class="card-author">{{fanFiction?.bookName}}</p>
+                        </div>
                     </div>
+                </div>
+
+                <div class="p-2">
+                    <div [innerHTML]="fanFiction?.description"></div>
                 </div>
             </div>
 
-            <div class="row">
-                <div [innerHTML]="fanFiction?.description"></div>
-            </div>
 
             <!-- <div class="row"><button class="btn btn-raised btn-primary">Buy Nows</button></div> -->
         </div>
 
     </div>
 </div>
-<div class="row justify-content-center">
+<div class="row justify-content-center mt-2">
     <button type="button" class="btn btn-raised btn-warning  btn-review" (click)="open(addReview)">
         <i class="fa fa-address-book d-block d-xl-inline-block d-lg-none p-0"></i>
         <span class="d-none d-lg-inline-block ml-1">Review this Fan Ficiton</span>
@@ -32,35 +35,35 @@
 
 <div class="row">
     <div *ngFor="let review of reviews">
-        
-            <div class="col-12">
 
-                <a class="list-group-item no-border review">
-                    <span class="media">
-                        <span class="avatar avatar-md avatar-busy">
-                            <img class="media-object d-flex mr-3 bg-info height-50 rounded-circle"
-                                src="{{review.userId.imageUrl}}"
-                                onerror="this.src='../../../../../assets/img/portrait/default.svg';"
-                                alt="Generic placeholder image">
-                            <i></i>
-                        </span>
+        <div class="col-12">
 
-                        <div class="media-body  text-left">
-                            <h6 class="list-group-item-heading" style="font-weight: bold;">{{review.userId.username}}
+            <a class="list-group-item no-border review">
+                <span class="media">
+                    <span class="avatar avatar-md avatar-busy">
+                        <img class="media-object d-flex mr-3 bg-info height-50 rounded-circle"
+                            src="{{review.userId.imageUrl}}"
+                            onerror="this.src='../../../../../assets/img/portrait/default.svg';"
+                            alt="Generic placeholder image">
+                        <i></i>
+                    </span>
 
-                            </h6>
-                            <div class="list-group-item-text ">
-                                <i class="ft-circle info font-small-2"></i> {{review.review}}
-                                <span class="float-right info">
-                                </span>
-                            </div>
+                    <div class="media-body  text-left">
+                        <h6 class="list-group-item-heading" style="font-weight: bold;">{{review.userId.username}}
 
+                        </h6>
+                        <div class="list-group-item-text ">
+                            <i class="ft-circle info font-small-2"></i> {{review.review}}
+                            <span class="float-right info">
+                            </span>
                         </div>
 
-                    </span>
-                </a>
-            </div>
-        
+                    </div>
+
+                </span>
+            </a>
+        </div>
+
     </div>
 </div>
 
@@ -89,5 +92,7 @@
     </div>
 
 </ng-template>
+
+
 
 <ngx-spinner></ngx-spinner>
