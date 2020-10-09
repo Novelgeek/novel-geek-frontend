@@ -13,6 +13,7 @@ import { ToastrService } from 'ngx-toastr';
 import { NgxSpinnerService } from 'ngx-spinner';
 import Post_modal from 'app/pages/posts/post_modal';
 import { NgForm } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-friend-profile',
@@ -43,7 +44,8 @@ export class FriendProfileComponent implements OnInit, OnDestroy {
     private bookService: BooksService,
     private postsService: PostsService,
     private userService: UserService,
-    private toastr: ToastrService, private spinner: NgxSpinnerService
+    private toastr: ToastrService, private spinner: NgxSpinnerService,
+    private route: ActivatedRoute
     ) { 
       this.postList = [];
     }
@@ -55,13 +57,17 @@ export class FriendProfileComponent implements OnInit, OnDestroy {
 
 
   ngOnInit() {
-    this.userSub = this.authService.user.subscribe( user => {
-      this.isAuthenticated = !!user; // !user ? false : true
-      this.user = user;
-      this.userId = +this.authService.currentUser.id;
-      this.url = user.photoUrl;
-      
-    });
+    
+     this.route.params.subscribe(params => {
+      this.userId = +params['id'];
+   });
+
+   this.userService.getUser(this.userId).subscribe(user=>{
+     this.user=user
+      this.url= this.user.imageUrl
+   })
+
+   // TODO : get user from backend
 
     //load book list 
 

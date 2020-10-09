@@ -122,17 +122,8 @@
             </div>
             <div class="card-content">
               <div class="card-body px-4">
-                <form [formGroup]="userSettingForm" (ngSubmit)="onVerifyPassword()">
+                <form [formGroup]="PasswordVerifyForm" (ngSubmit)="onVerifyPassword()">
                   <div class="form-body">
-                    <div class="form-group row">
-                      <label for="username">Username</label>
-                      <input type="text" id="username" formControlName="username" class="form-control">
-                      <span *ngIf="!userSettingForm.get('username').valid && userSettingForm.get('username').touched"
-                        class="help-block danger">
-                        <span *ngIf="userSettingForm.get('username').errors['required']">This field is
-                          required!</span>
-                      </span>
-                    </div>
                     <div class="form-group ">
                       <label for="contact">Password</label>
                       <input type="password" id="contact" formControlName="oldPassword" class="form-control">

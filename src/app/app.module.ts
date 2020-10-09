@@ -77,6 +77,7 @@ import { ArchwizardModule } from 'angular-archwizard';
 import { LocalBooksComponent } from './pages/books/local-books/local-books.component';
 import { LocalBookCardComponent } from './pages/books/local-books/local-book-card/local-book-card.component';
 import { ProgressbarShowvalueComponent } from './pages/polls/progressbar-showvalue/progressbar-showvalue.component';
+import { FriendProfileComponent } from './pages/friends/friend-profile/friend-profile.component';
 
 export function tokenGetter() {
   return localStorage.getItem('token');
@@ -135,7 +136,8 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     AddPollComponent,
     MyPollsComponent,
     PollModelComponent,
-    ProgressbarShowvalueComponent
+    ProgressbarShowvalueComponent,
+    FriendProfileComponent
 
   ],
   imports: [

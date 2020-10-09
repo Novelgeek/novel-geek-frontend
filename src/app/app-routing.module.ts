@@ -34,6 +34,7 @@ import { ManageAdminsComponent } from './pages/admin/manage-admins/manage-admins
 import { AuctionHomeComponent } from './pages/auction/auction-home/auction-home.component';
 import { AddBookComponent } from './pages/books/add-book/add-book.component';
 import { LocalBooksComponent } from './pages/books/local-books/local-books.component';
+import { FriendProfileComponent } from './pages/friends/friend-profile/friend-profile.component';
 
 const appRoutes: Routes = [
   { path: 'login', component: LoginComponent},
@@ -60,6 +61,7 @@ const appRoutes: Routes = [
       {path: 'auctions', component: AuctionHomeComponent},
 
       {path: 'friends', component: FriendsHomeComponent},
+      {path: 'friends/:id', component: FriendProfileComponent},
       {path: 'groups', component: GroupHomeComponent},
       {path: 'groups/:id', component: GroupDetailComponent},
       {path: 'messages', component: MessageHomeComponent},

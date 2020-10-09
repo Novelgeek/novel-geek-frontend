@@ -21,6 +21,10 @@ export class UserService {
     return this.http.get<Userdetails>('http://localhost:8080/user/me');
   }
 
+  getUser(userId: number){
+    return this.http.get('http://localhost:8080/user/'+userId);
+  }
+
   saveUserDetails(userDetails: Userdetails) {
     return this.http.post('http://localhost:8080/user/save', userDetails);
   }
@@ -31,6 +35,10 @@ export class UserService {
 
   uploadImage(newimage: FormData, userId){
     return this.http.post<any>('http://localhost:8080/user/'+ userId +'/updateImage', newimage);
+  }
+
+  deleteUser(password){
+    return this.http.delete('http://localhost:8080/user/delete', password);
   }
 
 }

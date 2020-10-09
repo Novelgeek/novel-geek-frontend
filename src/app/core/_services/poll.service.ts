@@ -18,7 +18,7 @@ export class PollService {
   }
 
   getPoll(id) {
-    return this.http.get('http://localhost:8080/poll/' + id);
+    return this.http.get<any>('http://localhost:8080/poll/' + id);
   }
 
   savePoll(poll: Poll) {
@@ -32,6 +32,7 @@ export class PollService {
   vote(pollId: number, selectedOption: number){
     return this.http.post('http://localhost:8080/poll/' + pollId + '/vote/' + selectedOption, {});
   }
+
 
 
 }

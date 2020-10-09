@@ -4,7 +4,7 @@
     <div class="col">
       <img src="../../../assets/img/portrait/default.svg" 
       width="30" height="30" class="d-inline-flex rounded-circle mr-1">
-      <span class="text-muted"><b>{{poll.user.username}} </b></span>
+      <span class="text-muted"><b>{{poll?.user?.username}} </b></span>
       <br/>
     </div>
   </div>
@@ -38,17 +38,19 @@
             (click)="vote()"
             class="btn waves-effect waves-light cyan accent-4">Vote</button>
     <!-- TO-DO: if end date passed -->
-    <button (click)="open(result)"
+    <button (click)="toggleResults()"
             class="btn waves-effect waves-light cyan accent-4">See results</button>
   </div>
 </div>
 </div>
 
-  <ng-template #result>
+
+
+  <div #result *ngIf="showResults == true">
     <div class="row">
-        <div class="input-field col s8 offset-s2">
-          <p><ngb-progressbar [showValue]="true" type="success" [value]="25"></ngb-progressbar></p>
+        <div class="input-field col s8 offset-s2" *ngFor="options">
+          <p><ngb-progressbar [showValue]="true" [type]="colorScheme" [value]="25"></ngb-progressbar></p>
         </div>
       </div>
-  </ng-template>
+    </div>
   

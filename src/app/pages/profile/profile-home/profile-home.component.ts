@@ -155,13 +155,17 @@ export class ProfileHomeComponent implements OnInit, OnDestroy {
 
   // image upload
 
-  onSubmit(form:NgForm){
+  onSubmit(){
     this.spinner.show();
     const formData = new FormData();
     formData.append('file', this.selectedImage);
     this.userService.uploadImage(formData,this.userId).subscribe(response => {
+     
+      
       this.spinner.hide();
       this.toastr.success('Profile Picture Uploaded succesfully');
+      this.authService.imageUpdated(response.imageUrl)
+
     }, errorMsg => {
       this.spinner.hide();
       this.toastr.error('Unable to upload the image.');
@@ -175,10 +179,12 @@ export class ProfileHomeComponent implements OnInit, OnDestroy {
       const reader = new FileReader();
 
       reader.readAsDataURL(event.target.files[0]); // read file as data url
-
+      this.selectedImage = event.target.files[0]
       reader.onload = (event) => { // called once readAsDataURL is completed
         this.url = event.target.result;
       }
+      this.onSubmit();
+
     }
   }
   public delete() {
