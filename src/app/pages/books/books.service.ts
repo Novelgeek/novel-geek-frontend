@@ -8,8 +8,6 @@ import { Book } from 'app/core/_models/book.model';
 })
 export class BooksService {
 
-
-
   public apiKey = 'AIzaSyBXGwa67D5ZrrFuPP6YUNc9glwM8edWFck';
   public name = '';
   public bookId = '';
@@ -81,8 +79,8 @@ export class BooksService {
     return this.http.get('/book/featured')
   }
 
-  boostLocalBook(bookId, orderId) {
-    return this.http.post('/book/boost-book', {bookId: bookId, orderId: orderId});
+  boostLocalBook(bookId, orderId, days) {
+    return this.http.post('/book/boost-book', {bookId: bookId, orderId: orderId, days: days});
   }
 
   addReviewLocal(review: any, bookId: any) {
@@ -98,6 +96,10 @@ export class BooksService {
 
   getSpecificLocalBook(id){
     return this.http.get('/book/local/' + id);
+  }
+
+  deleteBook(bookId: any) {
+    return this.http.delete('/book/local/' + bookId);
   }
 
 }

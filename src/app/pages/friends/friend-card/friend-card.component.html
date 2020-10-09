@@ -28,7 +28,7 @@
           </a>
         </div>
         <div class="col align-self-center text-center">
-          <a [ngbTooltip]="'Message User'" placement="bottom">
+          <a [ngbTooltip]="'Message User'" placement="bottom" [routerLink]="['/messages']"  [queryParams]="{user: user.id}">
             <i class="ft-mail"></i>
           </a>
 

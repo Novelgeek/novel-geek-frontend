@@ -98,7 +98,7 @@
                                 <i class="ft-edit mr-2"></i>
                                 <span>My Profile</span>
                             </a>
-                            <a class="dropdown-item py-1" [routerLink]="['/messages']">
+                            <a *ngIf="!isAdmin" class="dropdown-item py-1" [routerLink]="['/messages']">
                                 <i class="ft-mail mr-2"></i>
                                 <span>My Inbox</span>
                             </a>

@@ -9,15 +9,18 @@ import { HttpClient } from '@angular/common/http';
 })
 export class LocalBookCardComponent implements OnInit {
   @Input() book: any;
-  totalPrice = 1000;
+  totalPrice = 0;
   merchantId = 1215152;
-  qty = 1
-  price = 1000;
+  qty = 30
+  price = 7;
   currency = 'LKR';
+  bookName = '';
 
   constructor(private modalService: NgbModal, private http: HttpClient) { }
 
   ngOnInit() {
+    this.totalPrice = this.price * this.qty
+    this.bookName = this.book.title;
   }
 
   open(content) {
@@ -32,6 +35,10 @@ export class LocalBookCardComponent implements OnInit {
     })
     console.log('aa')
     this.http.request('POST', 'https://sandbox.payhere.lk/pay/checkout')
+  }
+
+  updatePrice() {
+    this.totalPrice = this.price * this.qty
   }
 
 }

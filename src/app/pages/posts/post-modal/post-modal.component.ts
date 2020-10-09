@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter, ViewChild } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, ViewChild, HostListener, ElementRef, Renderer2, AfterViewInit } from '@angular/core';
 import Post_modal from '../post_modal';
 // import { EventEmitter } from 'protractor';
 import { PostsService } from 'app/core/_services/posts.service';
@@ -6,6 +6,7 @@ import { threadId } from 'worker_threads';
 import { Comment_modal } from '../comment_modal';
 import { Like_modal } from '../like_modal';
 import { NgForm } from '@angular/forms';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-post-modal',
@@ -17,6 +18,12 @@ export class PostModalComponent implements OnInit {
   @Input() item: Post_modal;
   @Input() itemindex: number;
   @ViewChild('addcomment') addcomment: NgForm;
+
+  @ViewChild('toggle') toggle: ElementRef;
+  @ViewChild('menu') menu: ElementRef;
+
+
+
   isLiked: boolean;
 
   shortDescription: boolean=true;
@@ -32,7 +39,7 @@ export class PostModalComponent implements OnInit {
 
   flag = '#009da0';
 
-  constructor(private postService: PostsService) {
+  constructor(private postService: PostsService, private renderer: Renderer2, private modalService: NgbModal) {
     this.new_comment = new Comment_modal();
     this.likeList = [];
     this.commentList = [];
@@ -40,7 +47,9 @@ export class PostModalComponent implements OnInit {
     this.showLikes = false;
     this.report = false;
     this.shortDescription=true;
+
   }
+
 
   ngOnInit() {
     if (this.item.liked) {
@@ -50,6 +59,12 @@ export class PostModalComponent implements OnInit {
       this.flag = '#009da0';
       this.isLiked = false;
     }
+  }
+
+  open(content) {
+    this.modalService.open(content, {ariaLabelledBy: 'create-group'}).result.then((result) => {
+    }, (reason) => {
+    });
   }
 
   public deletePost(postid: number) {

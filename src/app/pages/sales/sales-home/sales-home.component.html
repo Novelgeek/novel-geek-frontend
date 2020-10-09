@@ -12,7 +12,7 @@
                 <div class="form-group">
                   <div class="row">
                     <div class="col-6">
-                      <button class="btn btn-outline-info mr-1 pull-right primary" (click)="onOpen()">
+                      <button class="btn btn-outline-info mr-1 pull-right primary" (click)="open(createSale)">
                         <i class="ft-plus primary mr-1"></i>
                         Sell a Book
                       </button>
@@ -86,13 +86,13 @@
 
 <!--CREATE NEW POST CUSTOM MODAL SECTION-->
  <div class="row">
-  <div class="backdrop" *ngIf="create">
+  <ng-template #createSale let-modal>
     <div class="col-10 modal-box" >
        <form #createpost="ngForm" (ngSubmit)="onsubmit(createpost.value)">
          <div class="card">
              <div class="card-header d-flex justify-content-between">
                <h4 class="card-title">Sell a Book</h4>
-               <i class="ft-x" style="cursor:pointer;" (click)="onClose()"></i>
+               <i class="ft-x" style="cursor:pointer;" (click)="modal.dismiss('Cross click')"></i>
              </div>    
              <div class="card-body form-group">
               <mat-form-field class="example-full-width">
@@ -185,7 +185,7 @@
          </div>
        </form>
     </div>
-  </div>
+  </ng-template>
  </div>
 <ngx-spinner></ngx-spinner>
 

@@ -16,11 +16,12 @@
       <span class="card-subtitle text-muted"> {{item.publishedDate|date:'medium'}}</span>
     </div>
     <div>
-      <a (click)="toggleList()"><i  class="ft-more-horizontal"></i></a>
-      <div style="position:relative">
-        <div *ngIf = "isShow" style="position: absolute; z-index: 1000;" class="text-left dropdown-menu show">
+      <a #toggle (click)="toggleList()"><i  class="ft-more-horizontal" ></i></a>
+      
+      <div style="position:relative" >
+        <div #menu *ngIf = "isShow" style="position: absolute; z-index: 1000;" class="text-left dropdown-menu show">
           <div *ngIf="!item.owned && !item.reported">
-            <a class=" dropdown-item py-1" (click)="reportPost()">
+            <a class=" dropdown-item py-1" (click)="open(reportModal)">
               <i class="ft-shield mr-2"></i>
               <span> Report Post</span>
             </a>
@@ -39,6 +40,8 @@
           </div> 
         </div>
       </div>
+
+
     </div>
   </div>
 
@@ -127,17 +130,17 @@
 </div>
 
 <!--REPORT POST CUSTOM MODAL SECTION-->
-<div class="row backdrop" *ngIf="report">
-  <div class="modal-box">
+<ng-template class="row" #reportModal let-modal>
+  <div class="modal-body">
     <form #reportpost="ngForm" (ngSubmit)="onsubmitReport(reportpost.value, item.postid)">
       <div class="card">
           <div class="card-header d-flex justify-content-between">
             <h4 class="card-title">Report Post</h4>
-            <i class="ft-x" style="cursor:pointer;" (click)="onClose()"></i>
+            <i class="ft-x" style="cursor:pointer;" (click)="modal.dismiss('Cross click')"></i>
           </div>    
           <div class="card-body form-group">
            <div class="d-flex justify-content-between">
-             <input class="form-control" placeholder="add reason" name="reason" ngModel #reason="ngModel" required style="margin: 5px;">
+             <input class="form-control" placeholder="State your reason" name="reason" ngModel #reason="ngModel" required style="margin: 5px;">
              <button type="submit" [disabled]="!reportpost.valid" class="btn btn-rased gradient-purple-bliss ft-navigation" style="margin: 5px;"></button>
            </div>
           </div>    
@@ -145,4 +148,4 @@
       </div>
     </form>
   </div>
-</div>
+</ng-template>
