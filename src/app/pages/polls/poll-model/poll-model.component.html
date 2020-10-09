@@ -48,9 +48,12 @@
 
   <div #result *ngIf="showResults == true">
     <div class="row">
-        <div class="input-field col s8 offset-s2" *ngFor="options">
-          <p><ngb-progressbar [showValue]="true" [type]="colorScheme" [value]="25"></ngb-progressbar></p>
+      <div fxLayout = "row">
+        <div class="input-field col s8 offset-s2" *ngFor="let option of options">
+          <p>{{option.name}}</p>
+          <p><ngb-progressbar [showValue]="true" [type]="colorScheme" [value]="option.value*10"></ngb-progressbar></p>
         </div>
+      </div>
       </div>
     </div>
   

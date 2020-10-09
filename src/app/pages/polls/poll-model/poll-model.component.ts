@@ -42,8 +42,7 @@ export class PollModelComponent implements OnInit {
       
     }
 
-    
-
+    //
 
     this.poll.options.forEach(option => {
       this.options.push({
@@ -52,9 +51,6 @@ export class PollModelComponent implements OnInit {
       })
     })
     console.log(this.options)
-
-    //poll options {option, count}
-
 
     
   }
@@ -90,7 +86,6 @@ export class PollModelComponent implements OnInit {
 
   toggleResults() {
     console.log(this.showResults);
-    
     this.showResults = !this.showResults
   }
 }
