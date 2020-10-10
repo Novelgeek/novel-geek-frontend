@@ -30,4 +30,7 @@ export class AuctionService {
   makeSale(sale: { auctionId: any; bidderId: any }) {
     return this.http.post('http://localhost:8080/auction/makesale', sale);
   }
+  endAuction(aid) {
+    return this.http.delete('http://localhost:8080/auction/endauction/' + this.aid);
+  }
 }

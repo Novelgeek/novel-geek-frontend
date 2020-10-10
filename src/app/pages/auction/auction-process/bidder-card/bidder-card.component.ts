@@ -1,5 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import {AuctionService} from '../../auction.service';
+import { NgxSpinnerService } from 'ngx-spinner';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-bidder-card',
@@ -12,7 +14,8 @@ export class BidderCardComponent implements OnInit {
   @Input() highestBidder: any;
   @Input() auctionId: any;
   isBidder = false;
-  constructor(private auctionService: AuctionService) { }
+  constructor(private auctionService: AuctionService, private spinner: NgxSpinnerService,
+    private toastr: ToastrService) { }
 
   ngOnInit(): void {
     console.log(this.bidder);
@@ -23,14 +26,20 @@ export class BidderCardComponent implements OnInit {
     }
   }
   makeSale() {
+    this.spinner.show();
     const sale = {
       'auctionId': this.auctionId,
       'bidderId': this.bidder.bidUser.id
     };
     this.auctionService.makeSale(sale).subscribe(data => {
+      this.spinner.hide();
       console.log(data);
+      this.toastr.success("Sold to "+this.bidder.bidUser.username);
+
     },
     error => {
+      this.spinner.hide();
+      this.toastr.error("Something Went Wrong");
       console.log(error)
     });
   }
