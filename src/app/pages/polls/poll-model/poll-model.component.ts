@@ -80,6 +80,10 @@ export class PollModelComponent implements OnInit {
             'value': option.score
           })
         })
+
+        this.poll.options.forEach(option => {
+          this.totalvotes+=option.score
+        });
         console.log(this.options)
       })
       this.toastr.success('Vote submitted!');

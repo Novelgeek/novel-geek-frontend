@@ -156,11 +156,11 @@ export class FriendProfileComponent implements OnInit, OnDestroy {
     };
 
 }
+//oninit ends here
 
 
 
-
-   nextSlide() {
+  nextSlide() {
     this.usefulSwiper.swiper.slideNext();
   }
 
@@ -172,9 +172,7 @@ export class FriendProfileComponent implements OnInit, OnDestroy {
     this.usefulSwiper.swiper.slideTo(index);
   }
 
-  // image slider configuration ends
-
-  // image upload
+  // image upload - take form data
 
   onSubmit(form:NgForm){
     this.spinner.show();
@@ -202,6 +200,7 @@ export class FriendProfileComponent implements OnInit, OnDestroy {
       }
     }
   }
+
   public delete() {
     this.url = null;
   }
@@ -211,43 +210,6 @@ export class FriendProfileComponent implements OnInit, OnDestroy {
     this.postList.splice(data.id, 1);
   }
 
-  //send friend request
-  sendFriendRequest() {
-    
-    this.spinner.show()
-    this.friendService.sendFriendRequest(this.userId).subscribe(data => {
-      this.user.status = 'REQUESTED';
-      this.toastr.success('Friend request sent to  ' + this.username);
-      this.spinner.hide()
-    }, errorMsg => {
-      this.toastr.error('Unable to send friend request to ' + this.username)
-      this.spinner.hide()
-    })
-  }
-
-  unFriendUser() {
-    this.spinner.show()
-    this.friendService.unFriend(this.userId).subscribe(data => {
-      this.user.friend = false;
-      this.toastr.info('Unfriended ' + this.username);
-      this.unFriend.emit({status: true, userId: this.userId});
-      this.spinner.hide()
-    }, errorMsg => {
-      this.toastr.error('Unable to unfriend ' + this.username + ', Please try again later.')
-      this.spinner.hide()
-    })
-  }
-
-  cancelSentRequest() {
-    this.spinner.show()
-    this.friendService.cancelSentRequest(this.userId).subscribe(data => {
-      this.user.status = null;
-      this.toastr.info('Friend request to  ' + this.username + ' has been cancelled');
-      this.spinner.hide()
-    }, errorMsg => {
-      this.toastr.error('Unable to cancel the friend request sent to ' + this.username)
-      this.spinner.hide()
-    })
-  }
+  
 
 }
