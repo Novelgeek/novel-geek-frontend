@@ -25,13 +25,13 @@ export class FriendProfileComponent implements OnInit, OnDestroy {
 
   private userSub: Subscription;
   user: any;
-  userId:number;
+  userId: number;
   isAuthenticated = false;
 
   url: any = null;
   selectedImage: File;
   image: string;
-  allBooks: any;
+  allBooks: any = [];
   highRated: any;
   lowRated: any;
   postList: Post_modal[];
@@ -53,33 +53,33 @@ export class FriendProfileComponent implements OnInit, OnDestroy {
     private friendService: FriendService,
     private toastr: ToastrService, private spinner: NgxSpinnerService,
     private route: ActivatedRoute
-    ) { 
+    ) {
       this.postList = [];
     }
 
     ngOnDestroy(): void {
-      
+
     }
 
 
 
   ngOnInit() {
-    
+
     this.route.params.subscribe(params => {
       this.userId = +params['id'];
     });
 
-    //get user from server
-    this.userService.getUser(this.userId).subscribe(data=>{
-     this.user=data
-     this.username=data.username
+    // get user from server
+    this.userService.getUser(this.userId).subscribe(data => {
+     this.user = data
+     this.username = data.username
      this.email = data.email
-     this.url= data.imageUrl
+     this.url = data.imageUrl
      // console.log(this.user)
-      //console.log(this.email)
+      // console.log(this.email)
       // this.email=this.user.email
 
-        //load user posts
+        // load user posts
         this.spinner.show();
         this.postsService.getUserPost(this.email).subscribe(response => {
           this.postList = response;
@@ -89,7 +89,7 @@ export class FriendProfileComponent implements OnInit, OnDestroy {
           })
 
 
-        //load user rated books
+        // load user rated books
         this.bookService.getFriendBookRatings(this.email).subscribe(data => {
           console.log(data)
           this.allBooks = data;
@@ -176,11 +176,11 @@ export class FriendProfileComponent implements OnInit, OnDestroy {
 
   // image upload
 
-  onSubmit(form:NgForm){
+  onSubmit(form: NgForm) {
     this.spinner.show();
     const formData = new FormData();
     formData.append('file', this.selectedImage);
-    this.userService.uploadImage(formData,this.userId).subscribe(response => {
+    this.userService.uploadImage(formData, this.userId).subscribe(response => {
       this.spinner.hide();
       this.toastr.success('Profile Picture Uploaded succesfully');
     }, errorMsg => {
@@ -188,7 +188,7 @@ export class FriendProfileComponent implements OnInit, OnDestroy {
       this.toastr.error('Unable to upload the image.');
     })
   }
-  
+
 
   // image upload
   onSelectFile(event) {
@@ -206,14 +206,14 @@ export class FriendProfileComponent implements OnInit, OnDestroy {
     this.url = null;
   }
 
-  //delet post
+  // delet post
   onDeletePost(data: {id: number}) {
     this.postList.splice(data.id, 1);
   }
 
-  //send friend request
+  // send friend request
   sendFriendRequest() {
-    
+
     this.spinner.show()
     this.friendService.sendFriendRequest(this.userId).subscribe(data => {
       this.user.status = 'REQUESTED';

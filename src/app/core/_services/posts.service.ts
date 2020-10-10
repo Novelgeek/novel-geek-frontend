@@ -21,11 +21,11 @@ export class PostsService {
     }
 
     likePost(postid: number) {
-        return this.http.get<any>('/post/likepost/'+ postid)
+        return this.http.get<any>('/post/likepost/' + postid)
     }
 
     unLikePost(postid: number) {
-        return this.http.delete('/post/unlikepost/'+ postid)
+        return this.http.delete('/post/unlikepost/' + postid)
 
     }
 
@@ -43,8 +43,8 @@ export class PostsService {
         return this.http.get<any>('/post/getcomments/' + postid)
     }
 
-    deleteComment(commentid:number){
-        return this.http.delete('/post/deletecomment/'+ commentid)
+    deleteComment(commentid: number) {
+        return this.http.delete('/post/deletecomment/' + commentid)
     }
 
     addReply(comment: string, commentid: number) {
@@ -57,24 +57,24 @@ export class PostsService {
         return this.http.get<any>('/post/getreplies/' + commentid)
     }
 
-    deleteReply(replyid:number){
-        return this.http.delete('/post/deletereply/'+ replyid)
+    deleteReply(replyid: number) {
+        return this.http.delete('/post/deletereply/' + replyid)
     }
 
     deletePost(postid: number) {
-        return this.http.delete('/post/delete/'+ postid)
+        return this.http.delete('/post/delete/' + postid)
 
     }
 
-    reportPost(postid:number, reason: string){
-        return this.http.post<any>("/post/report/"+ postid, reason)
+    reportPost(postid: number, reason: string) {
+        return this.http.post<any>('/post/report/' + postid, reason)
     }
 
-    unReportPost(postid:number){
-        return this.http.delete<any>("/post/unreport/"+ postid)
+    unReportPost(postid: number) {
+        return this.http.delete<any>('/post/unreport/' + postid)
     }
 
-    getUserPost(email: string){
-        return this.http.get<any>('http://localhost:8080/post/userpost/'+email)
+    getUserPost(email: string) {
+        return this.http.get<any>('/post/userpost/' + email)
     }
 }

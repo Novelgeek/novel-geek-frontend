@@ -26,11 +26,13 @@ export class PostModalComponent implements OnInit {
 
   isLiked: boolean;
 
-  shortDescription: boolean=true;
-  showComments:boolean=false;
-  showLikes:boolean=false;
-  isShow:boolean = false;
-  report :boolean = false;
+  shortDescription = true;
+  showComments = false;
+  showLikes = false;
+  isShow = false;
+  report = false;
+
+  private wasInside = false;
 
 
   commentList: Comment_modal [];
@@ -39,6 +41,7 @@ export class PostModalComponent implements OnInit {
 
   flag = '#009da0';
 
+
   constructor(private postService: PostsService, private renderer: Renderer2, private modalService: NgbModal) {
     this.new_comment = new Comment_modal();
     this.likeList = [];
@@ -46,7 +49,7 @@ export class PostModalComponent implements OnInit {
     this.showLikes = false;
     this.showLikes = false;
     this.report = false;
-    this.shortDescription=true;
+    this.shortDescription = true;
 
   }
 
@@ -88,6 +91,7 @@ export class PostModalComponent implements OnInit {
     this.postService.reportPost(postid, Values.reason).
     subscribe(response => {
       this.item.reported = true
+      this.modalService.dismissAll()
     })
   }
 
@@ -180,7 +184,7 @@ export class PostModalComponent implements OnInit {
     .subscribe(response => {
       this.new_comment = response;
       this.commentList.splice(0, 0, this.new_comment);
-      this.item.commentcount+=1;
+      this.item.commentcount += 1;
     })
     this.addcomment.reset();
   }
@@ -194,11 +198,11 @@ export class PostModalComponent implements OnInit {
     this.showComments = false;
   }
 
-  onDeleteComment(data: {id: number}){
+  onDeleteComment(data: {id: number}) {
     this.commentList.splice(data.id, 1);
   }
 
-  alterDescription(){
+  alterDescription() {
     this.shortDescription = !this.shortDescription;
   }
 }

@@ -61,7 +61,7 @@ export class BooksService {
   }
 
   getFriendBookRatings(email){
-    return this.http.get('http://localhost:8080/book/friendBookRatings/'+email)
+    return this.http.get('/book/friendBookRatings/'+email)
   }
 
   addReview(myReview: String, bookId: any) {

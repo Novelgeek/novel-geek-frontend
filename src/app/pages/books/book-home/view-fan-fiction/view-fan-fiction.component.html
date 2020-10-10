@@ -26,7 +26,7 @@
                 <li ngbNavItem>
                   <a ngbNavLink>All Fan Fictions</a>
                   <ng-template ngbNavContent>
-                    <div class="col-12 web-result" *ngFor="let fanfiction of fanfictionList">
+                    <div class="col-6 col-sm-12 web-result" *ngFor="let fanfiction of fanfictionList">
                       <div class="card">
                         <div class="card-header">
                           <h4 class="card-title cursor-pointer"><a
@@ -34,7 +34,7 @@
                         </div>
                         <div class="card-content">
                           <div class="card-body">
-                            <p>{{fanfiction.description}}</p><span
+                            <p>{{(fanfiction.description | slice:0:100) + (fanfiction.description.length > 100 ? '...': '')}}</p><span
                               class="badge bg-light-primary mb-sm-0 mb-1 mr-2">{{fanfiction.bookName}}</span>
                           </div>
                         </div>
@@ -59,7 +59,7 @@
                         </div>
                         <div class="card-content">
                           <div class="card-body">
-                            <p>{{fanfiction.description}}</p><span
+                            <p>{{(fanfiction.description | slice:0:100) + (fanfiction.description.length > 100 ? '...': '')}}</p><span
                               class="badge bg-light-primary mb-sm-0 mb-1 mr-2">{{fanfiction.bookName}}</span>
                           </div>
                           <div class="card-footer border-top d-flex  align-items-center">

@@ -192,7 +192,7 @@ let firebaseConfig = {
     PollModelComponent,
 
     ProgressbarShowvalueComponent,
-    FriendProfileComponent
+    FriendProfileComponent,
 
 
     FanFictionComponent,
