@@ -5,6 +5,7 @@ import { HttpClient } from '@angular/common/http';
 import { PostsService } from 'app/core/_services/posts.service';
 import { ToastrService } from 'ngx-toastr';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 // import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
@@ -25,7 +26,7 @@ export class PostsHomeComponent implements OnInit {
 
   /*public sanitizer:DomSanitizer*/
   constructor(private http: HttpClient, private postsService: PostsService,
-    private toastr: ToastrService, private spinner: NgxSpinnerService) {
+    private toastr: ToastrService, private spinner: NgxSpinnerService, private modalService: NgbModal) {
     this.new_post = new Post_modal();
     this.postList = [];
   }
@@ -40,6 +41,12 @@ export class PostsHomeComponent implements OnInit {
     })
 
     //console.log(this.postList)
+  }
+
+  open(content) {
+    this.modalService.open(content, {ariaLabelledBy: 'create-group'}).result.then((result) => {
+    }, (reason) => {
+    });
   }
 
   onsubmit(Values: any) {

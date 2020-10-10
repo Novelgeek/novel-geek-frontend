@@ -9,7 +9,7 @@
               <h4 class="card-title">Groups</h4>
             </div>
             <div class="col-6">
-              <form class="form">
+              <div>
                 <div class="form-group">
                   <!-- <div class="position-relative has-icon-right">
                     <input type="text" class="form-control" name="form-control-with-icon">
@@ -30,13 +30,13 @@
                       <div class="input-group ">
                         <input type="text" name="search" class="form-control" [(ngModel)]="searchTerm" placeholder="Search" aria-describedby="button-addon4">
                         <div class="input-group-append">
-                          <button class="btn btn-raised btn-primary" (click)="onSearch()" type="button"><i class="ft-search"></i></button>
+                          <button class="btn btn-raised btn-primary" type="button"><i class="ft-search"></i></button>
                         </div>
                       </div>
                     </div>
                   </div>
                 </div>
-              </form>
+              </div>
             </div>
           </div>
 
@@ -48,7 +48,7 @@
                   <a ngbNavLink>My Groups</a>
                   <ng-template ngbNavContent>
                     <div class="row" matchHeight="card">
-                      <div class="col col-xl-3 col-lg-3 col-md-3 col-sm-6 col-12" *ngFor="let group of myGroups">
+                      <div class="col col-xl-3 col-lg-3 col-md-3 col-sm-6 col-12" *ngFor="let group of myGroups | filter: searchTerm">
                         <app-group-card [group]="group"></app-group-card>
                       </div>
                     </div>
@@ -61,7 +61,7 @@
                   <a ngbNavLink>All Groups</a>
                   <ng-template ngbNavContent>
                     <div class="row">
-                      <div class="col-sm-12 col-md-6" *ngFor="let group of allGroups">
+                      <div class="col-sm-12 col-md-6" *ngFor="let group of allGroups | filter: searchTerm">
                         <app-group-horizontal-card [group]="group"></app-group-horizontal-card>
                       </div>
                     </div>

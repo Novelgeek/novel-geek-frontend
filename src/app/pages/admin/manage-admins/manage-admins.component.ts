@@ -46,4 +46,12 @@ export class ManageAdminsComponent implements OnInit {
     });
   }
 
+  deleteAdmin(adminId){
+    this.adminService.deleteAdmin(adminId).subscribe(data => {
+
+    }, error => {
+      this.toastr.error(error.error)
+    })
+  }
+
 }

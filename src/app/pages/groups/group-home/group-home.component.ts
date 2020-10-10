@@ -113,8 +113,7 @@ export class GroupHomeComponent implements OnInit {
     return list ? list.filter(item => item.name.search(new RegExp(filterText, 'i')) > -1) : [];
   }
 
-  onSearch() {
-    this.allGroups = this.transform(this.allGroups, this.searchTerm);
-  }
+
+
 
 }

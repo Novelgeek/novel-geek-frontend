@@ -9,12 +9,12 @@
               <h4 class="card-title">Friends</h4>
             </div>
             <div class="col-md-4 col-sm-8 col-xs-12">
-              <form class="form">
+              <div>
                 <div class="form-group">
                   
 
                       <div class="input-group ">
-                        <input type="text" class="form-control " placeholder="Search" aria-describedby="button-addon4">
+                        <input type="text" class="form-control" placeholder="Search" aria-describedby="button-addon4" [(ngModel)]="searchTerm">
                         <div class="input-group-append">
                           <button class="btn btn-raised btn-primary" type="button">
                             <i class="ft-search"></i>
@@ -24,7 +24,7 @@
                       </div>
 
                 </div>
-              </form>
+              </div>
             </div>
           </div>
 
@@ -36,7 +36,7 @@
                   <a ngbNavLink>My Friends</a>
                   <ng-template ngbNavContent>
                     <div class="row" matchHeight="card" *ngIf="friends.length !== 0">
-                      <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12" *ngFor="let friend of friends">
+                      <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12" *ngFor="let friend of friends | filter: searchTerm">
                         <app-friend-card [user]="friend" (unFriend)="unFriended($event)" ></app-friend-card>
                       </div>
                     </div>
@@ -49,7 +49,7 @@
                   <a ngbNavLink>Find Friends</a>
                   <ng-template ngbNavContent>
                     <div class="row">
-                      <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12" *ngFor="let user of notFriends">
+                      <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12" *ngFor="let user of notFriends | filter: searchTerm">
                         <app-friend-card [user]="user"></app-friend-card>
                       </div>
                     </div>

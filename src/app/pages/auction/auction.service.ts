@@ -5,19 +5,35 @@ import {HttpClient} from '@angular/common/http'
   providedIn: 'root'
 })
 export class AuctionService {
+  aid = '';
 
   constructor(private http: HttpClient) { }
   
   addAuction(auction: FormData){
-    return this.http.post('http://localhost:8080/book/addauction', auction);
+
+    return this.http.post('/auction/addauction', auction);
   }
 
+
+
   getAuctions(){
-    return this.http.get('http://localhost:8080/book/getauctions');
+    return this.http.get('/book/getauctions');
+
   }
   
   addNewBid(bid){
     console.log(bid);
-    return this.http.post('http://localhost:8080/book/addnewbid', bid);
+
+    return this.http.post('/auction/addnewbid', bid);
+  }
+  
+  getAuctionData(aid) {
+    this.aid = aid;
+    return this.http.get('/auction/getauctiondata/' + this.aid);
+  }
+
+  makeSale(sale: { auctionId: any; bidderId: any }) {
+    return this.http.post('/auction/makesale', sale);
+
   }
 }

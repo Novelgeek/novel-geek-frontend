@@ -15,6 +15,7 @@ export class FriendsHomeComponent implements OnInit {
   notFriends: any = [];
   requests: any = [];
   recommendations: any = [];
+  searchTerm = '';
 
   constructor(private friendService: FriendService, private toastr: ToastrService, private spinner: NgxSpinnerService,
               private notificationService: NotificationService) { }

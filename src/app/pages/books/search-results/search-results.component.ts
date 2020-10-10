@@ -24,6 +24,7 @@ export class SearchResultsComponent implements OnInit {
     });
     this.search();
   }
+
   search() {
     if (this.searchTerm !== '') {
 
@@ -34,6 +35,8 @@ export class SearchResultsComponent implements OnInit {
           this.books = this.info.items;
           this.spinner.hide();
       }, error => {
+        console.log(error);
+        
         this.spinner.hide();
       });
     } else {

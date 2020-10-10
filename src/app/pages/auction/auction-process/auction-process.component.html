@@ -1,0 +1,32 @@
+<div class="row-12">
+<div class="row" style="background-color: white;height:500px;margin-top: 20px;">
+    <div class="container">
+            <div class="card card-inverse bg-primary text-center" >
+                <div class="card-content">
+                    <div class="card-img overlap">
+                        <img src="{{data.imageUrl}}" alt="element 03" width="170">
+                    </div>
+                    <div class="card-body">
+                        <h4 class="card-title">{{data.bookTitle}}</h4>
+                        <p class="card-text">Auctions Ends in: {{this.remainingTime}} </p>
+                        <div class="mb-3">
+                            <a href="javascript:void(0)" class="btn btn-raised gradient-purple-bliss white card-shadow">End Auction</a>
+                          </div>
+                    </div>
+                </div>
+            </div>
+    </div>
+</div>
+<div class="row" style="margin-top: auto;">
+
+        <div class="col-12" *ngFor="let bidder of bidders ">
+            <div class="container" style="text-align: center;">
+                <app-bidder-card [auctionId]="auctionId" [bidder] = "bidder" [highestBidder]="highestBidder"></app-bidder-card>
+            </div>
+
+         </div>
+
+
+</div>
+
+</div>

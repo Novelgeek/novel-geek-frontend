@@ -12,6 +12,9 @@ import { PostsHomeComponent } from './pages/posts/posts-home/posts-home.componen
 import { ProfileHomeComponent } from './pages/profile/profile-home/profile-home.component';
 import { ProfileSettingsComponent } from './pages/profile/profile-settings/profile-settings.component';
 import { SalesHomeComponent } from './pages/sales/sales-home/sales-home.component';
+import {SalesInfoComponent} from './pages/sales/sales-info/sales-info.component';
+import {MoreInfoComponent} from './pages/sales/more-info/more-info.component';
+
 import { SignupComponent } from './pages/auth/signup/signup.component';
 
 import { AuthGuard } from './core/_guards/auth.guard';
@@ -32,9 +35,19 @@ import {HttpClientModule} from '@angular/common/http';
 import { ManagePostsComponent } from './pages/admin/manage-posts/manage-posts.component';
 import { ManageAdminsComponent } from './pages/admin/manage-admins/manage-admins.component';
 import { AuctionHomeComponent } from './pages/auction/auction-home/auction-home.component';
+
+import { AuctionProcessComponent } from './pages/auction/auction-process/auction-process.component';
+import { StoreComponent } from './pages/books/store/store.component';
+
 import { AddBookComponent } from './pages/books/add-book/add-book.component';
 import { LocalBooksComponent } from './pages/books/local-books/local-books.component';
+
 import { FriendProfileComponent } from './pages/friends/friend-profile/friend-profile.component';
+
+import { ViewFanFictionComponent } from './pages/books/book-home/view-fan-fiction/view-fan-fiction.component';
+import { FanFictionDetailComponent } from './pages/books/book-home/fan-fiction-detail/fan-fiction-detail.component';
+import { LocalBookDetailComponent } from './pages/books/local-books/local-book-detail/local-book-detail.component';
+
 
 const appRoutes: Routes = [
   { path: 'login', component: LoginComponent},
@@ -58,7 +71,13 @@ const appRoutes: Routes = [
       {path: 'books/reviewbook', component: BookReviewComponent},
       {path: 'books/add', component: AddBookComponent},
       {path: 'books/local-books', component: LocalBooksComponent},
+      {path: 'books/local-books/:id', component: LocalBookDetailComponent},
+      {path: 'books/fan-fiction', component: ViewFanFictionComponent},
+      {path: 'books/fan-fiction/:id', component: FanFictionDetailComponent},
       {path: 'auctions', component: AuctionHomeComponent},
+      {path: 'auctions/process', component: AuctionProcessComponent},
+      {path: 'auctions/process/:id', component: AuctionProcessComponent},
+      {path: 'store', component: StoreComponent},
 
       {path: 'friends', component: FriendsHomeComponent},
       {path: 'friends/:id', component: FriendProfileComponent},
@@ -69,6 +88,8 @@ const appRoutes: Routes = [
       {path: 'posts', component: PostsHomeComponent},
       {path: 'profile', component: ProfileHomeComponent},
       {path: 'sales', component: SalesHomeComponent},
+      {path: 'salesinfo/:id', component: SalesInfoComponent},
+      {path: 'moreinfo/:id', component: MoreInfoComponent},
       {path: 'profile/settings', component: ProfileSettingsComponent},
       {path: 'booklet', component: BookletComponent},
       {path: '', component: PostsHomeComponent},
