@@ -41,7 +41,7 @@ export class NavbarComponent implements OnInit, AfterViewInit, OnDestroy {
     private router: Router,
     private notificationService: NotificationService
     ) { 
-      this.notificationCount=0;
+      //this.notificationCount=0;
     }
 
 
@@ -71,23 +71,19 @@ export class NavbarComponent implements OnInit, AfterViewInit, OnDestroy {
     })
 
     this.notificationService.reportNotifications.subscribe(data => {
+      //console.log(data);
       this.reportNotifications=data;
     })
 
     this.notificationService.commentNotifications.subscribe(data => {
       this.commentNotifications=data;
+      //console.log(this.commentNotifications);
     })
 
     this.notificationService.replyNotifications.subscribe(data => {
       this.replyNotifications=data;
+      console.log(this.replyNotifications)
     })
-
-    this.notificationCount=this.groupNotifications.length
-    +this.friendNotifications.length
-    +this.reportNotifications.length
-    +this.commentNotifications.length
-    +this.replyNotifications.length
-
   }
 
   ngAfterViewInit() {

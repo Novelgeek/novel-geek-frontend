@@ -75,14 +75,14 @@ export class PostsService {
     }
 
     getReportNotifications(){
-        return this.http.get<any>("post/reportnotifications")
+        return this.http.get<any>("/post/reportnotifications")
     }
 
     getCommentNotifications(){
-        return this.http.get<any>("post/commentnotifications")
+        return this.http.get<any>("/post/commentnotifications")
     }
 
     getReplyNotifications(){
-        return this.http.get<any>("post/replynotifications")
+        return this.http.get<any>("/post/replynotifications")
     }
 }
