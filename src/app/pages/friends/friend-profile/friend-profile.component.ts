@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild , EventEmitter, OnDestroy } from '@angular/core';
+import { Component, OnInit, ViewChild , EventEmitter, OnDestroy, Output } from '@angular/core';
 import { AuthService } from 'app/core/_services/auth.service';
 import { Subscription } from 'rxjs';
 
@@ -9,23 +9,24 @@ import { SwiperComponent } from 'ngx-useful-swiper';
 import { BooksService } from 'app/pages/books/books.service';
 import { PostsService } from 'app/core/_services/posts.service';
 import { UserService } from 'app/core/_services/user.service';
+import { FriendService } from 'app/core/_services/friend.service';
 import { ToastrService } from 'ngx-toastr';
 import { NgxSpinnerService } from 'ngx-spinner';
 import Post_modal from 'app/pages/posts/post_modal';
 import { NgForm } from '@angular/forms';
-//
+import { ActivatedRoute } from '@angular/router';
+
 @Component({
-  selector: 'app-profile-home',
-  templateUrl: './profile-home.component.html',
-  styleUrls: ['./profile-home.component.scss']
+  selector: 'app-friend-profile',
+  templateUrl: './friend-profile.component.html',
+  styleUrls: ['./friend-profile.component.scss']
 })
-export class ProfileHomeComponent implements OnInit, OnDestroy {
+export class FriendProfileComponent implements OnInit, OnDestroy {
 
   private userSub: Subscription;
   user: any;
   userId:number;
   isAuthenticated = false;
-
 
   url: any = null;
   selectedImage: File;
@@ -34,63 +35,80 @@ export class ProfileHomeComponent implements OnInit, OnDestroy {
   highRated: any;
   lowRated: any;
   postList: Post_modal[];
-  public recommendations: any;
+  firstname: any
+  email: string;
+  username: any;
 
   // image slider configuration
   @ViewChild('usefulSwiper', { static: false }) usefulSwiper: SwiperComponent;
-  config: SwiperOptions;
+  swconfig: SwiperOptions;
 
+  @Output() unFriend = new EventEmitter();
 
   constructor(
     private authService: AuthService,
     private bookService: BooksService,
     private postsService: PostsService,
     private userService: UserService,
-    private toastr: ToastrService, private spinner: NgxSpinnerService
+    private friendService: FriendService,
+    private toastr: ToastrService, private spinner: NgxSpinnerService,
+    private route: ActivatedRoute
     ) { 
       this.postList = [];
     }
 
     ngOnDestroy(): void {
-      this.userSub.unsubscribe();
+      
     }
 
 
 
   ngOnInit() {
-    this.userSub = this.authService.user.subscribe( user => {
-      this.isAuthenticated = !!user; // !user ? false : true
-      this.user = user;
-      this.userId = +this.authService.currentUser.id;
-      this.url = user.photoUrl;
-      
+    
+    this.route.params.subscribe(params => {
+      this.userId = +params['id'];
     });
 
-    //load recommendation
+    //get user from server
+    this.userService.getUser(this.userId).subscribe(data=>{
+     this.user=data
+     this.username=data.username
+     this.email = data.email
+     this.url= data.imageUrl
+     // console.log(this.user)
+      //console.log(this.email)
+      // this.email=this.user.email
 
-    this.bookService.getRecommendations().subscribe(data => {
-      this.recommendations = data;
-    });
+        //load user posts
+        this.spinner.show();
+        this.postsService.getUserPost(this.email).subscribe(response => {
+          this.postList = response;
+          this.spinner.hide();
+          }, errorMsg => {
+          this.spinner.hide()
+          })
 
 
-    //load book list 
-    this.bookService.getMyBookRatings().subscribe(data => {
-      console.log(data)
-      this.allBooks = data;
-      this.highRated = this.allBooks.filter(book => {
-        return book.rating > 2
-      })
-      this.lowRated = this.allBooks.filter(book => {
-        return book.rating <= 2
-      })
-      console.log(this.highRated);
-      console.log(this.lowRated);
+        //load user rated books
+        this.bookService.getFriendBookRatings(this.email).subscribe(data => {
+          console.log(data)
+          this.allBooks = data;
+          this.highRated = this.allBooks.filter(book => {
+            return book.rating > 2
+          })
+          this.lowRated = this.allBooks.filter(book => {
+            return book.rating <= 2
+          })
+          console.log(this.highRated);
+          console.log(this.lowRated);
 
-    }, errorMsg => {
-      console.log(errorMsg);
+        }, errorMsg => {
+          console.log(errorMsg);
+        })
+
     })
 
-    this.config = {
+    this.swconfig = {
 
       pagination: { el: '.swiper-pagination', clickable: true },
       height: 240,
@@ -137,16 +155,10 @@ export class ProfileHomeComponent implements OnInit, OnDestroy {
 
     };
 
-    // load posts of users
-
-    this.spinner.show();
-    this.postsService.getMyPosts().subscribe(response => {
-      this.postList = response;
-      this.spinner.hide();
-    }, errorMsg => {
-      this.spinner.hide()
-    })
 }
+
+
+
 
    nextSlide() {
     this.usefulSwiper.swiper.slideNext();
@@ -164,45 +176,78 @@ export class ProfileHomeComponent implements OnInit, OnDestroy {
 
   // image upload
 
-  onSubmit(){
+  onSubmit(form:NgForm){
     this.spinner.show();
     const formData = new FormData();
     formData.append('file', this.selectedImage);
     this.userService.uploadImage(formData,this.userId).subscribe(response => {
-     
-      
       this.spinner.hide();
       this.toastr.success('Profile Picture Uploaded succesfully');
-      this.authService.imageUpdated(response.imageUrl)
-
     }, errorMsg => {
       this.spinner.hide();
       this.toastr.error('Unable to upload the image.');
     })
   }
+  
 
   // image upload
-
   onSelectFile(event) {
     if (event.target.files && event.target.files[0]) {
       const reader = new FileReader();
 
       reader.readAsDataURL(event.target.files[0]); // read file as data url
-      this.selectedImage = event.target.files[0]
+
       reader.onload = (event) => { // called once readAsDataURL is completed
         this.url = event.target.result;
       }
-      this.onSubmit();
-
     }
   }
   public delete() {
     this.url = null;
   }
 
+  //delet post
   onDeletePost(data: {id: number}) {
     this.postList.splice(data.id, 1);
   }
 
-}
+  //send friend request
+  sendFriendRequest() {
+    
+    this.spinner.show()
+    this.friendService.sendFriendRequest(this.userId).subscribe(data => {
+      this.user.status = 'REQUESTED';
+      this.toastr.success('Friend request sent to  ' + this.username);
+      this.spinner.hide()
+    }, errorMsg => {
+      this.toastr.error('Unable to send friend request to ' + this.username)
+      this.spinner.hide()
+    })
+  }
 
+  unFriendUser() {
+    this.spinner.show()
+    this.friendService.unFriend(this.userId).subscribe(data => {
+      this.user.friend = false;
+      this.toastr.info('Unfriended ' + this.username);
+      this.unFriend.emit({status: true, userId: this.userId});
+      this.spinner.hide()
+    }, errorMsg => {
+      this.toastr.error('Unable to unfriend ' + this.username + ', Please try again later.')
+      this.spinner.hide()
+    })
+  }
+
+  cancelSentRequest() {
+    this.spinner.show()
+    this.friendService.cancelSentRequest(this.userId).subscribe(data => {
+      this.user.status = null;
+      this.toastr.info('Friend request to  ' + this.username + ' has been cancelled');
+      this.spinner.hide()
+    }, errorMsg => {
+      this.toastr.error('Unable to cancel the friend request sent to ' + this.username)
+      this.spinner.hide()
+    })
+  }
+
+}

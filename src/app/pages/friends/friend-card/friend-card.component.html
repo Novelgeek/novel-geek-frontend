@@ -9,7 +9,9 @@
             class="width-150 rounded-circle img-fluid" [src]="user.imageUrl" onerror="this.src='assets/img/portrait/default.svg';"></div>
         <!-- <div class="col align-self-center text-center"><i class="icon-envelope font-large-2 blue-grey lighten-2"></i></div> -->
       </div>
+      <a [routerLink]="'/friends/' + user.id">
       <h3 class="font-large-1 text-center">{{user.username}}</h3>
+      </a>
       <span class="font-medium-1 grey d-block text-center">{{user.email}}</span>
       <div class="row mt-4 mb-3 text-center">
         <div *ngIf="user.status === 'REQUESTED'" class="col align-self-center text-center">

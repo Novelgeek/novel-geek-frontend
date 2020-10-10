@@ -1,5 +1,11 @@
 <div class="card">
     <div class="card-header d-flex justify-content-between">
+      <div class="col">
+        <img src="../../../assets/img/portrait/default.svg" 
+        width="30" height="30" class="d-inline-flex rounded-circle mr-1">
+        <span class="text-muted"><b>{{poll?.user?.username}} </b></span>
+        <br/>
+      </div>
       <div class="col text-right">
         <a (click)="toggleList()"><i  class="ft-more-horizontal"></i></a>
         <div style="position:relative">
@@ -26,8 +32,19 @@
           </p>
       </div>
       <br>
+
+      
     </div>
   
     <div class="card-footer">
+
+      <div class="row">
+        <div fxLayout = "row">
+          <div class="input-field col s8 offset-s2" *ngFor="let option of options">
+            <p>{{option.name}}</p>
+            <p><ngb-progressbar [showValue]="true" [type]="colorScheme" [value]="option.value*10"></ngb-progressbar></p>
+          </div>
+        </div>
+        </div>
       
     </div>

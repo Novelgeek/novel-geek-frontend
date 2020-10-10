@@ -89,6 +89,10 @@ import { AddBookComponent } from './pages/books/add-book/add-book.component';
 import { ArchwizardModule } from 'angular-archwizard';
 import { LocalBooksComponent } from './pages/books/local-books/local-books.component';
 import { LocalBookCardComponent } from './pages/books/local-books/local-book-card/local-book-card.component';
+
+import { ProgressbarShowvalueComponent } from './pages/polls/progressbar-showvalue/progressbar-showvalue.component';
+import { FriendProfileComponent } from './pages/friends/friend-profile/friend-profile.component';
+
 import { PostCommentModalComponent } from './pages/posts/post-comment-modal/post-comment-modal.component';
 import { SalesInfoComponent } from './pages/sales/sales-info/sales-info.component';
 import {MoreInfoComponent} from './pages/sales/more-info/more-info.component';
@@ -186,10 +190,16 @@ let firebaseConfig = {
     AddPollComponent,
     MyPollsComponent,
     PollModelComponent,
+
+    ProgressbarShowvalueComponent,
+    FriendProfileComponent
+
+
     FanFictionComponent,
     ViewFanFictionComponent,
     FanFictionDetailComponent,
     LocalBookDetailComponent
+
   ],
   imports: [
     BrowserAnimationsModule,

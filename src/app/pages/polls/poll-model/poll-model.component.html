@@ -4,7 +4,7 @@
     <div class="col">
       <img src="../../../assets/img/portrait/default.svg" 
       width="30" height="30" class="d-inline-flex rounded-circle mr-1">
-      <span class="text-muted"><b>{{poll.user.username}} </b></span>
+      <span class="text-muted"><b>{{poll?.user?.username}} </b></span>
       <br/>
     </div>
   </div>
@@ -33,28 +33,32 @@
     <div *ngIf="votingEnded">
       Voting has ended.
     </div>
+    <br>
     <button *ngIf="!votingEnded"
             [disabled]="selected == undefined"
             (click)="vote()"
             class="btn waves-effect waves-light cyan accent-4">Vote</button>
     <!-- TO-DO: if end date passed -->
-    <button (click)="open(result)"
+    <button (click)="toggleResults()"
             class="btn waves-effect waves-light cyan accent-4">See results</button>
   </div>
+  
+  
+</div>
+<div class="card-footer">
+  <div #result *ngIf="showResults == true">
+    <div class="row">
+      <div fxLayout = "row">
+        <div class="input-field col s8 offset-s2" *ngFor="let option of options">
+          <p>{{option.name}}</p>
+          <p><ngb-progressbar [showValue]="true" [type]="colorScheme" [value]="(option.value/totalvotes*100) |number:'1.2-2'"></ngb-progressbar></p>
+        </div>
+      </div>
+      </div>
+    </div>
 </div>
 </div>
 
-  <ng-template #result>
-    <div class="row">
-        <div class="input-field col s8 offset-s2">
-          <div class="poll-container">
-            <br>
-            <ngx-charts-bar-vertical [scheme]="colorScheme" [results]="options" [gradient]="gradient" [xAxis]="showXAxis" [yAxis]="showYAxis"
-              [legend]="showLegend" [showXAxisLabel]="showXAxisLabel" [showYAxisLabel]="showYAxisLabel" [xAxisLabel]="xAxisLabel"
-              [yAxisLabel]="yAxisLabel" (select)="onSelect($event)">
-            </ngx-charts-bar-vertical>
-          </div>
-        </div>
-      </div>
-  </ng-template>
+
+
   

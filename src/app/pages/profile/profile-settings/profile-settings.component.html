@@ -112,6 +112,44 @@
           </div>
         </ng-template>
       </li>
+
+      <li ngbNavItem="account">
+        <a ngbNavLink><i class="ft-x-circle mr-1 align-middle"></i><span class="align-middle">Account Delete</span></a>
+        <ng-template ngbNavContent>
+          <div class="card">
+            <div class="card-header">
+              <h4 class="card-title">Delete Account</h4>
+            </div>
+            <div class="card-content">
+              <div class="card-body px-4">
+                <form [formGroup]="PasswordVerifyForm" (ngSubmit)="onVerifyPassword()">
+                  <div class="form-body">
+                    <div class="form-group ">
+                      <label for="contact">Password</label>
+                      <input type="password" id="contact" formControlName="oldPassword" class="form-control">
+                      <small class="help-block danger" *ngIf="passwordResetForm.get('oldPassword').hasError('required') && passwordResetForm.get('oldPassword').touched">
+                        Password cannot be Empty!</small>
+                    </div>
+
+                  <div class="form-actions right">
+                    <button type="button" class="btn btn-raised btn-secondary mr-1">
+                      <i class="ft-x"></i> Cancel
+                    </button>
+                    <button type="submit" class="btn btn-raised btn-danger" [disabled]="!userSettingForm.valid">
+                      <i class="ft-check"></i>Delete Profile
+                    </button>
+                  </div>
+
+                </div>
+                </form>
+              </div>
+
+            </div>
+
+          </div>
+        </ng-template>
+      </li>
+
     </ul>
   </div>
   <div class="col-md-9 col-sm-12">
