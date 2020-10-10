@@ -22,7 +22,7 @@ export class UserService {
   }
 
   getUser(userId: number){
-    return this.http.get('http://localhost:8080/user/'+userId);
+    return this.http.get<any>('http://localhost:8080/user/'+userId);
   }
 
   saveUserDetails(userDetails: Userdetails) {

@@ -33,10 +33,11 @@ export class ProfileHomeComponent implements OnInit, OnDestroy {
   highRated: any;
   lowRated: any;
   postList: Post_modal[];
+  public recommendations: any;
 
   // image slider configuration
   @ViewChild('usefulSwiper', { static: false }) usefulSwiper: SwiperComponent;
-  swconfig: SwiperOptions;
+  config: SwiperOptions;
 
   constructor(
     private authService: AuthService,
@@ -63,6 +64,12 @@ export class ProfileHomeComponent implements OnInit, OnDestroy {
       
     });
 
+    //load recommendation
+
+    this.bookService.getRecommendations().subscribe(data => {
+      this.recommendations = data;
+    });
+
     //load book list 
 
     this.bookService.getMyBookRatings().subscribe(data => {
@@ -81,7 +88,7 @@ export class ProfileHomeComponent implements OnInit, OnDestroy {
       console.log(errorMsg);
     })
 
-    this.swconfig = {
+    this.config = {
 
       pagination: { el: '.swiper-pagination', clickable: true },
       height: 240,

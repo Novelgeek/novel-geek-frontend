@@ -38,6 +38,8 @@ export class PostsHomeComponent implements OnInit {
     }, errorMsg => {
       this.spinner.hide()
     })
+
+    //console.log(this.postList)
   }
 
   onsubmit(Values: any) {

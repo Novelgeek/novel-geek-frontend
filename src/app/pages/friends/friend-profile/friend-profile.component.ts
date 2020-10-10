@@ -18,7 +18,7 @@ import { ActivatedRoute } from '@angular/router';
 @Component({
   selector: 'app-friend-profile',
   templateUrl: './friend-profile.component.html',
-  styleUrls: ['./friend-profile.component.css']
+  styleUrls: ['./friend-profile.component.scss']
 })
 export class FriendProfileComponent implements OnInit, OnDestroy {
 
@@ -34,6 +34,9 @@ export class FriendProfileComponent implements OnInit, OnDestroy {
   highRated: any;
   lowRated: any;
   postList: Post_modal[];
+  firstname: any
+  email: string;
+  username: any;
 
   // image slider configuration
   @ViewChild('usefulSwiper', { static: false }) usefulSwiper: SwiperComponent;
@@ -58,20 +61,31 @@ export class FriendProfileComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     
-     this.route.params.subscribe(params => {
+    this.route.params.subscribe(params => {
       this.userId = +params['id'];
-   });
+    });
 
-   this.userService.getUser(this.userId).subscribe(user=>{
-     this.user=user
-      this.url= this.user.imageUrl
-   })
+    this.userService.getUser(this.userId).subscribe(data=>{
+     this.user=data
+     this.username=data.username
+     this.email = data.email
+     this.url= data.imageUrl
+     // console.log(this.user)
+      //console.log(this.email)
+      // this.email=this.user.email
 
-   // TODO : get user from backend
+    //load user posts
+    this.spinner.show();
+    this.postsService.getUserPost(this.email).subscribe(response => {
+      this.postList = response;
+      this.spinner.hide();
+      }, errorMsg => {
+      this.spinner.hide()
+      })
 
-    //load book list 
 
-    this.bookService.getMyBookRatings().subscribe(data => {
+    //load user rated books
+    this.bookService.getFriendBookRatings(this.email).subscribe(data => {
       console.log(data)
       this.allBooks = data;
       this.highRated = this.allBooks.filter(book => {
@@ -86,6 +100,16 @@ export class FriendProfileComponent implements OnInit, OnDestroy {
     }, errorMsg => {
       console.log(errorMsg);
     })
+
+   })
+
+   // TODO : get user from backend
+
+    //load book list 
+
+    
+
+    
 
     this.swconfig = {
 
@@ -136,13 +160,6 @@ export class FriendProfileComponent implements OnInit, OnDestroy {
 
     // load posts of users
 
-    this.spinner.show();
-    this.postsService.getMyPosts().subscribe(response => {
-      this.postList = response;
-      this.spinner.hide();
-    }, errorMsg => {
-      this.spinner.hide()
-    })
 }
 
    nextSlide() {

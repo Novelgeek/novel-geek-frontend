@@ -60,6 +60,10 @@ export class BooksService {
     return this.http.get('http://localhost:8080/book/bookRatings');
   }
 
+  getFriendBookRatings(email){
+    return this.http.get('http://localhost:8080/book/friendBookRatings/'+email)
+  }
+
   addReview(myReview: String, bookId: any) {
     return this.http.post('http://localhost:8080/book/addreview', {
       bookId: bookId,

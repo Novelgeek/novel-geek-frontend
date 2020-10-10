@@ -1,29 +1,20 @@
-<!-- <div class="card" style="width: 18rem;">
-    <img class="card-img-top" src="https://upload.wikimedia.org/wikipedia/commons/5/56/Kobe_Bryant_2014.jpg" alt="Card image cap">
-    <div class="card-body">
-      <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-    </div>
-  </div> -->
-
-  
-
-
+<!-- current users recommended books -->
 <div class="container-fluid">
   <div class="row justify-content-between">
-    <div class="col-lg-8">
+    <div class="col-md-8 col-sm-12" >
       <div class="card pl-3 pr-3">
         <div class="card-header text-center">
-          <h4 class="card-title">Your Books</h4>
+          <h4 class="card-title">Featured Books For You</h4>
           <p></p>
         </div>
         <div class="card-content">
-          <swiper [config]="swconfig">
+          <swiper [config]="config">
             <div class="swiper-wrapper ">
           
-              <div class="swiper-slide"  *ngFor="let rating of allBooks">
-                <a [routerLink]="['/books/search',rating.book.bookId]">
-                <img [src]="rating.book.img" height="150" class="book-img card-img-top"/>
-                {{rating.book.title}}
+              <div class="swiper-slide"  *ngFor="let recommendation of recommendations">
+                <a [routerLink]="['/books/search',recommendation.bookId]">
+                <img [src]="recommendation.img" class="book-img"/>
+                {{recommendation.title}}
               </a>
               </div>
           
@@ -75,19 +66,19 @@
       </div>
     </div>
 
-    <div class="col-8">
+    <!-- <div class="col-8">
       <div class="card pl-3 pr-3">
         <div class="card-header text-center">
           <h4 class="card-title">Your low rated Books</h4>
           <p></p>
         </div>
         <div class="card-content">
-          <swiper [config]="swconfig">
+          <swiper [config]="config">
             <div class="swiper-wrapper ">
           
               <div class="swiper-slide"  *ngFor="let rating of lowRated">
                 <a [routerLink]="['/books/search',rating.book.bookId]">
-                <img [src]="rating.book.img" height="150" class="book-img"/>
+                <img [src]="rating.book.img"  class="img-fluid card-img-top"/>
                 {{rating.book.title}}
               </a>
               </div>
@@ -105,7 +96,7 @@
         </div>
         
       </div>
-    </div>
+    </div> -->
 
   </div>
 </div>

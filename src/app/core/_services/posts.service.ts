@@ -55,4 +55,8 @@ export class PostsService {
     unReportPost(postid:number){
         return this.http.delete<any>("http://localhost:8080/post/unreport/"+ postid)
     }
+
+    getUserPost(email: string){
+        return this.http.get<any>('http://localhost:8080/post/userpost/'+email)
+    }
 }

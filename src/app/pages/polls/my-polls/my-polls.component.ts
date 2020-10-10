@@ -13,6 +13,8 @@ import { Subscription } from 'rxjs';
 })
 export class MyPollsComponent implements OnInit {
 
+  
+
   constructor(private pollService: PollService,
     private authService: AuthService,
     private toastr: ToastrService, 
@@ -23,11 +25,24 @@ export class MyPollsComponent implements OnInit {
     @Input() itemindex: number;
     @Output() ondelete  = new EventEmitter<{id: number}> ();
     isShow:boolean = false;
+
+    colorScheme = {
+      domain: ['success', 'info', 'warning', 'dangers']
+    };
+    options = []
  
     ngOnInit(): void {
         //this.loadMyPolls();
         console.log(this.poll.pollid);
         console.log(this.poll);
+
+        this.poll.options.forEach(option => {
+          this.options.push({
+            'name': option.option,
+            'value': option.score
+          })
+        })
+        console.log(this.options)
     }
 
 
