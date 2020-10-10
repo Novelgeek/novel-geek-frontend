@@ -21,6 +21,7 @@ export class PollModelComponent implements OnInit {
   selected: number;
   votingEnded = false;
   showResults = false;
+  totalvotes: number =0
 
   options = []
 
@@ -51,6 +52,13 @@ export class PollModelComponent implements OnInit {
       })
     })
     console.log(this.options)
+
+    //get total score of the votes
+    this.poll.options.forEach(option => {
+      this.totalvotes+=option.score
+    });
+    console.log(this.totalvotes)
+
 
     
   }

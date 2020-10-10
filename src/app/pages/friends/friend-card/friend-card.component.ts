@@ -18,6 +18,7 @@ export class FriendCardComponent implements OnInit {
   constructor(private friendService: FriendService, private toastr: ToastrService, private spinner: NgxSpinnerService, private UserService: UserService) { }
 
   ngOnInit() {
+    console.log(this.user)
   }
 
   unFriendUser() {

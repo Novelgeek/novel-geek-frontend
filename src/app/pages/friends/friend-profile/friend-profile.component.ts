@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild , EventEmitter, OnDestroy } from '@angular/core';
+import { Component, OnInit, ViewChild , EventEmitter, OnDestroy, Output } from '@angular/core';
 import { AuthService } from 'app/core/_services/auth.service';
 import { Subscription } from 'rxjs';
 
@@ -9,6 +9,7 @@ import { SwiperComponent } from 'ngx-useful-swiper';
 import { BooksService } from 'app/pages/books/books.service';
 import { PostsService } from 'app/core/_services/posts.service';
 import { UserService } from 'app/core/_services/user.service';
+import { FriendService } from 'app/core/_services/friend.service';
 import { ToastrService } from 'ngx-toastr';
 import { NgxSpinnerService } from 'ngx-spinner';
 import Post_modal from 'app/pages/posts/post_modal';
@@ -42,11 +43,14 @@ export class FriendProfileComponent implements OnInit, OnDestroy {
   @ViewChild('usefulSwiper', { static: false }) usefulSwiper: SwiperComponent;
   swconfig: SwiperOptions;
 
+  @Output() unFriend = new EventEmitter();
+
   constructor(
     private authService: AuthService,
     private bookService: BooksService,
     private postsService: PostsService,
     private userService: UserService,
+    private friendService: FriendService,
     private toastr: ToastrService, private spinner: NgxSpinnerService,
     private route: ActivatedRoute
     ) { 
@@ -54,7 +58,7 @@ export class FriendProfileComponent implements OnInit, OnDestroy {
     }
 
     ngOnDestroy(): void {
-      this.userSub.unsubscribe();
+      
     }
 
 
@@ -65,6 +69,7 @@ export class FriendProfileComponent implements OnInit, OnDestroy {
       this.userId = +params['id'];
     });
 
+    //get user from server
     this.userService.getUser(this.userId).subscribe(data=>{
      this.user=data
      this.username=data.username
@@ -74,42 +79,34 @@ export class FriendProfileComponent implements OnInit, OnDestroy {
       //console.log(this.email)
       // this.email=this.user.email
 
-    //load user posts
-    this.spinner.show();
-    this.postsService.getUserPost(this.email).subscribe(response => {
-      this.postList = response;
-      this.spinner.hide();
-      }, errorMsg => {
-      this.spinner.hide()
-      })
+        //load user posts
+        this.spinner.show();
+        this.postsService.getUserPost(this.email).subscribe(response => {
+          this.postList = response;
+          this.spinner.hide();
+          }, errorMsg => {
+          this.spinner.hide()
+          })
 
 
-    //load user rated books
-    this.bookService.getFriendBookRatings(this.email).subscribe(data => {
-      console.log(data)
-      this.allBooks = data;
-      this.highRated = this.allBooks.filter(book => {
-        return book.rating > 2
-      })
-      this.lowRated = this.allBooks.filter(book => {
-        return book.rating <= 2
-      })
-      console.log(this.highRated);
-      console.log(this.lowRated);
+        //load user rated books
+        this.bookService.getFriendBookRatings(this.email).subscribe(data => {
+          console.log(data)
+          this.allBooks = data;
+          this.highRated = this.allBooks.filter(book => {
+            return book.rating > 2
+          })
+          this.lowRated = this.allBooks.filter(book => {
+            return book.rating <= 2
+          })
+          console.log(this.highRated);
+          console.log(this.lowRated);
 
-    }, errorMsg => {
-      console.log(errorMsg);
+        }, errorMsg => {
+          console.log(errorMsg);
+        })
+
     })
-
-   })
-
-   // TODO : get user from backend
-
-    //load book list 
-
-    
-
-    
 
     this.swconfig = {
 
@@ -158,9 +155,10 @@ export class FriendProfileComponent implements OnInit, OnDestroy {
 
     };
 
-    // load posts of users
-
 }
+
+
+
 
    nextSlide() {
     this.usefulSwiper.swiper.slideNext();
@@ -190,9 +188,9 @@ export class FriendProfileComponent implements OnInit, OnDestroy {
       this.toastr.error('Unable to upload the image.');
     })
   }
+  
 
   // image upload
-
   onSelectFile(event) {
     if (event.target.files && event.target.files[0]) {
       const reader = new FileReader();
@@ -208,8 +206,48 @@ export class FriendProfileComponent implements OnInit, OnDestroy {
     this.url = null;
   }
 
+  //delet post
   onDeletePost(data: {id: number}) {
     this.postList.splice(data.id, 1);
+  }
+
+  //send friend request
+  sendFriendRequest() {
+    
+    this.spinner.show()
+    this.friendService.sendFriendRequest(this.userId).subscribe(data => {
+      this.user.status = 'REQUESTED';
+      this.toastr.success('Friend request sent to  ' + this.username);
+      this.spinner.hide()
+    }, errorMsg => {
+      this.toastr.error('Unable to send friend request to ' + this.username)
+      this.spinner.hide()
+    })
+  }
+
+  unFriendUser() {
+    this.spinner.show()
+    this.friendService.unFriend(this.userId).subscribe(data => {
+      this.user.friend = false;
+      this.toastr.info('Unfriended ' + this.username);
+      this.unFriend.emit({status: true, userId: this.userId});
+      this.spinner.hide()
+    }, errorMsg => {
+      this.toastr.error('Unable to unfriend ' + this.username + ', Please try again later.')
+      this.spinner.hide()
+    })
+  }
+
+  cancelSentRequest() {
+    this.spinner.show()
+    this.friendService.cancelSentRequest(this.userId).subscribe(data => {
+      this.user.status = null;
+      this.toastr.info('Friend request to  ' + this.username + ' has been cancelled');
+      this.spinner.hide()
+    }, errorMsg => {
+      this.toastr.error('Unable to cancel the friend request sent to ' + this.username)
+      this.spinner.hide()
+    })
   }
 
 }
