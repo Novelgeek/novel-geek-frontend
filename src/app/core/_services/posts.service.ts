@@ -77,4 +77,16 @@ export class PostsService {
     getUserPost(email: string) {
         return this.http.get<any>('/post/userpost/' + email)
     }
+
+    getReportNotifications(){
+        return this.http.get<any>("/post/reportnotifications")
+    }
+
+    getCommentNotifications(){
+        return this.http.get<any>("/post/commentnotifications")
+    }
+
+    getReplyNotifications(){
+        return this.http.get<any>("/post/replynotifications")
+    }
 }

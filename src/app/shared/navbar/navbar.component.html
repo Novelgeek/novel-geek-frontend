@@ -33,7 +33,14 @@
                     <li *ngIf="!isAdmin" class="nav-item" ngbDropdown [placement]="placement">
                         <a class="nav-link position-relative" id="dropdownBasic2" ngbDropdownToggle>
                             <i class="d-inline icon-bell font-medium-2 blue-grey darken-4 align-middle"></i>
-                            <span class="notification badge badge-pill badge-danger align-middle">{{groupNotifications.length + friendNotifications.length}}</span>
+                            <span class="notification badge badge-pill badge-danger align-middle">{{
+                            groupNotifications.length
+                            +friendNotifications.length
+                            +reportNotifications.length
+                            +commentNotifications.length
+                            +replyNotifications.length}}</span>
+                            
+                            
                             <!-- <p class="d-inline">Notifications</p> -->
                         </a>
                         <div ngbDropdownMenu aria-labelledby="dropdownBasic2"
@@ -58,6 +65,35 @@
                                         <span class="noti-text">{{friend.username}} Sent you a Friend Request</span>
                                     </span>
                                 </a>
+
+                                <a *ngFor="let report of reportNotifications"
+                                    class="dropdown-item noti-container py-3 border-bottom border-bottom-blue-grey border-bottom-lighten-4">
+                                    <i class="ft-bell danger float-left d-block font-large-1 mt-1 mr-2"></i>
+                                    <span class="noti-wrapper">
+                                        <span class="noti-title line-height-1 d-block text-bold-400 danger">Report</span>
+                                        <span class="noti-text">Your post with title,<b>{{report.postTitle}}</b> 
+                                        has been deleted by page admin.</span>
+                                    </span>
+                                </a>
+                                <a *ngFor="let comment of commentNotifications"
+                                    class="dropdown-item noti-container py-3 border-bottom border-bottom-blue-grey border-bottom-lighten-4">
+                                    <i class="ft-bell success float-left d-block font-large-1 mt-1 mr-2"></i>
+                                    <span class="noti-wrapper">
+                                        <span class="noti-title line-height-1 d-block text-bold-400 success">Comments</span>
+                                        <span class="noti-text"><b>{{comment.commentor}}</b> has comment on your post with title 
+                                            <b>{{comment.postTitle}}</b>.
+                                        </span>
+                                    </span>
+                                </a>
+                                <a *ngFor="let reply of replyNotifications"
+                                    class="dropdown-item noti-container py-3 border-bottom border-bottom-blue-grey border-bottom-lighten-4">
+                                    <i class="ft-bell warning float-left d-block font-large-1 mt-1 mr-2"></i>
+                                    <span class="noti-wrapper">
+                                        <span class="noti-title line-height-1 d-block text-bold-400 warning">Replies</span>
+                                        <span class="noti-text"><b>{{reply.replier}}</b> has replied to your comment on post, <b>{{reply.postTitle}}</b>.</span>
+                                    </span>
+                                </a>
+
                                 <a
                                     class="dropdown-item noti-container py-3 border-bottom border-bottom-blue-grey border-bottom-lighten-4">
                                     <i class="ft-bell danger float-left d-block font-large-1 mt-1 mr-2"></i>
