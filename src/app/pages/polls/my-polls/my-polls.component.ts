@@ -63,7 +63,6 @@ export class MyPollsComponent implements OnInit {
       });
   }
 
-  
 
   loadMyPolls() {
     // let userId = this.authService.currentUser.id;

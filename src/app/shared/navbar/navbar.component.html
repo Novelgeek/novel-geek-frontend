@@ -33,7 +33,11 @@
                     <li *ngIf="!isAdmin" class="nav-item" ngbDropdown [placement]="placement">
                         <a class="nav-link position-relative" id="dropdownBasic2" ngbDropdownToggle>
                             <i class="d-inline icon-bell font-medium-2 blue-grey darken-4 align-middle"></i>
-                            <span class="notification badge badge-pill badge-danger align-middle">{{
+                            <span *ngIf="groupNotifications.length
+                            +friendNotifications.length
+                            +reportNotifications.length
+                            +commentNotifications.length
+                            +replyNotifications.length !=0" class="notification badge badge-pill badge-danger align-middle">{{
                             groupNotifications.length
                             +friendNotifications.length
                             +reportNotifications.length
@@ -94,27 +98,14 @@
                                     </span>
                                 </a>
 
-                                <a
-                                    class="dropdown-item noti-container py-3 border-bottom border-bottom-blue-grey border-bottom-lighten-4">
-                                    <i class="ft-bell danger float-left d-block font-large-1 mt-1 mr-2"></i>
-                                    <span class="noti-wrapper">
-                                        <span class="noti-title line-height-1 d-block text-bold-400 danger">New Order
-                                            Received</span>
-                                        <span class="noti-text">Lorem ipsum dolor sit ametest?</span>
-                                    </span>
-                                </a>
-                                <a class="dropdown-item noti-container py-3">
-                                    <i class="ft-bell success float-left d-block font-large-1 mt-1 mr-2"></i>
-                                    <span class="noti-wrapper">
-                                        <span class="noti-title line-height-1 d-block text-bold-400 success">New User
-                                            Registered</span>
-                                        <span class="noti-text">Lorem ipsum dolor sit ametnatus aut.</span>
-                                    </span>
-                                </a>
+                                
                             </div>
-                            <a
-                                class="noti-footer primary text-center d-block border-top border-top-blue-grey border-top-lighten-4 text-bold-400 py-1">Read
-                                All Notifications</a>
+                            <a *ngIf="groupNotifications.length
+                            +friendNotifications.length
+                            +reportNotifications.length
+                            +commentNotifications.length
+                            +replyNotifications.length ==0" class="noti-footer primary text-center d-block border-top border-top-blue-grey border-top-lighten-4 text-bold-400 py-1">
+                                You are all Caught up</a>
                         </div>
                     </li>
                     <li></li>

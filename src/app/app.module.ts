@@ -109,6 +109,7 @@ import { Ng2SearchPipeModule } from 'ng2-search-filter';
 
 import { FanFictionDetailComponent } from './pages/books/book-home/fan-fiction-detail/fan-fiction-detail.component';
 import { LocalBookDetailComponent } from './pages/books/local-books/local-book-detail/local-book-detail.component';
+import { AdminProfileComponent } from './pages/admin/admin-profile/admin-profile.component';
 
 
 export function tokenGetter() {
@@ -193,7 +194,7 @@ let firebaseConfig = {
 
     ProgressbarShowvalueComponent,
     FriendProfileComponent,
-
+    AdminProfileComponent,
 
     FanFictionComponent,
     ViewFanFictionComponent,

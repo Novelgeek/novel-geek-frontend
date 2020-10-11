@@ -6,6 +6,7 @@ import { HttpClient } from '@angular/common/http';
 })
 export class AdminService {
 
+
   constructor(private http: HttpClient) { }
 
 
@@ -45,6 +46,14 @@ export class AdminService {
 
   deleteAdmin(adminId: any) {
     return this.http.delete('/admin/' + adminId);
+  }
+
+  updateAdmin(username: any) {
+    return this.http.post('/admin/update' , {username: username});
+  }
+
+  changePassword(password, oldPassword) {
+    return this.http.post('/admin/change-password', { password: password, oldPassword: oldPassword });
   }
 
 }
