@@ -70,8 +70,9 @@
                                     </span>
                                 </a>
 
-                                <a *ngFor="let report of reportNotifications"
-                                    class="dropdown-item noti-container py-3 border-bottom border-bottom-blue-grey border-bottom-lighten-4">
+                                <a *ngFor="let report of reportNotifications;let index = index;"
+                                    class="dropdown-item noti-container py-3 border-bottom border-bottom-blue-grey border-bottom-lighten-4"
+                                    (click)="deleteReportNoti(report.notiid, index)">
                                     <i class="ft-bell danger float-left d-block font-large-1 mt-1 mr-2"></i>
                                     <span class="noti-wrapper">
                                         <span class="noti-title line-height-1 d-block text-bold-400 danger">Report</span>
@@ -79,8 +80,9 @@
                                         has been deleted by page admin.</span>
                                     </span>
                                 </a>
-                                <a *ngFor="let comment of commentNotifications"
-                                    class="dropdown-item noti-container py-3 border-bottom border-bottom-blue-grey border-bottom-lighten-4">
+                                <a *ngFor="let comment of commentNotifications;let index = index;"
+                                    class="dropdown-item noti-container py-3 border-bottom border-bottom-blue-grey border-bottom-lighten-4"
+                                    [routerLink]="['/posts']" (click)="deleteCommentNoti(comment.notiid, index)">
                                     <i class="ft-bell success float-left d-block font-large-1 mt-1 mr-2"></i>
                                     <span class="noti-wrapper">
                                         <span class="noti-title line-height-1 d-block text-bold-400 success">Comments</span>
@@ -89,30 +91,14 @@
                                         </span>
                                     </span>
                                 </a>
-                                <a *ngFor="let reply of replyNotifications"
-                                    class="dropdown-item noti-container py-3 border-bottom border-bottom-blue-grey border-bottom-lighten-4">
+                                <a *ngFor="let reply of replyNotifications;let index = index;"
+                                    class="dropdown-item noti-container py-3 border-bottom border-bottom-blue-grey border-bottom-lighten-4"
+                                    [routerLink]="['/posts']"
+                                    (click)="deleteReplyNoti(reply.notiid, index)">
                                     <i class="ft-bell warning float-left d-block font-large-1 mt-1 mr-2"></i>
                                     <span class="noti-wrapper">
                                         <span class="noti-title line-height-1 d-block text-bold-400 warning">Replies</span>
                                         <span class="noti-text"><b>{{reply.replier}}</b> has replied to your comment on post, <b>{{reply.postTitle}}</b>.</span>
-                                    </span>
-                                </a>
-
-                                <a
-                                    class="dropdown-item noti-container py-3 border-bottom border-bottom-blue-grey border-bottom-lighten-4">
-                                    <i class="ft-bell danger float-left d-block font-large-1 mt-1 mr-2"></i>
-                                    <span class="noti-wrapper">
-                                        <span class="noti-title line-height-1 d-block text-bold-400 danger">New Order
-                                            Received</span>
-                                        <span class="noti-text">Lorem ipsum dolor sit ametest?</span>
-                                    </span>
-                                </a>
-                                <a class="dropdown-item noti-container py-3">
-                                    <i class="ft-bell success float-left d-block font-large-1 mt-1 mr-2"></i>
-                                    <span class="noti-wrapper">
-                                        <span class="noti-title line-height-1 d-block text-bold-400 success">New User
-                                            Registered</span>
-                                        <span class="noti-text">Lorem ipsum dolor sit ametnatus aut.</span>
                                     </span>
                                 </a>
                             </div>
