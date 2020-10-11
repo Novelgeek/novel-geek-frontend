@@ -10,9 +10,13 @@ import { ChartsModule } from 'ng2-charts';
   styleUrls: ['./admin-home.component.scss'],
 })
 export class AdminHomeComponent implements OnInit {
-
-  public lineChartData = chartsData.lineChartData;
-  public lineChartLabels = chartsData.lineChartLabels;
+  public genreData: any=[];
+  public userData:any=[];
+  public lineChartData =  [
+    { data: [330, 600, 260, 700], label: 'Users' },
+  
+  ];
+  public lineChartLabels = ['January', 'February', 'March', 'April','May','June','July','August','September','October','November','December'];
   public lineChartOptions = chartsData.lineChartOptions;
   public lineChartColors = chartsData.lineChartColors;
   public lineChartLegend = chartsData.lineChartLegend;
@@ -22,10 +26,10 @@ export class AdminHomeComponent implements OnInit {
 
   // barChart
   public barChartOptions = chartsData.barChartOptions;
-  public barChartLabels = chartsData.barChartLabels;
+  public barChartLabels = ['Jan','Feb'];
+  public barChartData = [{ data: [330, 600], label: 'Account A' }];
   public barChartType = chartsData.barChartType;
   public barChartLegend = chartsData.barChartLegend;
-  public barChartData = chartsData.barChartData;
   public barChartColors = chartsData.barChartColors;
 
 
@@ -42,6 +46,20 @@ export class AdminHomeComponent implements OnInit {
   constructor(private statService: StatisticService) { }
 
   ngOnInit() {
+    this.statService.getGenreStats().subscribe(data=>{
+       console.log(data);
+       this.genreData = data;
+       let genreStatsData = [
+         {data: this.genreData.count, label:"Search Count"}
+       ]
+       this.barChartData = genreStatsData;
+       this.barChartLabels = this.genreData.categories;
+    });
+    this.statService.getUserStats().subscribe(dat=>{
+      console.log(dat);
+      this.userData=dat;
+      this.lineChartData =  [{ data: this.userData, label: 'Users' }];
+    });
     this.statService.getBasicStat().subscribe(data => {
       this.statData = data;
       console.log(this.statData);

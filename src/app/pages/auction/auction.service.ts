@@ -36,4 +36,7 @@ export class AuctionService {
     return this.http.post('/auction/makesale', sale);
 
   }
+  endAuction(aid) {
+    return this.http.delete('http://localhost:8080/auction/endauction/' + this.aid);
+  }
 }

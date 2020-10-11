@@ -4,6 +4,8 @@ export class Book {
         public title: string,
         public author: string,
         public myRating: number,
-        public img: string
+        public img: string,
+        public genre:string
+
     ) {}
 }
