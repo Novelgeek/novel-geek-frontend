@@ -37,6 +37,22 @@
             <div class="col-auto">
               <ul ngbNav #nav="ngbNav" class="nav-pills">
                 <li ngbNavItem >
+                  <a ngbNavLink>All Sales Posts</a>
+                  <ng-template ngbNavContent>
+
+                    <div class="card-columns">
+                      <ng-container *ngFor="let item of allPosts; let itemindex = index;">
+                        <app-sales-modal [item]="item" [itemindex]="itemindex" (ondelete)="onDeletePostAll($event)" [allpost]="true"></app-sales-modal>
+                      </ng-container>      
+                    </div> 
+
+                    <div class="row justify-content-center  mt-2 font-medium-4" matchHeight="card" *ngIf="allPosts.length === 0">
+                      There are no Posts yet. Click on Sell a Book to get started.
+                    </div>
+                  </ng-template>
+                </li>
+
+                <li ngbNavItem>
                   <a ngbNavLink>My Sales Posts</a>
                   <ng-template ngbNavContent>
                     <!--<div class="row" matchHeight="card">
@@ -46,27 +62,12 @@
                     </div>--> 
                     <div class="card-columns">
                       <ng-container *ngFor="let item of myPosts; let itemindex = index;">
-                        <app-sales-modal [item]="item" [itemindex]="itemindex" (ondelete)="onDeletePostMy($event)"></app-sales-modal>
+                        <app-sales-modal [item]="item" [itemindex]="itemindex" (ondelete)="onDeletePostMy($event)" [allpost]="false"></app-sales-modal>
                       </ng-container>                 
                     </div>
 
                     <div class="row justify-content-center  mt-2 font-medium-4" matchHeight="card" *ngIf="myPosts.length === 0">
                       No posts yet. Click on Sell a Book to start selling.
-                    </div>
-                  </ng-template>
-                </li>
-                <li ngbNavItem>
-                  <a ngbNavLink>All Sales Posts</a>
-                  <ng-template ngbNavContent>
-
-                    <div class="card-columns">
-                      <ng-container *ngFor="let item of allPosts; let itemindex = index;">
-                        <app-sales-modal [item]="item" [itemindex]="itemindex" (ondelete)="onDeletePostAll($event)"></app-sales-modal>
-                      </ng-container>      
-                    </div> 
-
-                    <div class="row justify-content-center  mt-2 font-medium-4" matchHeight="card" *ngIf="allPosts.length === 0">
-                      There are no Posts yet. Click on Sell a Book to get started.
                     </div>
                   </ng-template>
                 </li>
