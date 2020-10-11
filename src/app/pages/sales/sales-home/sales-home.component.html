@@ -12,7 +12,7 @@
                 <div class="form-group">
                   <div class="row">
                     <div class="col-6">
-                      <button class="btn btn-outline-info mr-1 pull-right primary" (click)="onOpen()">
+                      <button class="btn btn-outline-info mr-1 pull-right primary" (click)="open(createSale)">
                         <i class="ft-plus primary mr-1"></i>
                         Sell a Book
                       </button>
@@ -37,6 +37,22 @@
             <div class="col-auto">
               <ul ngbNav #nav="ngbNav" class="nav-pills">
                 <li ngbNavItem >
+                  <a ngbNavLink>All Sales Posts</a>
+                  <ng-template ngbNavContent>
+
+                    <div class="card-columns">
+                      <ng-container *ngFor="let item of allPosts; let itemindex = index;">
+                        <app-sales-modal [item]="item" [itemindex]="itemindex" (ondelete)="onDeletePostAll($event)" [allpost]="true"></app-sales-modal>
+                      </ng-container>      
+                    </div> 
+
+                    <div class="row justify-content-center  mt-2 font-medium-4" matchHeight="card" *ngIf="allPosts.length === 0">
+                      There are no Posts yet. Click on Sell a Book to get started.
+                    </div>
+                  </ng-template>
+                </li>
+
+                <li ngbNavItem>
                   <a ngbNavLink>My Sales Posts</a>
                   <ng-template ngbNavContent>
                     <!--<div class="row" matchHeight="card">
@@ -46,27 +62,12 @@
                     </div>--> 
                     <div class="card-columns">
                       <ng-container *ngFor="let item of myPosts; let itemindex = index;">
-                        <app-sales-modal [item]="item" [itemindex]="itemindex" (ondelete)="onDeletePostMy($event)"></app-sales-modal>
+                        <app-sales-modal [item]="item" [itemindex]="itemindex" (ondelete)="onDeletePostMy($event)" [allpost]="false"></app-sales-modal>
                       </ng-container>                 
                     </div>
 
                     <div class="row justify-content-center  mt-2 font-medium-4" matchHeight="card" *ngIf="myPosts.length === 0">
                       No posts yet. Click on Sell a Book to start selling.
-                    </div>
-                  </ng-template>
-                </li>
-                <li ngbNavItem>
-                  <a ngbNavLink>All Sales Posts</a>
-                  <ng-template ngbNavContent>
-
-                    <div class="card-columns">
-                      <ng-container *ngFor="let item of allPosts; let itemindex = index;">
-                        <app-sales-modal [item]="item" [itemindex]="itemindex" (ondelete)="onDeletePostAll($event)"></app-sales-modal>
-                      </ng-container>      
-                    </div> 
-
-                    <div class="row justify-content-center  mt-2 font-medium-4" matchHeight="card" *ngIf="allPosts.length === 0">
-                      There are no Posts yet. Click on Sell a Book to get started.
                     </div>
                   </ng-template>
                 </li>
@@ -86,13 +87,13 @@
 
 <!--CREATE NEW POST CUSTOM MODAL SECTION-->
  <div class="row">
-  <div class="backdrop" *ngIf="create">
+  <ng-template #createSale let-modal>
     <div class="col-10 modal-box" >
        <form #createpost="ngForm" (ngSubmit)="onsubmit(createpost.value)">
          <div class="card">
              <div class="card-header d-flex justify-content-between">
                <h4 class="card-title">Sell a Book</h4>
-               <i class="ft-x" style="cursor:pointer;" (click)="onClose()"></i>
+               <i class="ft-x" style="cursor:pointer;" (click)="modal.dismiss('Cross click')"></i>
              </div>    
              <div class="card-body form-group">
               <mat-form-field class="example-full-width">
@@ -185,7 +186,7 @@
          </div>
        </form>
     </div>
-  </div>
+  </ng-template>
  </div>
 <ngx-spinner></ngx-spinner>
 

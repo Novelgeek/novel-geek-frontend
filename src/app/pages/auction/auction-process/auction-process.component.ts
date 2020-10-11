@@ -4,6 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { NgxSpinner } from 'ngx-spinner/lib/ngx-spinner.enum';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { AuctionService } from '../auction.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-auction-process',
@@ -18,7 +19,10 @@ export class AuctionProcessComponent implements OnInit {
   bidders: any = [];
   highestBidder: any;
 
-  constructor(private auctionService:AuctionService,private route: ActivatedRoute, private spinner: NgxSpinnerService) { }
+  constructor(private auctionService:AuctionService,
+    private route: ActivatedRoute, 
+    private spinner: NgxSpinnerService,
+    private toastr:ToastrService) { }
 
   ngOnInit(): void {
     this.spinner.show();
@@ -75,5 +79,17 @@ export class AuctionProcessComponent implements OnInit {
       }
     });
     this.bidders = resArr;
+  }
+  endAuction(){
+    this.spinner.show();
+    this.auctionService.endAuction(this.auctionId).subscribe(data=>{
+      this.spinner.hide();
+      this.toastr.success("Auction Ended Succesfully");
+      
+
+    },error=>{
+      this.spinner.hide();
+      this.toastr.error("Something Went Wrong");
+    });
   }
 }

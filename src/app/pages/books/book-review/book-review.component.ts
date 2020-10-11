@@ -39,7 +39,12 @@ export class BookReviewComponent implements OnInit, OnDestroy {
       this.bookService.getBooksById(this.bookId).subscribe(data => {
         this.data = data;
         this.book = this.data.volumeInfo;
-        const bookDetail = new Book(this.bookId, this.book.title, this.book.authors[0], this.rating, this.book.imageLinks.thumbnail);
+        console.log(this.book);
+        let category=null;
+        if(this.book.categories){
+            category=this.book.categories[0];
+        }
+        const bookDetail = new Book(this.bookId, this.book.title, this.book.authors[0], this.rating, this.book.imageLinks.thumbnail,category);
         // tslint:disable-next-line: no-shadowed-variable
         this.bookService.getUserRating(this.bookId).subscribe( data => {
           if( data !== null) {
@@ -73,11 +78,12 @@ export class BookReviewComponent implements OnInit, OnDestroy {
     this.bookService.addReview(this.myReview, this.bookId).subscribe(data => {
       this.spinner.hide();
       this.reviews.push(data);
+      this.modalService.dismissAll();
     }, error => this.spinner.hide())
   }
 
   onRate() {
-    const bookDetail = new Book(this.bookId, this.book.title, this.book.authors[0], this.rating, this.book.imageLinks.thumbnail);
+    const bookDetail = new Book(this.bookId, this.book.title, this.book.authors[0], this.rating, this.book.imageLinks.thumbnail,this.book.categories[0]);
     // console.log(bookDetail);
     this.bookService.rateBook(bookDetail).subscribe(data => {
       console.log(data);

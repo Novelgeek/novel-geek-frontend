@@ -10,12 +10,12 @@ import {Comment_reply_modal} from '../comment_reply_modal';
 })
 export class PostCommentModalComponent implements OnInit {
   @Output() ondelete  = new EventEmitter <{id: number}> ();
-  @Input() comment: Comment_modal;
+  @Input() comment: any;
   @Input() commentindex: number;
   @ViewChild('addreply') addreply: NgForm;
-  isreply: boolean = false;
+  isreply = false;
   replyList: Comment_reply_modal [];
-  showreply: boolean = false;
+  showreply = false;
   public new_reply: Comment_reply_modal;
   constructor(private postService: PostsService) {
     this.replyList = [];
@@ -25,44 +25,44 @@ export class PostCommentModalComponent implements OnInit {
   ngOnInit() {
   }
 
-  Reply(){
+  Reply() {
     this.isreply = !this.isreply;
   }
 
-  onsubmitReply(Values: any, commentid: number){
-    //console.log(commentid);
-    //console.log(Values);
+  onsubmitReply(Values: any, commentid: number) {
+    // console.log(commentid);
+    // console.log(Values);
     this.postService.addReply(Values.reply, commentid )
     .subscribe(response => {
       this.new_reply = response;
       this.replyList.splice(0, 0, this.new_reply);
-      
+
     })
     this.addreply.reset();
   }
 
-  ShowReply(commentid:number){
+  ShowReply(commentid: number) {
     this.showreply = !this.showreply;
-    if(this.showreply){
+    if (this.showreply) {
       this.postService.getReplies(commentid).subscribe(response => {
         this.replyList = response;
-        //console.log(response);
+        // console.log(response);
       })
     }
   }
 
-  deleteComment(commentid:number){
+  deleteComment(commentid: number) {
     this.postService.deleteComment(commentid).
     subscribe(response => {
       this.ondelete.emit({id: this.commentindex});
     })
   }
 
-  deleteReply(replyid:number, index:number){
+  deleteReply(replyid: number, index: number) {
     this.postService.deleteReply(replyid).
     subscribe(response => {
       this.replyList.splice(index, 1);
     })
-    //console.log(replyid)
+    // console.log(replyid)
   }
 }

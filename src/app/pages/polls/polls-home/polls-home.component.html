@@ -16,7 +16,7 @@
                   <a ngbNavLink>All Polls</a>
                   <ng-template ngbNavContent>
                     <div class="row">
-                      <div *ngFor="let poll of allpolls" class="col col-xl-3 col-md-3 col-sm-6 col-12" >
+                      <div *ngFor="let poll of allpolls" class="col col-xl-4 col-md-4 col-sm-6 col-12" >
                           <app-poll-model [poll]="poll"></app-poll-model>
                       </div>
                     </div>
@@ -26,7 +26,7 @@
                   <a ngbNavLink>My Polls</a>
                   <ng-template ngbNavContent>
                     <div class="row">
-                      <div *ngFor="let poll of mypolls; let itemindex = index;" class="col-sm-12 col-md-6">
+                      <div *ngFor="let poll of mypolls; let itemindex = index;" class="col col-xl-4 col-md-4 col-sm-6 col-12">
                         <app-my-polls [poll]="poll"  [itemindex]="itemindex" (ondelete)="onDeletePoll($event)"></app-my-polls>
                       </div>
                     </div>

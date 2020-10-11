@@ -6,7 +6,7 @@
       <div class="px-3">
         <h4 class="card-title">{{(book.title | slice:0:50) + (book.title.length > 50 ? '...': '')}}</h4>
         <p class="card-text">{{book.description | slice:0:10}}</p>
-        <button  class="btn btn-raised btn-primary btn-darken-3 white" (click)="onClick()">View Book</button>
+        <button  class="btn btn-raised btn-primary btn-darken-3 white" [routerLink]="'/books/local-books/' + book.id">View Book</button>
       </div>
       <div class="px-3">
         <button class="btn btn-outline-primary primary" type="button" (click)="open(boostBook)" >Boost</button>
@@ -22,7 +22,7 @@
 <!-- boost modal -->
 <ng-template #boostBook let-modal>
   <div class="modal-header">
-    <h4 class="modal-title" id="create-group">Create new Group</h4>
+    <h4 class="modal-title" id="create-group">Provide Your details</h4>
     <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
       <span aria-hidden="true">&times;</span>
     </button>
@@ -36,53 +36,81 @@
              <div class="col-6 card-content">
                <mat-form-field  class="example-full-width">
                  <mat-label>First Name</mat-label>
-                 <input matInput name="first_name" ngModel #first_name="ngModel" required/>
+                 <input matInput name="first_name" ngModel #first_name="ngModel"/>
                </mat-form-field>
              </div>
              <div class="col-6">
                <mat-form-field  class="example-full-width">
                  <mat-label>Last Name</mat-label>
-                 <input matInput  name="last_name" ngModel #last_name="ngModel" required/>
+                 <input matInput  name="last_name" ngModel #last_name="ngModel"/>
                </mat-form-field>
              </div>
            </div>
+
 
            <div class="row">
              <div class="col-6">
                <mat-form-field  class="example-full-width">
                  <mat-label>Email</mat-label>
-                 <input matInput name="email" ngModel #email="ngModel" type="email" required/>
+                 <input matInput name="email" ngModel #email="ngModel" type="email" pattern="^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"/>
                </mat-form-field>
+               <div *ngIf="email.errors?.pattern" style="color: red;"> 
+                Inavalid Email.
+             </div> 
                <mat-form-field  class="example-full-width">
                  <mat-label>Contact Number</mat-label>
-                 <input matInput name="phone" ngModel #phone="ngModel" required/>
-               </mat-form-field>                
+                 <input matInput name="phone" ngModel #phone="ngModel"  pattern="^[0-9]{10,10}"/>
+               </mat-form-field>
+               <div *ngIf="phone.errors?.pattern" style="color: red;"> 
+                Inavalid Telephone number
+              </div>                
              </div>
              <div class="col-6">
                <mat-form-field  class="example-full-width">
                  <mat-label>Address</mat-label>
-                 <input matInput name="address" ngModel #address="ngModel" type="email" required/>
+                 <input matInput name="address" ngModel #address="ngModel" type="email"/>
                </mat-form-field>
                <mat-form-field  class="example-full-width">
                  <mat-label>City</mat-label>
-                 <input matInput name="city" ngModel #city="ngModel" required/>
+                 <input matInput name="city" ngModel #city="ngModel"/>
                </mat-form-field> 
              </div>
            </div>
 
+           
+           <div class="row">
+            <div class="col-6 card-content">
+              <mat-form-field  class="example-full-width">
+                <mat-label>No of Days</mat-label>
+                <input matInput name="days" [(ngModel)]="qty" (input)="updatePrice()"  required/>
+              </mat-form-field>
+              <div *ngIf="totalPrice < 50" style="color: red;"> 
+                Minimum boost days is 8
+              </div> 
+            </div>
+            <div class="col-6">
+              <mat-form-field  class="example-full-width">
+                <mat-label>Total</mat-label>
+                <input matInput  name="total" [(ngModel)]="totalPrice" readonly required/>
+              </mat-form-field>
+            </div>
+          </div>
+
+
+
            <input type="hidden" id="merchant_id" [(ngModel)]="merchantId" name="merchant_id" value="1215088">    <!-- Replace your Merchant ID -->
-           <input type="hidden" name="return_url" value="http://localhost:4200/books/local-books">
+           <input type="hidden" name="return_url" [value]="'http://localhost:4200/books/local-books?bookId=' + book.id + '&days=' + qty">
            <input type="hidden" name="cancel_url" value="http://localhost:4200/books/local-books">
            <input type="hidden" name="notify_url" value="/book/boost-book"> 
            <input type="hidden" name="order_id" value="1">
-           <input type="hidden" name="items" value="narnia">
+           <input type="hidden" name="items" [(ngModel)]="bookName">
            <input type="hidden" name="currency" value="LKR">
-           <input type="hidden" name="amount" value="1000"> 
+           <input type="hidden" name="amount" [(ngModel)]="totalPrice"> 
            <input type="hidden" name="country" value="Sri Lanka"> 
         </div>  
         <!-- [disabled]="!buybook.valid"   -->
         <div class="card-footer d-flex justify-content-center form-group">          
-           <input type="submit" (click)="form.submit()" id="payhere-payment"  value="Buy Book" class="btn btn-raised gradient-purple-bliss white"> 
+           <input type="submit" (click)="form.submit()" [disabled]="totalPrice < 50" id="payhere-payment"  value="Boost Book" class="btn btn-outline-primary primary"> 
         </div> 
      </div>
    </form>

@@ -1,60 +1,62 @@
 <!-- view all polls -->
 <div class="card">
-  <div class="card-header">
-    <div class="col">
-      <img src="../../../assets/img/portrait/default.svg" 
-      width="30" height="30" class="d-inline-flex rounded-circle mr-1">
-      <span class="text-muted"><b>{{poll.user.username}} </b></span>
-      <br/>
-    </div>
-  </div>
-  <div class="card-body">
-<div class="icon-block">
-    <!-- <h2 class="center light-blue-text">
-      <i class="material-icons">insert_chart</i>
-    </h2> -->
-    <h5 class="card-title">{{poll.title}}</h5>
-    <br>
-    <form *ngIf="!votingEnded">
-      <div *ngFor="let option of poll.options,  let i = index"
-           class="left-align">
-        <p class="card-text">
-          <label>
-            <input (click)="selected=option.optionid"
-                   name="group1"
-                   type="radio"
-                   [disabled]="poll.voted" />
-            <span>  {{option?.option}}</span>
-          </label>
-        </p>
+    <div class="card-header">
+      <div class="col">
+        <img src="../../../assets/img/portrait/default.svg" 
+        width="30" height="30" class="d-inline-flex rounded-circle mr-1">
+        <span class="text-muted"><b>{{poll?.user?.username}} </b></span>
+        <br/>
       </div>
-      <p *ngIf="poll.voted">Already Voted.</p>
-    </form>
-    <div *ngIf="votingEnded">
-      Voting has ended.
     </div>
-    <button *ngIf="!votingEnded"
-            [disabled]="selected == undefined"
-            (click)="vote()"
-            class="btn waves-effect waves-light cyan accent-4">Vote</button>
-    <!-- TO-DO: if end date passed -->
-    <button (click)="open(result)"
-            class="btn waves-effect waves-light cyan accent-4">See results</button>
+    <div class="card-body">
+  <div class="icon-block">
+      <!-- <h2 class="center light-blue-text">
+        <i class="material-icons">insert_chart</i>
+      </h2> -->
+      <h5 class="card-title">{{poll.title}}</h5>
+      <br>
+      <form *ngIf="!votingEnded">
+        <div *ngFor="let option of poll.options,  let i = index"
+            class="left-align">
+          <p class="card-text">
+            <label>
+              <input (click)="selected=option.optionid"
+                    name="group1"
+                    type="radio"
+                    [disabled]="poll.voted" />
+              <span>  {{option?.option}}</span>
+            </label>
+          </p>
+        </div>
+        <p *ngIf="poll.voted">Already Voted.</p>
+      </form>
+      <div *ngIf="votingEnded">
+        Voting has ended.
+      </div>
+      <br>
+      <button *ngIf="!votingEnded"
+              [disabled]="selected == undefined"
+              (click)="vote()"
+              class="btn waves-effect waves-light cyan accent-4">Vote</button>
+      <!-- TO-DO: if end date passed -->
+      <button (click)="toggleResults()"
+              class="btn waves-effect waves-light cyan accent-4">See results</button>
+    </div>
   </div>
-</div>
-</div>
-
-  <ng-template #result>
-    <div class="row">
-        <div class="input-field col s8 offset-s2">
-          <div class="poll-container">
-            <br>
-            <ngx-charts-bar-vertical [scheme]="colorScheme" [results]="options" [gradient]="gradient" [xAxis]="showXAxis" [yAxis]="showYAxis"
-              [legend]="showLegend" [showXAxisLabel]="showXAxisLabel" [showYAxisLabel]="showYAxisLabel" [xAxisLabel]="xAxisLabel"
-              [yAxisLabel]="yAxisLabel" (select)="onSelect($event)">
-            </ngx-charts-bar-vertical>
+  <div class="card-footer">
+    <div #result *ngIf="showResults == true">
+      <div >
+        <div >
+          <div  *ngFor="let option of options">
+            <p>{{option.name}}</p>
+            <p><ngb-progressbar [showValue]="true" [type]="colorScheme" [value]="(option.value/totalvotes*100) |number:'1.2-2'"></ngb-progressbar></p>
           </div>
         </div>
+        </div>
       </div>
-  </ng-template>
+  </div>
+</div>
+
+
+
   

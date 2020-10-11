@@ -89,6 +89,10 @@ import { AddBookComponent } from './pages/books/add-book/add-book.component';
 import { ArchwizardModule } from 'angular-archwizard';
 import { LocalBooksComponent } from './pages/books/local-books/local-books.component';
 import { LocalBookCardComponent } from './pages/books/local-books/local-book-card/local-book-card.component';
+
+import { ProgressbarShowvalueComponent } from './pages/polls/progressbar-showvalue/progressbar-showvalue.component';
+import { FriendProfileComponent } from './pages/friends/friend-profile/friend-profile.component';
+
 import { PostCommentModalComponent } from './pages/posts/post-comment-modal/post-comment-modal.component';
 import { SalesInfoComponent } from './pages/sales/sales-info/sales-info.component';
 import {MoreInfoComponent} from './pages/sales/more-info/more-info.component';
@@ -99,6 +103,14 @@ import { ManageAdminsComponent } from './pages/admin/manage-admins/manage-admins
 import { ManagePostsComponent } from './pages/admin/manage-posts/manage-posts.component';
 import { FanFictionComponent } from './pages/books/book-home/fan-fiction/fan-fiction.component';
 import { ViewFanFictionComponent } from './pages/books/book-home/view-fan-fiction/view-fan-fiction.component';
+
+import { DatePipe } from '@angular/common';
+import { Ng2SearchPipeModule } from 'ng2-search-filter';
+
+import { FanFictionDetailComponent } from './pages/books/book-home/fan-fiction-detail/fan-fiction-detail.component';
+import { LocalBookDetailComponent } from './pages/books/local-books/local-book-detail/local-book-detail.component';
+
+
 export function tokenGetter() {
   return localStorage.getItem('token');
 }
@@ -178,8 +190,16 @@ let firebaseConfig = {
     AddPollComponent,
     MyPollsComponent,
     PollModelComponent,
+
+    ProgressbarShowvalueComponent,
+    FriendProfileComponent,
+
+
     FanFictionComponent,
-    ViewFanFictionComponent
+    ViewFanFictionComponent,
+    FanFictionDetailComponent,
+    LocalBookDetailComponent
+
   ],
   imports: [
     BrowserAnimationsModule,
@@ -188,7 +208,7 @@ let firebaseConfig = {
     HttpClientModule,
     NgbModule,
     BarRatingModule,
-
+    Ng2SearchPipeModule,
     
     MatMenuModule,
     MatChipsModule,
@@ -236,6 +256,7 @@ let firebaseConfig = {
       useClass: TokenInterceptor,
       multi: true,
     },
+    DatePipe
   ],
   bootstrap: [AppComponent],
 })

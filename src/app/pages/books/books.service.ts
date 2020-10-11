@@ -8,7 +8,6 @@ import { Book } from 'app/core/_models/book.model';
 })
 export class BooksService {
 
-
   public apiKey = 'AIzaSyBXGwa67D5ZrrFuPP6YUNc9glwM8edWFck';
   public name = '';
   public bookId = '';
@@ -19,13 +18,15 @@ export class BooksService {
     this.name = searchTerm;
     return this.http.get('https://www.googleapis.com/books/v1/volumes?q=' + encodeURIComponent(this.name) + '+intitle&maxResults=12&printType=books&key=' + this.apiKey);
     // return this.http.get('https://www.googleapis.com/books/v1/volumes/oPIMmQEACAAJ?key=AIzaSyBXGwa67D5ZrrFuPP6YUNc9glwM8edWFck');
+    // encodeURIComponent(this.name)
   }
 
   getBooksById(bookId) {
     this.bookId = bookId;
-    console.log('book id'+ this.bookId);
+    console.log('book id' + this.bookId);
     return this.http.get('https://www.googleapis.com/books/v1/volumes/' + this.bookId + '?key=AIzaSyBXGwa67D5ZrrFuPP6YUNc9glwM8edWFck');
   }
+
 
   getReviews(bookId) {
     this.bookId = bookId;
@@ -55,8 +56,12 @@ export class BooksService {
     return this.http.get('/book/userRating/' + bookId);
   }
 
-  getMyBookRatings(){
+  getMyBookRatings() {
     return this.http.get('/book/bookRatings');
+  }
+
+  getFriendBookRatings(email){
+    return this.http.get('/book/friendBookRatings/'+email)
   }
 
   addReview(myReview: String, bookId: any) {
@@ -72,6 +77,33 @@ export class BooksService {
 
   getAllLocalBooks() {
     return this.http.get('/book/allLocal')
+  }
+
+  getFeaturedBooks() {
+    return this.http.get('/book/featured')
+  }
+
+  boostLocalBook(bookId, orderId, days) {
+    return this.http.post('/book/boost-book', {bookId: bookId, orderId: orderId, days: days});
+  }
+
+  addReviewLocal(review: any, bookId: any) {
+    return this.http.post('/book/local/addreview', {
+      bookId: bookId,
+      reviewDescription: review
+    });
+  }
+
+  getLocalBookReviews(id){
+    return this.http.get('/book/local/review/' + id);
+  }
+
+  getSpecificLocalBook(id){
+    return this.http.get('/book/local/' + id);
+  }
+
+  deleteBook(bookId: any) {
+    return this.http.delete('/book/local/' + bookId);
   }
 
 }

@@ -6,6 +6,9 @@ import { PostsService } from 'app/core/_services/posts.service';
 import { ToastrService } from 'ngx-toastr';
 import { NgxSpinnerService } from 'ngx-spinner';
 import {Router} from '@angular/router';
+
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+
 // import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
@@ -26,7 +29,8 @@ export class PostsHomeComponent implements OnInit {
 
   /*public sanitizer:DomSanitizer*/
   constructor(private http: HttpClient, private postsService: PostsService,
-    private toastr: ToastrService, private router: Router, private spinner: NgxSpinnerService) {
+    private toastr: ToastrService, private spinner: NgxSpinnerService, private modalService: NgbModal, private router: Router) {
+
     this.new_post = new Post_modal();
     this.postList = [];
     this.router.routeReuseStrategy.shouldReuseRoute = function(){
@@ -42,6 +46,14 @@ export class PostsHomeComponent implements OnInit {
     }, errorMsg => {
       this.spinner.hide()
     })
+
+    //console.log(this.postList)
+  }
+
+  open(content) {
+    this.modalService.open(content, {ariaLabelledBy: 'create-group'}).result.then((result) => {
+    }, (reason) => {
+    });
   }
 
   onsubmit(Values: any) {

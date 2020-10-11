@@ -42,6 +42,12 @@ import { StoreComponent } from './pages/books/store/store.component';
 import { AddBookComponent } from './pages/books/add-book/add-book.component';
 import { LocalBooksComponent } from './pages/books/local-books/local-books.component';
 
+import { FriendProfileComponent } from './pages/friends/friend-profile/friend-profile.component';
+
+import { ViewFanFictionComponent } from './pages/books/book-home/view-fan-fiction/view-fan-fiction.component';
+import { FanFictionDetailComponent } from './pages/books/book-home/fan-fiction-detail/fan-fiction-detail.component';
+import { LocalBookDetailComponent } from './pages/books/local-books/local-book-detail/local-book-detail.component';
+
 
 const appRoutes: Routes = [
   { path: 'login', component: LoginComponent},
@@ -65,12 +71,16 @@ const appRoutes: Routes = [
       {path: 'books/reviewbook', component: BookReviewComponent},
       {path: 'books/add', component: AddBookComponent},
       {path: 'books/local-books', component: LocalBooksComponent},
+      {path: 'books/local-books/:id', component: LocalBookDetailComponent},
+      {path: 'books/fan-fiction', component: ViewFanFictionComponent},
+      {path: 'books/fan-fiction/:id', component: FanFictionDetailComponent},
       {path: 'auctions', component: AuctionHomeComponent},
       {path: 'auctions/process', component: AuctionProcessComponent},
       {path: 'auctions/process/:id', component: AuctionProcessComponent},
       {path: 'store', component: StoreComponent},
 
       {path: 'friends', component: FriendsHomeComponent},
+      {path: 'friends/:id', component: FriendProfileComponent},
       {path: 'groups', component: GroupHomeComponent},
       {path: 'groups/:id', component: GroupDetailComponent},
       {path: 'messages', component: MessageHomeComponent},

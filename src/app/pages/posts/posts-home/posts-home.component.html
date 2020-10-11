@@ -6,7 +6,7 @@
       <div class="card-body d-flex justify-content-between">
         <img src="../../../assets/img/portrait/default.svg" 
           width="30" height="30" class="rounded-circle mr-1">
-        <input class="form-control" (click)="onOpen()" placeholder="Share your thoughts ...">
+        <input class="form-control" (click)="open(newPost)" placeholder="Share your thoughts ...">
       </div>
     </div>
   </div>
@@ -29,14 +29,14 @@
 
 <!--CREATE NEW POST CUSTOM MODAL SECTION-->
  <div class="row">
-  <div class="backdrop" *ngIf="create">
+  <ng-template class="backdrop" #newPost let-modal>
     <div class="col-3"></div>
     <div class="col-4 modal-box" >
        <form #createpost="ngForm" (ngSubmit)="onsubmit(createpost.value)">
          <div class="card">
              <div class="card-header d-flex justify-content-between">
                <h4 class="card-title">Create Post</h4>
-               <i class="ft-x" style="cursor:pointer;" (click)="onClose()"></i>
+               <i class="ft-x" style="cursor:pointer;" (click)="modal.dismiss('Cross click')"></i>
              </div>    
              <div class="card-body form-group">
                <input type="text" name="title" ngModel #title="ngModel" class="form-control card-title" placeholder="Post Title" required>
@@ -75,7 +75,7 @@
        </form>
     </div>
     <div class="col-5"></div>
-  </div>
+  </ng-template>
    
 
  </div>

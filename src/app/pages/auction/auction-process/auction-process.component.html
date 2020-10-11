@@ -10,7 +10,7 @@
                         <h4 class="card-title">{{data.bookTitle}}</h4>
                         <p class="card-text">Auctions Ends in: {{this.remainingTime}} </p>
                         <div class="mb-3">
-                            <a href="javascript:void(0)" class="btn btn-raised gradient-purple-bliss white card-shadow">End Auction</a>
+                            <a href="javascript:void(0)" (click)="endAuction()" class="btn btn-raised gradient-purple-bliss white card-shadow">End Auction</a>
                           </div>
                     </div>
                 </div>

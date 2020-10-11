@@ -31,7 +31,7 @@ export class PollsHomeComponent implements OnInit {
     });
 
     this.pollService.getPollsForUser().subscribe(polls =>{
-      console.log(polls)
+      // console.log(polls)
       this.mypolls = polls;
     }, error =>{
       console.log(error);
