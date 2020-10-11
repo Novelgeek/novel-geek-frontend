@@ -1,0 +1,70 @@
+<div class="row align-items-center">
+  <div *ngIf="comment.imagePath==null">
+    <img src="../../../assets/img/portrait/default.svg" 
+  width="30" height="30" class="rounded-circle mr-1" >
+  </div>
+  <div *ngIf="comment.imagePath !=null">
+    <img [src]="comment.imagePath" 
+  width="30" height="30" class="rounded-circle mr-1" >
+  </div>
+  <div class="chat-bubble mb-1" style="float: left;">
+    <b style="font-size: small">{{comment.username}}</b><br>
+    <p>{{comment.comment}}</p>
+  </div>
+  <div *ngIf="comment.owned">
+    <a (click)="deleteComment(comment.commentid)" class="ml-1">
+      <i class="warning ft-trash-2"></i>
+    </a>
+  </div>        
+</div>
+<div class="row align-items-center mb-1">
+  <div style="text-decoration: underline;" class="ml-4 primary mr-8">
+    <a (click)="Reply()">Reply</a>
+  </div>
+  <div style="text-decoration: underline;" class="ml-2 primary">
+    <a (click)="ShowReply(comment.commentid)">Show Reply</a>
+  </div>
+
+</div>
+<div *ngIf="isreply">
+  <form #addreply="ngForm" (ngSubmit)="onsubmitReply(addreply.value, comment.commentid)" class="ml-4">
+    <div class="d-flex justify-content-between">
+      <input class="form-control" placeholder="add reply" name="reply" ngModel #reply="ngModel" required style="margin: 5px;">
+      <button type="submit" [disabled]="!addreply.valid" class="btn btn-rased gradient-purple-bliss ft-navigation" style="margin: 5px;"></button>
+    </div>
+  </form>
+</div>
+<div *ngIf="showreply" class="ml-3">
+  <div *ngIf="replyList.length === 0">
+    No replies yet
+  </div>
+  <ng-container *ngFor="let reply of replyList; let replyindex = index;">
+    <div class="row ml-3 align-items-center">
+      <div *ngIf="reply.imagePath==null">
+        <img src="../../../assets/img/portrait/default.svg" 
+      width="30" height="30" class="rounded-circle mr-1" >
+      </div>
+      <div *ngIf="reply.imagePath !=null">
+        <img [src]="reply.imagePath" 
+      width="30" height="30" class="rounded-circle mr-1" >
+      </div>
+      <div class="chat-bubble mb-1" style="float: left;">
+        <b style="font-size: small">{{reply.username}}</b><br>
+        <p>{{reply.comment}}</p>
+      </div>
+      <div *ngIf="reply.owned">
+        <a (click)="deleteReply(reply.replyid, replyindex)" class="ml-1">
+          <i class="warning ft-trash-2 mr-2"></i>
+        </a>
+      </div>   
+    </div>
+    <!-- <div class="row ml-5">
+      <div *ngIf="reply.owned">
+        <a (click)="deleteReply(reply.replyid, replyindex)" class="dropdown-item py-1">
+          <i class="ft-trash-2 mr-2"></i>
+        </a>
+      </div>
+    </div> -->
+  </ng-container>
+</div>
+

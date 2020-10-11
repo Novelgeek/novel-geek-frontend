@@ -151,6 +151,7 @@ export class GroupDetailComponent implements OnInit, OnDestroy {
       this.isAdmin = false;
       this.spinner.hide();
       this.toastr.info('Left Group');
+      this.router.navigate(['/groups']);
     }, error => {
       this.spinner.hide();
       this.toastr.error(error);
@@ -184,11 +185,11 @@ export class GroupDetailComponent implements OnInit, OnDestroy {
   }
 
   deleteGroup() {
-    this.toastr.warning()
     this.groupService.deleteGroup(this.id).subscribe(data => {
-      console.log('Group deleted');
+      this.toastr.success('Group deleted');
+      this.router.navigate(['/groups']);
     }, error => {
-      console.log(error)
+      this.toastr.error('Unable to delete group');
     })
   }
 

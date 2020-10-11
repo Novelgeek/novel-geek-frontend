@@ -1,0 +1,21 @@
+.chat-bubble{
+    padding-bottom: 0px;
+    padding-left: 15px;
+    padding-right: 20px;
+    padding-top: 5px;
+    border-radius: 9px;
+    background-color: rgba($color: #009DA0, $alpha: 0.2);
+    position: relative;
+
+}
+
+.chat-bubble-reply{
+    padding-bottom: 1px;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-top: 10px;
+    background-color: rgba($color: #009DA0, $alpha: 0.2);
+    border-radius: 9px;
+    position: relative;
+
+}

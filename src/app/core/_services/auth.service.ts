@@ -18,7 +18,7 @@ export class AuthService {
 
   signup(username: string, email: string, password: string) {
 
-    return this.http.post('http://localhost:8080/auth/signup',
+    return this.http.post('/auth/signup',
       {
         username: username,
         email: email,
@@ -44,7 +44,7 @@ export class AuthService {
 
   login(email: string, password: string) {
 
-    return this.http.post<{token: string, username: string}>('http://localhost:8080/auth/login',
+    return this.http.post<{token: string, username: string}>('/auth/login',
       {
         email: email,
         password: password,
@@ -84,6 +84,12 @@ export class AuthService {
     }
   }
 
+  isLoggedIn(){
+    const user = JSON.parse(localStorage.getItem('user'));
+    if (!user) { return false; }
+    return true;
+  }
+
   autoLogout(expirationDuration: number) {
 
     this.tokenExpirationTimer = setTimeout(() => {
@@ -98,7 +104,7 @@ export class AuthService {
   }
 
   adminLogin(email, password) {
-    return this.http.post<{token: string, username: string}>('http://localhost:8080/admin/auth/login',
+    return this.http.post<{token: string, username: string}>('/admin/auth/login',
       {
         email: email,
         password: password,
@@ -109,15 +115,15 @@ export class AuthService {
   }
 
   sendPasswordResetLink(email) {
-    return this.http.post('http://localhost:8080/auth/forgot-password', { email: email });
+    return this.http.post('/auth/forgot-password', { email: email });
   }
 
   resetPassword(password, token) {
-    return this.http.post('http://localhost:8080/auth/reset-password', { password: password, token: token });
+    return this.http.post('/auth/reset-password', { password: password, token: token });
   }
 
   changePassword(password, oldPassword) {
-    return this.http.post('http://localhost:8080/change-password', { password: password, oldPassword: oldPassword });
+    return this.http.post('/change-password', { password: password, oldPassword: oldPassword });
   }
 
   userUpdated(username) {

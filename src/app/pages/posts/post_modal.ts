@@ -1,6 +1,7 @@
 export default class Post_modal {
     public postid: number;
     public username: string;
+    public userimg:string;
     public title: string;
     public publishedDate: Date;
     public imagePath: string;
@@ -16,6 +17,7 @@ export default class Post_modal {
     public constructor(){
         this.postid=0;
         this.username='';
+        this.userimg='';
         this.title="";
         this.publishedDate=new Date();
         this.imagePath="";

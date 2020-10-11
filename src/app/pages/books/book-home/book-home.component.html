@@ -14,7 +14,7 @@
 
 <div class="row justify-content-end">
   <div class="col-12">
-    <button class="btn btn-outline-info mr-1 pull-right primary" >
+    <button class="btn btn-outline-info mr-1 pull-right primary" (click)="fanFictionDialog()">
       <i class="ft-plus primary mr-1"></i>
       Add New Fan-Fiction
     </button>
@@ -22,13 +22,15 @@
       <i class="ft-plus primary mr-1"></i>
       Add New Book
     </button>
+    <button class="btn btn-outline-info mr-1 pull-left primary" [routerLink]="'/books/fan-fiction'">
+      <i class="ft-plus primary mr-1"></i>
+      View Fan Fictions 
+    </button>
   </div>
 </div>
 
-
-
 <div class="row">
-  <div class="col-md-6 col-sm-12" >
+  <div class="col-6" >
     <div class="card pl-3 pr-3">
       <div class="card-header text-center">
         <h4 class="card-title">Books you might like</h4>
@@ -100,14 +102,76 @@
         
         <p></p>
       </div>
-      <div class="card-content">
+      <div *ngIf="localBooks?.length === 0" class="card-content">
         <div class="d-flex empty">
           <h4 class="primary">Nothing to display</h4>
         </div>
       </div>
-      
+      <div class="card-content">
+        <swiper [config]="config">
+          <div class="swiper-wrapper ">
+        
+            <div class="swiper-slide"  *ngFor="let localBook of localBooks">
+              <a [routerLink]="['/books/local-books/' ,localBook.id]">
+              <img *ngIf="localBook?.imgUrl !== null" [src]="localBook?.imgUrl" class="img-fluid card-img-top"/>
+              <img *ngIf="localBook?.imgUrl === null" src="../../../../assets/img/book/default.png" class="img-fluid card-img-top"/>
+              {{localBook.title}}
+            </a>
+            </div>
+        
+          </div>
+        
+          <br/>
+          <br/>
+          <div class="swiper-pagination"></div>
+          
+          <div class="swiper-button-next"></div>
+          <div class="swiper-button-prev"></div>
+        
+        </swiper>
+      </div>
     </div>
   </div>
+
+
+  <div class="col-md-6 col-sm-12" >
+    <div class="card pl-3 pr-3">
+      <div class="card-header text-center">
+        <h4 class="card-title">Featured Books</h4>
+        
+        <p></p>
+      </div>
+      <div *ngIf="featured?.length === 0" class="card-content">
+        <div class="d-flex empty">
+          <h4 class="primary">Nothing to display</h4>
+        </div>
+      </div>
+      <div class="card-content">
+        <swiper [config]="config">
+          <div class="swiper-wrapper ">
+        
+            <div class="swiper-slide"  *ngFor="let book of featured">
+              <a [routerLink]="['/books/local-books/' ,book.localBook.id]">
+                <img *ngIf="book?.localBook?.imgUrl !== null" [src]="book?.localBook?.imgUrl" class="img-fluid card-img-top"/>
+                <img *ngIf="book?.localBook?.imgUrl === null" src="../../../../assets/img/book/default.png" class="img-fluid card-img-top"/>
+              {{book?.localBook?.title}}
+            </a>
+            </div>
+        
+          </div>
+        
+          <br/>
+          <br/>
+          <div class="swiper-pagination"></div>
+          
+          <div class="swiper-button-next"></div>
+          <div class="swiper-button-prev"></div>
+        
+        </swiper>
+      </div>
+    </div>
+  </div>
+
 
 </div>
 

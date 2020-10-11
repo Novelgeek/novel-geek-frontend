@@ -73,6 +73,7 @@ export class BookReviewComponent implements OnInit, OnDestroy {
     this.bookService.addReview(this.myReview, this.bookId).subscribe(data => {
       this.spinner.hide();
       this.reviews.push(data);
+      this.modalService.dismissAll();
     }, error => this.spinner.hide())
   }
 

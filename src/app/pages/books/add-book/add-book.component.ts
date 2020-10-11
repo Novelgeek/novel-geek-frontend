@@ -1,11 +1,14 @@
 import { Component, OnInit } from '@angular/core';
-import {  NgForm } from '@angular/forms';
+import { NgForm } from '@angular/forms';
+import { Router } from '@angular/router';
+import { NgxSpinnerService } from 'ngx-spinner';
+import { ToastrService } from 'ngx-toastr';
 import { BooksService } from '../books.service';
 
 @Component({
   selector: 'app-add-book',
   templateUrl: './add-book.component.html',
-  styleUrls: ['./add-book.component.scss']
+  styleUrls: ['./add-book.component.scss'],
 })
 export class AddBookComponent implements OnInit {
   imageUrl = '';
@@ -18,7 +21,12 @@ export class AddBookComponent implements OnInit {
   genres: any[] = [];
   genresNames = ['Action', 'Adventure', 'Comedy'];
 
-  constructor(private bookService: BooksService) { }
+  constructor(
+    private bookService: BooksService,
+    private spinner: NgxSpinnerService,
+    private toastr: ToastrService,
+    private router: Router
+  ) {}
 
   ngOnInit() {
     this.genresNames.forEach((c, i) => {
@@ -33,11 +41,10 @@ export class AddBookComponent implements OnInit {
       // tslint:disable-next-line: no-shadowed-variable
       reader.onload = (event: any) => {
         this.imageUrl = event.target.result;
-      }
+      };
       this.selectedImage = event.target.files[0];
     }
   }
-
 
   public uploadPdf(event) {
     if (event.target.files) {
@@ -49,9 +56,13 @@ export class AddBookComponent implements OnInit {
     return { name: name, tag: true };
   }
 
-  addBook(basicBookForm: NgForm, advancedBookForm: NgForm, optionalBookForm: NgForm) {
+  addBook(
+    basicBookForm: NgForm,
+    advancedBookForm: NgForm,
+    optionalBookForm: NgForm
+  ) {
     const bookGenres: String[] = [];
-    this.selectedGenres.forEach( genre => {
+    this.selectedGenres.forEach((genre) => {
       bookGenres.push(genre.name);
     });
     console.log(bookGenres);
@@ -66,10 +77,17 @@ export class AddBookComponent implements OnInit {
     newBook.append('genres', this.selectedGenres);
     newBook.append('publisher', optionalBookForm.value.publisher);
     newBook.append('pdf', this.selectedPdf);
-
-    this.bookService.addNewBook(newBook).subscribe(data => {
-
-    })
+    this.spinner.show();
+    this.bookService.addNewBook(newBook).subscribe(
+      (data) => {
+        this.spinner.hide();
+        this.toastr.success('Book added Succesfully');
+        this.router.navigate(['/books'])
+      },
+      (error) => {
+        this.spinner.hide();
+        this.toastr.error('Unable to add book');
+      }
+    );
   }
-
 }

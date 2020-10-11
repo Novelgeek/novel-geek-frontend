@@ -26,6 +26,7 @@ export class ProfileHomeComponent implements OnInit, OnDestroy {
   userId:number;
   isAuthenticated = false;
 
+
   url: any = null;
   selectedImage: File;
   image: string;
@@ -38,6 +39,7 @@ export class ProfileHomeComponent implements OnInit, OnDestroy {
   // image slider configuration
   @ViewChild('usefulSwiper', { static: false }) usefulSwiper: SwiperComponent;
   config: SwiperOptions;
+
 
   constructor(
     private authService: AuthService,
@@ -70,8 +72,8 @@ export class ProfileHomeComponent implements OnInit, OnDestroy {
       this.recommendations = data;
     });
 
-    //load book list 
 
+    //load book list 
     this.bookService.getMyBookRatings().subscribe(data => {
       console.log(data)
       this.allBooks = data;

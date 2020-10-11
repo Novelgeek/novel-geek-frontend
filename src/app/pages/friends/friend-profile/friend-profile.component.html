@@ -1,8 +1,12 @@
 <!-- users favorits book according to user ratings -->
   <div class="container-fluid">
     <div class="row justify-content-between">
-      <div class="col-lg-8">
-        <div class="card pl-3 pr-3">
+      <div class="text-center justify-content-center primary mt-2 font-medium-4" *ngIf="allBooks?.length == 0">
+        {{username}} seems to be a new User, not much info available
+      </div>
+      
+      <div class="col-lg-8" *ngIf="allBooks?.length != 0">
+        <div class="card pl-3 pr-3" >
           <div class="card-header text-center">
             <h4 class="card-title">{{username}}'s Favorite Books</h4>
             <p></p>
@@ -32,13 +36,15 @@
           
         </div>
       </div>
+      
+      
   
       <!--Profile Card 3-->
      
       <div class="col-lg-4">
         <div class="card profile-card-1" >
           <div class="hoverable">
-            <img  [src]="url ? url: '../../../assets/img/portrait/default.svg'" alt="profile-image" />
+            <img  [src]="url ? url: '../../../assets/img/portrait/default.svg'" alt="profile-image" onerror="this.src='../../../assets/img/portrait/default.svg';"/>
           </div>
           <!-- <form (ngSubmit)="onSubmit(updateImage)" #updateImage="ngForm">
             <div class="form-group">
@@ -102,34 +108,14 @@
     </div>
   </div>
     <!--POSTS APPEARS HEARE/POST SECTION-->
-    <div class="row">
-      <div class="col-lg-12">
-        <div class="card-columns">
-        
-          <ng-container *ngFor="let item of postList; let itemindex = index;">
-            <app-post-modal [item]="item" [itemindex]="itemindex" (ondelete)="onDeletePost($event)"></app-post-modal>
-          </ng-container>
-          <div *ngIf="postList.length === 0">
-            <span class="card-body text-muted" >Currently, No Post Available</span>
-          </div>
-        
-        </div>
-      </div>
-      
-    <!-- <div class="col-lg-4">
 
-      <div class="card">
-        <div class="card-header text-center">
-          <h2 class="card-title">{{username}}'s Friends</h2>
-          
-        </div>
-        <div class="card-content">
-          <div class="card-body">
-            <p>chethani</p>
-          </div>
-        </div>
-      </div>
-    </div> -->
+  <div class="card-columns">
+  
+    <ng-container *ngFor="let item of postList; let itemindex = index;">
+      <app-post-modal [item]="item" [itemindex]="itemindex" (ondelete)="onDeletePost($event)"></app-post-modal>
+    </ng-container>
+    <div *ngIf="postList.length === 0">
+      <span class="card-body text-muted" ></span>
 
     </div>
   

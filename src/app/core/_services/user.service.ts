@@ -18,27 +18,31 @@ export class UserService {
   constructor(private http: HttpClient, private router: Router, private jwtService: JwtHelperService) { }
 
   getUserDetais() {
-    return this.http.get<Userdetails>('http://localhost:8080/user/me');
+    return this.http.get<Userdetails>('/user/me');
   }
 
-  getUser(userId: number){
-    return this.http.get<any>('http://localhost:8080/user/'+userId);
+  getUser(userId: number) {
+    return this.http.get<any>('/user/' + userId);
   }
 
   saveUserDetails(userDetails: Userdetails) {
-    return this.http.post('http://localhost:8080/user/save', userDetails);
+    return this.http.post('/user/save', userDetails);
   }
 
   getAllUsers() {
-    return this.http.get('http://localhost:8080/user');
+    return this.http.get('/user');
   }
 
-  uploadImage(newimage: FormData, userId){
-    return this.http.post<any>('http://localhost:8080/user/'+ userId +'/updateImage', newimage);
+  getAllUsersExceptMe() {
+    return this.http.get('/user/all');
   }
 
-  deleteUser(password){
-    return this.http.delete('http://localhost:8080/user/delete', password);
+  uploadImage(newimage: FormData, userId) {
+    return this.http.post<any>('/user/' + userId + '/updateImage', newimage);
+  }
+
+  deleteUser(password) {
+    return this.http.delete('/user/delete', password);
   }
 
 }

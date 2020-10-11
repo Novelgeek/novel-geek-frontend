@@ -1,6 +1,14 @@
 <div class="card">
   <div class="card-header d-flex justify-content-between">
-    <div>
+    <div *ngIf="item.userimg !=null">
+      <img [src]="item.userimg" 
+      width="30" height="30" class="d-inline-flex rounded-circle mr-1">
+      <span class="text-muted"><b>{{item.username}} </b></span>
+      <br/>
+      <span class="card-subtitle text-muted"> {{item.publishedDate|date:'medium'}}</span>
+    </div>
+
+    <div *ngIf="item.userimg == null">
       <img src="../../../assets/img/portrait/default.svg" 
       width="30" height="30" class="d-inline-flex rounded-circle mr-1">
       <span class="text-muted"><b>{{item.username}} </b></span>
@@ -8,11 +16,12 @@
       <span class="card-subtitle text-muted"> {{item.publishedDate|date:'medium'}}</span>
     </div>
     <div>
-      <a (click)="toggleList()"><i  class="ft-more-horizontal"></i></a>
-      <div style="position:relative">
-        <div *ngIf = "isShow" style="position: absolute; z-index: 1000;" class="text-left dropdown-menu show">
+      <a #toggle (click)="toggleList()"><i  class="ft-more-horizontal" ></i></a>
+      
+      <div style="position:absolute" >
+        <div #menu *ngIf = "isShow" style="position: absolute; left: -130px; z-index: 1000;" class="text-left dropdown-menu show">
           <div *ngIf="!item.owned && !item.reported">
-            <a class=" dropdown-item py-1" (click)="reportPost()">
+            <a class=" dropdown-item py-1" (click)="open(reportModal)">
               <i class="ft-shield mr-2"></i>
               <span> Report Post</span>
             </a>
@@ -31,6 +40,8 @@
           </div> 
         </div>
       </div>
+
+
     </div>
   </div>
 
@@ -39,10 +50,17 @@
     <div class="card-content" *ngIf="item.imagePath!= null ">
       <img [src]="item.imagePath" alt="img"  class="img-fluid">
     </div>
-    <div class="card-content">
-        <p class="card-text">
-          {{item.description}}
-        </p>
+    <div class="card-content" >
+        <div class="card-text">
+          <div [ngClass]="{'show-less': shortDescription}">
+            <p>
+              {{item.description}}
+            </p>
+          </div>    
+        </div>
+        <a type="button" (click)="alterDescription()" class="primary" style="font-size:12px;">
+          {{ shortDescription ? 'read more...': 'read less' }}
+        </a> 
     </div>
     <br>
     <div class="card-content d-flex justify-content-between text-muted">
@@ -80,19 +98,8 @@
       No comments yet :D
     </div>
     <div>
-      <ng-container *ngFor="let com of commentList">
-        <div class="row">
-          <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60" 
-          width="30" height="30" class="rounded-circle mr-1" >
-          <div class="col chat-bubble mb-1" style="float: right;">
-            <div class="row">
-              <b style="font-size: small; padding-bottom: 0px;">{{com.username}}</b>
-            </div>
-            <div class="row">
-              <p>{{com.comment}}</p>
-            </div>
-          </div>
-        </div>
+      <ng-container *ngFor="let comment of commentList; let commentindex = index;">
+        <app-post-comment-modal [comment]="comment" [commentindex]="commentindex" (ondelete)="onDeleteComment($event)"></app-post-comment-modal>
       </ng-container>
     </div>
     <div style="float: right; font-size: small; color: rgb(16, 80, 175); text-decoration: underline;">
@@ -123,17 +130,17 @@
 </div>
 
 <!--REPORT POST CUSTOM MODAL SECTION-->
-<div class="row backdrop" *ngIf="report">
-  <div class="modal-box">
+<ng-template class="row" #reportModal let-modal>
+  <div class="modal-body">
     <form #reportpost="ngForm" (ngSubmit)="onsubmitReport(reportpost.value, item.postid)">
       <div class="card">
           <div class="card-header d-flex justify-content-between">
             <h4 class="card-title">Report Post</h4>
-            <i class="ft-x" style="cursor:pointer;" (click)="onClose()"></i>
+            <i class="ft-x" style="cursor:pointer;" (click)="modal.dismiss('Cross click')"></i>
           </div>    
           <div class="card-body form-group">
            <div class="d-flex justify-content-between">
-             <input class="form-control" placeholder="add reason" name="reason" ngModel #reason="ngModel" required style="margin: 5px;">
+             <input class="form-control" placeholder="State your reason" name="reason" ngModel #reason="ngModel" required style="margin: 5px;">
              <button type="submit" [disabled]="!reportpost.valid" class="btn btn-rased gradient-purple-bliss ft-navigation" style="margin: 5px;"></button>
            </div>
           </div>    
@@ -141,4 +148,4 @@
       </div>
     </form>
   </div>
-</div>
+</ng-template>
