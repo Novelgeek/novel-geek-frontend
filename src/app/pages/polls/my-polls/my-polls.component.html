@@ -6,7 +6,7 @@
         <span class="text-muted"><b>{{poll?.user?.username}} </b></span>
         <br/>
       </div>
-      <div class="col text-right">
+      <div >
         <a (click)="toggleList()"><i  class="ft-more-horizontal"></i></a>
         <div style="position:relative">
           <div *ngIf = "isShow" style="position: absolute; z-index: 1000;" class="text-left dropdown-menu show">
@@ -23,21 +23,15 @@
   
     <div class="card-body">
       <h5 class="card-title">{{poll.title}}</h5>
-      <div class="card-content" >
-        
-      </div>
       <div class="card-content">
           <p class="card-text">
             End Date - {{poll.endDate | date: 'medium'}}
           </p>
       </div>
-      <br>
-
-      
+      <br> 
     </div>
   
     <div class="card-footer">
-
       <div class="row">
         <div fxLayout = "row">
           <div class="input-field col s8 offset-s2" *ngFor="let option of options">
@@ -46,5 +40,4 @@
           </div>
         </div>
         </div>
-      
     </div>

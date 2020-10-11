@@ -156,11 +156,11 @@ export class FriendProfileComponent implements OnInit, OnDestroy {
     };
 
 }
+//oninit ends here
 
 
 
-
-   nextSlide() {
+  nextSlide() {
     this.usefulSwiper.swiper.slideNext();
   }
 
@@ -172,9 +172,7 @@ export class FriendProfileComponent implements OnInit, OnDestroy {
     this.usefulSwiper.swiper.slideTo(index);
   }
 
-  // image slider configuration ends
-
-  // image upload
+  // image upload - take form data
 
   onSubmit(form: NgForm) {
     this.spinner.show();
@@ -202,6 +200,7 @@ export class FriendProfileComponent implements OnInit, OnDestroy {
       }
     }
   }
+
   public delete() {
     this.url = null;
   }
@@ -210,6 +209,7 @@ export class FriendProfileComponent implements OnInit, OnDestroy {
   onDeletePost(data: {id: number}) {
     this.postList.splice(data.id, 1);
   }
+
 
   // send friend request
   sendFriendRequest() {
@@ -249,5 +249,6 @@ export class FriendProfileComponent implements OnInit, OnDestroy {
       this.spinner.hide()
     })
   }
+
 
 }
