@@ -5,7 +5,10 @@ import { HttpClient } from '@angular/common/http';
 import { PostsService } from 'app/core/_services/posts.service';
 import { ToastrService } from 'ngx-toastr';
 import { NgxSpinnerService } from 'ngx-spinner';
+import {Router} from '@angular/router';
+
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+
 // import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
@@ -26,9 +29,13 @@ export class PostsHomeComponent implements OnInit {
 
   /*public sanitizer:DomSanitizer*/
   constructor(private http: HttpClient, private postsService: PostsService,
-    private toastr: ToastrService, private spinner: NgxSpinnerService, private modalService: NgbModal) {
+    private toastr: ToastrService, private spinner: NgxSpinnerService, private modalService: NgbModal, private router: Router) {
+
     this.new_post = new Post_modal();
     this.postList = [];
+    this.router.routeReuseStrategy.shouldReuseRoute = function(){
+      return false;
+    }
   }
 
   ngOnInit() {
