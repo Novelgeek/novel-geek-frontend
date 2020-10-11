@@ -13,7 +13,7 @@ import { Subscription } from 'rxjs';
 })
 export class MyPollsComponent implements OnInit {
 
-  
+  totalvotes: number =0
 
   constructor(private pollService: PollService,
     private authService: AuthService,
@@ -43,6 +43,10 @@ export class MyPollsComponent implements OnInit {
           })
         })
         console.log(this.options)
+
+        this.poll.options.forEach(option => {
+          this.totalvotes+=option.score
+        });
     }
 
 
