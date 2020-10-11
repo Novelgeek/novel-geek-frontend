@@ -10,4 +10,10 @@ export class StatisticService {
   getBasicStat() {
     return this.http.get('http://localhost:8080/admin/basic-stat');
   }
+  getGenreStats(){
+    return this.http.get('http://localhost:8080/admin/genrestats')
+  }
+  getUserStats(){
+    return this.http.get('http://localhost:8080/admin/userstats')
+  }
 }
