@@ -26,7 +26,7 @@
                 <li ngbNavItem>
                   <a ngbNavLink>All Fan Fictions</a>
                   <ng-template ngbNavContent>
-                    <div class="col-12 web-result" *ngFor="let fanfiction of fanfictionList">
+                    <div class="col-6 col-sm-12 web-result" *ngFor="let fanfiction of fanfictionList">
                       <div class="card">
                         <div class="card-header">
                           <h4 class="card-title cursor-pointer"><a
@@ -34,7 +34,7 @@
                         </div>
                         <div class="card-content">
                           <div class="card-body">
-                            <p>{{fanfiction.description}}</p><span
+                            <p>{{(fanfiction.description | slice:0:100) + (fanfiction.description.length > 100 ? '...': '')}}</p><span
                               class="badge bg-light-primary mb-sm-0 mb-1 mr-2">{{fanfiction.bookName}}</span>
                           </div>
                         </div>
@@ -59,15 +59,17 @@
                         </div>
                         <div class="card-content">
                           <div class="card-body">
-                            <p>{{fanfiction.description}}</p><span
+                            <p>{{(fanfiction.description | slice:0:100) + (fanfiction.description.length > 100 ? '...': '')}}</p><span
                               class="badge bg-light-primary mb-sm-0 mb-1 mr-2">{{fanfiction.bookName}}</span>
                           </div>
-                          <div class="card-footer border-top d-flex justify-content-between align-items-center">
-                            <small class="text-truncate"><a (click)="delete(fanfiction.id)"
+                          <div class="card-footer border-top d-flex  align-items-center">
+                            <small class="text-truncate "><a (click)="open(editFiction, fanfiction)"
+                                class="primary darken-3">Edit</a></small>
+                            <small class="text-truncate ml-3"><a (click)="delete(fanfiction.id)"
                                 class="warning darken-3">Delete</a></small>
-                            <small class="text-truncate"><a (click)="open(editFiction, fanfiction)"
-                                class="warning darken-3">Edit</a></small>
-                                <i class="ft-more-vertical- font-small-4 cursor-pointer"></i></div>
+
+                            <i class="ft-more-vertical- font-small-4 cursor-pointer"></i>
+                          </div>
                         </div>
                       </div>
                     </div>
@@ -101,17 +103,17 @@
 
     <div class="form-group">
       <label for="textArea">Title</label>
-      <input class="form-control" type="text"  placeholder="Title" [(ngModel)]="currentFanFiction.title">
+      <input class="form-control" type="text" placeholder="Title" [(ngModel)]="currentFanFiction.title">
     </div>
 
     <div class="form-group">
       <label for="textArea">Based on Book</label>
-      <input class="form-control" type="text"  placeholder="Book Name" [(ngModel)]="currentFanFiction.bookName">
+      <input class="form-control" type="text" placeholder="Book Name" [(ngModel)]="currentFanFiction.bookName">
     </div>
 
     <div class="form-group">
       <label for="textArea">Write Here</label>
-      <textarea class="form-control" id="description" rows="10"  [(ngModel)]="currentFanFiction.description"></textarea>
+      <textarea class="form-control" id="description" rows="10" [(ngModel)]="currentFanFiction.description"></textarea>
       <!-- <button class="button button4" (click)="addFacFiction(imageInput,bookName,description)">Add</button> -->
       <br>
 

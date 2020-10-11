@@ -15,6 +15,7 @@ import { ToastrService } from 'ngx-toastr';
 export class ProfileSettingsComponent implements OnInit {
   userSettingForm: FormGroup;
   passwordResetForm: FormGroup;
+  PasswordVerifyForm: FormGroup;
 
   userDetails: Userdetails;
   constructor(private userService: UserService, private authService: AuthService, private toastr: ToastrService) {}
@@ -50,6 +51,10 @@ export class ProfileSettingsComponent implements OnInit {
         console.log(error);
       }
     );
+
+    this.PasswordVerifyForm = new FormGroup({
+      oldPassword: new FormControl('', Validators.required)
+    })
 
     // this.userSettingForm.valueChanges.subscribe(
     //   (value) => console.log(value)
@@ -88,5 +93,13 @@ export class ProfileSettingsComponent implements OnInit {
       this.toastr.error(error.error);
     });
 
+  }
+
+  onVerifyPassword(){
+    this.userService.deleteUser(this.PasswordVerifyForm.value.oldPassword).subscribe(data=>{
+      this.toastr.success('Account deleted successfully')
+    }, error =>{
+      this.toastr.error(error.error)
+    })
   }
 }

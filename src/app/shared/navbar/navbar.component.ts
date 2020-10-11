@@ -28,6 +28,10 @@ export class NavbarComponent implements OnInit, AfterViewInit, OnDestroy {
 
   groupNotifications: any = [];
   friendNotifications: any = [];
+  reportNotifications: any = [];
+  commentNotifications: any = [];
+  replyNotifications: any = [];
+  notificationCount: number;
 
   constructor(
     private layoutService: LayoutService,
@@ -36,7 +40,9 @@ export class NavbarComponent implements OnInit, AfterViewInit, OnDestroy {
     private route: ActivatedRoute,
     private router: Router,
     private notificationService: NotificationService
-    ) { }
+    ) { 
+      //this.notificationCount=0;
+    }
 
 
   ngOnDestroy(): void {
@@ -64,6 +70,20 @@ export class NavbarComponent implements OnInit, AfterViewInit, OnDestroy {
       this.friendNotifications = data;
     })
 
+    this.notificationService.reportNotifications.subscribe(data => {
+      //console.log(data);
+      this.reportNotifications=data;
+    })
+
+    this.notificationService.commentNotifications.subscribe(data => {
+      this.commentNotifications=data;
+      //console.log(this.commentNotifications);
+    })
+
+    this.notificationService.replyNotifications.subscribe(data => {
+      this.replyNotifications=data;
+      console.log(this.replyNotifications)
+    })
   }
 
   ngAfterViewInit() {

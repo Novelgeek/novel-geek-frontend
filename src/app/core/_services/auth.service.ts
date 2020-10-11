@@ -84,6 +84,12 @@ export class AuthService {
     }
   }
 
+  isLoggedIn(){
+    const user = JSON.parse(localStorage.getItem('user'));
+    if (!user) { return false; }
+    return true;
+  }
+
   autoLogout(expirationDuration: number) {
 
     this.tokenExpirationTimer = setTimeout(() => {
@@ -128,4 +134,14 @@ export class AuthService {
     newUser.username = username;
     this.user.next(newUser)
   }
+
+  imageUpdated(url) {
+    const newUser = this.currentUser;
+    const user = JSON.parse(localStorage.getItem('user'));
+    user.photoUrl = url;
+    localStorage.setItem('user', JSON.stringify(user));
+    newUser.photoUrl = url;
+    this.user.next(newUser)
+  }
+
 }

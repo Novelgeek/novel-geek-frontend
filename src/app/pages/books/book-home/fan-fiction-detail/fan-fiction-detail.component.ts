@@ -32,7 +32,6 @@ export class FanFictionDetailComponent implements OnInit {
 
     this.fanFictionService.getFanFictionReviews(this.id).subscribe(data => {
       console.log(data);
-      
       this.reviews = data;
     })
 

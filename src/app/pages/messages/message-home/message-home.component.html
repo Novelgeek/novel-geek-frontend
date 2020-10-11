@@ -52,6 +52,9 @@
               </div>
             </div>
           </div>
+          <div class="justify-content-center align-items-center" *ngIf="messageHistory?.length == 0">
+            Send a message to start a conversation
+          </div>
         </div>
         <div class="type_msg">
           <div class="input_msg_write">
@@ -63,3 +66,5 @@
         </div>
       </div>
     </div>
+
+<ngx-spinner></ngx-spinner>

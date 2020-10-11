@@ -16,6 +16,8 @@ export class SalesModalComponent implements OnInit {
   @Output() ondelete  = new EventEmitter <{id: number}> ();
   @Input() item: Selling_modal;
   @Input() itemindex: number;
+  @Input() allpost: boolean=true;
+  
   public new_payment: Payment_modal;
   purchaseInfo: boolean=false;
   purchaseData: Purchase_info_modal;

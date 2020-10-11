@@ -2,6 +2,7 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { FriendService } from 'app/core/_services/friend.service';
 import { ToastrService } from 'ngx-toastr';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { UserService } from 'app/core/_services/user.service';
 
 @Component({
   selector: 'app-friend-card',
@@ -11,11 +12,13 @@ import { NgxSpinnerService } from 'ngx-spinner';
 export class FriendCardComponent implements OnInit {
   @Input() user: any;
   @Output() unFriend = new EventEmitter();
+  showProfile = false;
 
 
-  constructor(private friendService: FriendService, private toastr: ToastrService, private spinner: NgxSpinnerService) { }
+  constructor(private friendService: FriendService, private toastr: ToastrService, private spinner: NgxSpinnerService, private UserService: UserService) { }
 
   ngOnInit() {
+    console.log(this.user)
   }
 
   unFriendUser() {
@@ -51,6 +54,16 @@ export class FriendCardComponent implements OnInit {
       this.spinner.hide()
     }, errorMsg => {
       this.toastr.error('Unable to send friend request to ' + this.user.username)
+      this.spinner.hide()
+    })
+  }
+
+  viewFriend(userId: number){
+    this.spinner.show()
+    this.UserService.getUser(userId).subscribe(response=>{
+        this.showProfile = true;
+    }, errorMsg=>{
+      this.toastr.error('unable to view the user profile')
       this.spinner.hide()
     })
   }

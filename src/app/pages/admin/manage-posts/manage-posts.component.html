@@ -134,22 +134,22 @@
                         <tr *ngFor="let reportdata of reportDataList; let index = index;">
                         <td>{{index+1}}</td>
                         <td>
-                            <div *ngIf="reportdata.userimg !=null">
-                                <img [src]="report.userimg" 
+                            <div *ngIf="reportdata?.userimg !=null">
+                                <img [src]="reportdata?.userimg" 
                             width="30" height="30" class="rounded-circle mr-1" >
                             {{reportdata.username}}
                             </div>
-                            <div *ngIf="reportdata.userimg ==null">
+                            <div *ngIf="reportdata?.userimg ==null">
                                 <img src="../../../assets/img/portrait/default.svg" 
                             width="30" height="30" class="rounded-circle mr-1" >
-                            {{reportdata.username}}
+                            {{reportdata?.username}}
                             </div>                    
                         </td>
                         <td>
-                            {{reportdata.reportid}}
+                            {{reportdata?.reportid}}
                         </td>
                         <td>
-                            {{reportdata.reason}}
+                            {{reportdata?.reason}}
                         </td>
                         </tr>
                     </tbody>

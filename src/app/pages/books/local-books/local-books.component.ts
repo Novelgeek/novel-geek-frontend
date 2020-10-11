@@ -10,6 +10,7 @@ import { BooksService } from '../books.service';
 export class LocalBooksComponent implements OnInit {
 
   localBooks: any;
+  searchTerm = ''
   constructor(private bookService: BooksService, private route: ActivatedRoute, private router:Router) {
     this.router.routeReuseStrategy.shouldReuseRoute = function(){
       return false;
@@ -26,7 +27,7 @@ export class LocalBooksComponent implements OnInit {
       if (params.order_id != null && params.bookId != null) {
         console.log(params.order_id, params.bookId);
         
-        this.bookService.boostLocalBook(params.bookId, params.order_id).subscribe(data => {
+        this.bookService.boostLocalBook(params.bookId, params.order_id, params.days).subscribe(data => {
           console.log(data);
           this.router.navigate(['books/local-books'])
         })

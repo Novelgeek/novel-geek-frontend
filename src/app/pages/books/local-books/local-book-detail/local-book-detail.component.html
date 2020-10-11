@@ -56,6 +56,10 @@
         <i class="fa fa-address-book d-block d-xl-inline-block d-lg-none p-0"></i>
         <span class="d-none d-lg-inline-block ml-1">Download this book</span>
     </a>
+    <a *ngIf="book?.users?.id === currentUser.id" type="button" class="btn btn-raised btn-warning ml-2 btn-review" (click)="delete()">
+        <i class="fa fa-address-book d-block d-xl-inline-block d-lg-none p-0"></i>
+        <span class="d-none d-lg-inline-block ml-1">Delete this book</span>
+    </a>
 </div>
 <br>
 

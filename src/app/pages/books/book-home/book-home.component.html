@@ -151,10 +151,10 @@
           <div class="swiper-wrapper ">
         
             <div class="swiper-slide"  *ngFor="let book of featured">
-              <a [routerLink]="['/books/local-books/' ,book.id]">
-                <img *ngIf="book?.imgUrl !== null" [src]="book?.imgUrl" class="img-fluid card-img-top"/>
-                <img *ngIf="book?.imgUrl === null" src="../../../../assets/img/book/default.png" class="img-fluid card-img-top"/>
-              {{book.title}}
+              <a [routerLink]="['/books/local-books/' ,book.localBook.id]">
+                <img *ngIf="book?.localBook?.imgUrl !== null" [src]="book?.localBook?.imgUrl" class="img-fluid card-img-top"/>
+                <img *ngIf="book?.localBook?.imgUrl === null" src="../../../../assets/img/book/default.png" class="img-fluid card-img-top"/>
+              {{book?.localBook?.title}}
             </a>
             </div>
         
