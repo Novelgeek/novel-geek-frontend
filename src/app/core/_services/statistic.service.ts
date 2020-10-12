@@ -11,9 +11,9 @@ export class StatisticService {
     return this.http.get('/admin/basic-stat');
   }
   getGenreStats(){
-    return this.http.get('http://localhost:8080/admin/genrestats')
+    return this.http.get('/admin/genrestats')
   }
   getUserStats(){
-    return this.http.get('http://localhost:8080/admin/userstats')
+    return this.http.get('/admin/userstats')
   }
 }

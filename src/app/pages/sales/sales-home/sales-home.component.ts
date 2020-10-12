@@ -22,7 +22,7 @@ export class SalesHomeComponent implements OnInit {
   create = false;
   contact = false;
 
-  imagePath: any;
+  imagePath: any = '';
   selectedImage: File;
   telephone: any = '';
 
@@ -107,6 +107,10 @@ export class SalesHomeComponent implements OnInit {
     });
   }
 
+  openScrollableContent(longContent) {
+    this.modalService.open(longContent, { scrollable: true });
+  }
+
   onsubmit(Values: any) {
     this.spinner.show();
     const newpost = new FormData();
@@ -134,10 +138,12 @@ export class SalesHomeComponent implements OnInit {
         this.create = false;
         this.spinner.hide();
         this.toastr.success('Post created succesfully');
+        this.modalService.dismissAll();
       },
       (errorMsg) => {
         this.spinner.hide();
         this.toastr.error('Unable to create post at the moment.');
+        this.modalService.dismissAll()
       }
     );
 

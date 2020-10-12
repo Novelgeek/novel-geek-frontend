@@ -12,7 +12,7 @@
                 <div class="form-group">
                   <div class="row">
                     <div class="col-6">
-                      <button class="btn btn-outline-info mr-1 pull-right primary" (click)="open(createSale)">
+                      <button class="btn btn-outline-info mr-1 pull-right primary" (click)="openScrollableContent(createSale)">
                         <i class="ft-plus primary mr-1"></i>
                         Sell a Book
                       </button>
@@ -105,8 +105,8 @@
              </div>
               <div class="row">
                 <div class="col-6 card-content">
-                  <div class="card-content" *ngIf="imagePath!=''">
-                    <img [src]="imagePath" class="img-fluid">
+                  <div class="card-content text-center" *ngIf="imagePath!=''">
+                    <img [src]="imagePath" class="img-fluid book-img">
                   </div>
                   <div class="form-group">
                     <i class="primary icon-picture mr-2"></i>

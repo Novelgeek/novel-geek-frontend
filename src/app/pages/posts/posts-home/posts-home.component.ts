@@ -51,7 +51,7 @@ export class PostsHomeComponent implements OnInit {
   }
 
   open(content) {
-    this.modalService.open(content, {ariaLabelledBy: 'create-group'}).result.then((result) => {
+    this.modalService.open(content, {ariaLabelledBy: 'create-group', scrollable: true}).result.then((result) => {
     }, (reason) => {
     });
   }
@@ -71,9 +71,11 @@ export class PostsHomeComponent implements OnInit {
       this.create = false;
       this.spinner.hide();
       this.toastr.success('Post created succesfully');
+      this.modalService.dismissAll()
     }, errorMsg => {
       this.spinner.hide();
       this.toastr.error('Unable to create post at the moment.');
+      this.modalService.dismissAll()
     })
   }
 

@@ -42,7 +42,6 @@ export class BookHomeComponent implements OnInit {
       this.recentlyViewed = data;
     });
     this.bookService.getFeaturedBooks().subscribe((data) => {
-      console.log(data);
       this.featured = data;
     });
     this.bookService.getAllLocalBooks().subscribe((data) => {

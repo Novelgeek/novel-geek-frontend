@@ -36,6 +36,12 @@
         <h4 class="card-title">Books you might like</h4>
         <p></p>
       </div>
+      <div *ngIf="recommendations?.length === 0" class="card-content">
+        <div class="d-flex empty">
+          <h4 class="primary">No Reccomendations, Give some ratings to get started</h4>
+        </div>
+      </div>
+      
       <div class="card-content">
         <swiper [config]="config">
           <div class="swiper-wrapper ">
@@ -67,6 +73,11 @@
       <div class="card-header text-center">
         <h4 class="card-title">Recently Viewed</h4>
         <p></p>
+      </div>
+      <div *ngIf="recentlyViewed?.length == 0" class="card-content">
+        <div class="d-flex empty">
+          <h4 class="primary">No Recently viewed books</h4>
+        </div>
       </div>
       <div class="card-content">
         <swiper [config]="config">

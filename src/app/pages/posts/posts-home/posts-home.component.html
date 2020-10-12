@@ -43,8 +43,8 @@
                <div class="card-content">
                  <textarea cols="100" rows="10" name="description" ngModel #description="ngModel" class="form-control" placeholder="your thoughts..." required></textarea>
                </div>
-               <div class="card-content" *ngIf="new_post.imagePath!=''">
-                 <img [src]="new_post.imagePath" class="img-fluid">
+               <div class="card-content text-center" *ngIf="new_post.imagePath!=''">
+                 <img [src]="new_post.imagePath" class="img-fluid book-img">
                </div>
              </div>    
              <div class="card-footer d-flex justify-content-between">

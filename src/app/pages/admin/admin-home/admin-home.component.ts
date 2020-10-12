@@ -47,6 +47,7 @@ export class AdminHomeComponent implements OnInit {
 
   ngOnInit() {
     this.statService.getGenreStats().subscribe(data=>{
+       console.log('data');
        console.log(data);
        this.genreData = data;
        let genreStatsData = [
