@@ -58,7 +58,8 @@ export class AuctionCardComponent implements OnInit {
       this.spinner.show();
       const newBid = <Number>this.bid;
       const curBid = <Number>this.currentBid;
-      if(newBid > curBid){
+      const startingBid = <Number> this.startingBid;
+      if(newBid > curBid && newBid > startingBid){
         const newBidData = {
           newBid : this.bid,
           auctionId : this.auctionId,

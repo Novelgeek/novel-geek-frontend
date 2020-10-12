@@ -16,14 +16,14 @@
                         </span>
                         <h6 class="list-group-item-heading" style="font-weight: bold;margin-top: 20px;">{{user.username}} started the item </h6>
                         <!-- margin-left: 170px;margin-top: -40px; -->
-                    </div>
-                    <div style="margin-left: 80px;">
-
-                        <a  mat-button [matMenuTriggerFor]="menu"  href="javascript:void(0)" class="btn"><i class="fa fa-ellipsis-h" aria-hidden="true"></i></a>
-                        <mat-menu #menu="matMenu">
-                            <button mat-menu-item (click)="onProcess()"> <mat-icon>dialpad</mat-icon>Prcess</button>
-                            <button mat-menu-item (click)="onDelete()"><mat-icon>delete_outline</mat-icon>Delete</button>
-                        </mat-menu>
+                        <div >
+    
+                            <a style="margin-top: 10px;" mat-button [matMenuTriggerFor]="menu"  href="javascript:void(0)" class="btn"><i class="fa fa-bars" aria-hidden="true"></i></a>
+                            <mat-menu  #menu="matMenu">
+                                <button [disabled]="ownUser"  mat-menu-item (click)="onProcess()"> <mat-icon>dialpad</mat-icon>Prcess</button>
+                                <button [disabled]="ownUser" mat-menu-item (click)="onDelete()"><mat-icon>delete_outline</mat-icon>Delete</button>
+                            </mat-menu>
+                        </div>
                     </div>
             </div>
             <div class="card-header">
