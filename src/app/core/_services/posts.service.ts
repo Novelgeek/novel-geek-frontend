@@ -89,4 +89,8 @@ export class PostsService {
     getReplyNotifications(){
         return this.http.get<any>("/post/replynotifications")
     }
+
+    deleteNotifications(notiid:number){
+        return this.http.delete<any>("/post/deletenotifications/"+notiid)
+    }
 }
