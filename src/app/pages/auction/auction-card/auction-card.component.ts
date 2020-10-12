@@ -24,6 +24,7 @@ export class AuctionCardComponent implements OnInit {
   @Input() currentBid: any;
   @Input() user: any = [];
   ownUser=false;
+  access=true;
 
   auction:any=[];
 
@@ -38,6 +39,7 @@ export class AuctionCardComponent implements OnInit {
     }
     if(this.user.id==this.authService.currentUser.id){
       this.ownUser=true;
+      this.access=false;
     }
     const time = new Date(this.finishDate).getTime() - new Date().getTime();
     this.remainingTime = this.dhm(time);
@@ -92,7 +94,14 @@ export class AuctionCardComponent implements OnInit {
 
   }
   onDelete(){
-
+    console.log(this.auctionId)
+    this.auctionService.endAuction(this.auctionId).subscribe(data=>{
+      this.toastr.success("Auction Removed");
+      
+    },
+    error=>{
+      console.log(error);
+    });
   }
 
 }

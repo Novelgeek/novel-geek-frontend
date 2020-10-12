@@ -20,8 +20,8 @@
     
                             <a style="margin-top: 10px;" mat-button [matMenuTriggerFor]="menu"  href="javascript:void(0)" class="btn"><i class="fa fa-bars" aria-hidden="true"></i></a>
                             <mat-menu  #menu="matMenu">
-                                <button [disabled]="ownUser"  mat-menu-item (click)="onProcess()"> <mat-icon>dialpad</mat-icon>Prcess</button>
-                                <button [disabled]="ownUser" mat-menu-item (click)="onDelete()"><mat-icon>delete_outline</mat-icon>Delete</button>
+                                <button [disabled]="access"  mat-menu-item (click)="onProcess()"> <mat-icon>dialpad</mat-icon>Prcess</button>
+                                <button [disabled]="access" mat-menu-item (click)="onDelete()"><mat-icon>delete_outline</mat-icon>Delete</button>
                             </mat-menu>
                         </div>
                     </div>
