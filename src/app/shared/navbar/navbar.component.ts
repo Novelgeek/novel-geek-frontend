@@ -7,7 +7,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Router } from '@angular/router';
 import { FriendService } from 'app/core/_services/friend.service';
 import { NotificationService } from 'app/core/_services/notification.service';
-
+import { PostsService } from 'app/core/_services/posts.service';
 
 @Component({
   selector: 'app-navbar',
@@ -39,6 +39,7 @@ export class NavbarComponent implements OnInit, AfterViewInit, OnDestroy {
     private authService: AuthService,
     private route: ActivatedRoute,
     private router: Router,
+    private postsService: PostsService,
     private notificationService: NotificationService
     ) { 
       //this.notificationCount=0;
@@ -121,5 +122,28 @@ export class NavbarComponent implements OnInit, AfterViewInit, OnDestroy {
 
   onLogout() {
     this.authService.logout();
+  }
+
+  deleteReportNoti(notiid:number, index:number){  
+    this.postsService.deleteNotifications(notiid).subscribe(data=>{
+      this.reportNotifications.splice(index, 1) 
+      this.notificationService.groupNotifications.next(this.reportNotifications)
+    })
+  }
+
+  deleteCommentNoti(notiid:number, index:number){
+    this.postsService.deleteNotifications(notiid).subscribe(data=>{
+      this.commentNotifications.splice(index, 1)
+      this.notificationService.groupNotifications.next(this.commentNotifications)
+    })
+    
+  }
+
+  deleteReplyNoti(notiid:number, index:number){
+    this.postsService.deleteNotifications(notiid).subscribe(data=>{
+      this.replyNotifications.splice(index, 1)
+      this.notificationService.groupNotifications.next(this.replyNotifications)
+    })
+    
   }
 }
