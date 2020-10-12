@@ -1,4 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { Poll } from 'app/core/_models/poll.model';
+import { PollService } from 'app/core/_services/poll.service';
+import { ToastrService } from 'ngx-toastr';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-polls-home',
@@ -7,9 +11,54 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PollsHomeComponent implements OnInit {
 
-  constructor() { }
+  allpolls: Poll[];
+  mypolls: Poll[];
 
-  ngOnInit() {
+
+  constructor(
+    private pollService: PollService) { 
+      this.mypolls=[];
+    }
+
+    
+  ngOnInit(): void {
+   
+    this.pollService.getPolls().subscribe(polls => {
+      // console.log(polls)
+      this.allpolls = polls;
+    }, error => {
+      console.log(error);
+    });
+
+    this.pollService.getPollsForUser().subscribe(polls =>{
+      console.log(polls)
+      this.mypolls = polls;
+    }, error =>{
+      console.log(error);
+    });
+  }
+
+  onDeletePoll(data: {id: number}){
+    this.mypolls.splice(data.id, 1);
+  }
+
+
+  onAddNewPoll($event) {
+    if ($event.status === true) {
+      this.pollService.getPolls().subscribe(polls => {
+        // console.log(polls)
+        this.allpolls = polls;
+      }, error => {
+        console.log(error);
+      });
+  
+      this.pollService.getPollsForUser().subscribe(polls =>{
+        console.log(polls)
+        this.mypolls = polls;
+      }, error =>{
+        console.log(error);
+      });
+    }
   }
 
 }

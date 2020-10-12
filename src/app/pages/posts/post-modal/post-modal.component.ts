@@ -18,9 +18,13 @@ export class PostModalComponent implements OnInit {
   @Input() itemindex: number;
   @ViewChild('addcomment') addcomment: NgForm;
   isLiked: boolean;
-  showComments = false;
-  showLikes = false;
-  isShow = false;
+
+  shortDescription: boolean=true;
+  showComments:boolean=false;
+  showLikes:boolean=false;
+  isShow:boolean = false;
+  report :boolean = false;
+
 
   commentList: Comment_modal [];
   public new_comment: Comment_modal;
@@ -34,7 +38,9 @@ export class PostModalComponent implements OnInit {
     this.commentList = [];
     this.showLikes = false;
     this.showLikes = false;
-   }
+    this.report = false;
+    this.shortDescription=true;
+  }
 
   ngOnInit() {
     if (this.item.liked) {
@@ -51,6 +57,35 @@ export class PostModalComponent implements OnInit {
     subscribe(response => {
       this.isShow = false;
       this.ondelete.emit({id: this.itemindex});
+    })
+  }
+
+
+  public reportPost() {
+    this.report = true;
+    this.isShow = !this.isShow;
+  }
+
+  public onsubmitReport(Values: any, postid: number) {
+    console.log(Values);
+    console.log(postid);
+    this.report = false;
+    this.postService.reportPost(postid, Values.reason).
+    subscribe(response => {
+      this.item.reported = true
+    })
+  }
+
+  onClose() {
+    this.report = false;
+    this.isShow = false;
+  }
+
+  public unReportPost(postid: number) {
+    this.postService.unReportPost(postid).
+    subscribe(response => {
+      this.item.reported = false
+      this.isShow = !this.isShow;
     })
   }
 
@@ -130,9 +165,11 @@ export class PostModalComponent implements OnInit {
     .subscribe(response => {
       this.new_comment = response;
       this.commentList.splice(0, 0, this.new_comment);
+      this.item.commentcount+=1;
     })
     this.addcomment.reset();
   }
+
 
   public toggleList() {
     this.isShow = !this.isShow;
@@ -141,5 +178,13 @@ export class PostModalComponent implements OnInit {
   public hideFooter() {
     this.showLikes = false;
     this.showComments = false;
+  }
+
+  onDeleteComment(data: {id: number}){
+    this.commentList.splice(data.id, 1);
+  }
+
+  alterDescription(){
+    this.shortDescription = !this.shortDescription;
   }
 }

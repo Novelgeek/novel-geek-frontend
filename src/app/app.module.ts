@@ -11,7 +11,15 @@ import { NgxSpinnerModule } from 'ngx-spinner';
 import { NgxUsefulSwiperModule } from 'ngx-useful-swiper';
 import { BarRatingModule } from 'ngx-bar-rating';
 
-import { PerfectScrollbarModule, PERFECT_SCROLLBAR_CONFIG, PerfectScrollbarConfigInterface} from 'ngx-perfect-scrollbar';
+import { AngularFireModule } from '@angular/fire';
+import { NgSelectModule } from '@ng-select/ng-select';
+
+
+import {
+  PerfectScrollbarModule,
+  PERFECT_SCROLLBAR_CONFIG,
+  PerfectScrollbarConfigInterface,
+} from 'ngx-perfect-scrollbar';
 
 import { AppComponent } from './app.component';
 import { LoginComponent } from './pages/auth/login/login.component';
@@ -25,19 +33,22 @@ import { PollsHomeComponent } from './pages/polls/polls-home/polls-home.componen
 import { PostsHomeComponent } from './pages/posts/posts-home/posts-home.component';
 import { PostModalComponent } from './pages/posts/post-modal/post-modal.component';
 import { ProfileHomeComponent } from './pages/profile/profile-home/profile-home.component';
+
 import { SalesHomeComponent } from './pages/sales/sales-home/sales-home.component';
+import {SalesModalComponent} from './pages/sales/sales-modal/sales-modal.component';
+
 import { ProfileSettingsComponent } from './pages/profile/profile-settings/profile-settings.component';
 import { TokenInterceptor } from './core/_services/token.interceptor';
 import { ChartsModule } from 'ng2-charts';
 
 import { MatSliderModule } from '@angular/material/slider';
+
 import {MatMenuModule} from '@angular/material/menu';
 import {MatIconModule} from '@angular/material/icon';
 
 
+
 import { BookletComponent } from './pages/books/booklet/booklet.component';
-
-
 
 import { SearchResultsComponent } from './pages/books/search-results/search-results.component';
 import { BookReviewComponent } from './pages/books/book-review/book-review.component';
@@ -55,27 +66,57 @@ import { ForgotPasswordComponent } from './pages/auth/forgot-password/forgot-pas
 import { ResetPasswordComponent } from './pages/auth/reset-password/reset-password.component';
 import { from } from 'rxjs';
 import { FriendCardComponent } from './pages/friends/friend-card/friend-card.component';
+
 import { AuctionHomeComponent } from './pages/auction/auction-home/auction-home.component';
 import { AuctionCardComponent } from './pages/auction/auction-card/auction-card.component';
+
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatNativeDateModule} from '@angular/material';
 import {MatChipsModule} from '@angular/material/chips';
 import {MatInputModule} from '@angular/material/input';
 
-import {MatButtonModule} from '@angular/material/button';
+
+import { AddPollComponent } from './pages/polls/add-poll/add-poll.component';
+import { MyPollsComponent } from './pages/polls/my-polls/my-polls.component';
+import { PollModelComponent } from './pages/polls/poll-model/poll-model.component';
+
+
+import { MatButtonModule } from '@angular/material/button';
 import { ManageAdminsComponent } from './pages/admin/manage-admins/manage-admins.component';
 import { ManagePostsComponent } from './pages/admin/manage-posts/manage-posts.component';
+
 import { AuctionProcessComponent } from './pages/auction/auction-process/auction-process.component';
 import { StoreComponent } from './pages/books/store/store.component';
 import { BidderCardComponent } from './pages/auction/auction-process/bidder-card/bidder-card.component';
+
+import { AddBookComponent } from './pages/books/add-book/add-book.component';
+import { ArchwizardModule } from 'angular-archwizard';
+import { LocalBooksComponent } from './pages/books/local-books/local-books.component';
+import { LocalBookCardComponent } from './pages/books/local-books/local-book-card/local-book-card.component';
+import { PostCommentModalComponent } from './pages/posts/post-comment-modal/post-comment-modal.component';
+import { SalesInfoComponent } from './pages/sales/sales-info/sales-info.component';
+import {MoreInfoComponent} from './pages/sales/more-info/more-info.component';
+
+
 export function tokenGetter() {
   return localStorage.getItem('token');
 }
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
-    suppressScrollX: true,
-    wheelPropagation: false
-  };
+  suppressScrollX: true,
+  wheelPropagation: false,
+};
+
+let firebaseConfig = {
+  apiKey: 'AIzaSyCla-JAP3zoxs3DXKPYCELoiUKqmu38IZM',
+  authDomain: 'novel-geek.firebaseapp.com',
+  databaseURL: 'https://novel-geek.firebaseio.com',
+  projectId: 'novel-geek',
+  storageBucket: 'novel-geek.appspot.com',
+  messagingSenderId: '223164082705',
+  appId: '1:223164082705:web:0a5bae54a6a444c7d15fb0',
+  measurementId: 'G-JGS3TP464K',
+};
 
 @NgModule({
   declarations: [
@@ -95,12 +136,22 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     GroupHomeComponent,
     MessageHomeComponent,
     PollsHomeComponent,
+
     PostsHomeComponent,
     PostModalComponent,
+    PostCommentModalComponent,
+
     ProfileHomeComponent,
-    SalesHomeComponent,
     ProfileSettingsComponent,
+    
+    SalesHomeComponent,
+    SalesModalComponent,
+    SalesInfoComponent,
+    MoreInfoComponent,
     AuctionHomeComponent,
+    AddBookComponent,
+    LocalBooksComponent,
+    LocalBookCardComponent,
 
     BookletComponent,
     SearchResultsComponent,
@@ -114,11 +165,21 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     GroupHorizontalCardComponent,
     GroupDetailComponent,
     NotFoundComponent,
+
     AuctionHomeComponent,
     AuctionCardComponent,
+
     AuctionProcessComponent,
     StoreComponent,
     BidderCardComponent
+
+
+    AddPollComponent,
+    MyPollsComponent,
+    PollModelComponent
+
+
+
   ],
   imports: [
     BrowserAnimationsModule,
@@ -127,15 +188,23 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     HttpClientModule,
     NgbModule,
     BarRatingModule,
+
     
     MatMenuModule,
     MatChipsModule,
+
+    NgSelectModule,
+
     MatDatepickerModule,
     MatSliderModule,
     MatInputModule,
     MatButtonModule,
     MatNativeDateModule,
     MatIconModule,
+
+    AngularFireModule.initializeApp(firebaseConfig),
+
+    ArchwizardModule,
 
     PerfectScrollbarModule,
     FormsModule,
@@ -151,20 +220,23 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
         blacklistedRoutes: ['http://example.com/examplebadroute/'],
       },
     }),
-    NgxUsefulSwiperModule
+    NgxUsefulSwiperModule,
   ],
   providers: [
     {
       provide: PERFECT_SCROLLBAR_CONFIG,
-      useValue: DEFAULT_PERFECT_SCROLLBAR_CONFIG
+      useValue: DEFAULT_PERFECT_SCROLLBAR_CONFIG,
     },
-    { provide: PERFECT_SCROLLBAR_CONFIG, useValue: DEFAULT_PERFECT_SCROLLBAR_CONFIG },
+    {
+      provide: PERFECT_SCROLLBAR_CONFIG,
+      useValue: DEFAULT_PERFECT_SCROLLBAR_CONFIG,
+    },
     {
       provide: HTTP_INTERCEPTORS,
       useClass: TokenInterceptor,
-      multi: true
-    }
+      multi: true,
+    },
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
 export class AppModule {}

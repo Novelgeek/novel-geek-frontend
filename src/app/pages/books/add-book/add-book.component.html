@@ -1,0 +1,181 @@
+<div class="row">
+  <div class="col-sm-12">
+      <div class="content-header">Add New Book</div>
+  </div>
+</div>
+<section id="ngx">
+  <div class="card">
+      <div class="card-content">
+          <div class="card-body">
+              <aw-wizard #wizard navBarLayout="large-empty-symbols">
+                  <aw-wizard-step [stepTitle]="'Basic Info'" [navigationSymbol]="{ symbol: '&#xf007;', fontFamily: 'FontAwesome' }">
+                      <form #basicBookForm="ngForm" class="editForm" novalidate>
+                          <h4 class="head text-center">Enter basic book details.</h4>
+                          <br/>
+                          <div class='row'>
+                              <div class='col-12'>
+                                  <div class="row justify-content-center">
+                                      <div class="col-md-6 col-sm-12 align-self-center">
+                                        <div *ngIf="imageUrl ===''" class="py-5 mb-3 text-center font-medium-5 text-uppercase grey my-drop-zone">
+                                        Base dropzone
+                                        </div>
+                                        <div class="card-content text-center" *ngIf="imageUrl!=''">
+                                            <img [src]="imageUrl" class="img-fluid book-img">
+                                        </div>
+                                        <div class="text-center mt-2">
+                                            <i class="primary icon-picture mr-2"></i>
+                                            <label style="cursor:pointer;">
+                                              <span class="primary">Attach Photo</span>
+                                              <input (change)="uploadImage($event)" ngModel name="image" type="file" style="display:none;">
+                                            </label>
+                                        </div>
+
+                                      </div>
+                                      <div class="col-md-6 col-sm-12">
+                                        <div class='col-12 col-sm-12'>
+                                            <div class="form-group">
+                                                <label class="form-control-label" for="title">Title</label>
+                                                <input class="form-control input-md" ngModel #title="ngModel" required id="title" name="title" type="text">
+                                                <small class="form-text text-muted danger" *ngIf="!title.valid && (title.dirty || title.touched)">This field is required!</small>
+                                            </div>
+                                        </div>
+                                        <div class='col-12 col-sm-12'>
+                                            <div class="form-group">
+                                                <label class="form-control-label" for="description">Description</label>
+                                                <textarea  required id="description" ngModel rows="5" name="description"  class="form-control"></textarea>
+                                                
+                                                
+                                            </div>
+                                        </div>
+                                      </div>
+                                      
+                                  </div>
+                                  <div class="form-group text-center">
+                                      <button type="button" uiSref="work" class="btn btn-info btn-raised" awNextStep>
+                                          Next
+                                          <span style="margin-left:10px;">
+                                              <i class="ft-chevron-right"></i>
+                                          </span>
+                                      </button>
+                                  </div>
+                              </div>
+                          </div>
+                      </form>
+                  </aw-wizard-step>
+                  <aw-wizard-step  [stepTitle]="'More Info'" [navigationSymbol]="{ symbol: '&#xf0b1;', fontFamily: 'FontAwesome' }">
+                      <form #advancedBookForm="ngForm" class="editForm" novalidate>
+                          <h4 class="head text-center">Tell us more about your book.</h4>
+                          <br/>
+                          <div class='row justify-content-center'>
+
+                                <div class='col-md-6 col-sm-12'>
+                                    <div class="form-group">
+                                        <label class="form-control-label" for="isbn">ISBN</label>
+                                        <input class="form-control input-md" ngModel #isbn="ngModel" required id="isbn" name="isbn" type="text">
+                                        <small class="form-text text-muted danger" *ngIf="!isbn.valid && (isbn.dirty || isbn.touched)">This field is required!</small>
+        
+                                    </div>
+                                </div>
+                                <div class='col-md-6 col-sm-12'>
+                                    <div class="form-group">
+                                        <label class="form-control-label" for="year">Year</label>
+                                        <input class="form-control input-md" ngModel #year="ngModel" required id="year" name="year" type="text">
+                                        <small class="form-text text-muted danger" *ngIf="!year.valid && (year.dirty || year.touched)">This field is required!</small>
+
+                                    </div>
+                                </div>
+                                <div class='col-md-6  col-sm-12'>
+                                    <div class="form-group">
+                                        <label class="form-control-label" for="genres">Genres</label>
+                                        <ng-select [items]="genres"
+                                                [addTag]="addTagFn"
+                                                [hideSelected]="true"
+                                                multiple="true"
+                                                bindLabel="name"
+                                                [(ngModel)]="selectedGenres"
+                                                [ngModelOptions]="{standalone: true}"
+                                                >
+                                        </ng-select>
+                                        <!-- <small class="form-text text-muted danger" *ngIf="!state.valid && (state.dirty || state.touched)">This field is required!</small> -->
+
+                                    </div>
+                                </div>
+                                <div class=' col-md-6 col-sm-12'>
+                                    <div class="form-group">
+                                        <label class="form-control-label" for="author">Author</label>
+                                        <input class="form-control input-md" ngModel #author="ngModel" required id="author" name="author" type="text">
+                                        <small class="form-text text-muted danger" *ngIf="!author.valid && (author.dirty || author.touched)">This field is required!</small>
+
+                                    </div>
+                                </div>
+
+                          </div>
+                          <div class="form-group text-center space-20">
+                              <button uiSref="personal" type="button" class="btn btn-raised btn-secondary mr-1" awPreviousStep>
+                                  <span style="margin-right:10px;">
+                                      <i class="ft-chevron-left"></i>
+                                  </span> Previous</button>
+                              <button uiSref="address" type="button" class="btn btn-raised btn-info" awNextStep>
+                                  Next
+                                  <span style="margin-left:10px;">
+                                      <i class="ft-chevron-right"></i>
+                                  </span>
+                              </button>
+                              <!-- <button uiSref="address" type="button" class="btn btn-raised btn-info" [disabled]="!advancedBookForm.valid" awNextStep>
+                                  Next
+                                  <span style="margin-left:10px;">
+                                      <i class="ft-chevron-right"></i>
+                                  </span>
+                              </button> -->
+                          </div>
+                      </form>                        
+                  </aw-wizard-step>
+                  <aw-wizard-step [stepTitle]="'Additional Info'" [navigationSymbol]="{ symbol: '&#xf0ac;', fontFamily: 'FontAwesome' }">
+                      <form #optionalBookForm="ngForm" class="editForm" novalidate>
+                          <h4 class="head text-center">Optional details about your book</h4>
+                          <br/>
+                            <div class='row justify-content-center align-items-center'>
+                                <div class="col-6">
+                                <div class="form-group">
+                                    <label class="form-control-label" for="publisher">Publisher</label>
+                                    <input class="form-control input-md" ngModel #publisher="ngModel" required id="publisher" name="publisher" type="text">
+                                    <small class="form-text text-muted danger" *ngIf="!publisher.valid && (publisher.dirty || publisher.touched)">This field is required!</small>
+
+                                </div>
+                                </div>
+
+                              <div class="col-6">
+                                <fieldset class="form-group">
+                                    <label for="file">PDF of Book</label>
+                                    <div class="custom-file  mx-auto d-block">
+                                    <input type="file" (change)="uploadPdf($event)" class="custom-file-input" 
+                                        id="inputGroupFile01" accept=".pdf,.doc,.docx">
+                                    <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
+                                    </div>
+                                </fieldset>
+                              </div>
+                            </div>
+                            
+                          <div class="form-group text-center">
+                            <button uiSref="work" type="button" class="btn btn-raised btn-secondary mr-1" awPreviousStep>
+                                <span style="margin-right:10px;">
+                                    <i class="ft-chevron-left"></i>
+                                </span> Previous</button>
+                            <button uiSref="result" type="button" class="btn btn-raised btn-success" 
+                            (click)="addBook(basicBookForm, advancedBookForm, optionalBookForm)" awResetWizard>
+                                Finish
+                                <span style="margin-left:10px;">
+                                    <i class="ft-chevron-right"></i>
+                                </span>
+                            </button>
+                        </div>
+                      </form>
+                      
+                  </aw-wizard-step>
+              </aw-wizard>
+
+
+          </div>
+      </div>
+  </div>
+</section>

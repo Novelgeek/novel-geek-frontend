@@ -1,0 +1,52 @@
+<!-- add poll component -->
+<div class="card">
+  <div class="card-header">
+    <h4>Create New Poll</h4>
+  </div>
+  <div class="card-body">
+      <form (ngSubmit)="onSubmitPollForm(f)" #f="ngForm" >
+          <div class="form-group">
+            <label for="title" class="inputdefault">Your question/title goes here </label>
+            <div class="">
+              <input [(ngModel)]="poll.title" id="title" name="title" type="text" class="form-control" required>
+            </div>
+              
+          </div> 
+            <div class="form-group">
+                <label for="option" class="inputdefault">Add an option</label>
+                <div class="row">
+                <div class="col-sm-6">
+                <input id="option" #option name="option" type="text" class="form-control" (keyup.enter)="addOption(option.value);option.value='';">
+                 </div>
+                <a class="col align-self-center text-center" (click)="addOption(option.value);option.value='';" [ngbTooltip]="'add option'" placement="bottom">
+                <i class="fa fa-plus"></i>
+              </a>
+            </div>
+            </div>
+        <div *ngFor="let o of options" class="row">
+         <div class="col -sm-6">
+            {{o}}
+          </div>
+            <a class="col align-self-center text-center" (click)="removeOption(o)" [ngbTooltip]="'remove option'" placement="bottom">
+              <i class="fa fa-minus"></i>
+            </a>
+        </div>
+        <br>
+          <div class="form-group">
+            <label for="endDate" class="inputdefault">Ending date</label>
+            <div class="input-group">
+              <input [(ngModel)]="poll.endDate" name="endDate" type="date" class="form-control" required>
+              <!-- <div class="input-group-append">
+                <button class="btn btn-outline-secondary calender" (click)="d.toggle()" type="button"><i class="fa fa-calendar"></i></button>
+              </div> -->
+            </div>
+            
+          </div>
+          <div class="form-group row">
+            <button [disabled]="f.invalid || options.length==0" class="btn waves-effect waves-light cyan accent-4" type="submit" name="action">Submit</button>
+          </div>
+      </form>
+  </div>
+</div>
+
+

@@ -33,6 +33,8 @@ export class GroupDetailComponent implements OnInit, OnDestroy {
   userId: number;
 
   currentOrientation = 'horizontal';
+  selectedFile: any;
+  posts: any;
 
 
   constructor(private route: ActivatedRoute, private groupService: GroupService,
@@ -47,7 +49,6 @@ export class GroupDetailComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.spinner.show();
     this.userId = +this.authService.currentUser.id;
-    console.log(this.userId);
     this.sub = this.route.params.subscribe(params => {
       this.id = +params['id'];
    });
@@ -61,6 +62,7 @@ export class GroupDetailComponent implements OnInit, OnDestroy {
     this.groupName = this.group.groupName;
     this.description = this.group.description;
     this.avatar = this.group.groupAvatar;
+    this.posts = this.group.posts;
     this.spinner.hide();
    }, error => {
      // tslint:disable-next-line: no-unused-expression
@@ -187,6 +189,31 @@ export class GroupDetailComponent implements OnInit, OnDestroy {
       console.log('Group deleted');
     }, error => {
       console.log(error)
+    })
+  }
+
+  // photo upload
+
+  onFileChanged(event) {
+    this.selectedFile = event.target.files[0]
+  }
+
+  onPostSubmit(form: NgForm) {
+
+    const newpost = new FormData();
+    newpost.append('title', form.value.title);
+    newpost.append('description', form.value.description)
+    newpost.append('sharedtype', 'Group')
+    newpost.append('file', this.selectedFile);
+
+    this.spinner.show();
+
+    this.groupService.createPost(newpost, this.id).subscribe( data => {
+      console.log(data)
+      this.spinner.hide();
+      this.toastr.success('New Post Added');
+    }, error => {
+      this.toastr.error(error);
     })
   }
 

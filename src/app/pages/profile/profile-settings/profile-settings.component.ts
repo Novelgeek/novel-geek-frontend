@@ -75,6 +75,7 @@ export class ProfileSettingsComponent implements OnInit {
       this.userSettingForm.value.description
     );
     this.userService.saveUserDetails(user).subscribe((data) => {
+      this.toastr.success('User updated succesfully');
       this.authService.userUpdated(user.username);
     });
     // this.userSettingForm.reset();
