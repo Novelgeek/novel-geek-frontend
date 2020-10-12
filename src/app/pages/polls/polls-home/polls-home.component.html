@@ -6,7 +6,7 @@
         <div class="card-body">
           <div class="row">
             <div class="col-6">
-              <h4 class = "card-title">Polls</h4>
+              <h4 class="card-title">Polls</h4>
             </div>
           </div>
           <div class="row">
@@ -16,9 +16,14 @@
                   <a ngbNavLink>All Polls</a>
                   <ng-template ngbNavContent>
                     <div class="row">
-                      <div *ngFor="let poll of allpolls" class="col col-xl-4 col-md-4 col-sm-6 col-12" >
-                          <app-poll-model [poll]="poll"></app-poll-model>
+                      <div *ngFor="let poll of allpolls" class="col col-xl-4 col-md-4 col-sm-6 col-12">
+                        <app-poll-model [poll]="poll"></app-poll-model>
                       </div>
+
+                    </div>
+                    <div class="row justify-content-center  mt-2 font-medium-4" matchHeight="card"
+                      *ngIf="allpolls.length === 0">
+                      There are no Posts yet. Add a poll to get started.
                     </div>
                   </ng-template>
                 </li>
@@ -26,9 +31,16 @@
                   <a ngbNavLink>My Polls</a>
                   <ng-template ngbNavContent>
                     <div class="row">
-                      <div *ngFor="let poll of mypolls; let itemindex = index;" class="col col-xl-4 col-md-4 col-sm-6 col-12">
-                        <app-my-polls [poll]="poll"  [itemindex]="itemindex" (ondelete)="onDeletePoll($event)"></app-my-polls>
+                      <div *ngFor="let poll of mypolls; let itemindex = index;"
+                        class="col col-xl-4 col-md-4 col-sm-6 col-12">
+                        <app-my-polls [poll]="poll" [itemindex]="itemindex" (ondelete)="onDeletePoll($event)">
+                        </app-my-polls>
                       </div>
+
+                    </div>
+                    <div class="row justify-content-center  mt-2 font-medium-4" matchHeight="card"
+                      *ngIf="mypolls.length === 0">
+                      There are no Posts yet. Add a poll to get started.
                     </div>
                   </ng-template>
                 </li>
@@ -50,4 +62,3 @@
 </div>
 
 <div [ngbNavOutlet]="nav"></div>
-

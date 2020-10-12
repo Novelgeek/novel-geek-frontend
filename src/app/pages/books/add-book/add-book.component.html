@@ -51,7 +51,7 @@
                                       
                                   </div>
                                   <div class="form-group text-center">
-                                      <button type="button" uiSref="work" class="btn btn-info btn-raised" awNextStep>
+                                      <button [disabled]="basicBookForm.invalid" type="button" uiSref="work" class="btn btn-info btn-raised" awNextStep>
                                           Next
                                           <span style="margin-left:10px;">
                                               <i class="ft-chevron-right"></i>
@@ -71,7 +71,7 @@
                                 <div class='col-md-6 col-sm-12'>
                                     <div class="form-group">
                                         <label class="form-control-label" for="isbn">ISBN</label>
-                                        <input class="form-control input-md" ngModel #isbn="ngModel" required id="isbn" name="isbn" type="text">
+                                        <input class="form-control input-md" ngModel #isbn="ngModel" required id="isbn" name="isbn" type="number">
                                         <small class="form-text text-muted danger" *ngIf="!isbn.valid && (isbn.dirty || isbn.touched)">This field is required!</small>
         
                                     </div>
@@ -79,7 +79,7 @@
                                 <div class='col-md-6 col-sm-12'>
                                     <div class="form-group">
                                         <label class="form-control-label" for="year">Year</label>
-                                        <input class="form-control input-md" ngModel #year="ngModel" required id="year" name="year" type="text">
+                                        <input class="form-control input-md" ngModel #year="ngModel" required id="year" name="year" type="number">
                                         <small class="form-text text-muted danger" *ngIf="!year.valid && (year.dirty || year.touched)">This field is required!</small>
 
                                     </div>
@@ -115,7 +115,7 @@
                                   <span style="margin-right:10px;">
                                       <i class="ft-chevron-left"></i>
                                   </span> Previous</button>
-                              <button uiSref="address" type="button" class="btn btn-raised btn-info" awNextStep>
+                              <button [disabled]="advancedBookForm.invalid" uiSref="address" type="button" class="btn btn-raised btn-info" awNextStep>
                                   Next
                                   <span style="margin-left:10px;">
                                       <i class="ft-chevron-right"></i>
@@ -138,7 +138,7 @@
                                 <div class="col-6">
                                 <div class="form-group">
                                     <label class="form-control-label" for="publisher">Publisher</label>
-                                    <input class="form-control input-md" ngModel #publisher="ngModel" required id="publisher" name="publisher" type="text">
+                                    <input class="form-control input-md" ngModel #publisher="ngModel" id="publisher" name="publisher" type="text">
                                     <small class="form-text text-muted danger" *ngIf="!publisher.valid && (publisher.dirty || publisher.touched)">This field is required!</small>
 
                                 </div>
@@ -162,7 +162,7 @@
                                     <i class="ft-chevron-left"></i>
                                 </span> Previous</button>
                             <button uiSref="result" type="button" class="btn btn-raised btn-success" 
-                            (click)="addBook(basicBookForm, advancedBookForm, optionalBookForm)" awResetWizard>
+                            (click)="addBook(basicBookForm, advancedBookForm, optionalBookForm)" awResetWizard [disabled]="basicBookForm.invalid || advancedBookForm.invalid || optionalBookForm.invalid">
                                 Finish
                                 <span style="margin-left:10px;">
                                     <i class="ft-chevron-right"></i>

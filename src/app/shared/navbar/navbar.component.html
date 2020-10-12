@@ -86,8 +86,10 @@
                                     <i class="ft-bell success float-left d-block font-large-1 mt-1 mr-2"></i>
                                     <span class="noti-wrapper">
                                         <span class="noti-title line-height-1 d-block text-bold-400 success">Comments</span>
-                                        <span class="noti-text"><b>{{comment.commentor}}</b> has comment on your post with title 
-                                            <b>{{comment.postTitle}}</b>.
+                                        <span class="noti-text"><b>{{comment.commentor}}</b> has comment on your post <br > 
+                                            <div class="ml-4">
+                                            with title 
+                                            <b>{{comment.postTitle}}</b>.</div>
                                         </span>
                                     </span>
                                 </a>
@@ -101,11 +103,8 @@
                                         <span class="noti-text"><b>{{reply.replier}}</b> has replied to your comment on post, <b>{{reply.postTitle}}</b>.</span>
                                     </span>
                                 </a>
-<<<<<<< HEAD
 
                                 
-=======
->>>>>>> 4a35788554e6f47472564f551128f03c50c9021e
                             </div>
                             <a *ngIf="groupNotifications.length
                             +friendNotifications.length
@@ -137,6 +136,10 @@
                                 <span>My Inbox</span>
                             </a>
                             <a *ngIf="!isAdmin" class="dropdown-item py-1" [routerLink]="['/profile/settings']">
+                                <i class="ft-settings mr-2"></i>
+                                <span>Settings</span>
+                            </a>
+                            <a *ngIf="isAdmin" class="dropdown-item py-1" [routerLink]="['/admin/profile']">
                                 <i class="ft-settings mr-2"></i>
                                 <span>Settings</span>
                             </a>

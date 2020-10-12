@@ -63,6 +63,10 @@ export class NavbarComponent implements OnInit, AfterViewInit, OnDestroy {
       this.isAdmin = true;
     }
 
+    this.getNotifications()
+  }
+
+  getNotifications() {
     this.notificationService.groupNotifications.subscribe(data => {
       this.groupNotifications = data;
     })
@@ -88,6 +92,7 @@ export class NavbarComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   ngAfterViewInit() {
+    this.getNotifications()
     if (this.config.layout.dir) {
       const dir = this.config.layout.dir;
       if (dir === 'rtl') {
