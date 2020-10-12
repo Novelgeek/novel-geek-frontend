@@ -1,7 +1,7 @@
 import { Component, ViewChild, ElementRef, Inject, Renderer2, OnInit, OnDestroy } from '@angular/core';
 import { ConfigService } from 'app/shared/services/config.service';
 import { DOCUMENT } from '@angular/common';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-home-layout',
@@ -20,7 +20,7 @@ export class HomeLayoutComponent implements OnInit{
     };
     hideSidebar: boolean;
     iscollapsed = true;
-    smallNav = false;
+    smallNav = true;
     isSidebar_sm = false;
     isSidebar_lg = false;
     bgColor = 'black';
@@ -31,7 +31,7 @@ export class HomeLayoutComponent implements OnInit{
 
     constructor(private elementRef: ElementRef, private configService: ConfigService,
         @Inject(DOCUMENT) private document: Document,
-        private renderer: Renderer2) {
+        private renderer: Renderer2, private router: Router) {
 
 
     }
@@ -40,7 +40,6 @@ export class HomeLayoutComponent implements OnInit{
     // }
 
     ngOnInit() {
-
       this.config = this.configService.interfaceConf;
       this.bgColor = this.config.layout.sidebar.backgroundColor;
 

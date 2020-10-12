@@ -74,7 +74,7 @@ export class AddBookComponent implements OnInit {
     newBook.append('isbn', advancedBookForm.value.isbn);
     newBook.append('year', advancedBookForm.value.year);
     newBook.append('author', advancedBookForm.value.author);
-    newBook.append('genres', this.selectedGenres);
+    newBook.append('genres', bookGenres.toString());
     newBook.append('publisher', optionalBookForm.value.publisher);
     newBook.append('pdf', this.selectedPdf);
     this.spinner.show();

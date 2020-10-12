@@ -65,6 +65,7 @@ export class AuthService {
       clearTimeout(this.tokenExpirationTimer);
     }
     this.tokenExpirationTimer = null;
+
   }
 
   autoLogin() {
@@ -127,6 +128,15 @@ export class AuthService {
   }
 
   userUpdated(username) {
+    const newUser = this.currentUser;
+    const user = JSON.parse(localStorage.getItem('user'));
+    user.username = username;
+    localStorage.setItem('user', JSON.stringify(user));
+    newUser.username = username;
+    this.user.next(newUser)
+  }
+
+  adminUpdated(username) {
     const newUser = this.currentUser;
     const user = JSON.parse(localStorage.getItem('user'));
     user.username = username;

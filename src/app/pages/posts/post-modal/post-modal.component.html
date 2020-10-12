@@ -1,24 +1,33 @@
 <div class="card">
   <div class="card-header d-flex justify-content-between">
     <div *ngIf="item.userimg !=null">
-      <img [src]="item.userimg" 
-      width="30" height="30" class="d-inline-flex rounded-circle mr-1">
+      <img [src]="item.userimg" width="30" height="30" class="d-inline-flex rounded-circle mr-1">
       <span class="text-muted"><b>{{item.username}} </b></span>
-      <br/>
+      <br />
       <span class="card-subtitle text-muted"> {{item.publishedDate|date:'medium'}}</span>
     </div>
 
     <div *ngIf="item.userimg == null">
-      <img src="../../../assets/img/portrait/default.svg" 
-      width="30" height="30" class="d-inline-flex rounded-circle mr-1">
+      <img src="../../../assets/img/portrait/default.svg" width="30" height="30"
+        class="d-inline-flex rounded-circle mr-1">
       <span class="text-muted"><b>{{item.username}} </b></span>
-      <br/>
+      <br />
       <span class="card-subtitle text-muted"> {{item.publishedDate|date:'medium'}}</span>
     </div>
-    <div>
-      <a #toggle (click)="toggleList()"><i  class="ft-more-horizontal" ></i></a>
-      
-      <div style="position:absolute" >
+
+    <div class="d-inline-block" ngbDropdown #myDrop="ngbDropdown">
+      <button class="drop" id="dropdownManual" ngbDropdownToggle ><i class="ft-more-horizontal"></i></button>
+      <div ngbDropdownMenu aria-labelledby="dropdownManual">
+        <button *ngIf="!item.owned && !item.reported" (click)="open(reportModal)" ngbDropdownItem><i class="ft-shield mr-2"></i>Report Post</button>
+        <button *ngIf="!item.owned && item.reported" (click)="unReportPost(item.postid)" ngbDropdownItem><i class="ft-triangle mr-2"></i>Cancel Report</button>
+        <button *ngIf="item.owned" (click)="deletePost(item.postid)" ngbDropdownItem> <i class="ft-trash-2 mr-2"></i>Delete Post</button>
+      </div>
+    </div>
+
+
+        <!-- 
+        <a #toggle (click)="toggleList()"><i class="ft-more-horizontal"></i></a>
+        <div style="position:absolute" >
         <div #menu *ngIf = "isShow" style="position: absolute; left: -130px; z-index: 1000;" class="text-left dropdown-menu show">
           <div *ngIf="!item.owned && !item.reported">
             <a class=" dropdown-item py-1" (click)="open(reportModal)">
@@ -39,117 +48,123 @@
             </a> 
           </div> 
         </div>
-      </div>
+      </div> -->
 
-
-    </div>
   </div>
 
-  <div class="card-body">
-    <h5 class="card-title">{{item.title}}</h5>
-    <div class="card-content" *ngIf="item.imagePath!= null ">
-      <img [src]="item.imagePath" alt="img"  class="img-fluid">
-    </div>
-    <div class="card-content" >
+    <div class="card-body">
+      <h5 class="card-title">{{item.title}}</h5>
+      <div class="card-content" *ngIf="item.imagePath!= null ">
+        <img [src]="item.imagePath" alt="img" class="img-fluid">
+      </div>
+      <div class="card-content">
         <div class="card-text">
           <div [ngClass]="{'show-less': shortDescription}">
             <p>
               {{item.description}}
             </p>
-          </div>    
+          </div>
         </div>
         <a type="button" (click)="alterDescription()" class="primary" style="font-size:12px;">
           {{ shortDescription ? 'read more...': 'read less' }}
-        </a> 
+        </a>
+      </div>
+      <br>
+      <div class="card-content d-flex justify-content-between text-muted">
+        <a (click)="openLikes(item.postid)" style="font-size: small; padding-bottom: 0px;">{{item.likecount}} Likes</a>
+        <a (click)="openComments(item.postid)" style="font-size: small; padding-bottom: 0px;">{{item.commentcount}}
+          comments</a>
+      </div>
     </div>
-    <br>
-    <div class="card-content d-flex justify-content-between text-muted">
-      <a (click)="openLikes(item.postid)" style="font-size: small; padding-bottom: 0px;">{{item.likecount}} Likes</a>
-      <a (click)="openComments(item.postid)" style="font-size: small; padding-bottom: 0px;">{{item.commentcount}} comments</a>
-    </div>
-  </div>
 
-  <div class="card-footer">
-    <a (click)="likeCount(item.postid)" style="padding-right: 50px;">
-      <i class="fa fa-heart mr-2" [style.color]="flag" ></i> 
-      <span class="primary">  Like</span>
-    </a>
-    <a (click)="openComments(item.postid)" style="padding-right: 50px;">
-      <i class="primary icon-speech mr-2"></i>
-      <span class="primary">Comment</span>
-    </a>
-  </div>
-  
-  <!--SHOW COMMENTS WINDOW-->
-  <div class="card-footer" *ngIf="showComments">
-    <!--NEW COMMENT-->
-    <div>
-      <form #addcomment="ngForm" (ngSubmit)="onsubmit(addcomment.value, item.postid)">
-        <div class="d-flex justify-content-between">
-          <input class="form-control" placeholder="add comment" name="comment" ngModel #comment="ngModel" required style="margin: 5px;">
-          <button type="submit" [disabled]="!addcomment.valid" class="btn btn-rased gradient-purple-bliss ft-navigation" style="margin: 5px;"></button>
-        </div>
-      </form>
+    <div class="card-footer">
+      <a (click)="likeCount(item.postid)" style="padding-right: 50px;">
+        <i class="fa fa-heart mr-2" [style.color]="flag"></i>
+        <span class="primary"> Like</span>
+      </a>
+      <a (click)="openComments(item.postid)" style="padding-right: 50px;">
+        <i class="primary icon-speech mr-2"></i>
+        <span class="primary">Comment</span>
+      </a>
     </div>
-    <br/>
 
-    <!--COMMENTS-->
-    <div *ngIf="commentList.length === 0">
-      No comments yet :D
-    </div>
-    <div>
-      <ng-container *ngFor="let comment of commentList; let commentindex = index;">
-        <app-post-comment-modal [comment]="comment" [commentindex]="commentindex" (ondelete)="onDeleteComment($event)"></app-post-comment-modal>
-      </ng-container>
-    </div>
-   <!--
+    <!--SHOW COMMENTS WINDOW-->
+    <div class="card-footer" *ngIf="showComments">
+      <!--NEW COMMENT-->
+      <div>
+        <form #addcomment="ngForm" (ngSubmit)="onsubmit(addcomment.value, item.postid)">
+          <div class="d-flex justify-content-between">
+            <input class="form-control" placeholder="add comment" name="comment" ngModel #comment="ngModel" required
+              style="margin: 5px;">
+            <button type="submit" [disabled]="!addcomment.valid"
+              class="btn btn-rased gradient-purple-bliss ft-navigation" style="margin: 5px;"></button>
+          </div>
+        </form>
+      </div>
+      <br />
+
+      <!--COMMENTS-->
+      <div *ngIf="commentList.length === 0">
+        No comments yet :D
+      </div>
+      <div>
+        <ng-container *ngFor="let comment of commentList; let commentindex = index;">
+          <app-post-comment-modal [comment]="comment" [commentindex]="commentindex"
+            (ondelete)="onDeleteComment($event)">
+          </app-post-comment-modal>
+        </ng-container>
+      </div>
+      <!--
      <div style="float: right; font-size: small; color: rgb(16, 80, 175); text-decoration: underline;">
       <a (click)="hideFooter()">hide</a>
     </div>
-   --> 
-  </div>
+   -->
+    </div>
 
-  <!--SHOW PEOPLE WHO LIKED POST WINDOW-->
-  <div class="card-footer" *ngIf="showLikes">
-    <div *ngIf="likeList.length === 0">
-      No likes yet :D
-    </div>
-    <div>
-      <ng-container *ngFor="let like of likeList">
-        <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60" 
-        width="30" height="30" class="d-inline-flex rounded-circle mr-1"> 
-        <span>
-          <b>{{like.likedUser}}</b>
-        </span>
-        <br>
-        <br>
-      </ng-container>
-    </div>
-    <!--
+    <!--SHOW PEOPLE WHO LIKED POST WINDOW-->
+    <div class="card-footer" *ngIf="showLikes">
+      <div *ngIf="likeList.length === 0">
+        No likes yet :D
+      </div>
+      <div>
+        <ng-container *ngFor="let like of likeList">
+          <img
+            src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60"
+            width="30" height="30" class="d-inline-flex rounded-circle mr-1">
+          <span>
+            <b>{{like.likedUser}}</b>
+          </span>
+          <br>
+          <br>
+        </ng-container>
+      </div>
+      <!--
     <div style="float: right; font-size: small; color: rgb(16, 80, 175); text-decoration: underline;">
       <a (click)="hideFooter()">hide</a>
     </div>
     -->
+    </div>
   </div>
-</div>
 
-<!--REPORT POST CUSTOM MODAL SECTION-->
-<ng-template class="row" #reportModal let-modal>
-  <div class="modal-body">
-    <form #reportpost="ngForm" (ngSubmit)="onsubmitReport(reportpost.value, item.postid)">
-      <div class="card">
+  <!--REPORT POST CUSTOM MODAL SECTION-->
+  <ng-template class="row" #reportModal let-modal>
+    <div class="modal-body">
+      <form #reportpost="ngForm" (ngSubmit)="onsubmitReport(reportpost.value, item.postid)">
+        <div class="card">
           <div class="card-header d-flex justify-content-between">
             <h4 class="card-title">Report Post</h4>
             <i class="ft-x" style="cursor:pointer;" (click)="modal.dismiss('Cross click')"></i>
-          </div>    
+          </div>
           <div class="card-body form-group">
-           <div class="d-flex justify-content-between">
-             <input class="form-control" placeholder="State your reason" name="reason" ngModel #reason="ngModel" required style="margin: 5px;">
-             <button type="submit" [disabled]="!reportpost.valid" class="btn btn-rased gradient-purple-bliss ft-navigation" style="margin: 5px;"></button>
-           </div>
-          </div>    
-          <div class="card-footer d-flex justify-content-between"></div> 
-      </div>
-    </form>
-  </div>
-</ng-template>
+            <div class="d-flex justify-content-between">
+              <input class="form-control" placeholder="State your reason" name="reason" ngModel #reason="ngModel"
+                required style="margin: 5px;">
+              <button type="submit" [disabled]="!reportpost.valid"
+                class="btn btn-rased gradient-purple-bliss ft-navigation" style="margin: 5px;"></button>
+            </div>
+          </div>
+          <div class="card-footer d-flex justify-content-between"></div>
+        </div>
+      </form>
+    </div>
+  </ng-template>

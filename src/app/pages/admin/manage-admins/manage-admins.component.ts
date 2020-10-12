@@ -33,7 +33,6 @@ export class ManageAdminsComponent implements OnInit {
 
   onSubmit(form: NgForm) {
     this.spinner.show();
-    console.log(form.value.username, form.value.email, form.value.password)
 
     this.adminService.addAdmin(form.value.username, form.value.email, form.value.password).subscribe( data => {
       this.admins.push(data);
@@ -48,7 +47,8 @@ export class ManageAdminsComponent implements OnInit {
 
   deleteAdmin(adminId){
     this.adminService.deleteAdmin(adminId).subscribe(data => {
-
+      this.toastr.success('Admin Deleted')
+      this.admins = this.admins.filter(admin => admin.id != adminId)
     }, error => {
       this.toastr.error(error.error)
     })
