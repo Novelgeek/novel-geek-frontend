@@ -49,7 +49,7 @@ export let lineChartOptions: any = {
   },
   title: {
     display: true,
-    text: 'Chart.js Line Chart - Legend'
+    text: 'User engagement'
   }
 };
 export let lineChartColors: Array<any> = [

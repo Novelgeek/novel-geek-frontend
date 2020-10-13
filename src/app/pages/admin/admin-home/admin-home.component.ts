@@ -25,7 +25,17 @@ export class AdminHomeComponent implements OnInit {
 
 
   // barChart
-  public barChartOptions = chartsData.barChartOptions;
+  public barChartOptions = {
+    scaleShowVerticalLines:false,
+    responsive:true,
+    scales: {
+      yAxes: [{
+        ticks: {
+          beginAtZero: true
+        }
+      }]
+    }
+  };
   public barChartLabels = ['Jan','Feb'];
   public barChartData = [{ data: [330, 600], label: 'Account A' }];
   public barChartType = chartsData.barChartType;
@@ -47,7 +57,6 @@ export class AdminHomeComponent implements OnInit {
 
   ngOnInit() {
     this.statService.getGenreStats().subscribe(data=>{
-       console.log('data');
        console.log(data);
        this.genreData = data;
        let genreStatsData = [
